@@ -1,0 +1,432 @@
+{% extends 'base.html' %} 
+{% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <!-- Leaflet CSS and JS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+      
+        <!-- Leaflet Draw CSS and JS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha384-6DBIkDzKj1PHw3gW8skvQoAQ5KoG5ru5Ot1WmYvFxBn96yO9SB+4+W4A7WuL4izU"
+        crossorigin=""/>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-1xhdQwMzS8Ly+5ZCvSk/Z9oGt92uI1FUpy2+vcD7zTkXXw06ivV8WgZ+flv7dX9tMJPCT8YENWQOv+7OxNwHvw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-PnX6fRPjq/LiYD6rsRv6LZx6PZyoLCejr3q1ZDDtzAVT9T1TzT8OGpVEyTjjntPtd+bGwIzgm1orDjZi2QX6UQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+    
+    
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.2/dist/bundle.js"
+            crossorigin="anonymous"></script>
+
+    <!-- jQuery library -->
+  {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
+  <!-- Popper.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+  <!-- Bootstrap CSS -->
+  {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    </head>
+
+    <body class="bg-img">
+
+      
+        <div class=" text-center" >
+            <div class="row" style="width:1450px;" >
+              <div class="col-3">
+                <div class="card mb-3" style="margin-left: 10px;">
+                    <div class="card-header">
+                      <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:-5px; font-weight:bolder;">Projects List</h5>
+                     </div>
+                    <div class="card-body">
+                     
+                      <button class="btn btn-outline-success shadow-none" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold; margin-bottom:5px;" onclick="location.href='{% url 'ALL_node' project.supervisorp.pseudo project.polygon_id %}'">Nodes details</button>
+                           
+                     
+                      {% for proj in projects %}
+                      <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; border: 1px solid #4F4F4F ; height:120px;">
+                        <div class="card-body text-vert">
+                          <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
+                          <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
+                          <button class="btn btn-dark   mx-auto d-block shadow-none"  onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id  %}'" style="margin-bottom: 3px; font-family:subset;font-weight:bold;">see polt</button>
+                          <!-- <button class="btn btn-dark  mx-auto d-block" name="button_2" style='  font-size: 8px; background-color: darkgreen;' onclick="location.href='{% url 'all' proj.supervisorp.pseudo proj.polygon_id %}'"> SEE all details</button> -->
+                              {% comment %} <button class="btn btn-dark  mx-auto d-block" name="b_add_N" style='  font-size: 8px; margin-top: 3px;' onclick="location.href='{% url 'modify' proj.supervisorp.pseudo proj.polygon_id %}'"> Modify</button> {% endcomment %}
+                               </div>
+                          </div>
+                          {% endfor %}
+                          </div>
+                        </div>
+
+                </div>
+
+                <div class="col-3"  style="background-color: #FFFFFF;width: 1087px; height: auto; border-radius: 10px;margin-left: 0.5;">
+                    <form method="POST">
+                    {% csrf_token %} 
+                        <h4 style=" font-family:subset; margin-bottom:10px;margin-top:20px; "> <strong style="color: #A26A25;">Last Node Added Of Project: </strong>{{ project.nomp }}</h4>
+                    
+                        
+<div class="row">
+
+                        <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; width: 250px; height: 320px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                    
+                          {% if project %}
+                          <h5 style="margin-bottom: 1px; "><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}"">Weather Information</a></h5>
+                          {% endif %} <hr>
+                          {% comment %} {% for ldn0 in ldn %} {% endcomment %}
+                          <div id="weather-info">
+                                    <p><strong>Temperature:</strong> {{ ldn0.temperature }}°C</p>
+                                    <p><strong>Humidity:</strong> {{ ldn0.humidity }}%</p>
+                                    <p><strong>Wind Speed:</strong> {{ ldn0.wind }} km/h</p>
+                                    <p><strong>rain volume:</strong> {{ ldn0.rain }} mm</p>
+                                    <p><strong style='color:#A26A25;'>related node:</strong> {{ ldn0.node }} </p>
+                                    <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#A26A25;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                      Node Information
+                                    </button>
+                                   
+                         
+                          </div>  
+                          {% comment %} {% endfor %}   {% endcomment %}
+                        </div>
+
+                        <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #D4D6D8; width: 220px; height: 130px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                          <h5>Prediction result</h5> <hr>
+                        
+                          <div>
+                        
+                            {% comment %} {% for ldn0 in ldn %} {% endcomment %}
+                        
+                            <div id="fwi">
+                              <p><strong>FWI :</strong>{{ ldn0.node.FWI }}</p>
+                              </div>
+                              
+                              <div id="status">
+                                {% if ldn0.node.status == 'DOWN' %}
+                                    <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ ldn0.node.status }}</span></p>
+                                {% elif ldn0.node.status == 'MODERATE' %}
+                                    <p><strong>Status: </strong><span style="color:blue; font-weight:bold">{{ ldn0.node.status }}</span></p>
+                                {% elif ldn0.node.status == 'HIGH' %}
+                                    <p><strong>Status: </strong><span style="color:yellow; font-weight:bold">{{ ldn0.node.status }}</span></p>
+                                {% elif ldn0.node.status == 'VERY HIGH' %}
+                                    <p><strong>Status: </strong><span style="color:orange; font-weight:bold">{{ ldn0.node.status }}</span></p>
+                                {% elif ldn0.node.status == 'EXTREME' %}
+                                    <p><strong>Status: </strong><span style="color:red; font-weight:bold">{{ ldn0.node.status }}</span></p>
+                                {% elif ldn0.node.status == 'UNKNOWN' %}
+                                    <p><strong>Status: </strong><span style="color:black; font-weight:bold">{{ ldn0.node.status }}</span></p>            
+                                {% endif %}
+                                </div>
+                        
+                                {% comment %} {% endfor %} {% endcomment %}
+                          </div>
+                        
+                          <button  class="btn btn-outline-dark" name="b_add_N" style='  font-size: 10px; margin-top: 20px; font-family:subset;font-weight:bold;' onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
+                        
+                        </div>
+
+                       
+
+</div>
+
+
+
+                         
+                           
+                           <div class='col-6 rounded ' id="map" style="width: 1070px;height: 700px; box-sizing:border-box; margin-top: 5px; margin-bottom: 10px; border-radius: 50px; border: 1px solid rgb(9, 0, 0) ;">
+                            <div class="leaflet-control"></div>
+                        </div>
+{% comment %}              
+                        <label for="geomp">Geometry:</label>
+                        <input type="text" id="geomp" name="geomp" value="{{ project.geomp }}" readonly><br><br>
+                         
+                        <br> {% endcomment %}
+                        {% comment %} {% for d in node %}
+                        <label for="lat">Latitude:</label>
+                        <input type="text" id="latitude" name="latitude" value="{{ d.latitude }}" readonly><br>
+
+                        <label for="lng">Longitude:</label>
+                        <input type="text" id="longitude" name="longitude" value="{{ d.longitude }}" readonly><br><br>
+                        {%endfor%} {% endcomment %}
+
+
+                    </form>
+
+
+
+                </div>
+                <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                  <div class="modal-dialog" >
+                    <div class="modal-content" style='border: 4px solid #D2B3AE ;'>
+                      <div class="modal-header" style="background-color:#2C847B;">
+                        <img src="{%static 'images\pos1.png'%}" alt="" width="50px" style="border-radius: 10px; " />
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel" style='color:#D2B3AE;'>Node Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body" style="background-color:#2C847B; text-align:left;">
+           
+                          
+                          <p style='color:#D2B3AE;'><strong>Node Name :</strong>   {{ ldn0.node.nom }}</p>
+                           
+                          
+                          <p style='color:#D2B3AE;'><strong>Reference: </strong>{{ ldn0.node.reference }}</p>
+                          <p style='color:#D2B3AE;'><strong>Position: </strong>{{ ldn0.node.latitude }},{{ ldn0.node.latitude }}</p>
+                          <p style='color:#D2B3AE;'><strong>Sensors: </strong>{{ ldn0.node.Sensors }}</p>
+                          <p style='color:#D2B3AE;'><strong>Duty Cycle: </strong>{{ 'Every 1 Min' }}</p>
+                          <div id="rssi">
+                          <p style='color:#D2B3AE;'><strong>RSSI: </strong> {{ ldn0.node.RSSI }}</p>
+                          </div>
+                          <p style='color:#D2B3AE;'><strong>Battery level: </strong>{{ ldn0.node.Battery_value }}</p>
+                          {% comment %} {% endfor %}                           {% endcomment %}
+                        </div>  
+                     
+                      <div class="modal-footer" style="background-color:#2C847B;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style='background-color:black; color:#C3B8B6;'>Close</button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+{% comment %}                 
+            <div class="col-2" style="width: 285px;" >
+                <div class="card mb-3" style="margin-left: 10px;">
+                    <div class="card-header">
+                      <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:5px; font-weight:bolder;">Nodes List</h5>
+                     </div>
+                     
+                     <button class="btn btn-dark  mx-auto d-block shadow-none" style='margin-top:10px;font-weight:bolder; font-family:subset; ' onclick="location.href='{% url 'ALL_node' project.supervisorp.pseudo project.polygon_id %}'">see nodes details</button>
+                    <div class="card-body">
+                     
+                      {% for d in nodee %}
+                      <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; height: 70px;  border: 1px solid #4F4F4F ;">
+                        <div class="card-body text-vert">
+                          <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; margin-top: -20px;"><strong style="font-family:subset; font-weight:bold;">Node Name: </strong> <br>{{ d.nom }}</h6>
+
+                          <!--<button class="btn btn-dark  mx-auto d-block" name="button_2" style='  font-size: 8px; background-color: darkgreen;' onclick="location.href='#'"> SEE all details</button> -->
+                           </div>
+                      </div>
+                      {% endfor %}
+                      </div>
+                    </div>
+
+            </div>
+
+
+            </div>
+
+
+        </div> {% endcomment %}
+
+   
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+
+    <script>
+      var geojson_str = "{{ project.geomp.json|escapejs }}";
+      var geojson = JSON.parse(geojson_str);
+      {% comment %} var status = "{{ node.status }}";
+      console.log('status  :::',status) {% endcomment %}
+
+
+
+ 
+      var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12);
+
+
+      L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+        L.geoJSON(geojson).addTo(map);
+
+        var fireIcon = L.icon({
+          iconUrl: '/static/images/fire3.png',
+          iconSize: [50, 50],
+          iconAnchor: [19, 19],
+          popupAnchor: [0, -19]
+          });
+    
+    {% for d in ldn %}
+    
+        var coords = JSON.parse(geojson_str).coordinates;
+    var first_coords = coords[0][0];
+    
+    console.log("{{ d.node.node_range}}")
+        var polygonOne = { 
+          "type": "Polygon",
+          "coordinates": [
+              coords[0][{{ d.node.node_range}}-1]
+          ]
+        };
+
+                                        var statusn = "{{ d.node.status }}";
+                                        console.log('----------node :',"{{node.nom}}"  ,'statusnnnn',statusn)
+
+                                        var colorn = "";
+                                      
+
+                                      if (statusn === "DOWN") {
+                                        colorn = "green";
+                                            
+                                      } else if (statusn === "MODERATE") {
+                                        colorn = "blue";
+                                         
+                                      } else if (statusn === "HIGH") {
+                                        colorn = "yellow";
+                                      } else if (statusn === "VERY HIGH") {
+                                        colorn = "orange";
+                                      } else if (statusn === "EXTREME") {
+                                        colorn = "red";
+                                      } else {
+                                        colorn = "black";
+                                      }
+     var latest_data = "<strong>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>Latitude : {{ d.node.latitude }} <br> Longitude : {{ d.node.longitude }}<br> <strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
+                                     
+              var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}]).bindPopup(latest_data).addTo(map);
+ 
+              
+              
+              
+              status = "{{ d.node.status}}" ;
+              console.log( status )
+              var color;
+                  if (status == "DOWN") {
+                      color = "green";
+                  } else if (status == "MODERATE") {
+                     color = "blue";
+                  } else if (status == "HIGH") {
+                      color = "yellow";
+                  } else if (status == "VERY HIGH") {
+                      color = "orange";
+                  } else if (status == "EXTREME") {
+                      color = "red";
+                      marker.setIcon(fireIcon);
+                      marker.bounce(-1);
+                  } else {
+                      color = "black";
+                  }
+  
+        var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.5 } }).addTo(map);
+        polygonLayer.setStyle({ color: color });
+        polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+  
+  
+    {% endfor %}
+
+        
+
+        
+{% comment %} ----------------------------------------------------------------------------------------------------------- {% endcomment %}
+
+    </script>
+
+
+    <script>
+  
+      $(document).ready(function() {
+          setInterval(function() {
+              $.ajax({
+                  url: "{% url 'update_weather' project.polygon_id %}",
+                  type: "GET",
+                  success: function(data_list) {
+                   data = data_list[1];
+                   status = data.node.status;
+                   if (status === "DOWN") {
+                       color = "green";
+                   } else if (status === "MODERATE") {
+                      color = "blue";
+                   } else if (status === "HIGH") {
+                       color = "yellow";
+                   } else if (status === "VERY HIGH") {
+                       color = "orange";
+                   } else if (status === "EXTREME") {
+                       color = "red";
+                   } else {
+                       color = "black";
+                   }
+                   polygonLayer.setStyle({ color: color });                   
+   
+   
+   
+   
+   
+                   if (status === "EXTREME") {
+                         marker.setIcon(fireIcon)
+                         marker.bounce(5);
+                        
+                    
+                         
+                       } else {
+                         marker.setIcon(null);
+                         marker.stopBouncing();
+                        }
+                        
+   
+                        
+                      $('#weather-info').html(
+                          '<div class="card-body">' +
+                             '<p><strong>Temperature:</strong> ' + data.temperature + '°C</p>' +
+                             '<p><strong>Humidity:</strong> ' + data.humidity + '%</p>' +
+                             '<p><strong>Wind Speed:</strong> ' + data.wind + ' km/h</p>' +
+                          '</div>'
+                      );
+                      $('#rssi').html(
+                        
+                             '<p><strong>RSSI: </strong>' + data.node.RSSI +' </p>' 
+                      );
+   
+                       $('#fwi').html('<p><strong>FWI: </strong>' + data.node.fwi + '</p>');
+   
+   
+   
+                       if (data.node.status == 'DOWN') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + data.node.status + '</span></p>');
+                       } else if (data.node.status == 'MODERATE') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + data.node.status + '</span></p>');
+                       } else if (data.node.status == 'HIGH') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + data.node.status + '</span></p>');
+                       } else if (data.node.status == 'VERY HIGH') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +data.node.status+ '</span></p>');
+                       } else if (data.node.status == 'EXTREME') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + data.node.status + '</span></p>');
+                       }                   
+   
+   
+   
+   
+   
+   
+   
+                  },
+                  error: function(xhr, status, error) {
+                      console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
+                  }
+              });
+          }, 5000); // refresh every 5 seconds
+      });
+     </script> 
+ 
+
+    </body>
+
+</html>
+{% endblock %}

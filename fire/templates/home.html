@@ -1,0 +1,288 @@
+{% extends 'base.html' %} 
+{% block content %} {% load static %}
+
+
+  <!-- Carousel wrapper -->
+<div id="carouselMaterialStyle" class="carousel slide carousel-fade " data-mdb-ride="carousel">
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="0" class="active" aria-current="true"
+      aria-label="Slide 1"></button>
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Inner -->
+  <div class="carousel-inner rounded-5 shadow-4-strong">
+    <!-- Single item -->
+    <div class="carousel-item active">
+      <img src="{%static 'images\forest3.jpg'%}" class="d-block w-100 "
+      width="400"
+          height="600"
+        alt="Sunset Over the City" />
+      <div class="carousel-caption d-none d-md-block">
+        <!-- <h5>First slide label</h5> -->
+        <p style="font-size: 30px; font-weight: lighter;">“We’ve all got to come together, and we’ve got to protect what’s left of our ancient forests on this planet.”</p>
+      </div>
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img src="{%static 'images\forest2.jpg'%}" class="d-block w-100"
+      width="400"
+          height="600"
+        alt="Canyon at Nigh" />
+      <div class="carousel-caption d-none d-md-block">
+        <!-- <h5>Second slide label</h5> -->
+        <p style="color: black; font-weight: lighter; font-size: 30px; ">“I love the forest. It is the place where you hear yourself better.”</p>
+      </div>
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img src="{%static 'images\forest4.jpg'%}" class="d-block w-100"
+      width="400"
+          height="600"
+        alt="Cliff Above a Stormy Sea" />
+      <div class="carousel-caption d-none d-md-block">
+        <!-- <h5>Third slide label</h5> -->
+        <p style="font-size: 30px; font-weight: lighter;" >"The death of the forest is the end of our life."</p>
+      </div>
+    </div>
+  </div>
+  <!-- Inner -->
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- Carousel wrapper -->
+
+
+<div style="margin: 80px 80px; padding: 0px" >
+  <!-- <hr class="featurette-divider" /> -->
+  <div class="row featurette" style="border: 0.5px solid gray ; padding: 15px 15px; margin-bottom: 30px;  background-color: #97B481; border-radius: 10px;">
+    <div class="col-md-7">
+      <br />
+      <h2 class="featurette-heading">
+        CO2 emissions and climate change
+        <br />
+        <span class="text-muted">planet conditions...</span>
+      </h2>
+      <p class="lead" >
+        Carbon dioxide emissions are the primary driver of global climate change.
+         It’s widely recognised that to avoid the worst impacts of climate change,
+          the world needs to urgently reduce emissions. 
+           Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world.
+           Global warming describes the current rise in the average temperature of Earth's air and oceans. 
+           which is often described as the most recent example of climate change.
+      </p>
+    </div>
+    <div class="col-md-5" >
+      <img src="{%static 'images\co2.jpg'%}" alt="" width="400px" style="border-radius: 10px; margin-top: 40px;" />
+    </div>
+  </div>
+
+  <!-- <hr class="featurette-divider" /> -->
+  <div class="row featurette" style="border: 0.5px solid gray ; padding: 15px 15px;  background-color: #DCFAC4; border-radius: 10px;">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading">
+        Forest and climate change
+        <br />
+        <span class="text-muted">Forests act as carbon sinks...</span>
+      </h2>
+      <p class="lead">
+        
+          
+         Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
+          and accumulates in the soil. Soils are one of the biggest carbon reservoirs on earth,
+          storing more of this element than the atmosphere and the aboveground biomass put together.
+
+      </p>
+    </div>
+    <div class="col-md-5 ">
+      <img src="{%static 'images\co3.jpg'%}" alt="" width="400px"  style="border-radius: 10px; margin-top: 7px;" />
+    </div>
+  </div>
+
+  <div class="row featurette" >
+
+
+    <div class="col-sm-5 " style="border: 1px solid gray ; padding: 10px 10px; background-color:#7F3D2A;border-radius: 10px; margin-top: 30px;  ">
+      <div class="card" style="height: 400px;">
+        
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="margin-left: 30px; ">
+          <img src="{%static 'images\tic.jpg'%}" class="img-fluid" width="500px"/>
+          <a href="#!">
+            <div class="mask" style="background-color: rgba(223, 216, 216, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body" style="background-color: #7F3D2A;">
+          <h5 class="card-title " style="color: white;">The Growing Threat of Global CO2 Emissions</h5>
+          
+          <p class="card-text lead" style="color: white;">This alarming trend shows no signs of slowing down<br />
+            Join the fight against climate change and help protect our planet</p>
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+      </div>
+    </div>
+    
+    <div  class="col-sm-4 " style="border: 1px solid gray ; margin-top: 90px; margin-left: 50px; border-radius: 10px; height: 300px;">
+    
+    </div>
+      </div>
+
+</div>
+
+
+
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+
+<div style="margin: 80px 80px;">
+<center>  
+    
+     
+<div class="row mb-8" >
+  <div class="col-sm-4 " >
+    <div class="card" >
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src="{%static 'images\fire1.jpg'%}" class="img-fluid"/>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title featurette-heading" >How Forest Fires Contribute to Rising CO2 Emissions</h5>
+        <p class="card-text lead">Forest fires can release significant amounts of carbon dioxide (CO2) into the atmosphere. 
+          When trees and other vegetation burn, they release stored carbon into the air, adding to the amount of CO2 already present.</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation="slide-out-right">
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src="{%static 'images\fire2.jpg'%}" class="img-fluid"/>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title featurette-heading">The huge desaster</h5>
+        <p class="card-text lead">The amount of CO2 released during a forest fire depends on the severity and duration of the fire, as well as the type and amount of vegetation burned. 
+          Large-scale forest fires can release millions of tonnes of CO2 into the atmosphere, contributing to global warming and climate change.</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src="{%static 'images\fire4.jpg'%}" class="img-fluid"/>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title featurette-heading">Not only co2 ...</h5>
+        <p class="card-text lead" >In addition to CO2, forest fires can also release other greenhouse gases like methane (CH4) and nitrous oxide (N2O) into the atmosphere. 
+          These gases can trap heat and contribute to global warming.</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-8 lead"  style="border: 1px solid #6D3C2F ; padding: 10px 10px; background-color:#7F3D2A ; color: white; border-radius:10px ; padding:  10px;">
+  <p class="lead">When forests burn, vast amounts of the stored carbon is emitted, <br />
+  scientists estimate that wildfires emitted about 8 billion tons of CO2 per year for the past 20 years. In 2017, total global CO2 emissions reached 32.5 billion tons, according to the International Energy Agency.
+</p></div>
+
+
+<div class="row g-0 bg-light position-relative mb-8">
+  <div class="col-md-4 mb-md-0 p-md-4">
+    <img src="{%static 'images\sol.jpg'%}" style="border-radius: 10px;" class="w-100" alt="...">
+  </div>
+  <div class="col-md-8 p-4 ps-md-0"  style="background-color: #DCFAC4; border-radius: 10px;">
+    
+    <h2 class="featurette-heading">
+      Our sollution
+      <br />
+      <span class="text-muted">System for monitoring forest fires...</span>
+    </h2>
+    <p class="lead">Our intelligent system not only detects forest fires but also provides accurate information about the location, size, and intensity of the fire, enabling emergency responders to take swift and effective action. With our system, you can help reduce the risk of injury and loss of life, protect natural resources, and mitigate the negative impact of forest fires on our environment and economy.
+
+      Don't wait until it's too late to take action. Invest in our intelligent system today and join us in the fight against forest fires. 
+      Together, we can make a positive impact and preserve our forests for generations to come.</p>
+    <a href="#" class="stretched-link">Explore more</a>
+  </div>
+</div>
+ 
+
+<!-- <div class="mm mb-8">
+  <div class="row">
+    <div class="col-sm-4">     
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Success card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+</div>
+</div>
+</div> -->
+
+
+
+      <!-- Buttons trigger collapse -->
+<a
+class="btn btn-success"
+data-mdb-toggle="collapse"
+href="#collapseExample"
+role="button"
+aria-expanded="false"
+aria-controls="collapseExample"
+style="background-color: #FDAE3A; color: #6D3C2F; font-weight: bolder;font-size: medium;"
+>
+WHo are we !
+</a>
+
+<!-- Collapsed content -->
+<div class="collapse mt-3" id="collapseExample">
+Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+sapiente ea proident.
+</div>
+
+
+
+
+
+
+</center>
+
+
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,312 @@
+{% extends 'base.html' %} 
+{% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <!-- Leaflet CSS and JS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+      
+        <!-- Leaflet Draw CSS and JS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    </head>
+
+    <body   style='background-color:#D4D6D8;'>
+        <div class="container222 text-center" >
+            <div class="row">
+                <div class="col-3">
+                    <div class="card mb-3" style="margin-left: 20px;">
+                        <div class="card-header">
+                          <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:5px; font-weight:bolder;">Projects List</h5>
+                         </div>
+                        <div class="card-body">
+                         
+                          {% for proj in projects %}
+                          <div class="card mb-2 " style="background-color: #DFD9DB; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
+                            <div class="card-body text-vert">
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
+                              <div class="d-inline-flex" style='margin-left:20px;'>
+                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button>
+                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
+                              </div>
+                             </div>
+                          </div>
+                          {% endfor %}
+                          </div>
+                        </div>
+
+                </div>
+
+                <div class="col-3"  style="background-color: #FFFFFF;width: 1090px; height: auto; border-radius: 10px;">
+                    <form method="POST">
+                    {% csrf_token %} 
+
+                        <h4 style=" font-family:subset; margin-bottom:20px;margin-top:10px; "> <strong style="color: #A26A25;">Add Node To Your Project: </strong>{{ project.nomp }}</h4>
+                    
+
+                        <div class="row mb-5" style="margin-left: 10px;">
+                            <div class="col-md-3">
+                              <label for="nom" style="margin-right: 5px;">Node Name:</label>
+                              <input type="text" id="nom" name="nom" style="margin-right: 20px; background-color: #DFD9DB;" placeholder="Node Name" />
+                            </div>
+                            
+                            <div class="col-md-3">
+                              <label for="reference" style="margin-right: 5px;">Node Reference:</label>
+                              <input type="text" id="reference" name="reference" style="margin-right: 20px; background-color: #DFD9DB;" placeholder="Node reference" />
+                            </div>
+                            
+                            <div class="col-md-3">
+                              <label for="sensors" style="margin-right: 5px;">Node sensors:</label>
+                              <input type="text" id="sensors" name="sensors" style="margin-right: 20px; background-color: #DFD9DB;" placeholder="Node Sensors" />
+                            </div>
+                            
+                            <div class="col-md-3">
+                              <label for="range" style="margin-right: 5px;">Node Range:</label>
+                              <input type="text" id="range" name="range" style="background-color: #DFD9DB;" placeholder="Enter Node range" />
+                            </div>
+                          </div>
+                          
+                          <div class="row" style="margin-top:10px;margin-left:-130px;">
+                            <div class="col-md-5">
+                                {% comment %} <h6 >Select The Specific Project ID:</h6> {% endcomment %}
+                                <select name="polyg" style="margin-right: 50px; background-color:#DFD9DB;">
+                                    {% for proj in projects %}
+                                    <option value="{{ proj.polygon_id }}">Project ID: {{ proj.polygon_id }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                {% comment %} <button class="btn btn-dark mx-auto d-block shadow-none" name="button_1" style='font-size: 10px; margin-bottom: 10px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> SAVE node</button> {% endcomment %}
+                                
+                                <nav aria-label="...">
+                                    <ul class="pagination" style='margin:0px 20px;'>
+                                      <li class="page-item ">
+                                        <button class="page-link" onclick="location.href='{% url 'add_client' supervisor.pseudo  %}'" style="  border: 1px solid #4F4F4F ;color:black;">Previous</button>
+                                      </li>
+        
+                                      <li class="page-item">
+                                        <button class="page-link" href='{% url 'add_client' supervisor.pseudo   %}' style="  border: 1px solid #4F4F4F ;color:black;">1</button>
+                                      </li>
+        
+                                      <li class="page-item " >
+                                        <a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">2</a></li>
+        
+        
+                                      <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">3</a></li>
+                                      <li class="page-item">
+                                        <button class="page-link" type="submit" value="save" style="  border: 1px solid #4F4F4F ;color:black;">Next</button>
+                                        
+                                      </li>
+                                    </ul>
+                                  </nav>
+                            </div>
+                        </div>
+                        
+                        <div class='col-6 rounded ' id="map" style="width: 1070px;height: 700px;  box-sizing:border-box; margin-top: 10px; margin-bottom: 10px;  border-radius: 50px; border: 1px solid rgb(9, 0, 0) ;">
+                            <div class="leaflet-control"></div>
+                        </div>
+             
+                        {% comment %} <label for="geomp">Geometry:</label>
+                        <input type="text" id="geomp" name="geomp" value="{{ project.geomp }}" readonly><br><br>
+                          {% endcomment %}
+                        {% comment %} <br> {% endcomment %}
+
+                        <label for="lat">Latitude:</label>
+                        <input type="text" id="lat" name="latitude">
+        
+                        <label for="lng">Longitude:</label>
+                        <input type="text" id="lng" name="longitude" style="margin-bottom: 10px; ">
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+   
+    <!-- <script src="{% static 'js/map.js' %}"></script> -->
+    <!-- leaflet js  -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"></script>
+
+<!-- leaflet draw plugin  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+  <script>
+
+    //  var map = L.map('map').setView([35, 9.5], 5);
+    //  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    //      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    //  }).addTo(map);
+
+    // var client = "{{ client }}";
+var geojson_str = "{{ project.geomp.json|escapejs }}";
+var geojson = JSON.parse(geojson_str);
+
+// Create a Leaflet map
+var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12);
+
+
+L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+}).addTo(map);
+
+// Add the GeoJSON polygon to the map
+polygonLayer=L.geoJSON(geojson).addTo(map);
+polygonLayer.bindTooltip("Polygon Of Project: "+"{{project.nomp}}");
+
+
+// leaflet draw 
+var drawnFeatures = new L.FeatureGroup();
+map.addLayer(drawnFeatures);
+
+var drawControl = new L.Control.Draw({
+    // position: "topright",
+    edit: {
+        featureGroup: drawnFeatures,
+        remove: true
+    },
+    draw: {
+    polygon: {
+     shapeOptions: {
+      color: 'purple'
+     },
+    //  allowIntersection: false,
+    //  drawError: {
+    //   color: 'orange',
+    //   timeout: 1000
+    //  },
+    },
+    polyline: {
+     shapeOptions: {
+      color: 'red'
+     },
+    },
+    rect: {
+     shapeOptions: {
+      color: 'green'
+     },
+    },
+    circle: {
+     shapeOptions: {
+      color: 'steelblue'
+     },
+    },
+    // remove: true // Add remove control option
+   },
+
+});
+map.addControl(drawControl);
+
+map.on("draw:created", function(e){
+    var type = e.layerType;
+    var layer = e.layer;
+
+   
+
+    console.log(layer.toGeoJSON())
+    
+
+    layer.bindPopup(`<p>${JSON.stringify(layer.toGeoJSON())}</p>`)
+    
+    drawnFeatures.addLayer(layer);
+
+    var geoj = layer.toGeoJSON();
+    const lat = geoj.geometry.coordinates[1];
+    const lng = geoj.geometry.coordinates[0];
+    
+    console.log("Latitude:", lat);
+    console.log("Longitude:", lng);
+
+    document.getElementById("lat").value = lat;
+   document.getElementById("lng").value = lng;
+   layer.bindPopup(`<p>Latitude: ${lat}<br> Longitude: ${lng}</p>`);
+
+   layer.dragging.enable(); // make the marker draggable
+
+   
+   layer.on('dragend', function() {
+    var latlng = layer.getLatLng();
+    console.log("New latitude:", latlng.lat);
+    console.log("New longitude:", latlng.lng);
+
+    document.getElementById("lat").value = latlng.lat;
+    document.getElementById("lng").value = latlng.lng;
+
+    layer.bindPopup(`<p>Latitude: ${latlng.lat}<br> Longitude: ${latlng.lng}</p>`);
+});
+
+
+  
+});
+
+    // remove the marker when clicked
+   // layer.on('click', function () {
+   //   map.removeLayer(layer);
+  //});
+
+map.on("draw:edited", function(e){
+    var layers = e.layers;
+    var type = e.layerType;
+    
+
+    layers.eachLayer(function(layer){
+        console.log(layer)
+        
+       
+    })
+    
+})
+
+        {% for node in nodee %}
+            var yass = L.marker([{{ node.position.y }}, {{ node.position.x }}]).addTo(map);
+            var latlng = yass.getLatLng();
+            console.log('--latlng',latlng)
+            // console.log('--name {{node.nom}}')
+            yass.bindPopup("<b>Node Name</b><br> {{ node.nom }} "   + "<br><b>Node Position</b><br>Latitude: " + latlng.lat + "<br>Longitude: " + latlng.lng).openPopup();
+        {% endfor %}
+
+/**************the old markeer*****************/
+
+// {% comment %} var marker;
+
+// map.on("click", function (e) {
+//   // If marker is already defined, remove it before adding a new one
+//    if (marker) {
+//    map.removeLayer(marker);
+//    }  
+//   // Add new marker at double-clicked location
+//   marker = L.marker(e.latlng, { draggable: true }).addTo(map);
+// marker.bindPopup('heloooo from "click".')
+//     .openPopup();
+  
+//   document.getElementById("lat").value = e.latlng.lat;
+//   document.getElementById("lng").value = e.latlng.lng;
+
+//   marker.on("dragend", function (e) {
+//     var marker = e.target;
+//     var position = marker.getLatLng();
+//     document.getElementById("lat").value = position.lat;
+//     document.getElementById("lng").value = position.lng;
+//   });
+// }); {% endcomment %}
+ </script>       
+
+    </body>
+
+</html>
+{% endblock %}

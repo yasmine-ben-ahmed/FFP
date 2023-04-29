@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+<body class="bg-img" >
+    <center>
+<div class="containerr" style="margin-left: 400px; margin-top: 200px; margin-bottom: 300px;">
+
+    <div class="row mb-8" >
+        <div class="col-sm-4 " >
+            <div class="card" style="width: 18rem; ">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                  <h5 class="card-title" style="font-family: 'subset'; font-weight: bolder; "> SUPERVISOR</h5>
+                  <img src="{%static 'images\supervisor.jpg'%}"  width="190px" height="100px" />
+                  <a class="btn btn-dark  mx-auto d-block" style='  font-size: 15px; background-color: darkgreen; margin-top : 10px' href="{% url 'connectassupervisor' %}" class="btn btn-primary">connect as supervisor</a>
+                </div>
+              </div>
+        </div>
+        
+
+        <div class="col-sm-4 " >
+            <div class="card" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                  <h5 class="card-title" style="font-family: 'subset'; font-weight: bolder; "> CLIENT</h5>
+                  <img src="{%static 'images\farmer.jpg'%}"  width="140px" height="110px" />
+                   <a class="btn btn-dark  mx-auto d-block" style='  font-size: 15px; background-color: darkgreen;' href="{% url 'connectasclient' %}" class="btn btn-primary">connect as client</a>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    
+</div>
+</center>
+</body>
+
+{% endblock %}

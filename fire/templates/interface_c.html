@@ -1,0 +1,216 @@
+{% extends 'base_client.html' %} 
+{% block content %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha384-6DBIkDzKj1PHw3gW8skvQoAQ5KoG5ru5Ot1WmYvFxBn96yO9SB+4+W4A7WuL4izU"
+        crossorigin=""/>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-1xhdQwMzS8Ly+5ZCvSk/Z9oGt92uI1FUpy2+vcD7zTkXXw06ivV8WgZ+flv7dX9tMJPCT8YENWQOv+7OxNwHvw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-PnX6fRPjq/LiYD6rsRv6LZx6PZyoLCejr3q1ZDDtzAVT9T1TzT8OGpVEyTjjntPtd+bGwIzgm1orDjZi2QX6UQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+    
+    
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.2/dist/bundle.js"
+            crossorigin="anonymous"></script>
+  
+
+    </head>
+
+    <body style="background-color: #E2DCDE;">
+
+        <div class="contain text-center" style="width: 1445px; height: 1500px;   margin-left: 2px; border-radius: 10px;" >
+            <div  class="row">
+                <div class="col-3" style="width: 250px; height: 120px;background-color: #FFFFFF; border: 0.5px solid rgb(168, 167, 167) ; margin-left: 22px; border-radius: 10px ; margin-top: 25px;">
+                           
+                </div>
+                {% for node_data in nodes_data %}
+                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #cbd1d6; width: 200px; height: 280px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                    {% if proj_instance %} 
+                    <p style="margin-bottom: 1px; "><a style="color: rgb(79, 78, 78);" href="{% url 'update' proj_instance.polygon_id %}""><strong>Weather Information of node : {{ node_data.node_instance.nom }}</strong></a></p>
+                    {% endif %} <hr>
+                    {% comment %} <p><strong>Weather information of node :  </strong>{{ node_data.node_instance.nom }}</p> {% endcomment %}
+                    <div id="weather-info">
+                    <p><strong>Temperature : </strong>{{ node_data.data.temperature }}°C</p>
+                    <p><strong>Humidity : </strong>{{ node_data.data.humidity }}%</p>
+                    <p><strong>Wind Speed : </strong>{{ node_data.data.wind }} km/h</p>
+                    <p><strong>Rain Volume:</strong>{{ node_data.data.rain }} mm</p>
+                    </div>
+                </div>
+                {% endfor %}
+              
+           </div>
+
+           <!-- <div class="row">
+
+            {% for node_data in nodes_data %}
+            <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #D4D6D8; width: 200px; height: 240px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                  
+            
+                <p><strong>Weather information of node :  </strong>{{ node_data.node_instance.nom }}</p><hr>
+                <p><strong>Temperature : </strong>{{ node_data.data.temperature }}°C</p>
+                <p><strong>Humidity : </strong>{{ node_data.data.humidity }}%</p>
+                <p><strong>Wind Speed : </strong>{{ node_data.data.wind }} km/h</p>
+                <p><strong>Rain Volume : </strong>{{ node_data.data.rain }} mm</p>
+        
+            </div>
+            {% endfor %}
+      </div> -->
+
+            <div class="row">
+                <div class="col-3" style="width: 250px; height: 800px; background-color: #FFFFFF;  border: 0.5px solid rgb(168, 167, 167) ; margin-left: 22px; border-radius: 10px; margin-right: 8px; ">
+                   
+                    
+                </div>
+
+
+                <!-- <div class="col-3"  style="background-color: #FFFFFF; width: 1150px; height: 640px; border-radius: 10px; margin-top: 8px; margin-left: 8px;"> -->
+
+
+
+                    <div class='col-6 rounded ' id="map" style="width: 1180px;height: 800px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; border: 1px solid rgb(9, 0, 0) ; ">
+                        <div class="leaflet-control"></div>
+                    </div>
+         
+                    <!-- <label for="geomp">Geometry:</label>
+                    <input type="text" id="geomp" name="geomp" value="{{ proj_instance.geomp }}" readonly><br><br>
+                     -->
+                <!-- </div> -->
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="lib/leaflet.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script> 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+ 
+
+
+   <script>
+var geojson_str = "{{ proj_instance.geomp.json|escapejs }}";
+var geojson = JSON.parse(geojson_str);
+
+
+
+// Create a Leaflet map
+var map = L.map('map').setView([{{ proj_instance.geomp.centroid.y }}, {{ proj_instance.geomp.centroid.x }}], 12);
+
+
+
+L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    L.geoJSON(geojson).addTo(map);
+
+  
+    var fireIcon = L.icon({
+      iconUrl: '/static/images/fire3.png',
+      iconSize: [50, 50],
+      iconAnchor: [19, 19],
+      popupAnchor: [0, -19]
+      });
+
+{% for d in ldn %}
+
+    var coords = JSON.parse(geojson_str).coordinates;
+var first_coords = coords[0][0];
+
+console.log("{{ d.node.node_range}}")
+    var polygonOne = { 
+      "type": "Polygon",
+      "coordinates": [
+          coords[0][{{ d.node.node_range}}-1]
+      ]
+    };
+
+                                    var statusn = "{{ d.node.status }}";
+                                    console.log('----------node :',"{{node.nom}}"  ,'statusnnnn',statusn)
+
+                                    var colorn = "";
+                                  
+
+                                  if (statusn === "DOWN") {
+                                    colorn = "green";
+                                        
+                                  } else if (statusn === "MODERATE") {
+                                    colorn = "blue";
+                                     
+                                  } else if (statusn === "HIGH") {
+                                    colorn = "yellow";
+                                  } else if (statusn === "VERY HIGH") {
+                                    colorn = "orange";
+                                  } else if (statusn === "EXTREME") {
+                                    colorn = "red";
+                                  } else {
+                                    colorn = "black";
+                                  }
+          var latest_data = "<strong>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>Latitude : {{ d.node.latitude }} <br> Longitude : {{ d.node.longitude }}<br> <strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
+          
+          var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}]).bindPopup(latest_data).addTo(map);   
+          
+          
+          status = "{{ d.node.status}}" ;
+          console.log( status )
+          var color;
+              if (status == "DOWN") {
+                  color = "green";
+              } else if (status == "MODERATE") {
+                 color = "blue";
+              } else if (status == "HIGH") {
+                  color = "yellow";
+              } else if (status == "VERY HIGH") {
+                  color = "orange";
+              } else if (status == "EXTREME") {
+                  color = "red";
+                  marker.setIcon(fireIcon);
+                  marker.bounce(-1);
+              } else {
+                  color = "black";
+              }
+
+    var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.5 } }).addTo(map);
+    polygonLayer.setStyle({ color: color });
+    polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+
+
+{% endfor %}
+            
+</script> 
+
+
+
+
+      
+
+    </body>
+
+</html>
+
+
+{% endblock %}

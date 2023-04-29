@@ -1,0 +1,251 @@
+{% comment %} {% extends 'base.html' %} 
+{% block content %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    
+
+    <!-- <link rel="stylesheet" href="{%static 'css/nature.css'%}" /> -->
+
+    <link
+      rel="stylesheet"
+      href="{%static 'bootstrap-5.2.3-dist/css/bootstrap.css'%}"
+    />
+
+    <!-- MDB--------------------------------------------------------------------------------- -->
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+rel="stylesheet"
+/>
+
+ <!-- Add icon library -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+
+    <body class="bg-img">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
+            <div class="container-fluid">
+              <a class="navbar-brand" style="margin-left: 35px; font-family: 'subset';" href="{% url 'home' %}">GREENIST</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item" style="font-size: 20px;">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></i>Home</a>
+                  </li>
+                  
+                  
+                  <li class="nav-item" style="font-size: 20px; margin-left: 900px">
+                    <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>
+                    
+                  </li>
+                  <li class="nav-item dropdown" style="font-size: 20px;" >
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-fw fa-sign-in"></i>Singnup as
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li style="font-size: 20px;"><a class="dropdown-item" href="{% url 'compte' 'supervisor' %}">Supervisor</a></li>
+                      <li style="font-size: 20px;"><a class="dropdown-item" href="{% url 'compte' 'client' %}">Client</a></li>
+                      
+                    </ul>
+                  </li> 
+                </ul>         
+              </div>
+            </div>
+          </nav>
+
+        <div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="card mb-3" style="margin-left: 20px;">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                              <div class="col text-center">
+                                <h5 class="card-title" style="color:rgb(51, 77, 4); font-family:subset; font-weight:bold; margin:0 auto; text-align:center;">Projects List</h5>
+                              </div>
+                              {% comment %} <div class="col-auto">
+                                <button class="btn btn-danger  shadow-none" style="margin:0px; background-color:darkyellow; width:20px; height:30px; display:flex; justify-content:center; align-items:center;">
+                                    <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i>
+                                  </button>
+                                  
+                              </div> {% endcomment %}
+                            </div>
+                          </div>
+                                                   
+                        <div class="card-body">
+                         
+                          {% for proj in projects %}
+                          <div class="card mb-2 " style="background-color: #DFD9DB; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
+                            <div class="card-body text-vert">
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
+                              <div class="d-inline-flex" style='margin-left:20px;'>
+                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button>
+                                <button class="btn btn-outline-warning" name="button_2" style="font-size: 10px; color: #D9991A; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
+                              </div>
+                            </div>
+                          </div>
+                          {% endfor %}
+                          </div>
+                        </div>
+
+                </div>
+
+                <div class="col-3"  style="background-color: #FFFFFF;width: 1090px; height:707px; border-radius: 10px;">
+
+                  <form method="POST" style='margin: 0px 20px; margin-right:100px;' >
+                    {% csrf_token %}
+
+                    <div >
+                      <div class="panel-footer" style=" margin-top: 10px;">
+                        <i class='fa fa-warning' style='color: red'></i> Fill Client Form if you have a new client Or <a href="{% url 'add_project' supervisor.pseudo  %}">Click here</a> to skip form If You Have Already A Client Account.
+                    </div>
+                      {% comment %} <button class="btn btn-dark" style='width:30%; background-color: #A26A25; color:#2B2612; font-size: 15px; margin-bottom: 4px;' type="submit" value="save">Next</button> {% endcomment %}
+ 
+                    
+                  </div>
+        
+                    
+                    <h3 class="mb-4"></h3>
+                    <h4 style=" font-family:subset; margin-bottom:20px; "> <strong style="color: #A26A25;">Add New client: </strong></h4>
+                    
+                      <div class="row mb-3" >
+                        <div class="col" >
+                          <h5>Last Name</h5>
+                          {{ form.nom}}
+                          {% if form.nom.errors %}
+                          <strong class="text-danger" role="alert">{{ form.nom.errors }}</strong>
+                          {% endif %}
+                        </div>
+                        <div class="col">
+                          <h5>Fist Name</h5>
+                          {{ form.prenom}}
+                          {% if form.prenom.errors %}
+                          <strong class="text-danger" role="alert">{{ form.prenom.errors }}</strong>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col">
+                          <h5>Pseudo</h5>
+                          {{ form.pseudo}}
+                          {% if form.pseudo.errors %}
+                          <strong class="text-danger" role="alert">{{ form.pseudo.errors }}</strong>
+                          {% endif %}
+                        </div>
+                        <div class="col">
+                          <h5>Phone</h5>
+                          {{ form.telephone }}
+                          {% if form.telephone.errors %}
+                          <strong class="text-danger" role="alert">{{ form.telephone.errors }}</strong>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <h5>Mail</h5>
+                        {{ form.email}}
+                        {% if form.email.errors %}
+                        <strong class="text-danger" role="alert">{{ form.email.errors }}</strong>
+                        {% endif %}
+                      </div>
+                      <div class="mb-3">
+                        <div class="col">
+                          <h5>Password</h5>
+                          {{ form.mot_de_passe}}
+                          {% if form.mot_de_passe.errors %}
+                          <strong class="text-danger" role="alert">{{ form.mot_de_passe.errors }}</strong>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <div class="col">
+                          <h5>Password confirmation</h5>
+                          {{ form.confirmation_mot_de_passe}}
+                          {% if form.confirmation_mot_de_passe.errors %}
+                          <strong class="text-danger" role="alert">{{ form.confirmation_mot_de_passe.errors }}</strong>
+                          {% endif %}
+                        </div>
+                      </div>
+                  
+                     
+                  
+                    
+                                            
+                       <nav aria-label="...">
+                        <ul class="pagination" style='margin:0px 350px;'>
+                          <li class="page-item " >
+                            <button class="page-link" onclick="location.href='{% url 'display' supervisor.pseudo  %}'" style="  border: 1px solid #4F4F4F ;color:black;">Previous</button>
+                          </li>
+
+                          
+                          <li class="page-item active" aria-current="page">
+                            <a class="page-link" href='{% url 'add_client' supervisor.pseudo %}' style='border: 1px solid #4F4F4F ;'>1</a>
+                          </li>
+
+
+                          <li class="page-item">
+                            <button class="page-link" href='{% url 'add_project' supervisor.pseudo  %}' style='border: 1px solid #4F4F4F ;'>2</button>
+                          </li>
+
+
+                          <li class="page-item"><a class="page-link" href='# ' style='border: 1px solid #4F4F4F ;'>3</a></li>
+                          <li class="page-item">
+                            <button class="page-link" href='{% url 'add_project' supervisor.pseudo  %}' style=" border: 1px solid #4F4F4F ; color:black;">Next</button>
+                          </li>
+                        </ul>
+                      </nav> 
+
+                      
+
+
+        
+        
+        
+                   </form>
+                      
+
+                </div>
+
+            </div>
+
+        </div>
+
+   
+   
+
+    </body>
+
+</html>
+{% comment %} {% endblock %} {% endcomment %}

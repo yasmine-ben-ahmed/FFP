@@ -1,0 +1,173 @@
+{% comment %} {% extends 'base.html' %} 
+{% block content %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    
+
+    <!-- <link rel="stylesheet" href="{%static 'css/nature.css'%}" /> -->
+
+    <link
+      rel="stylesheet"
+      href="{%static 'bootstrap-5.2.3-dist/css/bootstrap.css'%}"
+    />
+
+    <!-- MDB--------------------------------------------------------------------------------- -->
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+rel="stylesheet"
+/>
+
+ <!-- Add icon library -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+
+    <body class="bg-img">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
+            <div class="container-fluid">
+              <a class="navbar-brand" style="margin-left: 35px; font-family: 'subset';" href="{% url 'home' %}">GREENIST</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item" style="font-size: 20px;">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></i>Home</a>
+                  </li>
+                  
+                  
+                  <li class="nav-item" style="font-size: 20px; margin-left: 900px">
+                    <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>
+                    
+                  </li>
+                  <li class="nav-item dropdown" style="font-size: 20px;" >
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-fw fa-sign-in"></i>Singnup as
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li style="font-size: 20px;"><a class="dropdown-item" href="{% url 'compte' 'supervisor' %}">Supervisor</a></li>
+                      <li style="font-size: 20px;"><a class="dropdown-item" href="{% url 'compte' 'client' %}">Client</a></li>
+                      
+                    </ul>
+                  </li>
+                </ul>         
+              </div>
+            </div>
+          </nav>
+
+        <div class="containert text-center" >
+            <div class="row">
+                <div class="col-3">
+                    <div class="card mb-3" style="margin-left: 45px;">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                              <div class="col text-center">
+                                <h5 class="card-title" style="color:rgb(51, 77, 4); font-family:subset; font-weight:bold; margin:0 auto; text-align:right;">Projects List</h5>
+                              </div>
+                              <div class="col-auto">
+                                {% comment %} <button onclick="location.href='{% url 'project_1' supervisor_obj.pseudo %}'" class="btn btn-danger  shadow-none" style="margin:0px; background-color:darkyellow; width:20px; height:30px; display:flex; justify-content:center; align-items:center;">
+                                    <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i>
+                                  </button> {% endcomment %}
+
+                                  {% comment %} <button onclick="location.href='{% url 'project_1' supervisor_obj.pseudo %}/step_1'" class="btn btn-danger shadow-none" style="margin:0px; background-color:darkyellow; width:20px; height:30px; display:flex; justify-content:center; align-items:center;">
+                                    <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i>
+                                  </button> {% endcomment %}
+
+                                  <button class="btn btn-danger shadow-none"  style='  font-size: 8px; background-color:darkyellow; color:white;width:20px; height:30px; display:flex; justify-content:center; align-items:center; ' onclick="location.href='{% url 'add_client' supervisor_obj.pseudo %}'"> <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i></button>
+          
+                                  
+                                  
+                              </div>
+                            </div>
+                          </div>
+                                                   
+                        <div class="card-body">
+                         
+                          {% for proj in projects %}
+                          <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
+                            <div class="card-body text-vert">
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
+                              <div class="d-inline-flex">
+                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button>
+                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
+                              </div>
+                              </div>
+                          </div>
+                          {% endfor %}
+                          </div>
+                        </div>
+
+                </div>
+
+                <div class="col-3"  style="background-color: #FFFFFF;width: 1090px; height:700px; border-radius: 10px;">
+                    <div style="border: 1px solid rgb(7, 7, 7) ; border-radius: 10px; height: 100px; width: 450px; margin: 50px 300px; background-color:#D4D6D8;">                  
+                        <h3 style="margin: 30px 30px; font-family:Lobster;">Welcome To Your Projects</h3>
+                    </div>
+
+                    <div style="text-align:center;">
+                        <h6 style=" font-family:Lobster;">Project Progress</h6><br>
+                        <strong>
+                            
+                          <li>Step 1 :Project client(s)</li>
+                          <p>Enter the necessary information about client(s)  to associate with the project.</p>
+                          <br>
+
+                          <li>Step 2 :Project description</li>
+                          <p>Enter the necessary information about your project.</p>
+                          <p>Draw polygons that represents the project areas.</p>
+                          <br>
+                          
+                          {% comment %} <li>Step 3 :Project plots</li>
+                          <p>Draw polygons that represents the project areas.</p>
+                          <br> {% endcomment %}
+                          <li>Step 3 :Project nodes</li>
+                          <p>Finally Place  Node(s) in project areas.</p>
+                          <br>
+                        </strong>
+                      </div>
+                      
+
+                </div>
+
+            </div>
+
+        </div>
+
+   
+
+    </body>
+
+</html>
+{% comment %} {% endblock %} {% endcomment %}

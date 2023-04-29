@@ -1,0 +1,128 @@
+
+
+#map {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #form {
+    width: 500px;
+
+    margin: 0.5vh auto 0 auto;
+    padding: 20px;
+    /* background-color: whitesmoke; */
+    background-color: #C3B8B6;
+    border-radius: 7px;
+    font-size: 12px;
+    
+   
+}
+
+#form h1 {
+    color: #A26A25;
+    text-align: center;
+}
+
+#form h4 {
+  color: #2B2612;
+  
+  
+}
+
+
+.input-control {
+    display: flex;
+    flex-direction: column;
+    background-color: #C3B8B6;
+    
+}
+
+.input-control input {
+    border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	padding: 10px;
+	width: 100%;
+}
+
+
+
+.input-control input:focus {
+    outline: 0;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    height: 13px;
+}
+.text{
+    text-align: center;
+}
+
+
+.bg-img {
+  /* The image used */
+  background-image: url("/static/images/blur2.jpg");
+  /* opacity: 0.7; */
+  /* filter: blur(1px); */
+  /* Control the height of the image */
+
+  background-size: cover;
+ 
+
+  /* Center and scale the image nicely */
+  background-position:center ;
+  background-repeat: no-repeat;
+ 
+}
+
+
+/* Responsive CSS */
+@media screen and (max-width: 780px){
+    .content{
+      margin-left: 0;
+      margin-top: 0;
+      padding: 10px 20px;
+      transition: 0s;
+    }
+    #check:checked ~ .content{
+      margin-left: 0;
+    }
+  }
+
+
+  .container {
+    display: grid;
+    align-items: center; 
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5px;
+   }
+   
+    img {
+     max-width: 100%;
+     max-height:100%;
+   }
+    
+   .text {
+     font-size: 70px;
+   }
+
+
+
+  
+
+  /* ***************************************************** */
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
