@@ -254,26 +254,87 @@
 
 
       <!-- Buttons trigger collapse -->
-<a
-class="btn btn-success"
-data-mdb-toggle="collapse"
-href="#collapseExample"
-role="button"
-aria-expanded="false"
-aria-controls="collapseExample"
-style="background-color: #FDAE3A; color: #6D3C2F; font-weight: bolder;font-size: medium;"
+
+<!-- Button -->
+<button class="btn btn-lg btn-forest-fire" data-mdb-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+style='  background: linear-gradient(45deg, #658d37, #b4332a);
+color: #fff;
+border-radius: 50px;
+border: none;
+padding: 15px 30px;
+font-size: 18px;
+font-weight: bold;
+text-transform: uppercase;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
 >
-WHo are we !
-</a>
+  <span class="btn-text"
+  style='  display: inline-block;
+  position: relative;
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  text-shadow: 2px 2px #000;'
+  >Who Are We !</span>
+</button>
+
+
 
 <!-- Collapsed content -->
-<div class="collapse mt-3" id="collapseExample">
-Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-sapiente ea proident.
+<div class="collapse mt-3 " id="collapseExample">
+  <div  style="border: 0.5px solid #0F1006 ; margin-top:10px; border-radius: 10px; width:auto;">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
+          <img src="{%static 'images\mr.jpg'%}" class="img-fluid rounded-circle" alt="Your Image" style="margin-top:10px; width:195px; height:190px;">
+      </div>
+      <div class="col-md-6 col-sm-12" style='margin-top:10px;'>
+          <div class="d-flex flex-column">
+              <h4 class="mb-0" style='color:#b4332a;'>Karim Fathallah</h4>
+              <p class="text-justify">Doctor in Computer Science/ Consultant Formateur IT</p>
+              <button class="btn btn-link " data-mdb-toggle="collapse" role="button"href="#karimContact"  data-target="#karimContact" aria-expanded="false" aria-controls="collapseExample" style='color:#658d37;'>Contact</button>
+              
+              <div class="collapse mt-3" id="karimContact">
+                <div class="d-flex flex-column">
+                    <a href="https://www.facebook.com/karim.fathallah.1979" class="mb-2 text-black"><i class="fab fa-facebook fa-lg mr-2 text-black"></i> Karim's Facebook</a>
+                    <a href="https://www.linkedin.com/in/dr-karim-fathallah/" class="mb-2 text-black"><i class="fab fa-linkedin fa-lg mr-2 text-black"></i> Karim's LinkedIn</a>
+                    <p class="mb-0"><i class="far fa-envelope fa-lg mr-2  text-black"></i>Email: fathallah.karim@gmail.com</p>
+                    <p class="mb-0"><i class="fas fa-phone fa-lg mr-2 text-black"></i>Phone: +216 93 267 545</p>
+                </div>
+            </div>
+            
+            
+          
+            </div>
+      </div>
+  </div>
+  <hr>
+  <div class="row justify-content-center align-items-center mt-4">
+    <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
+        <img src="{%static 'images\me.jpg'%}" class="img-fluid rounded-circle" alt="Your Image" style="margin-bottom:10px; width:200px; height:195px;">
+    </div>
+    <div class="col-md-6 col-sm-12 " style='margin-bottom:10px;'>
+        <div class="d-flex flex-column">
+            <h4 class="mb-0" style='color:#b4332a;'>Yasmine Ben Ahmed</h4>
+            <p class="text-justify">Embedded systems and IOT student at Faculty of Sciences of Tunis FST</p>
+               <button class="btn btn-link " data-mdb-toggle="collapse" role="button"href="#yasmineContact"  data-target="#yasmineContact" aria-expanded="false" aria-controls="collapseExample" style='color:#658d37;'>Contact</button>
+              
+            <div class="collapse mt-3" id="yasmineContact">
+              <div class="d-flex flex-column">
+                <a href="https://www.facebook.com/yasmine.benahmed.902" class="mb-2 text-black"><i class="fab fa-facebook fa-lg mr-2 text-black"></i> Yasmine's Facebook</a>
+                <a href="https://www.instagram.com/yasmin.benahmed/?hl=fr" class="mb-2 text-black"><i class="fab fa-instagram fa-lg mr-2 text-black"></i> Yasmine's Instagram</a>
+                <a href="https://www.linkedin.com/in/yasmine-ben-ahmed/" class="mb-2 text-black"><i class="fab fa-linkedin fa-lg mr-2 text-black"></i> Yasmine's LinkedIn</a>
+                <a href="https://github.com/Yasmine-BA1" class="mb-2 text-black"><i class="fab fa-github fa-lg mr-2 text-black"></i> Yasmine's Github</a>
+                <p class="mb-0"><i class="far fa-envelope fa-lg mr-2  text-black"></i>Email: benahmedyasmin@gmail.com</p>
+                <p class="mb-0"><i class="fas fa-phone fa-lg mr-2 text-black"></i>Phone: +216 52 066 233</p>
+            </div>
+            </div>
+        
+        
+          </div>
+    </div>
+</div>
 </div>
 
 
+</div>
 
 
 
