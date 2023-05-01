@@ -55,7 +55,7 @@
                         <h4 style=" font-family:subset; margin-bottom:20px;margin-top:10px; "> <strong style="color: #A26A25;">Add Node To Your Project: </strong>{{ project.nomp }}</h4>
                     
 
-                        <div class="row mb-5" style="margin-left: 10px;">
+                        <div class="row mb-3" style="margin-left: 10px;">
                             <div class="col-md-3">
                               <label for="nom" style="margin-right: 5px;">Node Name:</label>
                               <input type="text" id="nom" name="nom" style="margin-right: 20px; background-color: #DFD9DB;" placeholder="Node Name" />
@@ -77,8 +77,13 @@
                             </div>
                           </div>
                           
-                          <div class="row" style="margin-top:10px;margin-left:-130px;">
-                            <div class="col-md-5">
+                          <div class="row" style="margin-left: 10px;">
+                            {% comment %} <div class="col-md-3">
+                              <label for="nom" style="margin-right: 5px;">Parcelle Name:</label>
+                              <input type="text" id="parcelle" name="parcelle" style="margin-right: 20px; background-color: #DFD9DB;" placeholder="Node Name" />
+                            </div> {% endcomment %}
+
+                            <div class="col-md-3"><br/>
                                 {% comment %} <h6 >Select The Specific Project ID:</h6> {% endcomment %}
                                 <select name="polyg" style="margin-right: 50px; background-color:#DFD9DB;">
                                     {% for proj in projects %}
@@ -86,7 +91,7 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3"><br/>
                                 {% comment %} <button class="btn btn-dark mx-auto d-block shadow-none" name="button_1" style='font-size: 10px; margin-bottom: 10px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> SAVE node</button> {% endcomment %}
                                 
                                 <nav aria-label="...">
@@ -167,7 +172,7 @@ L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/M
 
 // Add the GeoJSON polygon to the map
 polygonLayer=L.geoJSON(geojson).addTo(map);
-polygonLayer.bindTooltip("Polygon Of Project: "+"{{project.nomp}}");
+polygonLayer.bindTooltip("Parcelle Of Project: "+"{{project.nomp}}");
 
 
 // leaflet draw 

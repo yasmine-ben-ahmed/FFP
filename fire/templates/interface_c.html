@@ -188,8 +188,8 @@ console.log("{{ d.node.node_range}}")
                   color = "orange";
               } else if (status == "EXTREME") {
                   color = "red";
-                  marker.setIcon(fireIcon);
-                  marker.bounce(-1);
+                  {% comment %} marker.setIcon(fireIcon);
+                  marker.bounce(-1); {% endcomment %}
               } else {
                   color = "black";
               }

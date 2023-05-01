@@ -241,10 +241,8 @@ rel="stylesheet"
           startDateField.addEventListener("input", function () {
             endDateField.min = this.value;
           });
-        </script>
 
-        <script>
-          var map = L.map('map').setView([37, 10.2], 9);
+          var map = L.map('map').setView([37, 10.2], 10);
           L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
               attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
           }).addTo(map);
@@ -290,11 +288,14 @@ rel="stylesheet"
                 const   coordinates = layer.toGeoJSON();
                 {% comment %} console.log("coord : "+e.layer.toGeoJSON().geometry.coordinates); {% endcomment %}
                 console.log(type);
+
                 if (type === 'polygon'){
                     drawnItems.addLayer(layer);
                     console.log("coord : "+e.layer.toGeoJSON().geometry.coordinates);
+
                 myjson=drawnItems.toGeoJSON() ;
             console.log('myjson',myjson);}
+
             let coords = [];
             myjson.features.forEach((coordonne) => {
                 coords = [...coords, ...coordonne.geometry.coordinates];
@@ -305,14 +306,17 @@ rel="stylesheet"
                         [...coords]
                     ]
                 }
-                console.log(multiPolygone)
-            document.getElementById('points').value=JSON.stringify(multiPolygone);  
+                console.log('multiPolygone',multiPolygone)
+            document.getElementById('points').value=JSON.stringify(multiPolygone); 
+
            
          });
     
     
     
-      </script>       
+      </script>  
+      
+
     
    
 

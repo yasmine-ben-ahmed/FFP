@@ -3,7 +3,8 @@ from django.contrib.gis import admin
 from .models import node
 from .models import myProject
 from .models import Data
-
+from .models import parcelle
+admin.site.register(parcelle)
 
 
 admin.site.register(Data)

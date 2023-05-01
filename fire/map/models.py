@@ -25,7 +25,18 @@ class myProject(models.Model):
     
     def __str__(self):
         return f' Project: {self.nomp}'
+    
+    
+class parcelle(models.Model):
+    namep = models.CharField(max_length=50, null=True, blank=True)
+    poly = models.PolygonField(null=True)
+    project = models.ForeignKey(myProject, on_delete=models.CASCADE, null=True, blank=True,related_name='parcelle')
 
+    def __str__(self):
+        if self.project:
+            return f'Parcelle of project: {self.project.nomp}'
+        else:
+            return 'Parcelle with no project assigned for now'
 
 
 #table des noeuds /markers
@@ -45,6 +56,7 @@ class node(models.Model):
     FWI=models.BigIntegerField(null=True,default= 0)
    
     polyg = models.ForeignKey(myProject, on_delete=models.CASCADE, null=True, blank=True,related_name='%(class)s_related')
+    parc = models.ForeignKey(parcelle, on_delete=models.CASCADE, null=True, blank=True,related_name='%(class)s_related')
 
     def __str__(self):
         return f' {self.nom}'  

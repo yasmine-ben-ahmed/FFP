@@ -6,9 +6,9 @@ from .views import *
 
 def result(idnode):
     nod = node.objects.get(Idnode=idnode)
-    print('....node.....',nod)
+    # print('....node.....',nod)
     fwi = nod.FWI
-    print('fff.........fwi',fwi)
+    # print('fff.........fwi',fwi)
 
     # my_project = myProject.objects.get(polygon_id=id)
     # nodee = node.objects.filter(polyg=my_project).order_by('-Idnode')
@@ -31,7 +31,7 @@ def result(idnode):
         status = 'EXTREME' 
     else:
         status = 'UNKNOWN'
-    print('sss.........status',status)
+    # print('sss.........status',status)
     
     
 

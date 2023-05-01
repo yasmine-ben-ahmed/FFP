@@ -8,7 +8,7 @@ from .models import myProject
 
 from signup.models import supervisor
 from django.contrib.gis.geos import GEOSGeometry
-
+from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
 from django.contrib.gis.geos import Point
@@ -48,16 +48,44 @@ def add_project(request,pseudo):
             formulairep.enregistrerProj()
 
             multiPolygone= request.POST.get('points')
+            multiPolygone_dict = json.loads(multiPolygone)
+            
             print(multiPolygone)
-            polygon = GEOSGeometry(multiPolygone, srid=4326)
+            multipolygon = GEOSGeometry(multiPolygone, srid=4326)
 
-            instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,geomp=polygon,clientp=selected_client,supervisorp=supervisors)
+            instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,geomp=multipolygon,clientp=selected_client,supervisorp=supervisors)
             instance.save()
+            
+            
+
+            polygons = []
+
+            for polygon_coords in multiPolygone_dict['coordinates']:
+                print('-----------')
+                for i in range(len(polygon_coords)): 
+                    poly_str = 'POLYGON(({0}))'.format(','.join([' '.join(map(str, c)) for c in polygon_coords[i]]))
+                    print('poly_str',poly_str)
+                    polygon = GEOSGeometry(poly_str, srid=4326)
+                    parcelle_obj = parcelle(poly=polygon,project=instance)
+                    # parcelle_obj.project = instance  # set the project attribute of the parcelle
+                    parcelle_obj.save()
+                    polygons.append(polygon)
                     
+                    
+            
+
+   
+                     
             # return redirect('add_client',id=instance.polygon_id)
             return redirect('addnode',pseudo=pseudo,id=instance.polygon_id)
         return render(request, 'addproj.html', {'form': formulairep,'projects':projects,'supervisor':supervisors})
     return render(request, 'addproj.html', {'form': Form_project(),'projects':projects,'supervisor':supervisors})
+
+
+
+
+
+
 
 # def add_polygones(request,pseudo):
 #     projects = myProject.objects.all()
@@ -146,10 +174,28 @@ def add_node(request, id,pseudo):
         mylongitude = request.POST.get('longitude') 
         point=Point(x=float(mylongitude),y=float(mylatitude))
         project_id = request.POST.get('polyg')
+        namep = request.POST.get('parcelle')
+       
         project_instance = myProject.objects.get(polygon_id=project_id)
+        parcelles = parcelle.objects.filter(project=project_instance)
+        list_p=[]
+        for p in parcelles:
+            list_p.append(p)
+        print('----------------------',list_p)
+        
+        # parcelle_obj = parcelle.objects.filter(project=project_instance).first() # Retrieve the first parcelle object
+        # print(parcelle_obj)
+        # parcelle_obj.namep = namep # Update the namep attribute
+        # parcelle_obj.save() # Save the changes to the database
 
-        instance = node(position=point,nom=node_name, polyg=project_instance, latitude=mylatitude, longitude=mylongitude,reference=reference,node_range=node_range,Sensors=Sensors)
+                       
+
+        instance = node(position=point,nom=node_name, polyg=project_instance,parc=list_p[node_range-1], latitude=mylatitude, longitude=mylongitude,reference=reference,node_range=node_range,Sensors=Sensors)
         instance.save()
+        
+        # parce=list_p[node_range-1]
+        # parce.namep=namep
+        # parce.save()
 
         new_data = Data(temperature=0, humidity=0, wind=0, node=instance)
         new_data.save()
@@ -228,7 +274,7 @@ def all_node(request,iid,pseudo):
         print(ldn0.node.FWI)
     
         lastd = data_list[0]
-        print('oooooooooooooooooooow',lastd)
+        
     
     if request.method == 'POST':
         return redirect('addnode',pseudo,iid)
@@ -237,92 +283,80 @@ def all_node(request,iid,pseudo):
     context = { 'projects':projects,'project':my_project,'nodee': nodes, 'ldn':data_list, 'ldn0':lastd}
     return render(request, 'all.html',context)
 
-# def update_weather(request, id):
-#     # get updated weather information
-#     my_project = myProject.objects.get(polygon_id=id)
+def update_weather(request, id):
+    # get updated weather information
+    my_project = myProject.objects.get(polygon_id=id)
 
-#     status = result(id)
+    # lasst node added
+    nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
+    onode = nodes[0]
+    
+    node_status = onode.status
+    node_fwi = onode.FWI
+    node_rssi = onode.RSSI
+    node_battery=onode.Battery_value
+    node_name =onode.nom
    
 
-#     nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
-#     onode = nodes[0]
-
-#     onode.status = status
-#     onode.save()
-#     # print('statussssss',status)
-
-
-#     # status = node.status
-#     # fwi = node.FWI
-#     # rssi= node.RSSI
-    
-#     status =onode.status
-#     fwi=onode.FWI
-#     rssi=onode.RSSI
-#     node_name =onode.nom
-#     # print('oonodeee',status)
-
-#     datas = Data.objects.filter(node=onode).order_by('-IdData')
-#     # print("ddddddddddd",datas)
-#     data = datas.first()
+    datas = Data.objects.filter(node=onode).order_by('-IdData')
+    # last data coming
+    datao = datas.first()
     
 
-#     data = {
-#         'temperature': data.temperature,
-#         'humidity': data.humidity,
-#         'wind': data.wind,
-#         'rain': data.rain,
-#         'RSSI' : rssi,
-#         # # 'camera' : cam,
-#         'fwi' : fwi,
-#         'status' : status,
-#         'node':node_name,
-#         }
-#     # print('fffff',data['fwi'])
-#     # print('fffff',data['RSSI'])
-#     # print('fffff',data['status'])
-#     # # get node status, fwi, and rssi
-#     # node_status = onode.status
-#     # node_fwi = onode.FWI
-#     # node_rssi = onode.RSSI
-#     # node_name =onode.nom
-#     # # add node status, fwi, and rssi to data
-#     # data['status'] = node_status
-#     # data['fwi'] = node_fwi
-#     # data['RSSI'] = node_rssi
-#     # data['node'] = node_name
-#     # print("oooooooo",data)
+    dataa = {
+        'temperature': datao.temperature,
+        'humidity': datao.humidity,
+        'wind': datao.wind,
+        'rain': datao.rain,
+        'RSSI' : node_rssi,
+        'battery' :node_battery,
+        
+        'fwi' : node_fwi,
+        'status' : node_status,
+        'node':node_name,
+        }
+    print('fffff',dataa['fwi'])
+    print('fffff',dataa['RSSI'])
+    print('fffff',dataa['status'])
+    # get node status, fwi, and rssi
+
+    # add node status, fwi, and rssi to data
+    dataa['status'] = node_status
+    dataa['fwi'] = node_fwi
+    dataa['RSSI'] = node_rssi
+    dataa['node'] = node_name
+    dataa['battery'] = node_battery
+    print("dataaaaaa",dataa)
     
 
-#     # return a JsonResponse with the updated data
-#     return JsonResponse(data)
-#     # return JsonResponse({"datas": list(datas.values())})
+    # return a JsonResponse with the updated data
+    return JsonResponse(dataa)
+    # return JsonResponse({"datas": list(datas.values())})
 
-def update_weather(request, id):
-    my_project = myProject.objects.get(polygon_id=id) 
+# def update_weather(request, id):
+#     my_project = myProject.objects.get(polygon_id=id) 
     
-    nodes = node.objects.filter(polyg=my_project)
-    data_list = []
-    for n in nodes:
-        ds = Data.objects.filter(node=n).order_by('-IdData').first()
-        data_list.append({
-            'node': {
-                'id': n.Idnode,
-                'status': result(n.Idnode),
-                'fwi': n.FWI,
-                'RSSI': n.RSSI,
-            },
-            'temperature': ds.temperature,
-            'humidity': ds.humidity,
-            'wind': ds.wind,
-            'rain': ds.rain,
-        })
-    #ldn0 = data_list.node
-    #print(ldn0)
-    data = data_list[0]
-    print('kkkkkk____',data['node']['status'])
+#     nodes = node.objects.filter(polyg=my_project)
+#     data_list = []
+#     for n in nodes:
+#         ds = Data.objects.filter(node=n).order_by('-IdData').first()
+#         data_list.append({
+#             'node': {
+#                 'id': n.Idnode,
+#                 'status': result(n.Idnode),
+#                 'fwi': n.FWI,
+#                 'RSSI': n.RSSI,
+#             },
+#             'temperature': ds.temperature,
+#             'humidity': ds.humidity,
+#             'wind': ds.wind,
+#             'rain': ds.rain,
+#         })
 
-    return JsonResponse(data_list, safe=False)
+#     data = data_list[0]
+#     print('kkkkkk____',data['node']['status'])
+
+#     return JsonResponse(data_list, safe=False)
 
 
 def modify(request,id,pseudo):
@@ -375,7 +409,7 @@ def ALL(request,id,pseudo):
 
         
     # print('------nodes_data',nodes_data)
-    context = {'nodes_data': nodes_data,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
+    context = {'nodes_data': nodes_data,'supervisor_obj':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
    
 
     return render(request, 'ALL_node.html',context )

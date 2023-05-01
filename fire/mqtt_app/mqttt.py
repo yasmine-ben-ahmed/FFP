@@ -4,6 +4,8 @@ from map.models import *
 import paho.mqtt.client as mqtt
 from django.conf import settings
 
+print('succeeeeeeeeeeeeeeessfully')
+
 # Create a new MQTT client instance
 client = mqtt.Client()
 

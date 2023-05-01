@@ -44,9 +44,16 @@
             <div class="row" style="width:1450px;" >
                 <div class="col-3">
                     <div class="card mb-3" style="margin-left: 20px; ">
-                        <div class="card-header">
-                          <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:5px; font-weight:bolder;">Projects List</h5>
-                         </div>
+                        <div class="row align-items-center">
+                            <div class="col text-center">
+                              <h5 class="card-title" style="color:rgb(51, 77, 4); font-family:subset; font-weight:bold; margin:0 auto; text-align:right;">Projects List</h5>
+                            </div>
+                            <div class="col-auto">
+
+                                <button class="btn btn-danger shadow-none"  style='  font-size: 8px; background-color:darkyellow; color:white;width:20px; height:30px; display:flex; justify-content:center; align-items:center; margin-right:40px;margin-top:5px;' onclick="location.href='{% url 'add_client' supervisor_obj.pseudo %}'"> <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i></button>
+ 
+                            </div>
+                          </div>
                         <div class="card-body">
                          
                           {% for proj in projects %}
@@ -271,8 +278,8 @@
                       color = "orange";
                   } else if (status == "EXTREME") {
                       color = "red";
-                      marker.setIcon(fireIcon);
-                      marker.bounce(-1);
+                      {% comment %} marker.setIcon(fireIcon);
+                      marker.bounce(-1); {% endcomment %}
                   } else {
                       color = "black";
                   }

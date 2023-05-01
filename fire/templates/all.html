@@ -47,6 +47,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+
     </head>
 
     <body class="bg-img">
@@ -319,8 +320,8 @@
                       color = "orange";
                   } else if (status == "EXTREME") {
                       color = "red";
-                      marker.setIcon(fireIcon);
-                      marker.bounce(-1);
+                      {% comment %} marker.setIcon(fireIcon);
+                      marker.bounce(-1); {% endcomment %}
                   } else {
                       color = "black";
                   }
@@ -339,17 +340,22 @@
 
     </script>
 
+    
 
     <script>
   
       $(document).ready(function() {
+
           setInterval(function() {
+            
               $.ajax({
+                
                   url: "{% url 'update_weather' project.polygon_id %}",
                   type: "GET",
-                  success: function(data_list) {
-                   data = data_list[1];
-                   status = data.node.status;
+                  success: function(dataa) {
+                   //data = data_list[0];
+                   //console.log('iiiiiiiiiii')
+                   status = dataa.status;
                    if (status === "DOWN") {
                        color = "green";
                    } else if (status === "MODERATE") {
@@ -365,49 +371,43 @@
                    }
                    polygonLayer.setStyle({ color: color });                   
    
-   
-   
-   
-   
-                   if (status === "EXTREME") {
+                  {% comment %} if (status === "EXTREME") {
                          marker.setIcon(fireIcon)
                          marker.bounce(5);
-                        
-                    
-                         
+   
                        } else {
                          marker.setIcon(null);
                          marker.stopBouncing();
-                        }
+                        } {% endcomment %}
                         
    
                         
                       $('#weather-info').html(
                           '<div class="card-body">' +
-                             '<p><strong>Temperature:</strong> ' + data.temperature + '°C</p>' +
-                             '<p><strong>Humidity:</strong> ' + data.humidity + '%</p>' +
-                             '<p><strong>Wind Speed:</strong> ' + data.wind + ' km/h</p>' +
+                             '<p><strong>Temperature:</strong> ' + dataa.temperature + '°C</p>' +
+                             '<p><strong>Humidity:</strong> ' + dataa.humidity + '%</p>' +
+                             '<p><strong>Wind Speed:</strong> ' + dataa.wind + ' km/h</p>' +
                           '</div>'
                       );
                       $('#rssi').html(
                         
-                             '<p><strong>RSSI: </strong>' + data.node.RSSI +' </p>' 
+                             '<p><strong>RSSI: </strong>' + dataa.RSSI +' </p>' 
                       );
    
-                       $('#fwi').html('<p><strong>FWI: </strong>' + data.node.fwi + '</p>');
+                       $('#fwi').html('<p><strong>FWI: </strong>' + dataa.fwi + '</p>');
    
    
    
-                       if (data.node.status == 'DOWN') {
-                           $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + data.node.status + '</span></p>');
-                       } else if (data.node.status == 'MODERATE') {
-                           $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + data.node.status + '</span></p>');
-                       } else if (data.node.status == 'HIGH') {
-                           $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + data.node.status + '</span></p>');
-                       } else if (data.node.status == 'VERY HIGH') {
-                           $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +data.node.status+ '</span></p>');
-                       } else if (data.node.status == 'EXTREME') {
-                           $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + data.node.status + '</span></p>');
+                       if (dataa.status == 'DOWN') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + dataa.status + '</span></p>');
+                       } else if (dataa.status == 'MODERATE') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + dataa.status + '</span></p>');
+                       } else if (dataa.status == 'HIGH') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + dataa.status + '</span></p>');
+                       } else if (dataa.status == 'VERY HIGH') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +dataa.status+ '</span></p>');
+                       } else if (dataa.status == 'EXTREME') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + dataa.status + '</span></p>');
                        }                   
    
    
