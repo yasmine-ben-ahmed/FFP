@@ -241,10 +241,9 @@ def all_node(request,iid,pseudo):
     for i in range(len(data_list)):
         ldn0 = data_list[i]
         #node = ldn0.node
-        print(ldn0)
-        dd = ldn0.wind
-        print(dd)
+        print('++++++++++++++++++ldn0',ldn0)
 
+   
         temperature = ldn0.temperature
         humidity = ldn0.humidity
         wind_speed = ldn0.wind
@@ -253,7 +252,7 @@ def all_node(request,iid,pseudo):
             writer = csv.writer(file)
             writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
 
-        # batchFWI('testBatch.csv')
+        batchFWI('testBatch.csv')
 
         with open('testBatch.csv', mode='r') as file:
             reader = csv.reader(file)

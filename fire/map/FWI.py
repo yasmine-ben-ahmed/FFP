@@ -6,29 +6,6 @@ import sys, re, datetime
 import os
 print(os.getcwd())
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #This is a collection of functions including functions for the Canadian Fire Weather Index
 #as well as 5 equations from (Lawson et al 1997) necessary to convert the Duff Moisture Code to
 #an actual moisture percent value.
@@ -272,6 +249,26 @@ Parameters:
 
 
 
+# def FWI(ISI, BUI):
+#     '''Calculates today's Fire Weather Index
+# Paramteres:
+#     ISI is the current day's ISI
+#     BUI is the current day's BUI
+
+#     FWI(10.853661073655068,8.4904265358371838) = 10.096371392382368'''
+#     if BUI <= 80.0:
+#         fD = 0.626 * pow(BUI, 0.809) + 2.0
+#     else:
+#         fD = 1000.0 / (25.0 + 108.64 * math.exp(-0.023 * BUI))
+
+#     B = 0.1 * ISI * fD
+
+#     if B > 1.0:
+#         S = math.exp(2.72 * pow(0.434 * math.log(B), 0.647))
+#     else:
+#         S = B
+
+#     return S
 def FWI(ISI, BUI):
     '''Calculates today's Fire Weather Index
 Paramteres:
@@ -279,6 +276,12 @@ Paramteres:
     BUI is the current day's BUI
 
     FWI(10.853661073655068,8.4904265358371838) = 10.096371392382368'''
+
+    if isinstance(ISI, complex):
+        ISI = ISI.real
+    if isinstance(BUI, complex):
+        BUI = BUI.real
+
     if BUI <= 80.0:
         fD = 0.626 * pow(BUI, 0.809) + 2.0
     else:
@@ -292,6 +295,7 @@ Paramteres:
         S = B
 
     return S
+
 
 
 

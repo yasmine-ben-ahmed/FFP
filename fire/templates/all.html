@@ -320,8 +320,8 @@
                       color = "orange";
                   } else if (status == "EXTREME") {
                       color = "red";
-                      {% comment %} marker.setIcon(fireIcon);
-                      marker.bounce(-1); {% endcomment %}
+                      marker.setIcon(fireIcon);
+                      marker.bounce(-1);
                   } else {
                       color = "black";
                   }
@@ -371,14 +371,14 @@
                    }
                    polygonLayer.setStyle({ color: color });                   
    
-                  {% comment %} if (status === "EXTREME") {
+                   if (status === "EXTREME") {
                          marker.setIcon(fireIcon)
                          marker.bounce(5);
    
                        } else {
                          marker.setIcon(null);
                          marker.stopBouncing();
-                        } {% endcomment %}
+                        } 
                         
    
                         

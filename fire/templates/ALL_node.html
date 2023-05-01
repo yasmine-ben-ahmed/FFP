@@ -131,8 +131,8 @@
                                 {% for node_data in nodes_data %}
                                 <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #D4D6D8; width: 200px; height: 240px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                                       
-                                
-                                    <p style='font-weight:bolder; margin-bottom:-10px;'><strong>Weather information of node :  </strong>{{ node_data.node_instance.nom }}</p><hr>
+                                    
+                                    <p style='font-weight:bolder; margin-bottom:-10px;'><strong><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}"">Weather Information of node : </a></strong>{{ node_data.node_instance.nom }}</p><hr>
                                     <p><strong>Temperature : </strong>{{ node_data.data.temperature }}°C</p>
                                     <p><strong>Humidity : </strong>{{ node_data.data.humidity }}%</p>
                                     <p><strong>Wind Speed : </strong>{{ node_data.data.wind }} km/h</p>
@@ -278,8 +278,8 @@
                       color = "orange";
                   } else if (status == "EXTREME") {
                       color = "red";
-                      {% comment %} marker.setIcon(fireIcon);
-                      marker.bounce(-1); {% endcomment %}
+                       marker.setIcon(fireIcon);
+                      marker.bounce(-1); 
                   } else {
                       color = "black";
                   }
@@ -293,93 +293,84 @@
      
     </script>
 
-{% comment %} <script>
+    <script>
   
-  $(document).ready(function() {
-      setInterval(function() {
-          $.ajax({
-              url: "{% url 'update_weather' project.polygon_id %}",
-              type: "GET",
-              success: function(data) {
-               status = data.status;
-               {% comment %} if (status === "DOWN") {
-                   color = "green";
-               } else if (status === "MODERATE") {
-                  color = "blue";
-               } else if (status === "HIGH") {
-                   color = "yellow";
-               } else if (status === "VERY HIGH") {
-                   color = "orange";
-               } else if (status === "EXTREME") {
-                   color = "red";
-               } else {
-                   color = "black";
-               }
-               polygonLayer.setStyle({ color: color });                    {% endcomment %}
-
-{% comment %} 
-                  $('#weather-info').html(
-                     
-                         '<p><strong>Temperature:</strong> ' + data.temperature + '°C</p>' +
-                         '<p><strong>Humidity:</strong> ' + data.humidity + '%</p>' +
-                         '<p><strong>Wind Speed:</strong> ' + data.wind + ' km/h</p>'
-                  );
-                  $('#rssi').html(
-                    
-                         '<p><strong>RSSI: </strong>' + data.RSSI +' </p>' 
-                  );
-
+        $(document).ready(function() {
+  
+            setInterval(function() {
+              
+                $.ajax({
                   
-                  // if (data.camera == 0) {
-                  //      $('#status-card').html('<div class="card-body"><p><strong>Status: </strong><span style="color:green; font-weight:bold">NO FIRE</span></p></div>');
-                  // } else if (data.camera <= 1) {
-                  //      $('#status-card').html('<div class="card-body"> <p><strong>Status: </strong><span style="color:red; font-weight:bold">FIRE</span></p></div>');
-                  // } else {
-                  //      $('#status-card').html('<div class="card-body"> <p><strong>Status: </strong><span style="color:black; font-weight:bold">NO NODE</span></p></div>');
-                  // }  {% endcomment %}
-
-
-                   {% comment %} $('#fwi').html('<p><strong>FWI: </strong>' + data.fwi + '</p>');
-
-
-
-                   if (data.status == 'DOWN') {
-                       $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + data.status + '</span></p>');
-                   } else if (data.status == 'MODERATE') {
-                       $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + data.status + '</span></p>');
-                   } else if (data.status == 'HIGH') {
-                       $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + data.status + '</span></p>');
-                   } else if (data.status == 'VERY HIGH') {
-                       $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' + data.status + '</span></p>');
-                   } else if (data.status == 'EXTREME') {
-                       $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + data.status + '</span></p>');
-                   }                   
-                  else if (data.status == 'UNKNOWN') {
-                    $('#status').html('<p><strong>Status: </strong><span style="color:black; font-weight:bold">' + data.status + '</span></p>');
-                }  {% endcomment %} 
-
-
-
-
-{% comment %} 
-                   if (status === "EXTREME") {
-                     marker.setIcon(fireIcon)
-                     marker.bounce(5);
-                    
-                
-                     
-                   } else {
-                     marker.setIcon(null);
-                     marker.stopBouncing();
-                    } {% endcomment %}
-              {% comment %} },
-              error: function(xhr, status, error) {
-                  console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
-              }
-          });
-      }, 5000); // refresh every 5 seconds
-  });
- </script> {% endcomment %}
+                    url: "{% url 'update_weather' project.polygon_id %}",
+                    type: "GET",
+                    success: function(dataa) {
+                     //data = data_list[0];
+                     //console.log('iiiiiiiiiii')
+                     status = dataa.status;
+                     if (status === "DOWN") {
+                         color = "green";
+                     } else if (status === "MODERATE") {
+                        color = "blue";
+                     } else if (status === "HIGH") {
+                         color = "yellow";
+                     } else if (status === "VERY HIGH") {
+                         color = "orange";
+                     } else if (status === "EXTREME") {
+                         color = "red";
+                     } else {
+                         color = "black";
+                     }
+                     polygonLayer.setStyle({ color: color });                   
+     
+                     if (status === "EXTREME") {
+                           marker.setIcon(fireIcon)
+                           marker.bounce(5);
+     
+                         } else {
+                           marker.setIcon(null);
+                           marker.stopBouncing();
+                          } 
+                          
+     
+                          
+                        $('#weather-info').html(
+                            '<div class="card-body">' +
+                               '<p><strong>Temperature:</strong> ' + dataa.temperature + '°C</p>' +
+                               '<p><strong>Humidity:</strong> ' + dataa.humidity + '%</p>' +
+                               '<p><strong>Wind Speed:</strong> ' + dataa.wind + ' km/h</p>' +
+                            '</div>'
+                        );
+                        $('#rssi').html(
+                          
+                               '<p><strong>RSSI: </strong>' + dataa.RSSI +' </p>' 
+                        );
+     
+                         $('#fwi').html('<p><strong>FWI: </strong>' + dataa.fwi + '</p>');
+     
+     
+     
+                         if (dataa.status == 'DOWN') {
+                             $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + dataa.status + '</span></p>');
+                         } else if (dataa.status == 'MODERATE') {
+                             $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + dataa.status + '</span></p>');
+                         } else if (dataa.status == 'HIGH') {
+                             $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + dataa.status + '</span></p>');
+                         } else if (dataa.status == 'VERY HIGH') {
+                             $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +dataa.status+ '</span></p>');
+                         } else if (dataa.status == 'EXTREME') {
+                             $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + dataa.status + '</span></p>');
+                         }                   
+     
+     
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
+                    }
+                });
+            }, 5000); // refresh every 5 seconds
+        });
+       </script> 
+  
  
     
 
