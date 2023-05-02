@@ -53,10 +53,13 @@ rel="stylesheet"
 
     </head>
 
-    <body   style='background-color:#D4D6D8;'>
+    <body   class='bg-img'>
         <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
             <div class="container-fluid">
-              <a class="navbar-brand" style="margin-left: 35px; font-family: 'subset';" href="{% url 'home' %}">GREENIST</a>
+              <div style="border: 1px solid gray; padding: 5px; display: inline-flex; align-items: center;">
+                <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
+                <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
+              </div>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -67,10 +70,10 @@ rel="stylesheet"
                   </li>
                   
                   
-                  <li class="nav-item" style="font-size: 20px; margin-left: 900px">
-                    <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>
-                    
+                  <li class="nav-item" style="font-size: 20px; margin-left: 800px">
+                    <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>    
                   </li>
+                  
                   <li class="nav-item dropdown" style="font-size: 20px;" >
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-fw fa-sign-in"></i>Singnup as
@@ -112,8 +115,8 @@ rel="stylesheet"
                               <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
                               <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
                               <div class="d-inline-flex" style='margin-left:20px;'>
-                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button>
-                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
+                                {% comment %} <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button> {% endcomment %}
+                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold; margin-left:45px;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
                               </div>
                             </div>
                           </div>
@@ -170,11 +173,15 @@ rel="stylesheet"
                         </div>
         
                           <div class="col" >
-                            <h5>Choise Your Client </h5>
+                            <h5>Choose An Existing Client </h5>
+
                             <div style="display: flex; flex-direction: row;">
                               {% comment %} <label style="margin-right: 10px; font-size:15px;">Select An Existing Client From Here</label> {% endcomment %}
                               {{ form.clientp }}
                             </div>
+                            <div class="panel-footer" style=" margin-top: -20px; margin-bottom: 10px; font-size:10px;">
+                              <i class='fa fa-warning' style='color: red'></i> Select your Client Form this list if you have already a client.
+                          </div>
                             
                           </div>
 
@@ -184,21 +191,25 @@ rel="stylesheet"
                           </div>
 
                           <nav aria-label="...">
-                            <ul class="pagination" style='margin:0px 400px;'>
+                            <ul class="pagination" style='margin:10px 400px;'>
                               <li class="page-item ">
-                                <button class="page-link" onclick="location.href='{% url 'add_client' supervisor.pseudo  %}'" style="  border: 1px solid #4F4F4F ;color:black;">Previous</button>
-                              </li>
-
-                              <li class="page-item">
-                                <button class="page-link" href='{% url 'add_client' supervisor.pseudo   %}' style="  border: 1px solid #4F4F4F ;color:black;">1</button>
+                                <button class="page-link" onclick="location.href='{% url 'display' supervisor.pseudo %}'" style="  border: 1px solid #4F4F4F ;color:black;">Previous</button>
                               </li>
 
                               <li class="page-item active" aria-current="page">
-                                <a class="page-link" href='{% url 'add_project' supervisor.pseudo %}' style="  border: 1px solid #4F4F4F ;color:black;">2</a>
+                                <button class="page-link" href='{% url 'add_project' supervisor.pseudo %}' style="  border: 1px solid #4F4F4F ;color:black; background-color:#d1485f;">1</button>
+                              </li>
+
+                              <li class="page-item " >
+                                <a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">2</a>
+                              </li>
+
+                              <li class="page-item ">
+                                <a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">3</a>
                               </li>
 
 
-                              <li class="page-item"><a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">3</a></li>
+                              <li class="page-item"><a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">4</a></li>
                               <li class="page-item">
                                 <button class="page-link" type="submit" value="save" style="  border: 1px solid #4F4F4F ;color:black;">Next</button>
                                 
@@ -206,25 +217,17 @@ rel="stylesheet"
                             </ul>
                           </nav>
 
-                          <div class='col-6 rounded ' id="map" style="width: 1055px;height: 700px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; border: 1px solid rgb(9, 0, 0) ; ">
+                          {% comment %} <div class='col-6 rounded ' id="map" style="width: 1055px;height: 700px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; border: 1px solid rgb(9, 0, 0) ; ">
                             <div class="leaflet-control"></div>
                             
                         </div>
                         <input type="text" id="points" name="points" style="margin-right: 375px;" /> 
-        
+         {% endcomment %}
 
         
 
                          
-                      {% comment %} <div class="text-center">
-                        <div class="panel-footer" style="text-align: center; margin-top: 10px;">
-                          Click Next To Submit Project Form Or Skip If You Have Already Project.
-                      </div>
-                        <button class="btn btn-dark" style='width:30%; background-color: #A26A25; color:#2B2612; font-size: 15px; margin-bottom: 4px;' type="submit" value="save">Next</button>
-                        <button class="btn btn-dark  mx-auto d-block"  style='  font-size: 8px; background-color: #A26A25; color:#2B2612;' onclick="location.href='{% url 'project_2' supervisor_obj.pseudo %}'"> Skip </button>  
-                      </div> {% endcomment %}
-                      <!-- {% comment %} <button class="btn btn-dark  mx-auto d-block"  style='  font-size: 8px; background-color: #A26A25; color:#2B2612;' onclick="location.href='#'"> Skip </button> {% endcomment %} -->
-                  
+                   
                    </form>
                       
 

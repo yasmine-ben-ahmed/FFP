@@ -22,12 +22,11 @@ from datetime import datetime
 
 
 def add_project(request,pseudo):
-    projects = myProject.objects.all()
     supervisors = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisors)
 
     clients = client.objects.all()
     if request.method == 'POST':
-
 
         formulairep = Form_project(request.POST)
         # Get the other data from the form data
@@ -47,37 +46,30 @@ def add_project(request,pseudo):
                  
             formulairep.enregistrerProj()
 
-            multiPolygone= request.POST.get('points')
-            multiPolygone_dict = json.loads(multiPolygone)
+            # multiPolygone= request.POST.get('points')
+            # multiPolygone_dict = json.loads(multiPolygone)
             
-            print(multiPolygone)
-            multipolygon = GEOSGeometry(multiPolygone, srid=4326)
+            # ,geomp=multipolygon///print(multiPolygone)
+            # multipolygon = GEOSGeometry(multiPolygone, srid=4326)
 
-            instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,geomp=multipolygon,clientp=selected_client,supervisorp=supervisors)
+            instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,clientp=selected_client,supervisorp=supervisors)
             instance.save()
-            
-            
+            print('***************',instance.polygon_id)
+            # polygons = []
 
-            polygons = []
-
-            for polygon_coords in multiPolygone_dict['coordinates']:
-                print('-----------')
-                for i in range(len(polygon_coords)): 
-                    poly_str = 'POLYGON(({0}))'.format(','.join([' '.join(map(str, c)) for c in polygon_coords[i]]))
-                    print('poly_str',poly_str)
-                    polygon = GEOSGeometry(poly_str, srid=4326)
-                    parcelle_obj = parcelle(poly=polygon,project=instance)
-                    # parcelle_obj.project = instance  # set the project attribute of the parcelle
-                    parcelle_obj.save()
-                    polygons.append(polygon)
-                    
-                    
-            
-
-   
-                     
+            # for polygon_coords in multiPolygone_dict['coordinates']:
+            #     print('-----------')
+            #     for i in range(len(polygon_coords)): 
+            #         poly_str = 'POLYGON(({0}))'.format(','.join([' '.join(map(str, c)) for c in polygon_coords[i]]))
+            #         print('poly_str',poly_str)
+            #         polygon = GEOSGeometry(poly_str, srid=4326)
+            #         parcelle_obj = parcelle(poly=polygon,project=instance)
+            #         # parcelle_obj.project = instance  # set the project attribute of the parcelle
+            #         parcelle_obj.save()
+            #         polygons.append(polygon)
+                              
             # return redirect('add_client',id=instance.polygon_id)
-            return redirect('addnode',pseudo=pseudo,id=instance.polygon_id)
+            return redirect('add_client',pseudo=pseudo,idd=instance.polygon_id)
         return render(request, 'addproj.html', {'form': formulairep,'projects':projects,'supervisor':supervisors})
     return render(request, 'addproj.html', {'form': Form_project(),'projects':projects,'supervisor':supervisors})
 
@@ -87,39 +79,59 @@ def add_project(request,pseudo):
 
 
 
-# def add_polygones(request,pseudo):
-#     projects = myProject.objects.all()
-#     supervisors = supervisor.objects.get(pseudo=pseudo)   
-#     if request.method == 'POST':
-
-#         multiPolygone= request.POST.get('points')
-            
-#         polygon = GEOSGeometry(multiPolygone, srid=4326)
-
-#         instance = myProject(geomp=polygon)
-#         # instance.save()
-                    
-#             # return redirect('add_client',id=instance.polygon_id)
-#         return redirect('addnode',pseudo=pseudo,id=instance.polygon_id)
+def add_polygones(request,pseudo,id):
+    superviseur = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=superviseur)
         
-#     return render(request, 'polyg.html', {'projects':projects,'supervisor':supervisors})
+    project = myProject.objects.get(polygon_id=id)   
+    if request.method == 'POST':
+
+        multiPolygone= request.POST.get('points')
+        multiPolygone_dict = json.loads(multiPolygone)
+        multipolygon = GEOSGeometry(multiPolygone, srid=4326)
+
+        # geometry = myProject(geomp=multipolygon)
+        # geometry.save()
+
+        project.geomp = multipolygon
+        project.save()         
+        
+        polygons = []
+
+        for polygon_coords in multiPolygone_dict['coordinates']:
+            print('-----------')
+            for i in range(len(polygon_coords)): 
+                poly_str = 'POLYGON(({0}))'.format(','.join([' '.join(map(str, c)) for c in polygon_coords[i]]))
+                print('poly_str',poly_str)
+                polygon = GEOSGeometry(poly_str, srid=4326)
+                parcelle_obj = parcelle(poly=polygon,project=project)
+                    # parcelle_obj.project = instance  # set the project attribute of the parcelle
+                parcelle_obj.save()
+                polygons.append(polygon)       
+                    
+            # return redirect('add_client',id=instance.polygon_id)
+        return redirect('addnode',pseudo=pseudo,id=project.polygon_id)
+        
+    return render(request, 'addpolyg.html', {'projects':projects,'supervisor':superviseur,'project':project})
 
 
-def add_client(request,pseudoo):
+def add_client(request,idd,pseudo):
         # project = myProject.objects.get(polygon_id=id)
-        superviseur = supervisor.objects.get(pseudo=pseudoo)
+        superviseur = supervisor.objects.get(pseudo=pseudo)
         projects = myProject.objects.filter(supervisorp=superviseur)
+        print('----------',projects)
+        project = myProject.objects.get(polygon_id=idd) 
+        print('----------',project.polygon_id)
+               
         if request.method == 'POST':
             formulaire = Form_client(request.POST)
             if formulaire.is_valid():
-                formulaire.enregistrer()
-                pseudo = formulaire.cleaned_data['pseudo']
-                variable = 'client'
-
                 
-                return redirect('add_project',pseudo=pseudoo)
-            return render(request, 'addclient.html', {'form': formulaire,'supervisor':superviseur,'projects':projects})
-        return render(request, 'addclient.html', {'form': Form_client(),'supervisor':superviseur,'projects':projects})
+                formulaire.enregistrer(id)
+ 
+                return redirect('add_polygones',pseudo=pseudo,idd=project.polygon_id)
+            return render(request, 'addclient.html', {'form': formulaire,'supervisor':superviseur,'projects':projects,'project':project})
+        return render(request, 'addclient.html', {'form': Form_client(),'supervisor':superviseur,'projects':projects,'project':project})
 
 
 def display(request,pseudo):
@@ -136,7 +148,7 @@ def display(request,pseudo):
         
     if request.method == 'POST':
     #     return redirect('project_1',pseudo)
-        return redirect('add_client', pseudo=pseudo)
+        return redirect('add_project', pseudo=pseudo)
 
     return render(request, 'display.html', {'projects':projects,'supervisor_obj':supervisor_obj})
 #-----------------------------------------------------------------------------
@@ -222,7 +234,9 @@ def start_mqtt(request,id):
 
 
 def all_node(request,iid,pseudo):
-    projects = myProject.objects.all()
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+
     my_project = myProject.objects.get(polygon_id=iid) 
     #polygons = [p.Polygon for p in projects if p.Polygon]
     #polygons = myPolygon.objects.all()
@@ -403,9 +417,6 @@ def ALL(request,id,pseudo):
     for i in range(len(data_list)):
         ldn0 = data_list[i]
         print(ldn0)
-        
-
-
         
     # print('------nodes_data',nodes_data)
     context = {'nodes_data': nodes_data,'supervisor_obj':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}

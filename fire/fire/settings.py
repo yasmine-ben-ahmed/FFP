@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'home',
     'signup',
     'login',
-    'mqtt_app',
+    
     
    
     

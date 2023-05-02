@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.gis.geos import Point
 from .models import *
-import datetime
+from itertools import chain
 # from location_field.widgets import LocationWidget
 # from django.contrib.gis.forms.widgets import LocationWidget
 from django.contrib.gis import forms as geoforms
@@ -11,7 +11,7 @@ class Form_project(forms.Form):
 
     nomp = forms.CharField(required=True,max_length=myProject._meta.get_field(
         'nomp').max_length, widget=forms.TextInput(attrs={'id': "nomp", 'name': "nomp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;", 'placeholder': 'Project Name'}))
-    descp = forms.CharField(  max_length=myProject._meta.get_field(
+    descp = forms.CharField( required=False, max_length=myProject._meta.get_field(
         'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
     
     # debutp=forms.DateField(required=True,initial=datetime.date.today, widget=forms.DateInput(attrs={'id': "debutp", 'name': "debutp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;",'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}))
@@ -21,7 +21,11 @@ class Form_project(forms.Form):
         'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;", 'placeholder': 'Region Name'}))
     # location = forms.CharField( required=True,widget=LocationWidget(attrs={'id': "location", 'name': "location", 'class': "form-control shadow-lg p-6 mb-4 rounded", 'style': "font-size: 20px; background-color: #DFD9DB;"}, based_fields=['city']))
 
-    clientp = forms.ModelChoiceField(queryset=client.objects.all(), empty_label=None,required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; width:170px;", 'placeholder': 'Select Client'}))
+    clientp = forms.ModelChoiceField(queryset=client.objects.all(), empty_label='None' ,required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; width:170px;", 'placeholder': 'Select Client'}))
+    
+    # client_choices = chain((('', 'No Client'),), client.objects.values_list('id', 'nom'))
+    # clientp = forms.ChoiceField(choices=client_choices, required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; width:170px;"}))
+    
     
     def is_valid(self):
             nomp = self.data['nomp']
@@ -50,7 +54,7 @@ class Form_project(forms.Form):
       
         # location = self.cleaned_data['location']
 
-        data =myProject(nomp=nomp,descp=descp,cityp=cityp,clientp=clientp)
+        # data =myProject(nomp=nomp,descp=descp,cityp=cityp,clientp=clientp)
         # data.save()
 
 
@@ -105,13 +109,8 @@ class Form_client(forms.Form):
             return value
 
 
-    def enregistrer(self):
-            # nomp = self.cleaned_data['nomp']
-            # desc = self.cleaned_data['desc']
-            # debut = self.cleaned_data['debut']
-            # fin = self.cleaned_data['fin']
-            # city = self.cleaned_data['city']
-            # location = self.cleaned_data['location']
+    def enregistrer(self,id):
+
 
             nom = self.cleaned_data['nom']
             prenom = self.cleaned_data['prenom']
@@ -119,9 +118,16 @@ class Form_client(forms.Form):
             pseudo = self.cleaned_data['pseudo']
             telephone = self.cleaned_data['telephone']
             confirmation_mot_de_passe = self.cleaned_data['confirmation_mot_de_passe']
-            data = client(nom=nom, prenom=prenom, pseudo=pseudo,
+            
+            new_client = client(nom=nom, prenom=prenom, pseudo=pseudo,
                             NB_GSM=telephone, e_mail=email)
-            data.save()
+            
+            new_client.save()
+            
+            my_project = myProject.objects.get(polygon_id=id) 
+            my_project.clientp = new_client
+            my_project.save()           
+            
             data = User.objects.create_user(
                 pseudo, email, confirmation_mot_de_passe)
             data.save()

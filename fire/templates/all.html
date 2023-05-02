@@ -50,7 +50,7 @@
 
     </head>
 
-    <body class="bg-img">
+    <body style='background-color:#B39976;'>
 
       
         <div class=" text-center" >
@@ -66,11 +66,11 @@
                            
                      
                       {% for proj in projects %}
-                      <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; border: 1px solid #4F4F4F ; height:120px;">
+                      <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ; height:120px;">
                         <div class="card-body text-vert">
                           <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
                           <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
-                          <button class="btn btn-dark   mx-auto d-block shadow-none"  onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id  %}'" style="margin-bottom: 3px; font-family:subset;font-weight:bold;">see polt</button>
+                          <button class="btn btn-dark   mx-auto d-block shadow-none"  onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id  %}'" style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;">see polt</button>
                           <!-- <button class="btn btn-dark  mx-auto d-block" name="button_2" style='  font-size: 8px; background-color: darkgreen;' onclick="location.href='{% url 'all' proj.supervisorp.pseudo proj.polygon_id %}'"> SEE all details</button> -->
                               {% comment %} <button class="btn btn-dark  mx-auto d-block" name="b_add_N" style='  font-size: 8px; margin-top: 3px;' onclick="location.href='{% url 'modify' proj.supervisorp.pseudo proj.polygon_id %}'"> Modify</button> {% endcomment %}
                                </div>
@@ -101,7 +101,7 @@
                                     <p><strong>Wind Speed:</strong> {{ ldn0.wind }} km/h</p>
                                     <p><strong>rain volume:</strong> {{ ldn0.rain }} mm</p>
                                     <p><strong style='color:#A26A25;'>related node:</strong> {{ ldn0.node }} </p>
-                                    <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#A26A25;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                       Node Information
                                     </button>
                                    
@@ -320,8 +320,8 @@
                       color = "orange";
                   } else if (status == "EXTREME") {
                       color = "red";
-                      marker.setIcon(fireIcon);
-                      marker.bounce(-1);
+                      {% comment %} marker.setIcon(fireIcon);
+                      marker.bounce(-1); {% endcomment %}
                   } else {
                       color = "black";
                   }

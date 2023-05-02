@@ -39,7 +39,7 @@
 
     </head>
 
-    <body class='bg-img'>
+    <body style='background-color:#deccad;'>
         <div class=" text-center" >
             <div class="row" style="width:1450px;" >
                 <div class="col-3">
@@ -50,19 +50,19 @@
                             </div>
                             <div class="col-auto">
 
-                                <button class="btn btn-danger shadow-none"  style='  font-size: 8px; background-color:darkyellow; color:white;width:20px; height:30px; display:flex; justify-content:center; align-items:center; margin-right:40px;margin-top:5px;' onclick="location.href='{% url 'add_client' supervisor_obj.pseudo %}'"> <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i></button>
+                                <button class="btn btn-danger shadow-none"  style='  font-size: 8px; background-color:darkyellow; color:white;width:20px; height:30px; display:flex; justify-content:center; align-items:center; margin-right:40px;margin-top:5px;' onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"> <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i></button>
  
                             </div>
                           </div>
                         <div class="card-body">
                          
                           {% for proj in projects %}
-                          <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
+                          <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
                             <div class="card-body text-vert">
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
+                              <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
                               <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
                               <div class="d-inline-flex" style='margin-left:20px;'>
-                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button>
+                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold; background-color:#2F3922;">see plot</button>
                                 <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'all' proj.supervisorp.pseudo proj.polygon_id %}'">Last</button>
                               </div>
                             </div>
@@ -82,7 +82,7 @@
                     
                         <p>
                             <label style='font-size:10px;'>Click Here To Display Nodes Information </label><br>
-                            <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#A26A25;" type="button" class="btn btn-dark shadow-none"  data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none"  data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
                                 Information
                             </button>
                           </p>
@@ -129,7 +129,7 @@
                           <div class="row">
 
                                 {% for node_data in nodes_data %}
-                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #D4D6D8; width: 200px; height: 240px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #deccad; width: 200px; height: 240px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                                       
                                     
                                     <p style='font-weight:bolder; margin-bottom:-10px;'><strong><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}"">Weather Information of node : </a></strong>{{ node_data.node_instance.nom }}</p><hr>
@@ -148,7 +148,7 @@
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <div class="row" >
                                 {% for ldn0 in ldn %} 
-                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #D4D6D8; width: 200px; height: 80px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #deccad; width: 200px; height: 80px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                                     <h6 style='font-weight:bolder; margin-bottom:-10px;'><strong>Prediction result</strong></h6>  <hr>
                         
                               
@@ -278,8 +278,8 @@
                       color = "orange";
                   } else if (status == "EXTREME") {
                       color = "red";
-                       marker.setIcon(fireIcon);
-                      marker.bounce(-1); 
+                       {% comment %} marker.setIcon(fireIcon);
+                      marker.bounce(-1);  {% endcomment %}
                   } else {
                       color = "black";
                   }

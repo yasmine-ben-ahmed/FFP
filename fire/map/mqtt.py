@@ -23,7 +23,7 @@ def on_connect(mqtt_client, userdata, flags, rc):
     else:
         print('Bad connection. Code:', rc)
 
-def on_message(mqtt_client, userdata, msg, id):
+def on_message(mqtt_client, userdata, msg,id):
         # Decode the incoming message
         payload_dict =json.loads(msg.payload)
         print(f'Received message on topic: {msg.topic} with payload: {msg.payload}', '\n')
@@ -31,6 +31,7 @@ def on_message(mqtt_client, userdata, msg, id):
         referencep = msg.topic.split('/')[-2]
         print('rrrrrffffffrrrppp',referencep)
         
+
         project = myProject.objects.get(polygon_id=id)
 
         
@@ -131,4 +132,9 @@ def start_mqtt_client(id):
     )
 
         # Start the MQTT loop (this function blocks and waits for incoming messages)
-    client.loop_forever()
+#     client.loop_forever()
+    # Start the MQTT client loop
+#     client.loop_start()
+
+    # Return the MQTT client instance
+#     return client

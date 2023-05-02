@@ -18,6 +18,7 @@ class supervisor(models.Model):
     NB_GSM=models.CharField(max_length=100,null=True)
     pseudo=models.CharField(max_length=100,null=True)
     e_mail=models.EmailField(max_length=100,null=True)
+    password=models.CharField(max_length=100,null=True)
     #position=models.PointField(null=True)
     
 

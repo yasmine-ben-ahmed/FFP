@@ -51,18 +51,21 @@ rel="stylesheet"
    <header>
     <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407; height: 60px;">
       <div class="container-fluid">
-        <a class="navbar-brand" style="margin-left: 35px; font-family: 'subset';" href="{% url 'home' %}">GREENIST</a>
+        <div style="border: 1px solid gray; padding: 2px; display: inline-flex; align-items: center;">
+          <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
+          <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
+        </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item" style="font-size: 20px; margin-top: 10px;">
+            <li class="nav-item" style="font-size: 20px; margin-top:10px;">
               <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></i>Home</a>
             </li>
             
             
-            <li class="nav-item" style="font-size: 20px; margin-left: 900px">
+            <li class="nav-item" style="font-size: 20px; margin-left: 840px">
                 <div style=" display: flex;
                 justify-content: end;
                 align-items: center;
