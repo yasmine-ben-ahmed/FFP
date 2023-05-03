@@ -53,7 +53,7 @@ rel="stylesheet"
 
     </head>
 
-    <body   style='background-color:#B39976;'>
+    <body   style='background-color:#deccad;'>
         <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
             <div class="container-fluid">
               <div style="border: 1px solid gray; padding: 5px; display: inline-flex; align-items: center;">
@@ -112,7 +112,7 @@ rel="stylesheet"
                           <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
                             <div class="card-body ">
                               <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset; "><strong >Project name:</strong> {{ proj.nomp }}</h6>
-                              <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
                               <div class="d-inline-flex" style='margin-left:20px;'>
                                 {% comment %} <button class="btn btn-dark shadow-none" onclick="location.href='#'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button> {% endcomment %}
                                 <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;  margin-left:45px;" onclick="location.href='#'">Visualize</button>

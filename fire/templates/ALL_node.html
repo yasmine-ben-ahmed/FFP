@@ -102,7 +102,11 @@
                                 <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Node RSSI: </strong>{{ d.RSSI }}</p>
                                 <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Duty cycle: </strong>{{ 'Every 1 Min' }}</p>
                                 <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Battery level: </strong>{{ d.Battery_value }}</p>
-                               <hr> 
+                               {% comment %} <hr> 
+                               <div id="fwi">
+                                <p><strong>FWI :</strong>{{ d.FWI }}</p>
+                                </div>{% endcomment %}
+
                                 <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);">
                                   {% if d.status == 'DOWN' %}
                                   <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ d.status }}</span></p>
@@ -118,7 +122,7 @@
                               {% elif d.status == 'UNKNOWN' %}
                                   <p><strong>Status: </strong><span style="color:black; font-weight:bold">{{ d.status }}</span></p>
                               {% endif %}                              
-                                </p>
+                                </p> 
                               </div>
                             {% endfor %}
   
@@ -148,10 +152,12 @@
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <div class="row" >
                                 {% for ldn0 in ldn %} 
-                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #deccad; width: 200px; height: 80px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #deccad; width: 200px; height: 130px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                                     <h6 style='font-weight:bolder; margin-bottom:-10px;'><strong>Prediction result</strong></h6>  <hr>
                         
-                              
+                                <div id="fwi" style='margin-bottom:-10px'>
+                              <p><strong>FWI :</strong>{{ ldn0.node.FWI }}</p>
+                              </div>
                               <div id="status">
                                 {% if ldn0.node.status == 'DOWN' %}
                                     <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ ldn0.node.status }}</span></p>
@@ -231,7 +237,7 @@
         var coords = JSON.parse(geojson_str).coordinates;
     var first_coords = coords[0][0];
     
-    console.log("{{ d.node.node_range}}")
+    console.log("foor marker {{ d.node.node_range}}")
         var polygonOne = { 
           "type": "Polygon",
           "coordinates": [
@@ -260,13 +266,17 @@
                                       } else {
                                         colorn = "black";
                                       }
-             var latest_data = "<strong>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>Latitude : {{ d.node.latitude }} <br> Longitude : {{ d.node.longitude }}<br> <strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
+             var latest_data = "<strong style='color:#A26A25;'>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>( {{ d.node.latitude }},{{ d.node.longitude }})<br><strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
                                      
-              var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}]).bindPopup(latest_data).addTo(map);   
+             var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}])
+             .bindPopup(latest_data)
+             .addTo(map);
+         
+             marker.openPopup();  
               
               
               status = "{{ d.node.status}}" ;
-              console.log( status )
+              console.log("fooor polygon", status )
               var color;
                   if (status == "DOWN") {
                       color = "green";
@@ -306,7 +316,7 @@
                     success: function(dataa) {
                      //data = data_list[0];
                      //console.log('iiiiiiiiiii')
-                     status = dataa.status;
+                     {% comment %} status = dataa.status;
                      if (status === "DOWN") {
                          color = "green";
                      } else if (status === "MODERATE") {
@@ -329,7 +339,7 @@
                          } else {
                            marker.setIcon(null);
                            marker.stopBouncing();
-                          } 
+                          }  {% endcomment %}
                           
      
                           

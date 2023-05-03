@@ -123,39 +123,48 @@
   </div> {% endcomment %}
 
 {% comment %} ------------------------------------------------------------------------------ {% endcomment %}
-<div style="margin: 80px 80px; padding: 0px" >
+<div style="margin: 50px 150px; " >
   <!-- <hr class="featurette-divider" /> -->
-  <div class="row featurette" style="border: 0.5px solid gray ; padding: 15px 15px; margin-bottom: 30px; width:1150px;  background-color: #97B481; border-radius: 10px;">
+  <div class="row featurette" style="border: 0.5px solid #97B481 ; padding: 10px 15px; margin-bottom: 30px; width:1150px;  background-color: #97B481; border-radius: 10px;">
     <div class="col-md-5">
       <br />
       <h2 class="featurette-heading">
-        CO2 emissions and climate change
-        <br/>
-        <span class="text-muted">planet conditions...</span>
-      </h2>
-      <p class="lead" >
+        CO2 emissions and climate change</h2>
+        
+        <h4><span class="text-muted">planet conditions...</span></h4>
+      
+      <p style="font-size:18px;" >
         Carbon dioxide emissions are the primary driver of global climate change.
          It’s widely recognised that to avoid the worst impacts of climate change,
           the world needs to urgently reduce emissions. 
-           Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world.
-          Global warming describes the current rise in the average temperature of Earth's air and oceans. 
-          which is often described as the most recent example of climate change.
-      </p>
+        </p>
+          <a class="btn btn-link  " data-mdb-toggle="collapse" role="button"href="#co2"  data-target="#co2" aria-expanded="false" aria-controls="collapseExample" style='color:gray; background-color:#97B481; margin-left:150px; margin-top:-50px;'>Explore More</a>
+              
+          <div class="collapse mt-3 " id="co2">
+            <div class="d-flex flex-column">
+              <p style="font-size:18px;">
+              Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world.
+              Global warming describes the current rise in the average temperature of Earth's air and oceans. 
+              which is often described as the most recent example of climate change.
+              </p>
+          </div>
+          </div>
+     
     </div>
     <div class="col-md-5" >
-      <img src="{%static 'images\co2.jpg'%}" alt="" width="500px" style="border-radius: 10px; margin-top: 40px;  margin-left: 70px;" />
+      <img src="{%static 'images\co2.jpg'%}" alt="" width="500px" style="border-radius: 10px; margin-top: 20px;  margin-left: 90px;   " />
     </div>
   </div>
 
   <!-- <hr class="featurette-divider" /> -->
-  <div class="row featurette" style="border: 0.5px solid gray ; padding: 15px 15px;  background-color: #DCFAC4; border-radius: 10px;">
+  <div class="row featurette" style="border: 0.5px solid #DCFAC4 ; padding: 10px 10px; width:1150px; background-color: #DCFAC4; border-radius: 10px;">
     <div class="col-md-5 order-md-2">
       <h2 class="featurette-heading">
         Forest and climate change
-        <br />
-        <span class="text-muted">Forests act as carbon sinks...</span>
       </h2>
-      <p class="lead">
+        <h4><span class="text-muted">Forests act as carbon sinks...</span></h4>
+      
+      <p style="font-size:18px;">
         
           
          Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
@@ -164,7 +173,7 @@
 
       </p>
     </div>
-    <div class="col-md-5 ">
+    <div class="col-md-5 " style=' margin-right: 100px;'>
       <img src="{%static 'images\co3.jpg'%}" alt="" width="400px"  style="border-radius: 10px; margin-top: 7px;" />
     </div>
   </div>
@@ -172,8 +181,8 @@
   <div class="row featurette" >
 
 
-    <div class="col-sm-5 " style="border: 1px solid gray ; padding: 10px 10px; background-color:#7F3D2A;border-radius: 10px; margin-top: 30px;  ">
-      <div class="card" style="height: 400px;">
+    <div class="col-sm-5 " style="border: 1px solid gray ;width:490px; padding: 10px 10px; background-color:#7c4c3e;border-radius: 10px; margin-top: 30px;  ">
+      <div class="card" style="height: 300px; ">
         
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="margin-left: 30px; ">
           <img src="{%static 'images\tic.jpg'%}" class="img-fluid" width="500px"/>
@@ -181,18 +190,18 @@
             <div class="mask" style="background-color: rgba(223, 216, 216, 0.15);"></div>
           </a>
         </div>
-        <div class="card-body" style="background-color: #7F3D2A;">
-          <h5 class="card-title " style="color: white;">The Growing Threat of Global CO2 Emissions</h5>
-          
-          <p class="card-text lead" style="color: white;">This alarming trend shows no signs of slowing down<br />
-            Join the fight against climate change and help protect our planet</p>
-          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-        </div>
+
       </div>
     </div>
     
-    <div  class="col-sm-4 " style="border: 1px solid gray ; margin-top: 90px; margin-left: 50px; border-radius: 10px; height: 300px;">
-    
+    <div  class="col-sm-4 " style="border: 1px solid gray ; padding:20px 20px; margin-top: 100px; margin-left: 100px; border-radius: 10px; height: 200px;background-color:#7c4c3e;">
+      
+        <h5  style="color: black; ">The Growing Threat of Global CO2 Emissions</h5>
+        
+        <p  style="color: black; font-size:17px;">This alarming trend shows no signs of slowing down.<br />
+          Join the fight against climate change and help protect our planet</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      
     </div>
       </div>
 
@@ -217,7 +226,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title featurette-heading" >How Forest Fires Contribute to Rising CO2 Emissions</h5>
-        <p class="card-text lead">Forest fires can release significant amounts of carbon dioxide (CO2) into the atmosphere. 
+        <p class="card-text "  style=" font-size:17px;">Forest fires can release significant amounts of carbon dioxide (CO2) into the atmosphere. 
           When trees and other vegetation burn, they release stored carbon into the air, adding to the amount of CO2 already present.</p>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
@@ -234,7 +243,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title featurette-heading">The huge desaster</h5>
-        <p class="card-text lead">The amount of CO2 released during a forest fire depends on the severity and duration of the fire, as well as the type and amount of vegetation burned. 
+        <p class="card-text " style=" font-size:17px;">The amount of CO2 released during a forest fire depends on the severity and duration of the fire, as well as the type and amount of vegetation burned. 
           Large-scale forest fires can release millions of tonnes of CO2 into the atmosphere, contributing to global warming and climate change.</p>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
@@ -250,7 +259,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title featurette-heading">Not only co2 ...</h5>
-        <p class="card-text lead" >In addition to CO2, forest fires can also release other greenhouse gases like methane (CH4) and nitrous oxide (N2O) into the atmosphere. 
+        <p class="card-text " style=" font-size:17px;" >In addition to CO2, forest fires can also release other greenhouse gases like methane (CH4) and nitrous oxide (N2O) into the atmosphere. 
           These gases can trap heat and contribute to global warming.</p>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
@@ -258,9 +267,10 @@
   </div>
 </div>
 
-<div class="row mb-8 lead"  style="border: 1px solid #6D3C2F ; padding: 10px 10px; background-color:#7F3D2A ; color: white; border-radius:10px ; padding:  10px;">
-  <p class="lead">When forests burn, vast amounts of the stored carbon is emitted, <br />
+<div class="row mb-8 lead"  style="border: 1px solid #6D3C2F ; padding: 10px 10px; background-color:#97B481 ; color: black; border-radius:10px ;width:1150px; height:115px;">
+  <p class="lead" ><strong>When forests burn, vast amounts of the stored carbon is emitted, <br />
   scientists estimate that wildfires emitted about 8 billion tons of CO2 per year for the past 20 years. In 2017, total global CO2 emissions reached 32.5 billion tons, according to the International Energy Agency.
+  </strong>
 </p></div>
 
 
@@ -269,17 +279,24 @@
     <img src="{%static 'images\sol.jpg'%}" style="border-radius: 10px;" class="w-100" alt="...">
   </div>
   <div class="col-md-8 p-4 ps-md-0"  style="background-color: #DCFAC4; border-radius: 10px;">
-    <h4>Our sollution</h4> 
+    <h4> Sollution</h4> 
     <h2 class="featurette-heading">
       FFFP : Forest and Farm Fire Protection 
-      <br />
-      <span class="text-muted">System for monitoring forest fires...</span>
     </h2>
-    <p class="lead">Our intelligent system not only detects forest fires but also provides accurate information about the location, size, and intensity of the fire, enabling emergency responders to take swift and effective action. With our system, you can help reduce the risk of injury and loss of life, protect natural resources, and mitigate the negative impact of forest fires on our environment and economy.
+      <h4><span class="text-muted">System for monitoring forest fires...</span></h4>
+    
+    <p style=" font-size:18px;">Our intelligent system not only detects forest fires but also provides accurate information about the location, size, and intensity of the fire, enabling emergency responders to take swift and effective action. With our system, you can help reduce the risk of injury and loss of life, protect natural resources, and mitigate the negative impact of forest fires on our environment and economy.
 
       Don't wait until it's too late to take action. Invest in our intelligent system today and join us in the fight against forest fires. 
       Together, we can make a positive impact and preserve our forests for generations to come.</p>
-    <a href="#" class="stretched-link">Explore more</a>
+      <a class="btn btn-link  " data-mdb-toggle="collapse" role="button"href="#sol"  data-target="#sol" aria-expanded="false" aria-controls="collapseExample" style='color:gray; background-color:#DCFAC4; margin-left:0px; margin-top:-50px;'>Explore More</a>
+      <div class="collapse mt-3 " id="sol">
+        <div class="d-flex flex-column">
+          <p style="font-size:18px;">
+          texttttt.
+          </p>
+      </div>
+      </div>   
   </div>
 </div>
  

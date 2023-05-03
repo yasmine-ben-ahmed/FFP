@@ -53,7 +53,7 @@ class node(models.Model):
     RSSI = models.BigIntegerField(null=True)
     Battery_value = models.BigIntegerField(null=True)
     status = models.CharField(max_length=50, null=True)
-    FWI=models.BigIntegerField(null=True,default= 0)
+    FWI=models.FloatField(null=True,default= 0)
    
     polyg = models.ForeignKey(myProject, on_delete=models.CASCADE, null=True, blank=True,related_name='%(class)s_related')
     parc = models.ForeignKey(parcelle, on_delete=models.CASCADE, null=True, blank=True,related_name='%(class)s_related')

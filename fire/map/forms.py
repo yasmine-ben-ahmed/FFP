@@ -109,7 +109,7 @@ class Form_client(forms.Form):
             return value
 
 
-    def enregistrer(self,id):
+    def enregistrer(self,idd):
 
 
             nom = self.cleaned_data['nom']
@@ -124,7 +124,7 @@ class Form_client(forms.Form):
             
             new_client.save()
             
-            my_project = myProject.objects.get(polygon_id=id) 
+            my_project = myProject.objects.get(polygon_id=idd) 
             my_project.clientp = new_client
             my_project.save()           
             

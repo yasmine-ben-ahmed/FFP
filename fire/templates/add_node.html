@@ -21,7 +21,7 @@
 
     </head>
 
-    <body   style='background-color:#B39976;'>
+    <body   style='background-color:#deccad;'>
         <div class="container222 text-center" >
             <div class="row">
                 <div class="col-3">
@@ -35,7 +35,7 @@
                           <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
                             <div class="card-body text-vert">
                               <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset; ;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
-                              <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
+                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
                               <div class="d-inline-flex" style='margin-left:20px;'>
                                 {% comment %} <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button> {% endcomment %}
                                 <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold; margin-right:15px;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>

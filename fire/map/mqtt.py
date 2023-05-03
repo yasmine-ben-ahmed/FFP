@@ -23,24 +23,25 @@ def on_connect(mqtt_client, userdata, flags, rc):
     else:
         print('Bad connection. Code:', rc)
 
-def on_message(mqtt_client, userdata, msg,id):
+def on_message(mqtt_client, userdata, msg):
         # Decode the incoming message
         payload_dict =json.loads(msg.payload)
+        print('----------------------------------------')
         print(f'Received message on topic: {msg.topic} with payload: {msg.payload}', '\n')
         
         referencep = msg.topic.split('/')[-2]
         print('rrrrrffffffrrrppp',referencep)
         
 
-        project = myProject.objects.get(polygon_id=id)
+        # project = myProject.objects.get(polygon_id=id)
 
         
             # Get the node with the matching reference
-        nodes = node.objects.filter(polyg=project,reference=referencep)
-        print('nodes',nodes)
+        nodes = node.objects.filter(reference=referencep).order_by('-Idnode')
+        print('**************nodes',nodes)
         if nodes:
             n = nodes[0]
-            print('n',n.nom,'  ref',n.reference)
+            print('*****n',n.nom,' ********* ref',n.reference)
         
 
             
@@ -113,24 +114,44 @@ def on_message(mqtt_client, userdata, msg,id):
             new_data.save()
             print('hiiiiiiiiii',new_data)
 
-def start_mqtt_client(id):
-    # Create a new MQTT client instance
-    client = mqtt.Client()
+# def start_mqtt_client(id):
+#     # Create a new MQTT client instance
+#     client = mqtt.Client()
+
+#     # Set the client's connection and message handling functions
+#     client.on_connect = on_connect
+#     client.on_message = lambda client, userdata, msg: on_message(client, userdata, msg,id)
+
+#     # Set the client's username and password
+#     client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+
+#     # Connect to the MQTT broker
+#     client.connect(
+#         host=settings.MQTT_SERVER,
+#         port=settings.MQTT_PORT,
+#         keepalive=settings.MQTT_KEEPALIVE
+#     )
+    
+#     client.loop_forever()
+#     return client
+
+client = mqtt.Client()
 
     # Set the client's connection and message handling functions
-    client.on_connect = on_connect
-    client.on_message = lambda client, userdata, msg: on_message(client, userdata, msg,id)
+client.on_connect = on_connect
+client.on_message = lambda client, userdata, msg: on_message(client, userdata, msg)
 
     # Set the client's username and password
-    client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
 
     # Connect to the MQTT broker
-    client.connect(
+client.connect(
         host=settings.MQTT_SERVER,
         port=settings.MQTT_PORT,
         keepalive=settings.MQTT_KEEPALIVE
-    )
-
+)
+    
+    
         # Start the MQTT loop (this function blocks and waits for incoming messages)
 #     client.loop_forever()
     # Start the MQTT client loop

@@ -5,6 +5,7 @@ from multiprocessing.connection import Client
 from statistics import geometric_mean
 from unittest import result
 from .models import myProject
+from . import mqtt
 
 from signup.models import supervisor
 from django.contrib.gis.geos import GEOSGeometry
@@ -14,7 +15,7 @@ from django.http import JsonResponse
 from django.contrib.gis.geos import Point
 from .forms import *
 import pyowm 
-from .mqtt import start_mqtt_client
+# from .mqtt import start_mqtt_client
 from .status import result
 import csv 
 from .FWI import *
@@ -127,9 +128,9 @@ def add_client(request,idd,pseudo):
             formulaire = Form_client(request.POST)
             if formulaire.is_valid():
                 
-                formulaire.enregistrer(id)
+                formulaire.enregistrer(idd)
  
-                return redirect('add_polygones',pseudo=pseudo,idd=project.polygon_id)
+                return redirect('add_polygones',pseudo=pseudo,id=project.polygon_id)
             return render(request, 'addclient.html', {'form': formulaire,'supervisor':superviseur,'projects':projects,'project':project})
         return render(request, 'addclient.html', {'form': Form_client(),'supervisor':superviseur,'projects':projects,'project':project})
 
@@ -225,7 +226,8 @@ def add_node(request, id,pseudo):
 
 def start_mqtt(request,id):
     # Start the MQTT client
-    start_mqtt_client(id)
+    # start_mqtt_client(id)
+    # mqtt.client.loop_forever()
     
     # Return a simple response to indicate that the client has started
     #return HttpResponse('MQTT client started successfully.')
@@ -282,7 +284,7 @@ def all_node(request,iid,pseudo):
         ldn0.node.status=resultatt
         ldn0.node.save()  
 
-    print(data_list)
+    print('data_list',data_list)
     for ldn0 in data_list:
         print(ldn0.node.FWI)
     
@@ -296,6 +298,8 @@ def all_node(request,iid,pseudo):
     context = { 'projects':projects,'project':my_project,'nodee': nodes, 'ldn':data_list, 'ldn0':lastd}
     return render(request, 'all.html',context)
 
+
+
 def update_weather(request, id):
     # get updated weather information
     my_project = myProject.objects.get(polygon_id=id)
@@ -303,17 +307,41 @@ def update_weather(request, id):
     # lasst node added
     nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
     onode = nodes[0]
+    print('----onode',onode)
     
     node_status = onode.status
     node_fwi = onode.FWI
     node_rssi = onode.RSSI
     node_battery=onode.Battery_value
     node_name =onode.nom
+    node_reference =onode.reference
    
 
     datas = Data.objects.filter(node=onode).order_by('-IdData')
     # last data coming
     datao = datas.first()
+    print('----datao',datao)
+    
+    
+    ldata =[]
+    for n in nodes:
+        dat= Data.objects.filter(node=n).order_by('-IdData').first()
+        ldata.append( {
+            
+        'temperature': datao.temperature,
+        'humidity': datao.humidity,
+        'wind': datao.wind,
+        'rain': datao.rain,
+        'RSSI' : node_rssi,
+        'battery' :node_battery,
+        'reference' :node_reference,
+        
+        'fwi' : node_fwi,
+        'status' : node_status,
+        'node':node_name,
+        }
+            
+        )
     
 
     dataa = {
@@ -323,22 +351,16 @@ def update_weather(request, id):
         'rain': datao.rain,
         'RSSI' : node_rssi,
         'battery' :node_battery,
+        'reference' :node_reference,
         
         'fwi' : node_fwi,
         'status' : node_status,
         'node':node_name,
         }
-    print('fffff',dataa['fwi'])
-    print('fffff',dataa['RSSI'])
-    print('fffff',dataa['status'])
-    # get node status, fwi, and rssi
+    print('fwi',dataa['fwi'])
+    print('rssi',dataa['RSSI'])
+    print('status',dataa['status'])
 
-    # add node status, fwi, and rssi to data
-    dataa['status'] = node_status
-    dataa['fwi'] = node_fwi
-    dataa['RSSI'] = node_rssi
-    dataa['node'] = node_name
-    dataa['battery'] = node_battery
     print("dataaaaaa",dataa)
     
 
@@ -346,30 +368,6 @@ def update_weather(request, id):
     return JsonResponse(dataa)
     # return JsonResponse({"datas": list(datas.values())})
 
-# def update_weather(request, id):
-#     my_project = myProject.objects.get(polygon_id=id) 
-    
-#     nodes = node.objects.filter(polyg=my_project)
-#     data_list = []
-#     for n in nodes:
-#         ds = Data.objects.filter(node=n).order_by('-IdData').first()
-#         data_list.append({
-#             'node': {
-#                 'id': n.Idnode,
-#                 'status': result(n.Idnode),
-#                 'fwi': n.FWI,
-#                 'RSSI': n.RSSI,
-#             },
-#             'temperature': ds.temperature,
-#             'humidity': ds.humidity,
-#             'wind': ds.wind,
-#             'rain': ds.rain,
-#         })
-
-#     data = data_list[0]
-#     print('kkkkkk____',data['node']['status'])
-
-#     return JsonResponse(data_list, safe=False)
 
 
 def modify(request,id,pseudo):
@@ -413,10 +411,13 @@ def ALL(request,id,pseudo):
         data_list.append(
             ds,
         )
+    
+    print('__________data_list',data_list)
            
     for i in range(len(data_list)):
         ldn0 = data_list[i]
         print(ldn0)
+        print('______data_list node status',ldn0.node.status)
         
     # print('------nodes_data',nodes_data)
     context = {'nodes_data': nodes_data,'supervisor_obj':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}

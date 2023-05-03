@@ -1,18 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 <body class="bg-img" >
 <div  >
-  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" >
+  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" style='background-color: #C3B8B6;'>
     {% csrf_token %}
-    <h1 class="text-center mb-4">Connexion</h1>
+    <h1 class="text-center mb-4" style='font-family:subset; font-weight: bolder;'>Connexion</h1>
     <div class="mb-3">
-      <label for="pseudo" class="form-label"><h4>Pseudo:</h4></label>
+      <label for="pseudo" class="form-label"><h4 style='font-family:subset; font-weight: bolder;'>Pseudo:</h4></label>
       {{ form.pseudo }}
       {% if form.pseudo.errors %}<h4>
       <div class="text-danger" role="alert">{{ form.pseudo.errors }}</div></4>
       {% endif %}
     </div>
     <div class="mb-3">
-      <label for="mot_de_passe" class="form-label"><h4>Mot de passe:</h4></label>
+      <label for="mot_de_passe" class="form-label"><h4 style='font-family:subset; font-weight: bolder;'>Mot de passe:</h4></label>
       {{ form.mot_de_passe }}
       {% if form.mot_de_passe.errors %}<h4>
       <div class="text-danger" role="alert">{{ form.mot_de_passe.errors }}</div></h4>

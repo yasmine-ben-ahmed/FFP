@@ -5,7 +5,7 @@ from .models import *
 
 class Form_supervisor(forms.Form):
     nom = forms.CharField(required=True, max_length=supervisor._meta.get_field(
-        'nom').max_length, widget=forms.TextInput(attrs={'id': "nom", 'name': "nom", 'class': "form-control shadow-lg p-6mb-4 rounded", 'style': "font-size: 10px; background-color: #DFD9DB;", 'placeholder': 'Last Name'}))
+        'nom').max_length, widget=forms.TextInput(attrs={'id': "nom", 'name': "nom", 'class': "form-control shadow-lg p-6 mb-4 rounded", 'style': "font-size: 20px; background-color: #DFD9DB;", 'placeholder': 'Last Name'}))
     
     prenom = forms.CharField(required=True, max_length=supervisor._meta.get_field(
         'prenom').max_length, widget=forms.TextInput(attrs={'id': 'prenom', 'name': 'prenom', 'placeholder': 'First Name', 'class': "form-control shadow-lg p-6 mb-4 rounded", 'style': "font-size: 20px; background-color: #DFD9DB;"}))
