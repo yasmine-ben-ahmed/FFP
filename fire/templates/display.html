@@ -53,7 +53,7 @@ rel="stylesheet"
 
     </head>
 
-    <body class="bg-img">
+    <body style="background-color:#E9D8C7;">
         <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
             <div class="container-fluid">
               <div style="border: 1px solid gray; padding: 5px; display: inline-flex; align-items: center;">
@@ -91,84 +91,143 @@ rel="stylesheet"
 
         <div class="containert text-center" >
             <div class="row">
-                <div class="col-3">
-                    <div class="card mb-3" style="margin-left: 45px;">
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                              <div class="col text-center">
-                                <h5 class="card-title" style="color:rgb(51, 77, 4); font-family:subset; font-weight:bold; margin:0 auto; text-align:right;">Projects List</h5>
-                              </div>
-                              <div class="col-auto">
-                                {% comment %} <button onclick="location.href='{% url 'project_1' supervisor_obj.pseudo %}'" class="btn btn-danger  shadow-none" style="margin:0px; background-color:darkyellow; width:20px; height:30px; display:flex; justify-content:center; align-items:center;">
-                                    <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i>
-                                  </button> {% endcomment %}
 
-                                  {% comment %} <button onclick="location.href='{% url 'project_1' supervisor_obj.pseudo %}/step_1'" class="btn btn-danger shadow-none" style="margin:0px; background-color:darkyellow; width:20px; height:30px; display:flex; justify-content:center; align-items:center;">
-                                    <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i>
-                                  </button> {% endcomment %}
+          <div class="col-3" >
+            <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
+              <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22;">Projects List</h5>
+              
+              <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
 
-                                  <button class="btn btn-danger shadow-none"  style='  font-size: 8px; background-color:darkyellow; color:white;width:20px; height:30px; display:flex; justify-content:center; align-items:center; ' onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"> <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i></button>
-          
-                                  
-                                  
-                              </div>
-                            </div>
-                          </div>
-                                                   
-                        <div class="card-body">
-                         
-                          {% for proj in projects %}
-                          <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
-                            <div class="card-body text-vert">
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
-                              <div class="d-inline-flex">
-                                {% comment %} <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button> {% endcomment %}
-                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
-                              </div>
-                              </div>
-                          </div>
-                          {% endfor %}
-                          </div>
-                        </div>
+              <ul class="list-unstyled mt-3">
+                {% for proj in projects %}
+                <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                  <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                  justify-content: space-between;">
+                  <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
 
-                </div>
+                    <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-45px;">Project ID: {{ proj.polygon_id }}</p>
+                  </div>
+                  <div class="project-actions">
+                    <style> 
+                      .visualize-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #3F6D22;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .visualize-btn:hover {
+                        color: #fff;
+                        background-color: #3F6D22;
+                        border-color: #3F6D22;
+                      }
+                    
+                      .visualize-btn i {
+                        font-size: 15px;
+                      }
+                    </style>
+                    <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
 
-                <div class="col-3"  style="background-color: #FFFFFF;width: 1090px; height:700px; border-radius: 10px;">
-                    <div style="border: 1px solid rgb(7, 7, 7) ; border-radius: 10px; height: 100px; width: 450px; margin: 50px 300px; background-color:#D4D6D8;">                  
-                        <h3 style="margin: 30px 30px; font-family:Lobster;">Welcome To Your Projects</h3>
-                    </div>
+                    <style> 
+                      .edit-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .edit-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .edit-btn i {
+                        font-size: 15px;
+                      }
+                    </style>
+                    <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
 
-                    <div style="text-align:center;">
-                        <h6 style=" font-family:Lobster;">Project Progress</h6><br>
-                        <strong>
-
-                          <li style='color:#D1485F;'>Step 1 :Project's description</li>
-                          <p>Enter the necessary information about your project.</p>
-                          <br>
-                          <li style='color:#D1485F;'>Step 2 :Project's client</li>
-                          <p>Enter the necessary information about client to associate with the project.</p>
-                          <br>
-
-                          <li style='color:#D1485F;'>Step 3 :Project's plots</li>
-                          <p>Draw polygons that represents the project areas.</p>
-                          <br>
-                          
-                          {% comment %} <li>Step 3 :Project plots</li>
-                          <p>Draw polygons that represents the project areas.</p>
-                          <br> {% endcomment %}
-                          <li style='color:#D1485F;'>Step 4 :Project's nodes</li>
-                          <p>Finally Place  Node(s) in project areas.</p>
-                          <br>
-                        </strong>
-                      </div>
-                      
-
-                </div>
-
+                    <style> 
+                      .delete-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .delete-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .delete-btn i {
+                        font-size: 15px;
+                      }
+                    </style>
+                    
+                    <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                    
+                    
+            
+                 
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
             </div>
+          </div>
 
-        </div>
+
+          
+
+              
+          <div class="col-3" style="background-color: #f7f7f7;width: 1000px; height: 700px; border-radius: 5px; margin-left:45px;">
+            {% comment %} <div style=" margin: 20px 40px; border-radius: 10px; height: 90px; width: 50%; display: flex; align-items: center; justify-content: center; background-color:#f7f7f7;">
+              <h3 style="margin-left: -330px; font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: bold; color: #3F6D22; ">My Projects</h3>
+            </div> {% endcomment %}
+            <div style="text-align: left; margin: 60px 40px;">
+              <h6 style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Project Progress</h6>
+              <hr style="border: 1px solid #D1485F; width: 50%; margin: 8px auto; margin-left: 0.5px; margin-bottom: 40px;">
+              <ul style="list-style-type: none; margin: 0; padding: 0;">
+                <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">1</div>
+                  <span style="margin-left: 20px;"><strong>Project's Description</strong></span>
+                </li>
+                <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Enter the necessary information about your project.</p>
+               <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">2</div>
+                  <span style="margin-left: 20px;"><strong>Project's Client</strong></span>
+                </li>
+                <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px; ">Enter the necessary information about the client <br>to associate with the project.</p>
+                <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">3</div>
+                  <span style="margin-left: 20px;"><strong>Project's Plots</strong></span>
+                </li>
+                <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Draw polygons that represent the project areas.</p>
+                <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">4</div>
+                  <span style="margin-left: 20px;"><strong> Project's Nodes</strong></span>
+                </li>
+                <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Place node(s) in project areas.</p>
+      
+            </div>
+          </div>
+          
+          
+          
+        
+
+  </div>
+
+</div>
 
    
 

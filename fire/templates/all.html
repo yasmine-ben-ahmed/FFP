@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base1.html' %} 
 {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -48,59 +48,127 @@
 
 
 
-    </head>
+</head>
 
-    <body style='background-color:#deccad;'>
+    <body style='background-color:#D4D7DC;'>
 
       
         <div class=" text-center" >
             <div class="row" style="width:1450px;" >
-              <div class="col-3">
-                <div class="card mb-3" style="margin-left: 10px;">
-                    <div class="card-header">
-                      <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:-5px; font-weight:bolder;">Projects List</h5>
-                     </div>
-                    <div class="card-body">
+              <div class="col-3" >
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 950px;">
+                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+                  
+                  <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'display_polygone' supervisor.pseudo project.polygon_id %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+                  <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
+                        
+                  <ul class="list-unstyled mt-3">
+                    {% for proj in projects %}
+                    <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                      <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                      justify-content: space-between;">
+                      <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+    
+                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
+                      </div>
+                      <div class="project-actions">
+                        <style> 
+                          .visualize-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #3F6D22;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .visualize-btn:hover {
+                            color: #fff;
+                            background-color: #3F6D22;
+                            border-color: #3F6D22;
+                          }
+                        
+                          .visualize-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+    
+                        <style> 
+                          .edit-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #8c8c8c;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .edit-btn:hover {
+                            color: #fff;
+                            background-color: #8c8c8c;
+                            border-color: #8c8c8c;
+                          }
+                        
+                          .edit-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
+    
+                        <style> 
+                          .delete-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #8c8c8c;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .delete-btn:hover {
+                            color: #fff;
+                            background-color: #8c8c8c;
+                            border-color: #8c8c8c;
+                          }
+                        
+                          .delete-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        
+                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                        
+                        
+                
                      
-                      <button class="btn btn-outline-success shadow-none" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold; margin-bottom:5px;" onclick="location.href='{% url 'ALL_node' project.supervisorp.pseudo project.polygon_id %}'">Nodes details</button>
-                           
-                     
-                      {% for proj in projects %}
-                      <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ; height:120px;">
-                        <div class="card-body text-vert">
-                          <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
-                          <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
-                          <button class="btn btn-dark   mx-auto d-block shadow-none"  onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id  %}'" style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;">see polt</button>
-                          <!-- <button class="btn btn-dark  mx-auto d-block" name="button_2" style='  font-size: 8px; background-color: darkgreen;' onclick="location.href='{% url 'all' proj.supervisorp.pseudo proj.polygon_id %}'"> SEE all details</button> -->
-                              {% comment %} <button class="btn btn-dark  mx-auto d-block" name="b_add_N" style='  font-size: 8px; margin-top: 3px;' onclick="location.href='{% url 'modify' proj.supervisorp.pseudo proj.polygon_id %}'"> Modify</button> {% endcomment %}
-                               </div>
-                          </div>
-                          {% endfor %}
-                          </div>
-                        </div>
-
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
                 </div>
+              </div>
 
-                <div class="col-3"  style="background-color: #FFFFFF;width: 1087px; height: auto; border-radius: 10px;margin-left: 0.5;">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 950px; border-radius: 5px; margin-left:30px;">
                     <form method="POST">
                     {% csrf_token %} 
-                        <h4 style=" font-family:subset; margin-bottom:10px;margin-top:20px; "> <strong style="color: #A26A25;">Last Node Added Of Project: </strong>{{ project.nomp }}</h4>
+                        <h4 style="  margin-bottom:10px;margin-top:20px; text-align:left; "> <strong style="color: #3F6D22;">Last Node Added Of Project: </strong>{{ project.nomp }}</h4>
                     
                         
 <div class="row">
   
 
-                        <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; width: 250px; height: 320px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                        <div class="col-3" style=" border: 1px solid #d5d4dd ; width: 250px; height: 320px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
                     
                           {% if project %}
                           <h5 style="margin-bottom: 1px; "><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}"">Weather Information</a></h5>
                           {% endif %} <hr>
                           {% comment %} {% for ldn0 in ldn %} {% endcomment %}
                           <div id="weather-info">
-                                    <p><strong>Temperature:</strong> {{ ldn0.temperature }}°C</p>
-                                    <p><strong>Humidity:</strong> {{ ldn0.humidity }}%</p>
-                                    <p><strong>Wind Speed:</strong> {{ ldn0.wind }} km/h</p>
-                                    <p><strong>rain volume:</strong> {{ ldn0.rain }} mm</p>
+                                    <p><strong>Temperature:</strong> {{ lastd.temperature }}°C</p>
+                                    <p><strong>Humidity:</strong> {{ lastd.humidity }}%</p>
+                                    <p><strong>Wind Speed:</strong> {{ lastd.wind }} km/h</p>
+                                    <p><strong>rain volume:</strong> {{ lastd.rain }} mm</p>
                                     {% comment %} <p><strong style='color:#A26A25;'>related node:</strong> {{ ldn0.node }} </p>
                                     <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                       Node Information
@@ -108,14 +176,14 @@
                                    
                          
                           </div>  
-                          <p><strong style='color:#A26A25;'>related node:</strong> {{ ldn0.node }} </p>
-                          <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                          <p><strong style='color:#A26A25;'>related node:</strong> {{ lastd.node }} </p>
+                          <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#082631; border-radius: 20px;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Node Information
                           </button>
                           {% comment %} {% endfor %}   {% endcomment %}
                         </div>
 
-                        <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #ddcfb6; width: 220px; height: 130px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                        <div class="col-3" style=" border: 1px solid #d5d4dd ; background-color: #E9D8C7; width: 220px; height: 130px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
                           <h5>Prediction result</h5> <hr>
                         
                           <div>
@@ -123,29 +191,29 @@
                             {% comment %} {% for ldn0 in ldn %} {% endcomment %}
                         
                             <div id="fwi">
-                              <p><strong>FWI :</strong>{{ ldn0.node.FWI }}</p>
+                              <p><strong>FWI :</strong>{{ lastd.node.FWI }}</p>
                               </div>
                               
                               <div id="status">
-                                {% if ldn0.node.status == 'DOWN' %}
-                                    <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ ldn0.node.status }}</span></p>
-                                {% elif ldn0.node.status == 'MODERATE' %}
-                                    <p><strong>Status: </strong><span style="color:blue; font-weight:bold">{{ ldn0.node.status }}</span></p>
-                                {% elif ldn0.node.status == 'HIGH' %}
-                                    <p><strong>Status: </strong><span style="color:yellow; font-weight:bold">{{ ldn0.node.status }}</span></p>
-                                {% elif ldn0.node.status == 'VERY HIGH' %}
-                                    <p><strong>Status: </strong><span style="color:orange; font-weight:bold">{{ ldn0.node.status }}</span></p>
-                                {% elif ldn0.node.status == 'EXTREME' %}
-                                    <p><strong>Status: </strong><span style="color:red; font-weight:bold">{{ ldn0.node.status }}</span></p>
-                                {% elif ldn0.node.status == 'UNKNOWN' %}
-                                    <p><strong>Status: </strong><span style="color:black; font-weight:bold">{{ ldn0.node.status }}</span></p>            
+                                {% if lastd.node.status == 'DOWN' %}
+                                    <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'MODERATE' %}
+                                    <p><strong>Status: </strong><span style="color:blue; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'HIGH' %}
+                                    <p><strong>Status: </strong><span style="color:yellow; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'VERY HIGH' %}
+                                    <p><strong>Status: </strong><span style="color:orange; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'EXTREME' %}
+                                    <p><strong>Status: </strong><span style="color:red; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'UNKNOWN' %}
+                                    <p><strong>Status: </strong><span style="color:black; font-weight:bold">{{ lastd.node.status }}</span></p>            
                                 {% endif %}
                                 </div>
                         
                                 {% comment %} {% endfor %} {% endcomment %}
                           </div>
                         
-                          <button  class="btn btn-outline-dark" name="b_add_N" style='  font-size: 10px; margin-top: 20px; font-family:subset;font-weight:bold;' onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
+                          <button  class="btn btn-outline-dark" name="b_add_N" style='  font-size: 10px; margin-top: 20px; font-family:subset;font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
                         
                         </div>
 
@@ -157,7 +225,7 @@
 
                          
                            
-                           <div class='col-6 rounded ' id="map" style="width: 1070px;height: 700px; box-sizing:border-box; margin-top: 5px; margin-bottom: 10px; border-radius: 50px; border: 1px solid rgb(9, 0, 0) ;">
+                           <div class='col-6 rounded ' id="map" style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
                         </div>
 {% comment %}              
@@ -190,17 +258,17 @@
                       <div class="modal-body" style="background-color:#4e8680; text-align:left;">
            
                           
-                          <p style='color:#D2B3AE;'><strong style='color:black;'>Node Name :</strong>   {{ ldn0.node.nom }}</p>
+                          <p style='color:#D2B3AE;'><strong style='color:black;'>Node Name :</strong>   {{ lastd.node.nom }}</p>
                            
                           
-                          <p style='color:#D2B3AE;'><strong style='color:black;'>Reference: </strong>{{ ldn0.node.reference }}</p>
-                          <p style='color:#D2B3AE;'><strong style='color:black;'>Position: </strong>{{ ldn0.node.latitude }},{{ ldn0.node.latitude }}</p>
-                          <p style='color:#D2B3AE;'><strong style='color:black;'>Sensors: </strong>{{ ldn0.node.Sensors }}</p>
+                          <p style='color:#D2B3AE;'><strong style='color:black;'>Reference: </strong>{{ lastd.node.reference }}</p>
+                          <p style='color:#D2B3AE;'><strong style='color:black;'>Position: </strong>{{ lastd.node.latitude }},{{ lastd.node.latitude }}</p>
+                          <p style='color:#D2B3AE;'><strong style='color:black;'>Sensors: </strong>{{ lastd.node.Sensors }}</p>
                           <p style='color:#D2B3AE;'><strong style='color:black;'>Duty Cycle: </strong>{{ 'Every 1 Min' }}</p>
                           <div id="rssi">
-                          <p style='color:#D2B3AE;'><strong style='color:black;'>RSSI: </strong> {{ ldn0.node.RSSI }}</p>
+                          <p style='color:#D2B3AE;'><strong style='color:black;'>RSSI: </strong> {{ lastd.node.RSSI }}</p>
                           </div>
-                          <p style='color:#D2B3AE;'><strong style='color:black;'>Battery level: </strong>{{ ldn0.node.Battery_value }}</p>
+                          <p style='color:#D2B3AE;'><strong style='color:black;'>Battery level: </strong>{{ lastd.node.Battery_value }}</p>
                           {% comment %} {% endfor %}                           {% endcomment %}
                         </div>  
                      
@@ -212,35 +280,6 @@
                   </div>
                 </div>
 
-{% comment %}                 
-            <div class="col-2" style="width: 285px;" >
-                <div class="card mb-3" style="margin-left: 10px;">
-                    <div class="card-header">
-                      <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:5px; font-weight:bolder;">Nodes List</h5>
-                     </div>
-                     
-                     <button class="btn btn-dark  mx-auto d-block shadow-none" style='margin-top:10px;font-weight:bolder; font-family:subset; ' onclick="location.href='{% url 'ALL_node' project.supervisorp.pseudo project.polygon_id %}'">see nodes details</button>
-                    <div class="card-body">
-                     
-                      {% for d in nodee %}
-                      <div class="card mb-2 " style="background-color: #d4d6d8; display: flex; flex-direction: column; height: 70px;  border: 1px solid #4F4F4F ;">
-                        <div class="card-body text-vert">
-                          <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; margin-top: -20px;"><strong style="font-family:subset; font-weight:bold;">Node Name: </strong> <br>{{ d.nom }}</h6>
-
-                          <!--<button class="btn btn-dark  mx-auto d-block" name="button_2" style='  font-size: 8px; background-color: darkgreen;' onclick="location.href='#'"> SEE all details</button> -->
-                           </div>
-                      </div>
-                      {% endfor %}
-                      </div>
-                    </div>
-
-            </div>
-
-
-            </div>
-
-
-        </div> {% endcomment %}
 
    
         <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
@@ -345,15 +384,6 @@
 
         
 
-        
-{% comment %} ----------------------------------------------------------------------------------------------------------- {% endcomment %}
-
-    </script>
-
-    
-
-    <script>
-  
       $(document).ready(function() {
 
           setInterval(function() {
@@ -363,32 +393,33 @@
                   url: "{% url 'update_weather' project.polygon_id %}",
                   type: "GET",
                   success: function(dataa) {
-                   //data = data_list[0];
-                   //console.log('iiiiiiiiiii')
-                   {% comment %} status = dataa.status;
-                   if (status === "DOWN") {
+
+                    
+{% comment %}                   
+                    statusp = dataa.status;
+                   if (statusp === "DOWN") {
                        color = "green";
-                   } else if (status === "MODERATE") {
+                   } else if (statusp === "MODERATE") {
                       color = "blue";
-                   } else if (status === "HIGH") {
+                   } else if (statusp === "HIGH") {
                        color = "yellow";
-                   } else if (status === "VERY HIGH") {
+                   } else if (statusp === "VERY HIGH") {
                        color = "orange";
-                   } else if (status === "EXTREME") {
+                   } else if (statusp === "EXTREME") {
                        color = "red";
                    } else {
                        color = "black";
                    }
-                   polygonLayer.setStyle({ color: color });                   
+                   polygonLayer.setStyle({ color: color });                    {% endcomment %}
    
-                   if (status === "EXTREME") {
+                   {% comment %} if (status === "EXTREME") {
                          marker.setIcon(fireIcon)
                          marker.bounce(5);
    
                        } else {
                          marker.setIcon(null);
                          marker.stopBouncing();
-                        }  {% endcomment %}
+                        }   {% endcomment %}
                         
    
                         

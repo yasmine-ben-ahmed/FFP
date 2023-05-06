@@ -53,7 +53,7 @@ rel="stylesheet"
 
     </head>
 
-    <body   style='background-color:#deccad;'>
+    <body   style="background-color:#D4D7DC;">
         <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
             <div class="container-fluid">
               <div style="border: 1px solid gray; padding: 5px; display: inline-flex; align-items: center;">
@@ -90,77 +90,183 @@ rel="stylesheet"
 
         <div >
             <div class="row">
-                <div class="col-3">
-                    <div class="card mb-3" style="margin-left: 20px;">
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                              <div class="col text-center">
-                                <h5 class="card-title" style="color:rgb(51, 77, 4); font-family:subset; font-weight:bold; margin:0 auto; text-align:center;">Projects List</h5>
-                              </div>
-                              {% comment %} <div class="col-auto">
-                                <button class="btn btn-danger  shadow-none" style="margin:0px; background-color:darkyellow; width:20px; height:30px; display:flex; justify-content:center; align-items:center;">
-                                    <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i>
-                                  </button>
-                                  
-                              </div> {% endcomment %}
-                            </div>
-                          </div>
-                                                   
-                        <div class="card-body">
-                         
-                          {% for proj in projects %}
-                          <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
-                            <div class="card-body ">
-                              <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset; "><strong >Project name:</strong> {{ proj.nomp }}</h6>
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
-                              <div class="d-inline-flex" style='margin-left:20px;'>
-                                {% comment %} <button class="btn btn-dark shadow-none" onclick="location.href='#'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button> {% endcomment %}
-                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;  margin-left:45px;" onclick="location.href='#'">Visualize</button>
-                              </div>
-                            </div>
-                          </div>
-                          {% endfor %}
-                          </div>
-                        </div>
-
+              <div class="col-3" >
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
+                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+                  
+                  <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+    
+                  <ul class="list-unstyled mt-3">
+                    {% for proj in projects %}
+                    <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                      <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                      justify-content: space-between;">
+                      <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+    
+                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
+                      </div>
+                      <div class="project-actions">
+                        <style> 
+                          .visualize-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #3F6D22;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .visualize-btn:hover {
+                            color: #fff;
+                            background-color: #3F6D22;
+                            border-color: #3F6D22;
+                          }
+                        
+                          .visualize-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+    
+                        <style> 
+                          .edit-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #8c8c8c;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .edit-btn:hover {
+                            color: #fff;
+                            background-color: #8c8c8c;
+                            border-color: #8c8c8c;
+                          }
+                        
+                          .edit-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
+    
+                        <style> 
+                          .delete-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #8c8c8c;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .delete-btn:hover {
+                            color: #fff;
+                            background-color: #8c8c8c;
+                            border-color: #8c8c8c;
+                          }
+                        
+                          .delete-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        
+                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                        
+                        
+                
+                     
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
                 </div>
+              </div>
 
-                <div class="col-3"  style="background-color: #FFFFFF;width: 1090px; height: auto; border-radius: 10px;">
+                <div class="col-3" style="background-color: #f7f7f7;width: 1040px; height: 700px; border-radius: 5px; margin-left:30px;">
 
                   <form method="POST"  style='margin: 0px 20px; margin-right:100px;' >
                     {% csrf_token %}
         
                     
-                    <h4 style=" font-family:subset; margin-bottom:20px; margin-top:10px;"> <strong style="color: #A26A25;">Draw plots project:</strong> {{project.nomp}} <strong style="color: #A26A25;">of client :</strong>{{project.clientp}}</h4>
+                    <h4 style="  margin-bottom:20px; margin-top:10px;"> <strong style="color: #3F6D22;">Draw plots project:</strong> {{project.nomp}} <strong style="color: #3F6D22;">of client :</strong>{{project.clientp}}</h4>
                     
-                    <nav aria-label="...">
-                      <ul class="pagination" style='margin:10px 400px;'>
-                        <li class="page-item ">
-                          <a class="page-link" href='{% url 'add_client' supervisor.pseudo project.polygon_id %}' style="  border: 1px solid #4F4F4F ;color:black;">Previous</a>
-                                                </li>
-
-                        <li class="page-item " >
-                                                  <a class="page-link" href='{% url 'add_project' supervisor.pseudo  %}' style="  border: 1px solid #4F4F4F ;color:black;">1</a>
-                                                  </li>
-
-                        <li class="page-item " >
-                          <a class="page-link" href='{% url 'add_client' supervisor.pseudo project.polygon_id %}' style="  border: 1px solid #4F4F4F ;color:black;">2</a>
-                        </li>
-
-                        <li class="page-item active " aria-current="page">
-                          <a class="page-link" href='{% url 'add_polygones' supervisor.pseudo project.polygon_id %}' style="  border: 1px solid #4F4F4F ;color:white; background-color:darkgreen;">3</a>
-                        </li>
-
-
-                        <li class="page-item"><a class="page-link" href='#' style="  border: 1px solid #4F4F4F ;color:black;">4</a></li>
+                    <nav class="pagination-container" >
+                      <ul class="pagination">
                         <li class="page-item">
-                          <button class="page-link" type="submit" value="save" style="  border: 1px solid #4F4F4F ;color:black;">Next</button>
-                          
+                          <a class="page-link" href='{% url 'add_client' supervisor.pseudo project.polygon_id %}' aria-label="Previous" >
+                            <i class="fas fa-chevron-left"></i>
+                          </a>
                         </li>
+                        <li class="page-item ">
+                          <a class="page-link" href='{% url 'add_project' supervisor.pseudo  %}'>1</a>
+                        </li>
+                        <li class="page-item ">
+                          <a class="page-link" href='{% url 'add_client' supervisor.pseudo project.polygon_id %}'>2</a>
+                        </li>
+                        <li class="page-item active">
+                          <a class="page-link" href={% url 'add_polygones' supervisor.pseudo project.polygon_id %}>3</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">4</a>
+                        </li>
+                        
+                          <li class="page-item">
+                            <button class="page-link" type="submit" value="save" >
+                              <i class="fas fa-chevron-left"></i>
+                            </button>
+                            
+                          </li>
+                        
                       </ul>
-                    </nav>
+                    </nav> 
+            <style>
+                .pagination-container {
+                  display: flex;
+                  justify-content: center;
+                  margin-top: 20px;
+                }
+                
+                .pagination {
+                  list-style: none;
+                  display: flex;
+                  align-items: center;
+                }
+                
+                .page-item {
+                  margin: 0 5px;
+                }
+                
+              .page-link {
+                  color: #333;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  border: 1px solid #ddd;
+                  transition: all 0.3s ease-in-out;
+                }
+                
+              .page-link:hover {
+                  background-color: #ddd;
+                }
+                
+                .active .page-link {
+                  background-color: #6B2737;
+                  color: #fff;
+                  border: 1px solid #d1485f;
+                }
+                
+                .page-link i {
+                  font-size: 16px;
+                }
+                
+              </style>                     
 
-                          <div class='col-6 rounded ' id="map" style="width: 1055px;height: 700px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; border: 1px solid rgb(9, 0, 0) ; ">
+
+         <div class='col-6 rounded ' id="map" style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-30px; ">
                             <div class="leaflet-control"></div>
                             
                         </div>

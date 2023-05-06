@@ -532,12 +532,18 @@ def batchFWI(fileName):
 
     rowNum = 0;
     for line in csv:
+        # Replace all null bytes with a space character
+            line = line.replace('\0', ' ')
+            
+            
             stuff = re.split(',',line)
 
             #read start parameters
             if rowNum == 0:
                 format = stuff[0]
-                if (format[0]=='"' and format[-1]=='"') or (format[0]=="'" and format[-1]=="'"):
+                if len(format) > 1 and ((format[0]=='"' and format[-1]=='"') or (format[0]=="'" and format[-1]=="'")):
+    # do something
+
                     format = format[1:-1]
                 first=[eval(x.replace('\r','').replace('\n','')) for x in stuff[1:5]]
                 rowNum+=1

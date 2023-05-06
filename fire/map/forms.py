@@ -10,18 +10,18 @@ from django.contrib.gis import forms as geoforms
 class Form_project(forms.Form):
 
     nomp = forms.CharField(required=True,max_length=myProject._meta.get_field(
-        'nomp').max_length, widget=forms.TextInput(attrs={'id': "nomp", 'name': "nomp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;", 'placeholder': 'Project Name'}))
+        'nomp').max_length, widget=forms.TextInput(attrs={'id': "nomp", 'name': "nomp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;", 'placeholder': 'Project Name'}))
     descp = forms.CharField( required=False, max_length=myProject._meta.get_field(
-        'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
+        'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
     
     # debutp=forms.DateField(required=True,initial=datetime.date.today, widget=forms.DateInput(attrs={'id': "debutp", 'name': "debutp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;",'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}))
     # finp=forms.DateField(required=True,initial=datetime.date.today, widget=forms.DateInput(attrs={'id': "finp", 'name': "finp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;",'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}))
    
     cityp = forms.CharField(required=True, max_length=myProject._meta.get_field(
-        'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;", 'placeholder': 'Region Name'}))
+        'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;", 'placeholder': 'Region Name'}))
     # location = forms.CharField( required=True,widget=LocationWidget(attrs={'id': "location", 'name': "location", 'class': "form-control shadow-lg p-6 mb-4 rounded", 'style': "font-size: 20px; background-color: #DFD9DB;"}, based_fields=['city']))
 
-    clientp = forms.ModelChoiceField(queryset=client.objects.all(), empty_label='None' ,required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; width:170px;", 'placeholder': 'Select Client'}))
+    clientp = forms.ModelChoiceField(queryset=client.objects.all(),required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; width:170px;", 'placeholder': 'Select Client'}))
     
     # client_choices = chain((('', 'No Client'),), client.objects.values_list('id', 'nom'))
     # clientp = forms.ChoiceField(choices=client_choices, required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; width:170px;"}))
@@ -61,25 +61,25 @@ class Form_project(forms.Form):
 class Form_client(forms.Form):
     
     nom = forms.CharField(required=True, max_length=client._meta.get_field(
-        'nom').max_length, widget=forms.TextInput(attrs={'id': "nom", 'name': "nom", 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;", 'placeholder': 'Last Name'}))
+        'nom').max_length, widget=forms.TextInput(attrs={'id': "nom", 'name': "nom", 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color:#FAF8FF;", 'placeholder': 'Last Name'}))
     
     prenom = forms.CharField(required=True, max_length=client._meta.get_field(
-        'prenom').max_length, widget=forms.TextInput(attrs={'id': 'prenom', 'name': 'prenom', 'placeholder': 'First Name', 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;"}))
+        'prenom').max_length, widget=forms.TextInput(attrs={'id': 'prenom', 'name': 'prenom', 'placeholder': 'First Name', 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
     
     telephone = forms.CharField(required=True, max_length=client._meta.get_field(
-        'NB_GSM').max_length, widget=forms.TextInput(attrs={'id': 'NB_GSM', 'name': 'NB_GSM', 'placeholder': 'Phone', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;"}))
+        'NB_GSM').max_length, widget=forms.TextInput(attrs={'id': 'NB_GSM', 'name': 'NB_GSM', 'placeholder': 'Phone', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
     
     pseudo = forms.CharField(required=True, max_length=client._meta.get_field(
-        'pseudo').max_length, widget=forms.TextInput(attrs={'id': 'pseudo', 'name': 'pseudo', 'placeholder': 'Pseudo', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;"}))
+        'pseudo').max_length, widget=forms.TextInput(attrs={'id': 'pseudo', 'name': 'pseudo', 'placeholder': 'Pseudo', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
     
     email = forms.EmailField(max_length=client._meta.get_field(
-        'e_mail').max_length, required=True, widget=forms.EmailInput(attrs={'id': 'email', 'name': 'email', 'placeholder': 'Mail', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;"}))
+        'e_mail').max_length, required=True, widget=forms.EmailInput(attrs={'id': 'email', 'name': 'email', 'placeholder': 'Mail', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
     
     mot_de_passe = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'id': 'password', 'name': 'password', 'placeholder': 'Password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;"}))
+        attrs={'id': 'password', 'name': 'password', 'placeholder': 'Password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
     
     confirmation_mot_de_passe = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'id': 'password1', 'name': 'password1', 'placeholder': 'Re-enter password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;"}))
+        attrs={'id': 'password1', 'name': 'password1', 'placeholder': 'Re-enter password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
 
     def is_valid(self):
             nom = self.data['nom']

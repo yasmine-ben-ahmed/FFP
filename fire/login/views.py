@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import *
 from map.models import myProject
+from signup.models import client
 # Create your views here.
 
 
@@ -22,7 +23,10 @@ def connectasclient(request):
                 login(request, data)
                 #### on va redirect dashboard #####
                 # return redirect('map/')
-            return redirect('interface_c',pseudo)
+                clientp = client.objects.get(pseudo=pseudo)
+                project = myProject.objects.get(clientp=clientp)
+                
+            return redirect('interface_c',pseudo,project.polygon_id)
         # We pass the form to the template even if it is not valid
         return render(request, 'login.html', {'form': formulaire})
     # We pass the form to the template for GET requests

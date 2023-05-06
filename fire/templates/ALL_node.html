@@ -39,50 +39,185 @@
 
     </head>
 
-    <body style='background-color:#deccad;'>
+    <body style='background-color:#D4D7DC;'>
         <div class=" text-center" >
             <div class="row" style="width:1450px;" >
-                <div class="col-3">
-                    <div class="card mb-3" style="margin-left: 20px; ">
-                        <div class="row align-items-center">
-                            <div class="col text-center">
-                              <h5 class="card-title" style="color:rgb(51, 77, 4); font-family:subset; font-weight:bold; margin:0 auto; text-align:right;">Projects List</h5>
-                            </div>
-                            <div class="col-auto">
-
-                                <button class="btn btn-danger shadow-none"  style='  font-size: 8px; background-color:darkyellow; color:white;width:20px; height:30px; display:flex; justify-content:center; align-items:center; margin-right:40px;margin-top:5px;' onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"> <i class="fa-solid fa-plus" style="color:white; font-size:30px;"></i></button>
- 
-                            </div>
+                <div class="col-3" >
+                    <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 1100px;">
+                      <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+                      
+                      <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'display' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+                      <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
+                      <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> last</button>
+                            
+                      <ul class="list-unstyled mt-3">
+                        {% for proj in projects %}
+                        <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                          <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                          justify-content: space-between;">
+                          <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+        
+                            <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
                           </div>
-                        <div class="card-body">
-                         
-                          {% for proj in projects %}
-                          <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
-                            <div class="card-body text-vert">
-                              <h6 class="card-subtitle mb-2 " style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
-                              <div class="d-inline-flex" style='margin-left:20px;'>
-                                <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold; background-color:#2F3922;">see plot</button>
-                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'all' proj.supervisorp.pseudo proj.polygon_id %}'">Last</button>
+                          <div class="project-actions">
+                            <style> 
+                              .visualize-btn {
+                                padding: 5px 5px;
+                                border: none;
+                                background-color: transparent;
+                                color: #3F6D22;
+                                font-size: 10px;
+                                cursor: pointer;
+                              }
+                            
+                              .visualize-btn:hover {
+                                color: #fff;
+                                background-color: #3F6D22;
+                                border-color: #3F6D22;
+                              }
+                            
+                              .visualize-btn i {
+                                font-size: 15px;
+                              }
+                            </style>
+                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+        
+                            <style> 
+                              .edit-btn {
+                                padding: 5px 5px;
+                                border: none;
+                                background-color: transparent;
+                                color:#3F6D22;
+                                font-size: 10px;
+                                cursor: pointer;
+                              }
+                            
+                              .edit-btn:hover {
+                                color: #fff;
+                                background-color: #3F6D22;
+                                border-color: #3F6D22;
+                              }
+                            
+                              .edit-btn i {
+                                font-size: 15px;
+                              }
+                            </style>
+                            <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example" ><i class="fa-solid fa-pencil"></i></button>
+                                  <!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #6B2737;">
+          <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">What do you want to modify?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <strong>Choose an option:</strong>
+          <ul>
+            <li style="margin:15px 5px;">
+              <p style="display: inline-block; margin-right: 10px;">Modify project information</p>
+              <a type="button" name="but_1" href="{% url 'modify_1' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</a>
+            </li>
+            <li  style="margin:15px 5px;">
+              <p style="display: inline-block; margin-right: 10px;">Modify project's plots</p>
+              <a type="button" name="but_2" href="{% url 'modify_2' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737;  margin:10px 5px;">click here</a>
+            </li>
+            <li style="margin:15px 5px;">
+                <form method="POST" action="{% url 'modify_3' supervisor.pseudo project.polygon_id %}">
+                  {% csrf_token %}
+                  <label for="node_to_delete" style="display: inline-block; margin-right: 10px;">Delete a project's node:</label>
+                  <select name="node_to_delete" style="display: inline-block; margin-right: 10px; color:black;background-color: white;">
+                    {% for n in nodee %}
+                      <option value="{{ n.nom }}">{{ n.nom }}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="submit" name="but_3" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</button>
+                </form>
+              </li>
+              
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" style="border-radius:20px;" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+                                                    
+        
+        
+                            <style> 
+                              .delete-btn {
+                                padding: 5px 5px;
+                                border: none;
+                                background-color: transparent;
+                                color: #3F6D22;
+                                font-size: 10px;
+                                cursor: pointer;
+                              }
+                            
+                              .delete-btn:hover {
+                                color: #fff;
+                                background-color: #3F6D22;
+                                border-color: #3F6D22;
+                              }
+                            
+                              .delete-btn i {
+                                font-size: 15px;
+                              }
+                            </style>
+                            
+                            <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog ">
+                                  <div class="modal-content">
+                                    <div class="modal-header " style="background-color:#6B2737;">
+                                      <h5 class="modal-title" id="exampleModalLabel"  style="color:white;">Delete Project</h5>
+                                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Are you sure you want to delete project "{{ project.nomp }}"?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px;">Cancel</button>
+                                      
+                                      <a type="button"  href="{% url 'delete_project' supervisor.pseudo project.polygon_id %}" class="btn btn-danger shadow-none" style="border-radius: 20px; background-color:#6B2737;">Delete</a>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          {% endfor %}
-                          </div>
-                        </div>
+                              
 
-                </div>
+                            
+                    
+                         
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
 
-                <div class="col-3"  style="background-color: #FFFFFF;width: 1087px; height: auto; border-radius: 10px;margin-left: 0.5;">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 1100px; border-radius: 5px; margin-left:30px;">
                     <form method="POST">
                     {% csrf_token %} 
 
                         
-                        <h4 style=" font-family:subset; margin-bottom:5px;margin-top:20px; "> <strong style="color: #A26A25;">Details Of Project: </strong>{{ project.nomp }}</h4>
-                    
-                        <p>
+                    {% comment %} <div style="display: flex; align-items: center;"> {% endcomment %}
+                        <h4 style="margin-bottom:5px;margin-top:20px; text-align:left;">
+                          <strong style="color: #3F6D22;">Details Of Project: </strong>{{ project.nomp }}
+                        </h4>
+                        {% comment %} <button class="btn btn-outline-dark" style="font-size: 6px; margin-top: 9px; margin-left: 10px; font-weight:bold; border-radius: 20px;" onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'">
+                          Plots
+                        </button>
+                      </div> {% endcomment %}
+                       <p>
                             <label style='font-size:10px;'>Click Here To Display Nodes Information </label><br>
-                            <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none"  data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            <button style=" border-radius: 20px;margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#082631;" type="button" class="btn btn-dark shadow-none"  data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
                                 Information
                             </button>
                           </p>
@@ -91,7 +226,7 @@
                         <div class="row" >
                         
                           {% for d in nodee %}
-                          <div class="col-3 collapse " id="collapseWidthExample"style=" border: 1px solid rgb(70, 69, 69) ; width: 200px; height: 340px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                          <div class="col-3 collapse " id="collapseWidthExample"style=" border: 1px solid #d5d4dd ; width: 200px; height: 340px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                             
 
                                 <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong style='color:#A26A25;'>Node Name: </strong>{{ d.nom }}</p>
@@ -133,15 +268,18 @@
                           <div class="row">
 
                                 {% for node_data in nodes_data %}
-                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #deccad; width: 200px; height: 240px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                                <div class="col-3" style=" border: 1px solid #d5d4dd; background-color: #E9D8C7; width: 200px; height: 240px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                                       
-                                    
+                                    {% if project %}
                                     <p style='font-weight:bolder; margin-bottom:-10px;'><strong><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}"">Weather Information of node : </a></strong>{{ node_data.node_instance.nom }}</p><hr>
-                                    <p><strong>Temperature : </strong>{{ node_data.data.temperature }}°C</p>
-                                    <p><strong>Humidity : </strong>{{ node_data.data.humidity }}%</p>
-                                    <p><strong>Wind Speed : </strong>{{ node_data.data.wind }} km/h</p>
-                                    <p><strong>Rain Volume : </strong>{{ node_data.data.rain }} mm</p>
-                            
+                                    {% endif %} 
+                                    
+                                    <div id="weather-info">
+                                        <p><strong>Temperature : </strong>{{ node_data.data.temperature }}°C</p>
+                                        <p><strong>Humidity : </strong>{{ node_data.data.humidity }}%</p>
+                                        <p><strong>Wind Speed : </strong>{{ node_data.data.wind }} km/h</p>
+                                        <p><strong>Rain Volume : </strong>{{ node_data.data.rain }} mm</p>
+                                    </div>  
                                 </div>
                                 {% endfor %}
                           </div>
@@ -152,7 +290,7 @@
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <div class="row" >
                                 {% for ldn0 in ldn %} 
-                                <div class="col-3" style=" border: 1px solid rgb(70, 69, 69) ; background-color: #deccad; width: 200px; height: 130px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
+                                <div class="col-3" style=" border: 1px solid #d5d4dd ; background-color: #E9D8C7; width: 200px; height: 130px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
                                     <h6 style='font-weight:bolder; margin-bottom:-10px;'><strong>Prediction result</strong></h6>  <hr>
                         
                                 <div id="fwi" style='margin-bottom:-10px'>
@@ -181,7 +319,7 @@
                     </div>
 
 
-                        <div class='col-6 rounded ' id="map" style="width: 1070px;height: 700px;box-sizing:border-box; margin-top: 20px;  margin-bottom: 10px;border-radius: 50px; border: 1px solid rgb(9, 0, 0) ;">
+                        <div class='col-6 rounded ' id="map" style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
                         </div>
              
@@ -206,181 +344,187 @@
         <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
 
 
- <script>
-      var geojson_str = "{{ project.geomp.json|escapejs }}";
-      var geojson = JSON.parse(geojson_str);
-      {% comment %} var status = "{{ node.status }}";
-      console.log('status  :::',status) {% endcomment %}
-
-
-
- 
-      var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12);
-
-
-      L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    }).addTo(map);
-
-        L.geoJSON(geojson).addTo(map);
-
-  
-        var fireIcon = L.icon({
-          iconUrl: '/static/images/fire3.png',
-          iconSize: [50, 50],
-          iconAnchor: [19, 19],
-          popupAnchor: [0, -19]
-          });
-    
-    {% for d in ldn %}
-    
-        var coords = JSON.parse(geojson_str).coordinates;
-    var first_coords = coords[0][0];
-    
-    console.log("foor marker {{ d.node.node_range}}")
-        var polygonOne = { 
-          "type": "Polygon",
-          "coordinates": [
-              coords[0][{{ d.node.node_range}}-1]
-          ]
-        };
-
-                                        var statusn = "{{ d.node.status }}";
-                                        console.log('----------node :',"{{node.nom}}"  ,'statusnnnn',statusn)
-
-                                        var colorn = "";
-                                      
-
-                                      if (statusn === "DOWN") {
-                                        colorn = "green";
-                                            
-                                      } else if (statusn === "MODERATE") {
-                                        colorn = "blue";
-                                         
-                                      } else if (statusn === "HIGH") {
-                                        colorn = "yellow";
-                                      } else if (statusn === "VERY HIGH") {
-                                        colorn = "orange";
-                                      } else if (statusn === "EXTREME") {
-                                        colorn = "red";
-                                      } else {
-                                        colorn = "black";
-                                      }
-             var latest_data = "<strong style='color:#A26A25;'>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>( {{ d.node.latitude }},{{ d.node.longitude }})<br><strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
-                                     
-             var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}])
-             .bindPopup(latest_data)
-             .addTo(map);
-         
-             marker.openPopup();  
-              
-              
-              status = "{{ d.node.status}}" ;
-              console.log("fooor polygon", status )
-              var color;
-                  if (status == "DOWN") {
-                      color = "green";
-                  } else if (status == "MODERATE") {
-                     color = "blue";
-                  } else if (status == "HIGH") {
-                      color = "yellow";
-                  } else if (status == "VERY HIGH") {
-                      color = "orange";
-                  } else if (status == "EXTREME") {
-                      color = "red";
-                       {% comment %} marker.setIcon(fireIcon);
-                      marker.bounce(-1);  {% endcomment %}
-                  } else {
-                      color = "black";
-                  }
-  
-        var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.5 } }).addTo(map);
-        polygonLayer.setStyle({ color: color });
-        polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
-  
-  
-    {% endfor %}
-     
-    </script>
-
-    <script>
-  
-        $(document).ready(function() {
-  
-            setInterval(function() {
-              
-                $.ajax({
-                  
-                    url: "{% url 'update_weather' project.polygon_id %}",
-                    type: "GET",
-                    success: function(dataa) {
-                     //data = data_list[0];
-                     //console.log('iiiiiiiiiii')
-                     {% comment %} status = dataa.status;
-                     if (status === "DOWN") {
-                         color = "green";
-                     } else if (status === "MODERATE") {
-                        color = "blue";
-                     } else if (status === "HIGH") {
-                         color = "yellow";
-                     } else if (status === "VERY HIGH") {
-                         color = "orange";
-                     } else if (status === "EXTREME") {
-                         color = "red";
-                     } else {
-                         color = "black";
-                     }
-                     polygonLayer.setStyle({ color: color });                   
-     
-                     if (status === "EXTREME") {
-                           marker.setIcon(fireIcon)
-                           marker.bounce(5);
-     
-                         } else {
-                           marker.setIcon(null);
-                           marker.stopBouncing();
-                          }  {% endcomment %}
-                          
-     
-                          
-                        $('#weather-info').html(
-                            '<div class="card-body">' +
-                               '<p><strong>Temperature:</strong> ' + dataa.temperature + '°C</p>' +
-                               '<p><strong>Humidity:</strong> ' + dataa.humidity + '%</p>' +
-                               '<p><strong>Wind Speed:</strong> ' + dataa.wind + ' km/h</p>' +
-                            '</div>'
-                        );
-                        $('#rssi').html(
-                          
-                               '<p><strong>RSSI: </strong>' + dataa.RSSI +' </p>' 
-                        );
-     
-                         $('#fwi').html('<p><strong>FWI: </strong>' + dataa.fwi + '</p>');
-     
-     
-     
-                         if (dataa.status == 'DOWN') {
-                             $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + dataa.status + '</span></p>');
-                         } else if (dataa.status == 'MODERATE') {
-                             $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + dataa.status + '</span></p>');
-                         } else if (dataa.status == 'HIGH') {
-                             $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + dataa.status + '</span></p>');
-                         } else if (dataa.status == 'VERY HIGH') {
-                             $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +dataa.status+ '</span></p>');
-                         } else if (dataa.status == 'EXTREME') {
-                             $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + dataa.status + '</span></p>');
-                         }                   
-     
-     
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
-                    }
+        <script>
+            var geojson_str = "{{ project.geomp.json|escapejs }}";
+            var geojson = JSON.parse(geojson_str);
+            {% comment %} var status = "{{ node.status }}";
+            console.log('status  :::',status) {% endcomment %}
+      
+      
+      
+       
+            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12);
+      
+      
+            L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+              attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+          }).addTo(map);
+      
+              L.geoJSON(geojson).addTo(map);
+      
+              var fireIcon = L.icon({
+                iconUrl: '/static/images/fire3.png',
+                iconSize: [50, 50],
+                iconAnchor: [19, 19],
+                popupAnchor: [0, -19]
                 });
-            }, 5000); // refresh every 5 seconds
-        });
-       </script> 
-  
+          
+          {% for d in ldn %}
+          
+              var coords = JSON.parse(geojson_str).coordinates;
+          var first_coords = coords[0][0];
+          
+          console.log("{{ d.node.node_range}}")
+              var polygonOne = { 
+                "type": "Polygon",
+                "coordinates": [
+                    coords[0][{{ d.node.node_range}}-1]
+                ]
+              };
+      
+                                              var statusn = "{{ d.node.status }}";
+                                              console.log('----------node :',"{{node.nom}}"  ,'statusnnnn',statusn)
+      
+                                              var colorn = "";
+                                            
+      
+                                            if (statusn === "DOWN") {
+                                              colorn = "green";
+                                                  
+                                            } else if (statusn === "MODERATE") {
+                                              colorn = "blue";
+                                               
+                                            } else if (statusn === "HIGH") {
+                                              colorn = "yellow";
+                                            } else if (statusn === "VERY HIGH") {
+                                              colorn = "orange";
+                                            } else if (statusn === "EXTREME") {
+                                              colorn = "red";
+                                            } else {
+                                              colorn = "black";
+                                            }
+           var latest_data = "<strong style='color:#A26A25;'>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>( {{ d.node.latitude }},{{ d.node.longitude }})<br> <strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
+                                           
+                          var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}])
+                          .bindPopup(latest_data)
+                          .addTo(map);
+                      
+                          marker.openPopup();
+       
+       
+                    
+                    
+                    
+                    status = "{{ d.node.status}}" ;
+                    console.log( status )
+                    var color;
+                        if (status == "DOWN") {
+                            color = "green";
+                        } else if (status == "MODERATE") {
+                           color = "blue";
+                        } else if (status == "HIGH") {
+                            color = "yellow";
+                        } else if (status == "VERY HIGH") {
+                            color = "orange";
+                        } else if (status == "EXTREME") {
+                            color = "red";
+                            {% comment %} marker.setIcon(fireIcon);
+                            marker.bounce(-1); {% endcomment %}
+                        } else {
+                            color = "black";
+                        }
+        
+              var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.5 } }).addTo(map);
+              polygonLayer.setStyle({ color: color });
+              polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+        
+        
+          {% endfor %}
+      
+              
+      
+            $(document).ready(function() {
+      
+                setInterval(function() {
+                  
+                    $.ajax({
+                      
+                        url: "{% url 'update_weather' project.polygon_id %}",
+                        type: "GET",
+                        success: function(dataa) {
+      
+                          
+      {% comment %}                   
+                          statusp = dataa.status;
+                         if (statusp === "DOWN") {
+                             color = "green";
+                         } else if (statusp === "MODERATE") {
+                            color = "blue";
+                         } else if (statusp === "HIGH") {
+                             color = "yellow";
+                         } else if (statusp === "VERY HIGH") {
+                             color = "orange";
+                         } else if (statusp === "EXTREME") {
+                             color = "red";
+                         } else {
+                             color = "black";
+                         }
+                         polygonLayer.setStyle({ color: color });                    {% endcomment %}
+         
+                         {% comment %} if (status === "EXTREME") {
+                               marker.setIcon(fireIcon)
+                               marker.bounce(5);
+         
+                             } else {
+                               marker.setIcon(null);
+                               marker.stopBouncing();
+                              }   {% endcomment %}
+                              
+         
+                              
+                            $('#weather-info').html(
+                                '<div class="card-body">' +
+                                   '<p><strong>Temperature:</strong> ' + dataa.temperature + '°C</p>' +
+                                   '<p><strong>Humidity:</strong> ' + dataa.humidity + '%</p>' +
+                                   '<p><strong>Wind Speed:</strong> ' + dataa.wind + ' km/h</p>' +
+                                '</div>'
+                            );
+                            $('#rssi').html(
+                              
+                                   '<p><strong>RSSI: </strong>' + dataa.RSSI +' </p>' 
+                            );
+         
+                             $('#fwi').html('<p><strong>FWI: </strong>' + dataa.fwi + '</p>');
+         
+         
+         
+                             if (dataa.status == 'DOWN') {
+                                 $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + dataa.status + '</span></p>');
+                             } else if (dataa.status == 'MODERATE') {
+                                 $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + dataa.status + '</span></p>');
+                             } else if (dataa.status == 'HIGH') {
+                                 $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + dataa.status + '</span></p>');
+                             } else if (dataa.status == 'VERY HIGH') {
+                                 $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +dataa.status+ '</span></p>');
+                             } else if (dataa.status == 'EXTREME') {
+                                 $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + dataa.status + '</span></p>');
+                             }                   
+         
+         
+         
+         
+         
+         
+         
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
+                        }
+                    });
+                }, 5000); // refresh every 5 seconds
+            });
+           </script> 
+         
  
     
 

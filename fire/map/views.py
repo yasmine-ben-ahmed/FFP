@@ -166,7 +166,7 @@ def display_polygone(request,id,pseudo):
 
        
         return redirect('addnode',pseudo,id)
-    return render(request, 'displaypoly.html', {'projects':projects,'project':project,'supervisor_obj':supervisor_obj})
+    return render(request, 'displaypoly.html', {'projects':projects,'project':project,'supervisor':supervisor_obj})
 
 
 def add_node(request, id,pseudo):
@@ -238,21 +238,16 @@ def start_mqtt(request,id):
 def all_node(request,iid,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
     projects = myProject.objects.filter(supervisorp=supervisor_obj)
-
     my_project = myProject.objects.get(polygon_id=iid) 
-    #polygons = [p.Polygon for p in projects if p.Polygon]
-    #polygons = myPolygon.objects.all()
-    # polygon = my_project.Polygon
     nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
-    
      
-      
     data_list = []
     for n in nodes :
         ds = Data.objects.filter(node=n).order_by('-IdData').first()
         data_list.append(
             ds,
         )
+    print('---------data_list',data_list)
 
     for i in range(len(data_list)):
         ldn0 = data_list[i]
@@ -270,13 +265,21 @@ def all_node(request,iid,pseudo):
 
         batchFWI('testBatch.csv')
 
+
+
         with open('testBatch.csv', mode='r') as file:
             reader = csv.reader(file)
             rows = list(reader)
-            last_row = rows[-1]
-            FWI = last_row[-1]
+            for row in rows:
+                print(row)
+            if len(rows) > 0:
+                last_row = rows[-1]
+                FWI = last_row[-1]
+            else:
+                FWI = '0'
 
         fwi = float(FWI)
+        print('heeeeeeeeeeeeeere',fwi)
         ldn0.node.FWI=fwi
         ldn0.node.save()
         resultatt= result(ldn0.node.Idnode)
@@ -284,9 +287,9 @@ def all_node(request,iid,pseudo):
         ldn0.node.status=resultatt
         ldn0.node.save()  
 
-    print('data_list',data_list)
-    for ldn0 in data_list:
-        print(ldn0.node.FWI)
+    
+    for data in data_list:
+        print(data.node.FWI)
     
         lastd = data_list[0]
         
@@ -295,7 +298,7 @@ def all_node(request,iid,pseudo):
         return redirect('addnode',pseudo,iid)
         
 
-    context = { 'projects':projects,'project':my_project,'nodee': nodes, 'ldn':data_list, 'ldn0':lastd}
+    context = { 'projects':projects,'project':my_project,'nodee': nodes, 'ldn':data_list, 'lastd':lastd,'supervisor':supervisor_obj}
     return render(request, 'all.html',context)
 
 
@@ -309,6 +312,36 @@ def update_weather(request, id):
     onode = nodes[0]
     print('----onode',onode)
     
+    datas = Data.objects.filter(node=onode).order_by('-IdData')
+    # last data coming
+    datao = datas.first()
+    print('----datao',datao)
+    ##################################################################""
+    
+    temperature = datao.temperature
+    humidity = datao.humidity
+    wind_speed = datao.wind
+
+    with open('testBatch.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
+
+    batchFWI('testBatch.csv')
+
+    with open('testBatch.csv', mode='r') as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+            last_row = rows[-1]
+            FWI = last_row[-1]
+
+    fwi = float(FWI)
+    onode.FWI=fwi
+    onode.save()
+    stat= result(onode.Idnode)
+    print ('stattttt',stat)
+    onode.status=stat
+    onode.save() 
+    
     node_status = onode.status
     node_fwi = onode.FWI
     node_rssi = onode.RSSI
@@ -316,11 +349,8 @@ def update_weather(request, id):
     node_name =onode.nom
     node_reference =onode.reference
    
+############################################################################
 
-    datas = Data.objects.filter(node=onode).order_by('-IdData')
-    # last data coming
-    datao = datas.first()
-    print('----datao',datao)
     
     
     ldata =[]
@@ -420,18 +450,19 @@ def ALL(request,id,pseudo):
         print('______data_list node status',ldn0.node.status)
         
     # print('------nodes_data',nodes_data)
-    context = {'nodes_data': nodes_data,'supervisor_obj':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
+    context = {'nodes_data': nodes_data,'supervisor':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
    
 
     return render(request, 'ALL_node.html',context )
 
 
 
-def interface_c(request, pseudo):
+def interface_c(request, id,pseudo):
     clientp = client.objects.get(pseudo=pseudo)
     projects = myProject.objects.filter(clientp=clientp)
     
     project = myProject.objects.get(clientp=clientp)
+    proj = myProject.objects.get(polygon_id=id)
     nodes = node.objects.filter(polyg=project).order_by('-Idnode')
     
     data_list = []
@@ -462,5 +493,71 @@ def interface_c(request, pseudo):
         nodes_data.append({'node_instance': node_instance, 'data': data})
         print(data)
 
-    context = {'ldn':data_list,'nodes_data': nodes_data,'nodee':nodeq,'clientp':clientp,'projects': projects, 'pseudo': pseudo,'proj_instance':proj_instance,'node_instance':node_instance}
+    context = {'ldn':data_list,'nodes_data': nodes_data,'nodee':nodeq,'clientp':clientp,'project': proj, 'pseudo': pseudo,'node_instance':node_instance}
     return render(request, 'interface_c.html', context)
+
+
+
+
+def delete_project(request,pseudo,id):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    
+    project = myProject.objects.get(polygon_id=id)
+    
+    project.delete()
+    return redirect('display',pseudo=supervisor_obj.pseudo)
+
+
+from django.http import HttpResponse
+
+def modify_1(request, pseudo, id):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    project = myProject.objects.get(polygon_id=id)
+    
+    project.delete()
+    return redirect('add_project', pseudo=supervisor_obj.pseudo)
+
+
+def modify_2(request, pseudo, id):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    project = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=project)
+    
+    for n in nodes:
+        n.delete()
+    
+    project.geomp = ""
+    project.save()
+
+    return redirect('add_polygones', pseudo=supervisor_obj.pseudo,id=project.polygon_id)
+
+
+def modify_3(request, pseudo, id):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    project = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=project)
+    
+    if request.method == 'POST':
+        node_to_delete_name = request.POST.get('node_to_delete')
+        node_to_delete = node.objects.get(nom=node_to_delete_name)
+        node_to_delete.delete()
+        return redirect('addnode', pseudo=supervisor_obj.pseudo, id=project.polygon_id)
+        
+  
+
+
+
+    
+        
+
+    
+
+
+        
+ 
+
+

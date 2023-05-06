@@ -18,8 +18,13 @@ urlpatterns = [
     
     path('update/<int:id>/', views.start_mqtt, name='update'),
   
-    path('interface/<str:pseudo>', views.interface_c, name='interface_c'),
+    path('interface/<str:pseudo>/<int:id>/', views.interface_c, name='interface_c'),
   
     path('update_weather/<int:id>/', views.update_weather, name='update_weather'),
+    
+    path('sup_<str:pseudo>/delete/<int:id>/', views.delete_project, name='delete_project'),
+    path('sup_<str:pseudo>/modify_1/<int:id>/', views.modify_1, name='modify_1'),
+    path('sup_<str:pseudo>/modify_2/<int:id>/', views.modify_2, name='modify_2'),
+    path('sup_<str:pseudo>/modify_3/<int:id>/', views.modify_3, name='modify_3'),
    
 ]

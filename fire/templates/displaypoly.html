@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base1.html' %} 
 {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,58 +21,127 @@
 
     </head>
 
-    <body style=' background-color:#deccad;'>
+    <body style=' background-color:#d5d4dd;'>
         <div class=" text-center" >
             <div class="row">
-                <div class="col-3">
-                    <div class="card mb-3" style="margin-left: 20px;">
-                        <div class="card-header">
-                          <h5 class="card-title" style="text-align:center; color:rgb(51, 77, 4); font-family:subset; margin-bottom:5px; font-weight:bolder;">Projects List</h5>
-                         </div>
-                        <div class="card-body">
-                         
-                          {% for proj in projects %}
-                          <div class="card mb-2 " style="background-color: #deccad; display: flex; flex-direction: column; border: 1px solid #4F4F4F ;">
-                            <div class="card-body text-vert">
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"><strong>Project name:</strong> {{ proj.nomp }}</h6>
-                              <h6 class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4); font-family:subset;"> <strong>Project ID:</strong> {{ proj.polygon_id }}</h6>
-                              <div class="d-inline-flex" style='margin-left:20px;'>
-                                {% comment %} <button class="btn btn-dark shadow-none" onclick="location.href='{% url 'display_polygone' proj.supervisorp.pseudo proj.polygon_id %}'" style="font-size: 10px; font-family:subset; font-weight:bold;">see plot</button> {% endcomment %}
-                                <button class="btn btn-outline-success" name="button_2" style="font-size: 10px; color: darkgreen; font-family:subset; font-weight:bold;" onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'">Visualize</button>
-                              </div>
-                            </div>
-                          </div>
-                          {% endfor %}
-                          </div>
-                        </div>
-
+              <div class="col-3" >
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
+                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+                  
+                  <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+    
+                  <ul class="list-unstyled mt-3">
+                    {% for proj in projects %}
+                    <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                      <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                      justify-content: space-between;">
+                      <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+    
+                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
+                      </div>
+                      <div class="project-actions">
+                        <style> 
+                          .visualize-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #3F6D22;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .visualize-btn:hover {
+                            color: #fff;
+                            background-color: #3F6D22;
+                            border-color: #3F6D22;
+                          }
+                        
+                          .visualize-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+    
+                        <style> 
+                          .edit-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #8c8c8c;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .edit-btn:hover {
+                            color: #fff;
+                            background-color: #8c8c8c;
+                            border-color: #8c8c8c;
+                          }
+                        
+                          .edit-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
+    
+                        <style> 
+                          .delete-btn {
+                            padding: 5px 5px;
+                            border: none;
+                            background-color: transparent;
+                            color: #8c8c8c;
+                            font-size: 10px;
+                            cursor: pointer;
+                          }
+                        
+                          .delete-btn:hover {
+                            color: #fff;
+                            background-color: #8c8c8c;
+                            border-color: #8c8c8c;
+                          }
+                        
+                          .delete-btn i {
+                            font-size: 15px;
+                          }
+                        </style>
+                        
+                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                        
+                        
+                
+                     
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
                 </div>
+              </div>
 
-                <div class="col-3"  style="background-color: #FFFFFF;width: 1090px; height: auto; border-radius: 10px;">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 700px; border-radius: 5px; margin-left:30px;">
                     <form method="POST">
                     {% csrf_token %} 
 
-                    <h4 style=" font-family:subset; margin-bottom:40px;margin-top:20px; "> <strong style="color: #A26A25;">Polygons Of Project: </strong>{{ project.nomp }}</h4>
+                    <h4 style=" text-align:left; margin-bottom:20px;margin-top:20px; "> <strong style="color: #3F6D22;">Polygons Of Project: </strong>{{ project.nomp }}</h4>
                     
 
-                        <div class="row">
-                          <div class="col" style="border: 1px solid rgb(70, 69, 69); width: 250px; height: 30px; background-color: #deccad;">
+                        <div class="row" style="margin:0px 20px;">
+                          <div class="col" style="border: 1px solid rgb(70, 69, 69); width: 250px; height: 30px; background-color: #FAF8FF;">
                             <p><strong>Start Date</strong>  : {{project.debutp|date:"F d, Y"}}</p>
                           </div>
-                          <div class="col" style="border: 1px solid rgb(70, 69, 69); width: 250px; height: 30px; margin-left:10px; margin-right:10px; background-color: #deccad;">
+                          <div class="col" style="border: 1px solid rgb(70, 69, 69); width: 250px; height: 30px; margin-left:10px; margin-right:10px; background-color: #FAF8FF;">
                             <p><strong>End Date</strong> : {{project.finp|date:"F d, Y"}}</p>
                           </div>
-                          <div class="col" style="border: 1px solid rgb(70, 69, 69); width: 250px; height: 30px; background-color: #deccad;">
+                          <div class="col" style="border: 1px solid rgb(70, 69, 69); width: 250px; height: 30px; background-color: #FAF8FF;">
                             <p><strong>Client</strong> : {{project.clientp}}</p>
                           </div>
                         </div>
                       
                       
-                          <button class="btn btn-dark mx-auto d-block shadow-none" name="button_1" style="font-size: 10px; margin-top: 30px; font-family:subset; font-weight: bold; background-color: #2F3922;" onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'">Add node</button>
-                    
+                        <button  class="btn btn-outline-dark"  style='  font-size: 10px; margin-top: 20px; font-family:subset;font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Node</button>
+                        
                 
                   
-                        <div class='col-6 rounded ' id="map" style="width: 1070px;height: 700px;  box-sizing:border-box; margin-top: 20px; margin-bottom: 10px; border-radius: 50px; border: 1px solid rgb(9, 0, 0) ;">
+                        <div class='col-6 rounded ' id="map" style="width: 1036px;height: 540px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
                         </div>
              
