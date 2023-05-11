@@ -25,9 +25,24 @@
         <div class=" text-center" >
             <div class="row">
               <div class="col-3" >
-                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
-                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+                <style>
+                  .sidebar-wrapper::-webkit-scrollbar {
+                    width: 6px;
+                    background-color: #D4D7DC;
+                  }
                   
+                  .sidebar-wrapper::-webkit-scrollbar-thumb {
+                    background-color: #6B2737;
+                    border-radius: 5px;
+                  }
+                  
+                </style>
+                
+       
+                <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
+                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
+                 
                   <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
     
                   <ul class="list-unstyled mt-3">
@@ -116,12 +131,13 @@
                   </ul>
                 </div>
               </div>
+            </div>  
 
                 <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 700px; border-radius: 5px; margin-left:30px;">
                     <form method="POST">
                     {% csrf_token %} 
 
-                    <h4 style=" text-align:left; margin-bottom:20px;margin-top:20px; "> <strong style="color: #3F6D22;">Polygons Of Project: </strong>{{ project.nomp }}</h4>
+                    <h4 style=" text-align:left; margin-bottom:20px;margin-top:20px; font-size: 18px; font-weight: bold; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 20px;   text-transform: uppercase; letter-spacing: 2px;"> <strong style="color: #3F6D22;">Polygons Of Project: </strong>{{ project.nomp }}</h4>
                     
 
                         <div class="row" style="margin:0px 20px;">

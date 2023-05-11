@@ -52,7 +52,7 @@ rel="stylesheet"
         
         .sidenav {
           height: 100%;
-          width: 265px;
+          width: 240px;
           position: fixed;
           z-index: 1;
           top: 0;
@@ -63,7 +63,7 @@ rel="stylesheet"
         }
         
         .sidenav a {
-          padding: 6px 8px 6px 16px;
+          padding: 1px 1px 1px 16px;
           text-decoration: none;
           font-size: 25px;
           color: #818181;
@@ -164,7 +164,8 @@ rel="stylesheet"
     </nav>
 
     <div class="sidenav">
-        <a class="navbar-brand" style="margin-left: 0px; font-family: 'subset'; color: white;margin-top: -15px;" href="{% url 'home' %}">GREENIST</a>
+      
+        <a class="navbar-brand" style="margin-bottom: 30px; font-family: 'subset'; color: white;margin-top: -15px;" href="{% url 'home' %}">Smart For Green</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -187,23 +188,23 @@ rel="stylesheet"
     </div>
   </div>
 <center>
-  <h6 style="color: rgb(108, 107, 107); margin-top: 10px;"> <strong>Project Name:</strong> {{proj_instance.nomp}}</h6>
+  <h6 style="color: rgb(108, 107, 107); margin-top: 10px;"> <strong>Project Name:</strong> {{project.nomp}}</h6>
 </center>
 <hr>
 <a href="{% url 'interface_c' pseudo project.polygon_id%}" style="margin-top: 50px;"> <i class="fa-solid fa-chart-column"></i>
-    <span style='font-size:20px'>Dashboard</span>
+    <span style='font-size:15px'>Dashboard</span>
 </a>
 <hr>
 <a href="{% url 'home' %}">
-  <span style='font-size:20px'>Nodes Details</span>
+  <span style='font-size:15px'>Nodes Details</span>
 </a>
 <hr>
 <a href="#clients"><i class="fa fa-user"></i>
-    <span style='font-size:20px'>Profile</span>
+    <span style='font-size:15px'>Profile</span>
 </a>
 <hr>
 <a href="#contact"><i class="fa fa-gear"></i>
-<span style='font-size:20px'> Settings</span>
+<span style='font-size:15px'> Settings</span>
 </a>
 <hr>
 </div>

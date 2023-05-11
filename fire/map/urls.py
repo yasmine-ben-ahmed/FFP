@@ -13,7 +13,7 @@ urlpatterns = [
     path('sup_<str:pseudo>/p<int:id>/add_node/4', views.add_node, name='addnode'),
     
     path('sup_<str:pseudo>/p_<int:iid>/last_node', views.all_node, name='all'),
-    path('sup_<str:pseudo>/p_<int:id>/modify', views.modify, name='modify'),
+   
     path('sup_<str:pseudo>/p_<int:id>/details', views.ALL, name='ALL_node'),
     
     path('update/<int:id>/', views.start_mqtt, name='update'),

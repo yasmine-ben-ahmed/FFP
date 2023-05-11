@@ -53,10 +53,10 @@ rel="stylesheet"
 
     </head>
 
-    <body style="background-color:#E9D8C7;">
+    <body style="background-color:#D4D7DC;">
         <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
             <div class="container-fluid">
-              <div style="border: 1px solid gray; padding: 5px; display: inline-flex; align-items: center;">
+              <div style="border: 0px solid gray; padding: 5px; display: inline-flex; align-items: center;">
                 <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
                 <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
               </div>
@@ -70,20 +70,11 @@ rel="stylesheet"
                   </li>
                   
                   
-                  <li class="nav-item" style="font-size: 20px; margin-left: 800px">
+                  <li class="nav-item" style="font-size: 20px; margin-left: 1000px">
                     <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>
                     
                   </li>
-                  <li class="nav-item dropdown" style="font-size: 20px;" >
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="fa fa-fw fa-sign-in"></i>Singnup as
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li style="font-size: 20px;"><a class="dropdown-item" href="{% url 'compte' 'supervisor' %}">Supervisor</a></li>
-                      <li style="font-size: 20px;"><a class="dropdown-item" href="{% url 'compte' 'client' %}">Client</a></li>
-                      
-                    </ul>
-                  </li>
+                 
                 </ul>         
               </div>
             </div>
@@ -93,8 +84,24 @@ rel="stylesheet"
             <div class="row">
 
           <div class="col-3" >
+            <style>
+              .sidebar-wrapper::-webkit-scrollbar {
+                width: 6px;
+                background-color: #D4D7DC;
+              }
+              
+              .sidebar-wrapper::-webkit-scrollbar-thumb {
+                background-color: #6B2737;
+                border-radius: 5px;
+              }
+              
+            </style>
+            
+   
+            <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
+            
             <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
-              <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22;">Projects List</h5>
+              <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
               
               <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
 
@@ -125,7 +132,7 @@ rel="stylesheet"
                       }
                     
                       .visualize-btn i {
-                        font-size: 15px;
+                        font-size: 11px;
                       }
                     </style>
                     <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
@@ -147,7 +154,7 @@ rel="stylesheet"
                       }
                     
                       .edit-btn i {
-                        font-size: 15px;
+                        font-size: 11px;
                       }
                     </style>
                     <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
@@ -169,7 +176,7 @@ rel="stylesheet"
                       }
                     
                       .delete-btn i {
-                        font-size: 15px;
+                        font-size: 11px;
                       }
                     </style>
                     
@@ -184,6 +191,7 @@ rel="stylesheet"
               </ul>
             </div>
           </div>
+        </div>
 
 
           
@@ -199,22 +207,22 @@ rel="stylesheet"
               <ul style="list-style-type: none; margin: 0; padding: 0;">
                 <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
                   <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">1</div>
-                  <span style="margin-left: 20px;"><strong>Project's Description</strong></span>
+                  <span style="margin-left: 20px;"><strong>Project Description</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Enter the necessary information about your project.</p>
                <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
                   <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">2</div>
-                  <span style="margin-left: 20px;"><strong>Project's Client</strong></span>
+                  <span style="margin-left: 20px;"><strong>Project Client</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px; ">Enter the necessary information about the client <br>to associate with the project.</p>
                 <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
                   <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">3</div>
-                  <span style="margin-left: 20px;"><strong>Project's Plots</strong></span>
+                  <span style="margin-left: 20px;"><strong>Project Plots</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Draw polygons that represent the project areas.</p>
                 <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
                   <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">4</div>
-                  <span style="margin-left: 20px;"><strong> Project's Nodes</strong></span>
+                  <span style="margin-left: 20px;"><strong> Project Nodes</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Place node(s) in project areas.</p>
       

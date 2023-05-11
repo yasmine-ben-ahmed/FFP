@@ -125,99 +125,107 @@
 {% comment %} ------------------------------------------------------------------------------ {% endcomment %}
 <div style="margin: 50px 150px; " >
   <!-- <hr class="featurette-divider" /> -->
-  <div class="row featurette" style="border: 0.5px solid #97B481 ; padding: 10px 15px; margin-bottom: 30px; width:1150px;  background-color: #97B481; border-radius: 10px;">
-    <div class="col-md-5">
-      <br />
-      <h2 class="featurette-heading">
+  <div class="row featurette" style="background-color: #f5f5f5; padding: 80px; border-radius: 10px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15); margin-bottom:40px;">
+    <div class="col-md-6" >
+      <h2 class="featurette-heading" style="font-weight: bold; font-size: 36px; color: #222222;">
         CO2 emissions and climate change</h2>
-        
-        <h4><span class="text-muted">planet conditions...</span></h4>
-      
-      <p style="font-size:18px;" >
-        Carbon dioxide emissions are the primary driver of global climate change.
-         It’s widely recognised that to avoid the worst impacts of climate change,
-          the world needs to urgently reduce emissions. 
+      <h4 style="font-size: 20px; color: #97B481; margin-bottom: 20px;">
+        <span class="text-muted">Planet conditions...</span>
+      </h4>
+      <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+        Carbon dioxide emissions are the primary driver of global climate change. It’s widely recognized that to avoid the worst impacts of climate change, the world needs to urgently reduce emissions.
+      </p>
+      <a class="btn btn-primary mt-4" data-mdb-toggle="collapse" href="#co2" data-target="#co2" aria-expanded="false" aria-controls="collapseExample" style="font-size: 18px; padding: 10px 20px; border-radius: 20px; background-color: #97B481; color: #fff; border: none;">Explore More</a>
+      <div class="collapse mt-3" id="co2">
+        <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+          Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world. Global warming describes the current rise in the average temperature of Earth's air and oceans, which is often described as the most recent example of climate change.
         </p>
-          <a class="btn btn-link  " data-mdb-toggle="collapse" role="button"href="#co2"  data-target="#co2" aria-expanded="false" aria-controls="collapseExample" style='color:gray; background-color:#97B481; margin-left:150px; margin-top:-50px;'>Explore More</a>
-              
-          <div class="collapse mt-3 " id="co2">
-            <div class="d-flex flex-column">
-              <p style="font-size:18px;">
-              Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world.
-              Global warming describes the current rise in the average temperature of Earth's air and oceans. 
-              which is often described as the most recent example of climate change.
-              </p>
-          </div>
-          </div>
-     
+      </div>
     </div>
-    <div class="col-md-5" >
-      <img src="{%static 'images\co2.jpg'%}" alt="" width="500px" style="border-radius: 10px; margin-top: 20px;  margin-left: 90px;   " />
+    <div class="col-md-6">
+      
+      <img  class="shadow-effect" src="{% static 'images/co2.jpg' %}" alt="" width="100%" style="border-radius: 10px;">
     </div>
   </div>
+  
 
   <!-- <hr class="featurette-divider" /> -->
-  <div class="row featurette" style="border: 0.5px solid #DCFAC4 ; padding: 10px 10px; width:1150px; background-color: #DCFAC4; border-radius: 10px;">
-    <div class="col-md-5 order-md-2">
-      <h2 class="featurette-heading">
+  <div class="row featurette" style="background-color: #DCFAC4; padding: 80px; border-radius: 10px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);">
+    <div class="col-md-6">
+      <h2 class="featurette-heading" style="font-weight: bold; font-size: 36px; color: #222222;">
         Forest and climate change
       </h2>
-        <h4><span class="text-muted">Forests act as carbon sinks...</span></h4>
-      
-      <p style="font-size:18px;">
-        
-          
-         Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
-          and accumulates in the soil. Soils are one of the biggest carbon reservoirs on earth,
-          storing more of this element than the atmosphere and the aboveground biomass put together.
-
+      <h4 style="font-size: 20px; color: #97B481; margin-bottom: 20px;">
+        <span class="text-muted">Forests act as carbon sinks...</span>
+      </h4>
+      <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+        Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
+        and accumulates in the soil. Soils are one of the biggest carbon reservoirs on earth,
+        storing more of this element than the atmosphere and the aboveground biomass put together.
       </p>
+      <a class="btn btn-primary mt-4" data-mdb-toggle="collapse" href="#forest" data-target="#forest" aria-expanded="false" aria-controls="collapseExample" style="font-size: 18px; padding: 10px 20px; border-radius: 20px; background-color: #97B481; color: #fff; border: none;">Explore More</a>
+      <div class="collapse mt-3" id="forest">
+        <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+          Deforestation and forest degradation account for about 10 percent of global greenhouse gas emissions caused by humans. Protecting and restoring forests can help mitigate climate change by absorbing carbon dioxide and providing other ecosystem services.
+        </p>
+      </div>
     </div>
-    <div class="col-md-5 " style=' margin-right: 100px;'>
-      <img src="{%static 'images\co3.jpg'%}" alt="" width="400px"  style="border-radius: 10px; margin-top: 7px;" />
+    <div class="col-md-6">
+      <img class="shadow-effect" src="{%static 'images\co3.jpg'%}" alt="" width="100%" style="border-radius: 10px;">
     </div>
   </div>
-
-  <div class="row featurette" >
-
-
-    <div class="col-sm-5 " style="border: 1px solid gray ;width:490px; padding: 10px 10px; background-color:#7c4c3e;border-radius: 10px; margin-top: 30px;  ">
-      <div class="card" style="height: 300px; ">
-        
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="margin-left: 30px; ">
-          <img src="{%static 'images\tic.jpg'%}" class="img-fluid" width="500px"/>
-          <a href="#!">
-            <div class="mask" style="background-color: rgba(223, 216, 216, 0.15);"></div>
-          </a>
-        </div>
-
+  
+  <div class="row featurette" style="margin-top:80px;">
+    <style>
+      .shadow-effect {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: all 0.2s ease-in-out;
+      }
+    
+      .shadow-effect:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+      }
+    </style>
+    
+    <div class="col-md-6 col-lg-5 mb-4">
+      <div class="position-relative overflow-hidden shadow-effect">
+        <img src="{% static 'images/tic.jpg' %}" class="w-100" alt="Tic Image">
       </div>
     </div>
     
-    <div  class="col-sm-4 " style="border: 1px solid gray ; padding:20px 20px; margin-top: 100px; margin-left: 100px; border-radius: 10px; height: 200px;background-color:#7c4c3e;">
-      
-        <h5  style="color: black; ">The Growing Threat of Global CO2 Emissions</h5>
+    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+      <div>
+        <h2 class="fw-bold mb-4">The Growing Threat of Global CO2 Emissions</h2>
+        <p class="mb-4">This alarming trend shows no signs of slowing down. Join the fight against climate change and help protect our planet</p>
         
-        <p  style="color: black; font-size:17px;">This alarming trend shows no signs of slowing down.<br />
-          Join the fight against climate change and help protect our planet</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-      
-    </div>
       </div>
+    </div>
+  </div>
+  
+
 
 </div>
-
-
-
   <!-- --------------------------------------------------------------------------------------------------------------------------- -->
 
-<div style="margin: 80px 80px;">
+<div style="margin: 100px 200px;">
 <center>  
     
      
 <div class="row mb-8" >
   <div class="col-sm-4 " >
-    <div class="card" >
+    <style>
+      .shadow-effect {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: all 0.2s ease-in-out;
+      }
+    
+      .shadow-effect:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+      }
+    </style>
+    <div class="card shadow-effect" >
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img src="{%static 'images\fire1.jpg'%}" class="img-fluid"/>
         <a href="#!">
@@ -234,7 +242,7 @@
   </div>
 
   <div class="col-sm-4" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation="slide-out-right">
-    <div class="card">
+    <div class="card shadow-effect">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img src="{%static 'images\fire2.jpg'%}" class="img-fluid"/>
         <a href="#!">
@@ -250,7 +258,7 @@
     </div>
   </div>
   <div class="col-sm-4">
-    <div class="card">
+    <div class="card shadow-effect">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img src="{%static 'images\fire4.jpg'%}" class="img-fluid"/>
         <a href="#!">
@@ -267,7 +275,7 @@
   </div>
 </div>
 
-<div class="row mb-8 lead"  style="border: 1px solid #6D3C2F ; padding: 10px 10px; background-color:#97B481 ; color: black; border-radius:10px ;width:1150px; height:115px;">
+<div class="row mb-8 lead"  style="border: 1px solid #6D3C2F ; padding: 10px 10px; background-color:#97B481 ; color: black; border-radius:10px ;width:1000px; height:115px; margin-left:0px;">
   <p class="lead" ><strong>When forests burn, vast amounts of the stored carbon is emitted, <br />
   scientists estimate that wildfires emitted about 8 billion tons of CO2 per year for the past 20 years. In 2017, total global CO2 emissions reached 32.5 billion tons, according to the International Energy Agency.
   </strong>
@@ -276,7 +284,7 @@
 
 <div class="row g-0 bg-light position-relative mb-8">
   <div class="col-md-4 mb-md-0 p-md-4">
-    <img src="{%static 'images\sol.jpg'%}" style="border-radius: 10px;" class="w-100" alt="...">
+    <img class="shadow-effect" src="{%static 'images\sol.jpg'%}" style="border-radius: 10px;" class="w-100" alt="...">
   </div>
   <div class="col-md-8 p-4 ps-md-0"  style="background-color: #DCFAC4; border-radius: 10px;">
     <h4> Sollution</h4> 
@@ -337,7 +345,7 @@ color: #fff;
 border-radius: 50px;
 border: none;
 padding: 15px 30px;
-font-size: 18px;
+font-size: 15px;
 font-weight: bold;
 text-transform: uppercase;
 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
@@ -355,7 +363,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
 
 <!-- Collapsed content -->
 <div class="collapse mt-3 " id="collapseExample">
-  <div  style="border: 0.5px solid #0F1006 ; margin-top:10px; border-radius: 10px; width:auto;">
+  <div  style="border: 1px solid garay ; margin-top:10px; border-radius: 10px; width:auto; background-color:#DCFAC4;" class='shadow-effect'>
   {% comment %} <div class="row justify-content-center align-items-center">
       <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
           <img src="{%static 'images\mr.jpg'%}" class="img-fluid rounded-circle" alt="Your Image" style="margin-top:10px; width:195px; height:190px;">
@@ -383,7 +391,28 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
   <hr>{% endcomment %}
   
   <div class="row justify-content-center align-items-center mt-4">
-    <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
+  <style>
+    .shadow-effect {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease-in-out;
+    }
+  
+    .shadow-effect:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    }
+  </style>
+  
+  <div class="col-md-6 col-lg-5 mb-4">
+    {% comment %} <div class="position-relative overflow-hidden shadow-effect"> {% endcomment %}
+      <h3>Smart For Green</h3>
+      ...........
+      <h3>  Company objects</h3>
+      ...........
+      <h3>Company sollution</h3>
+    </div>
+  {% comment %} </div> {% endcomment %}
+    {% comment %} <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
         <img src="{%static 'images\me.jpg'%}" class="img-fluid rounded-circle" alt="Your Image" style="margin-bottom:10px; width:200px; height:195px;">
     </div>
     <div class="col-md-6 col-sm-12 " style='margin-bottom:10px;'>
@@ -406,7 +435,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
         
           </div>
     </div>
-</div>
+</div> {% endcomment %}
 </div>
 
 
@@ -416,6 +445,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
 
 
 </center>
+
 
 
 </div>

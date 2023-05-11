@@ -101,7 +101,7 @@ rel="stylesheet"
      
               <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
              
-            <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
+            <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: auto;">
                   <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
               
               
@@ -267,27 +267,11 @@ rel="stylesheet"
 
                      <nav class="pagination-container" >
                             <ul class="pagination">
-                              <li class="page-item">
-                                <a class="page-link" href='{% url 'display' supervisor.pseudo  %}' aria-label="Previous" >
-                                  <i class="fas fa-chevron-left"></i>
-                                </a>
-                              </li>
-                              <li class="page-item active">
-                                <a class="page-link" href='{% url 'add_project' supervisor.pseudo  %}'>1</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                              </li>
-                              <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                              </li>
+                          
                               
                                 <li class="page-item">
                                   <button class="page-link" type="submit" value="save" >
-                                    <i class="fas fa-chevron-left"></i>
+                                   Save
                                   </button>
                                   
                                 </li>

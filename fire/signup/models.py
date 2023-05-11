@@ -19,11 +19,7 @@ class supervisor(models.Model):
     pseudo=models.CharField(max_length=100,null=True)
     e_mail=models.EmailField(max_length=100,null=True)
     password=models.CharField(max_length=100,null=True)
-    #position=models.PointField(null=True)
-    
 
-    supervisor_id=models.CharField(max_length=100,null=True, unique=True)
-    # client = models.ForeignKey(client, on_delete=models.CASCADE, null=True, related_name='%(class)s_related')
 
     image=models.ImageField(null=True)
     
@@ -40,7 +36,7 @@ class client(models.Model):
     e_mail=models.EmailField(max_length=100,null=True)
     image=models.ImageField(null=True)
 
-    # client_id=models.CharField(max_length=100,null=True, unique=True)
+    
 
     supervisor = models.ForeignKey(supervisor, on_delete=models.CASCADE, null=True, related_name='%(class)s_related')
 

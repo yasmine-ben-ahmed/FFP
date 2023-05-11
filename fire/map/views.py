@@ -36,6 +36,7 @@ def add_project(request,pseudo):
         debutp = request.POST.get('debutp')
         finp = request.POST.get('finp')
         cityp = request.POST.get('cityp')
+        piece_joinde =request.POST.get('piece_joinde')
 
 
         if formulairep.is_valid():
@@ -43,7 +44,7 @@ def add_project(request,pseudo):
             selected_client_id = request.POST.get('clientp')
 
             # Get the client object based on the selected ID
-            selected_client = client.objects.get(id=selected_client_id)
+            
                  
             formulairep.enregistrerProj()
 
@@ -52,10 +53,17 @@ def add_project(request,pseudo):
             
             # ,geomp=multipolygon///print(multiPolygone)
             # multipolygon = GEOSGeometry(multiPolygone, srid=4326)
+            if selected_client_id:
+                selected_client = client.objects.get(id=selected_client_id)
 
-            instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,clientp=selected_client,supervisorp=supervisors)
-            instance.save()
-            print('***************',instance.polygon_id)
+                instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,clientp=selected_client,supervisorp=supervisors,piece_joinde=piece_joinde)
+                instance.save()
+                return redirect('add_polygones',pseudo=pseudo,id=instance.polygon_id)
+            else:
+                instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,supervisorp=supervisors,piece_joinde=piece_joinde)
+                instance.save()                
+                return redirect('add_client',pseudo=pseudo,idd=instance.polygon_id)
+            
             # polygons = []
 
             # for polygon_coords in multiPolygone_dict['coordinates']:
@@ -70,7 +78,7 @@ def add_project(request,pseudo):
             #         polygons.append(polygon)
                               
             # return redirect('add_client',id=instance.polygon_id)
-            return redirect('add_client',pseudo=pseudo,idd=instance.polygon_id)
+            
         return render(request, 'addproj.html', {'form': formulairep,'projects':projects,'supervisor':supervisors})
     return render(request, 'addproj.html', {'form': Form_project(),'projects':projects,'supervisor':supervisors})
 
@@ -261,7 +269,7 @@ def all_node(request,iid,pseudo):
 
         with open('testBatch.csv', mode='a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
+            #writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
 
         batchFWI('testBatch.csv')
 
@@ -324,7 +332,7 @@ def update_weather(request, id):
 
     with open('testBatch.csv', mode='a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
+            #writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
 
     batchFWI('testBatch.csv')
 
@@ -400,15 +408,7 @@ def update_weather(request, id):
 
 
 
-def modify(request,id,pseudo):
 
-
-    
-    if request.method == 'POST':
-        return redirect('addnode',pseudo,id)
-
-    context = {}
-    return render(request, 'modify.html',context)
 
 
 
@@ -512,12 +512,54 @@ def delete_project(request,pseudo,id):
 from django.http import HttpResponse
 
 def modify_1(request, pseudo, id):
-    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+
+    supervisors = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisors)
     project = myProject.objects.get(polygon_id=id)
+
     
-    project.delete()
-    return redirect('add_project', pseudo=supervisor_obj.pseudo)
+    if request.method == 'POST':
+
+        formulairep = Form_project(request.POST)
+        # Get the other data from the form data
+        new_name = request.POST.get('nomp')
+        new_descp = request.POST.get('descp')
+        new_debutp = request.POST.get('debutp')
+        new_finp = request.POST.get('finp')
+        new_cityp = request.POST.get('cityp')
+        new_piece_joinde =request.POST.get('piece_joinde')
+
+
+        if formulairep.is_valid():
+            # Get the selected client from the form
+            selected_client_id = request.POST.get('clientp')               
+            formulairep.enregistrerProj()
+
+            if selected_client_id:
+                new_client = client.objects.get(id=selected_client_id)
+                project.nomp=new_name
+                project.descp=new_descp
+                project.debutp=new_debutp
+                project.finp=new_finp
+                project.cityp=new_cityp
+                project.clientp=new_client
+                project.piece_joinde=new_piece_joinde
+                project.save()
+                return redirect('ALL_node',pseudo=pseudo,id=project.polygon_id)
+            else:
+                project.nomp=new_name
+                project.descp=new_descp
+                project.debutp=new_debutp
+                project.finp=new_finp
+                project.cityp=new_cityp
+                project.piece_joinde=new_piece_joinde
+                project.save()              
+                return redirect('ALL_node',pseudo=pseudo,id=project.polygon_id)
+
+            
+        return render(request, 'modify_1.html', {'form': formulairep,'projects':projects,'supervisor':supervisors})
+    return render(request, 'modify_1.html', {'form': Form_project(),'projects':projects,'supervisor':supervisors})
+
 
 
 def modify_2(request, pseudo, id):

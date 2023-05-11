@@ -16,11 +16,10 @@ class myProject(models.Model):
     debutp = models.DateTimeField(default=timezone.now,null=True)
     finp = models.DateTimeField(null=True)
     cityp = models.CharField(max_length=255,null=True)
+    piece_joinde = models.FileField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True)
     locationp = PlainLocationField(based_fields=['cityp'], zoom=7,null=True)
     clientp = models.ForeignKey(client, on_delete=models.CASCADE,null=True)
     supervisorp = models.ForeignKey(supervisor, on_delete=models.CASCADE, null=True)
-
-    
     polygon_id = models.BigAutoField(primary_key=True, default=None)
     
     def __str__(self):

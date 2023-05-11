@@ -14,18 +14,12 @@ class Form_project(forms.Form):
     descp = forms.CharField( required=False, max_length=myProject._meta.get_field(
         'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
     
-    # debutp=forms.DateField(required=True,initial=datetime.date.today, widget=forms.DateInput(attrs={'id': "debutp", 'name': "debutp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;",'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}))
-    # finp=forms.DateField(required=True,initial=datetime.date.today, widget=forms.DateInput(attrs={'id': "finp", 'name': "finp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB;",'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}))
-   
     cityp = forms.CharField(required=True, max_length=myProject._meta.get_field(
         'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;", 'placeholder': 'Region Name'}))
-    # location = forms.CharField( required=True,widget=LocationWidget(attrs={'id': "location", 'name': "location", 'class': "form-control shadow-lg p-6 mb-4 rounded", 'style': "font-size: 20px; background-color: #DFD9DB;"}, based_fields=['city']))
-
-    clientp = forms.ModelChoiceField(queryset=client.objects.all(),required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; width:170px;", 'placeholder': 'Select Client'}))
+ 
+    clientp = forms.ModelChoiceField(queryset=client.objects.all(),required=False,empty_label='None', widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; width:170px;", 'placeholder': 'Select Client'}))
     
-    # client_choices = chain((('', 'No Client'),), client.objects.values_list('id', 'nom'))
-    # clientp = forms.ChoiceField(choices=client_choices, required=False, widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #DFD9DB; width:170px;"}))
-    
+    piece_joinde = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'id': "piece_joinde", 'name': "piece_joinde", 'class': "form-control-file", 'style': "font-size: 15px;"}))
     
     def is_valid(self):
             nomp = self.data['nomp']

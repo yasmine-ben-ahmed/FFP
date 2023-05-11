@@ -25,9 +25,24 @@
         <div class="container222 text-center" >
             <div class="row">
               <div class="col-3" >
-                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 820px;">
-                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+                <style>
+                  .sidebar-wrapper::-webkit-scrollbar {
+                    width: 6px;
+                    background-color: #D4D7DC;
+                  }
                   
+                  .sidebar-wrapper::-webkit-scrollbar-thumb {
+                    background-color: #6B2737;
+                    border-radius: 5px;
+                  }
+                  
+                </style>
+                
+       
+                <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
+                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
+                 
                   <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
     
                   <ul class="list-unstyled mt-3">
@@ -57,7 +72,7 @@
                           }
                         
                           .visualize-btn i {
-                            font-size: 15px;
+                            font-size: 11px;
                           }
                         </style>
                         <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
@@ -79,7 +94,7 @@
                           }
                         
                           .edit-btn i {
-                            font-size: 15px;
+                            font-size: 11px;
                           }
                         </style>
                         <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
@@ -101,7 +116,7 @@
                           }
                         
                           .delete-btn i {
-                            font-size: 15px;
+                            font-size: 11px;
                           }
                         </style>
                         
@@ -116,12 +131,13 @@
                   </ul>
                 </div>
               </div>
+            </div>  
 
                 <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 820px; border-radius: 5px; margin-left:30px;">
                     <form method="POST">
                     {% csrf_token %} 
 
-                        <h4 style=" font-family:subset; margin-bottom:20px;margin-top:10px; "> <strong style="color: #3F6D22;">Add Node To Your Project: </strong>{{ project.nomp }}</h4>
+                        <h4 style=" margin-bottom:20px;margin-top:10px;   font-size: 18px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 20px;   text-transform: uppercase; letter-spacing: 2px;"> <strong style="color: #3F6D22;">Add Node To Your Project: </strong>{{ project.nomp }}</h4>
                     
 
                         <div class="row mb-3" style="margin-left: 10px;">
@@ -132,7 +148,14 @@
                             
                             <div class="col-md-3">
                               <label for="reference" style="margin-right: 5px;color:#6B2737; ">Node Reference:</label>
-                              <input type="text" id="reference" name="reference" style="margin-right: 20px; background-color: #FAF8FF;" placeholder="Node reference" />
+                              {% comment %} <input type="text" id="reference" name="reference" style="margin-right: 20px; background-color: #FAF8FF;" placeholder="Node reference" /> {% endcomment %}
+                              
+                              <select  type="text" name="reference" style="margin-right: 20px; height:32px; background-color: #FAF8FF;" placeholder="Node reference">
+                                <option value="">Node reference</option>
+                                <option value="eui-70b3d57edd05a535">1:eui-70b3d57edd05a535</option>
+                                <option value="eui-70b3d57ed005ca2c">2:eui-70b3d57ed005ca2c</option>
+                               
+                            </select>
                             </div>
                             
                             <div class="col-md-3">
@@ -141,7 +164,7 @@
                             </div>
                             
                             <div class="col-md-3">
-                              <label for="range" style="margin-right: 5px; color:#6B2737;">Node Range:</label>
+                              <label for="range" style="margin-right: 5px; color:#6B2737;">Node order:</label>
                               <input type="text" id="range" name="range" style="background-color: #FAF8FF;" placeholder="Enter Node range" />
                             </div>
                           </div>

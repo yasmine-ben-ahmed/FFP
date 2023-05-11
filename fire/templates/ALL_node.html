@@ -43,12 +43,29 @@
         <div class=" text-center" >
             <div class="row" style="width:1450px;" >
                 <div class="col-3" >
-                    <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 1100px;">
-                      <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;">Projects List</h5>
+
+                    <style>
+                        .sidebar-wrapper::-webkit-scrollbar {
+                          width: 6px;
+                          background-color: #D4D7DC;
+                        }
+                        
+                        .sidebar-wrapper::-webkit-scrollbar-thumb {
+                          background-color: #6B2737;
+                          border-radius: 5px;
+                        }
+                        
+                      </style>
                       
+             
+                      <div class="sidebar-wrapper" style="height: 720px; overflow-y: auto;">
+                
+                    <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 720px;">
+                        <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
+               
                       <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'display' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
                       <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
-                      <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> last</button>
+                      <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> visualize</button>
                             
                       <ul class="list-unstyled mt-3">
                         {% for proj in projects %}
@@ -77,7 +94,7 @@
                               }
                             
                               .visualize-btn i {
-                                font-size: 15px;
+                                font-size: 11px;
                               }
                             </style>
                             <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
@@ -99,7 +116,7 @@
                               }
                             
                               .edit-btn i {
-                                font-size: 15px;
+                                font-size: 11px;
                               }
                             </style>
                             <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example" ><i class="fa-solid fa-pencil"></i></button>
@@ -166,7 +183,7 @@
                               }
                             
                               .delete-btn i {
-                                font-size: 15px;
+                                font-size: 11px;
                               }
                             </style>
                             
@@ -201,68 +218,62 @@
                       </ul>
                     </div>
                   </div>
-
+                </div>
                 <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 1100px; border-radius: 5px; margin-left:30px;">
                     <form method="POST">
                     {% csrf_token %} 
 
                         
                     {% comment %} <div style="display: flex; align-items: center;"> {% endcomment %}
-                        <h4 style="margin-bottom:5px;margin-top:20px; text-align:left;">
+                        <h4 style="margin-bottom:5px;margin-top:20px; text-align:left; font-size: 18px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 20px;   text-transform: uppercase; letter-spacing: 2px;">
                           <strong style="color: #3F6D22;">Details Of Project: </strong>{{ project.nomp }}
                         </h4>
                         {% comment %} <button class="btn btn-outline-dark" style="font-size: 6px; margin-top: 9px; margin-left: 10px; font-weight:bold; border-radius: 20px;" onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'">
                           Plots
                         </button>
                       </div> {% endcomment %}
-                       <p>
-                            <label style='font-size:10px;'>Click Here To Display Nodes Information </label><br>
-                            <button style=" border-radius: 20px;margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#082631;" type="button" class="btn btn-dark shadow-none"  data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                Information
-                            </button>
-                          </p>
-
-                          <div style="display: flex; justify-content: center; align-items: center;">
-                        <div class="row" >
-                        
-                          {% for d in nodee %}
-                          <div class="col-3 collapse " id="collapseWidthExample"style=" border: 1px solid #d5d4dd ; width: 200px; height: 340px; margin-left: 10px; border-radius: 10px; margin-top: 8px; margin-right: 10px;" >
-                            
-
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong style='color:#A26A25;'>Node Name: </strong>{{ d.nom }}</p>
-                                <hr>
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Node reference: </strong>{{ d.reference }}</p>
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Node Position: </strong>{{ d.latitude  }},{{ d.longitude  }}</p>
-                                <!-- <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Related Project: </strong>{{ d.polyg.nomp  }}</p> -->
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Node RSSI: </strong>{{ d.RSSI }}</p>
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Duty cycle: </strong>{{ 'Every 1 Min' }}</p>
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);"><strong>Battery level: </strong>{{ d.Battery_value }}</p>
-                               {% comment %} <hr> 
-                               <div id="fwi">
-                                <p><strong>FWI :</strong>{{ d.FWI }}</p>
-                                </div>{% endcomment %}
-
-                                <p class="card-subtitle mb-2 text-muted" style="text-align:center; color:rgb(51, 77, 4);">
-                                  {% if d.status == 'DOWN' %}
-                                  <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ d.status }}</span></p>
-                              {% elif d.status == 'MODERATE' %}
-                                  <p><strong>Status: </strong><span style="color:blue; font-weight:bold">{{ d.status }}</span></p>
-                              {% elif d.status == 'HIGH' %}
-                                  <p><strong>Status: </strong><span style="color:yellow; font-weight:bold">{{ d.status }}</span></p>
-                              {% elif d.status == 'VERY HIGH' %}
-                                  <p><strong>Status: </strong><span style="color:orange; font-weight:bold">{{ d.status }}</span></p>
-                              {% elif d.status == 'EXTREME' %}
-                                  <p><strong>Status: </strong><span style="color:red; font-weight:bold">{{ d.status }}</span></p>
-                              
-                              {% elif d.status == 'UNKNOWN' %}
-                                  <p><strong>Status: </strong><span style="color:black; font-weight:bold">{{ d.status }}</span></p>
-                              {% endif %}                              
-                                </p> 
-                              </div>
-                            {% endfor %}
+ <!-- Button to show/hide node information -->
+ <button type="button" class="btn btn-dark rounded-pill mb-3" data-bs-toggle="collapse" data-bs-target="#nodeInfo" aria-expanded="false" aria-controls="nodeInfo">
+    Click Here To Display Nodes Information
+  </button>
   
-                            </div>
-                       </div>
+  
+  <!-- Node information cards -->
+  <div class="row justify-content-center collapse flex-row" id="nodeInfo">
+
+    {% for d in nodee %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="card h-100 border-0 rounded-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">{{ d.nom }}</h5>
+          <hr>
+          <p class="card-text mb-2"><strong>Node Reference:</strong> {{ d.reference }}</p>
+          <p class="card-text mb-2"><strong>Node Position:</strong> {{ d.latitude }}, {{ d.longitude }}</p>
+          <p class="card-text mb-2"><strong>Node RSSI:</strong> {{ d.RSSI }}</p>
+          <p class="card-text mb-2"><strong>Duty Cycle:</strong> Every 1 Min</p>
+          <p class="card-text mb-2"><strong>Battery Level:</strong> {{ d.Battery_value }}</p>
+          <hr>
+          <p class="card-text mb-2"><strong>Status:</strong>
+            {% if d.status == 'DOWN' %}
+            <span class="text-success fw-bold">{{ d.status }}</span>
+            {% elif d.status == 'MODERATE' %}
+            <span class="text-primary fw-bold">{{ d.status }}</span>
+            {% elif d.status == 'HIGH' %}
+            <span class="text-warning fw-bold">{{ d.status }}</span>
+            {% elif d.status == 'VERY HIGH' %}
+            <span class="text-orange fw-bold">{{ d.status }}</span>
+            {% elif d.status == 'EXTREME' %}
+            <span class="text-danger fw-bold">{{ d.status }}</span>
+            {% elif d.status == 'UNKNOWN' %}
+            <span class="text-dark fw-bold">{{ d.status }}</span>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
 
                        <div style="display: flex; justify-content: center; align-items: center;">
                           <div class="row">
@@ -285,7 +296,6 @@
                           </div>
 
                         </div>
-
 
                         <div style="display: flex; justify-content: center; align-items: center;">
                             <div class="row" >
@@ -317,6 +327,7 @@
                           {% endfor %}
                         </div>
                     </div>
+                          
 
 
                         <div class='col-6 rounded ' id="map" style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
@@ -521,7 +532,7 @@
                             console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
                         }
                     });
-                }, 5000); // refresh every 5 seconds
+                }, 10000); // refresh every  seconds
             });
            </script> 
          
