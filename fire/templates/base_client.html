@@ -165,25 +165,25 @@ rel="stylesheet"
 
     <div class="sidenav">
       
-        <a class="navbar-brand" style="margin-bottom: 30px; font-family: 'subset'; color: white;margin-top: -15px;" href="{% url 'home' %}">Smart For Green</a>
+        {% comment %} <a class="navbar-brand" style="margin-bottom: 30px; font-family: 'subset'; color: white;margin-top: -15px;" href="{% url 'home' %}">Smart For Green</a> {% endcomment %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         
-        <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4" style="border: 0.1px solid rgb(65, 64, 64) ; margin-top: -24.8px; border-radius: 0px; width: 260px; height: 100px;" >
+        <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4" style="border: 0.1px solid rgb(65, 64, 64) ; margin-top: 10px; border-radius: 0px; width: 260px; height: 100px;" >
             
     <img
         class="rounded-pill img-fluid"
-        width="70"
+        width="60"
         src="{{ clientp.image.url }}"
-        alt="">
+        alt="" style='margin-left:-40px;'>
 
     <div class="ms-1">
       <h4 class="fs-6 mb-0">
         
-        <a class="text-decoration-none" href="#" style="font-size:22px ; color: rgb(217, 215, 215);">{{clientp.prenom}} {{clientp.nom}}</a>
+        <a class="text-decoration-none" href="#" style="font-size:18px ; color: rgb(217, 215, 215);">{{clientp.prenom}} {{clientp.nom}}</a>
       </h4>
-      <h6 style="margin-top: 2px; margin-bottom: 5px; margin-left: 14px;">Welcome, {{ pseudo }}!</h6> 
+      <h6 style="margin-top: 2px; margin-bottom: 5px; font-size:13px ;  margin-left: 14px;">Welcome, {{ pseudo }}!</h6> 
       <!-- <p class="mt-1 mb-0">Lorem ipsum dolor sit .</p> -->
     </div>
   </div>

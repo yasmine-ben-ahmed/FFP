@@ -269,7 +269,7 @@ def all_node(request,iid,pseudo):
 
         with open('testBatch.csv', mode='a', newline='') as file:
             writer = csv.writer(file)
-            #writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
+            # writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
 
         batchFWI('testBatch.csv')
 
@@ -332,7 +332,7 @@ def update_weather(request, id):
 
     with open('testBatch.csv', mode='a', newline='') as file:
             writer = csv.writer(file)
-            #writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
+            # writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
 
     batchFWI('testBatch.csv')
 
