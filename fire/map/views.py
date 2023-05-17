@@ -24,7 +24,7 @@ from datetime import datetime
 
 def add_project(request,pseudo):
     supervisors = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisors)
+    projects = myProject.objects.filter(supervisorp=supervisors).order_by('-polygon_id')
 
     clients = client.objects.all()
     if request.method == 'POST':
@@ -90,7 +90,7 @@ def add_project(request,pseudo):
 
 def add_polygones(request,pseudo,id):
     superviseur = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=superviseur)
+    projects = myProject.objects.filter(supervisorp=superviseur).order_by('-polygon_id')
         
     project = myProject.objects.get(polygon_id=id)   
     if request.method == 'POST':
@@ -127,7 +127,7 @@ def add_polygones(request,pseudo,id):
 def add_client(request,idd,pseudo):
         # project = myProject.objects.get(polygon_id=id)
         superviseur = supervisor.objects.get(pseudo=pseudo)
-        projects = myProject.objects.filter(supervisorp=superviseur)
+        projects = myProject.objects.filter(supervisorp=superviseur).order_by('-polygon_id')
         print('----------',projects)
         project = myProject.objects.get(polygon_id=idd) 
         print('----------',project.polygon_id)
@@ -148,7 +148,7 @@ def display(request,pseudo):
     # supervisors = supervisor.objects.get(pseudo=pseudo)
     
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
     print("/////////", supervisor_obj.pseudo)
     print("/////projects////",projects )
 
@@ -165,7 +165,7 @@ def display(request,pseudo):
 def display_polygone(request,id,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
     print("//supervisor_obj/", supervisor_obj)
-    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
     project = myProject.objects.get(polygon_id=id)
     print("//project/", project.supervisorp)
 
@@ -179,7 +179,7 @@ def display_polygone(request,id,pseudo):
 
 def add_node(request, id,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
     project = myProject.objects.get(polygon_id=id)
 
     marker = node.objects.all()
@@ -245,9 +245,13 @@ def start_mqtt(request,id):
 
 def all_node(request,iid,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
     my_project = myProject.objects.get(polygon_id=iid) 
     nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
+    
+    nod = node.objects.filter(polyg=my_project).order_by('-Idnode').first()
+    ldat = Data.objects.filter(node=nod).order_by('-IdData').first()
+    print('********',nod,'*****',ldat)
      
     data_list = []
     for n in nodes :
@@ -255,7 +259,7 @@ def all_node(request,iid,pseudo):
         data_list.append(
             ds,
         )
-    print('---------data_list',data_list)
+    print('!!!!!!!--------data_list',data_list)
 
     for i in range(len(data_list)):
         ldn0 = data_list[i]
@@ -267,33 +271,6 @@ def all_node(request,iid,pseudo):
         humidity = ldn0.humidity
         wind_speed = ldn0.wind
 
-        with open('testBatch.csv', mode='a', newline='') as file:
-            writer = csv.writer(file)
-            # writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
-
-        batchFWI('testBatch.csv')
-
-
-
-        with open('testBatch.csv', mode='r') as file:
-            reader = csv.reader(file)
-            rows = list(reader)
-            for row in rows:
-                print(row)
-            if len(rows) > 0:
-                last_row = rows[-1]
-                FWI = last_row[-1]
-            else:
-                FWI = '0'
-
-        fwi = float(FWI)
-        print('heeeeeeeeeeeeeere',fwi)
-        ldn0.node.FWI=fwi
-        ldn0.node.save()
-        resultatt= result(ldn0.node.Idnode)
-        print (resultatt)
-        ldn0.node.status=resultatt
-        ldn0.node.save()  
 
     
     for data in data_list:
@@ -306,45 +283,57 @@ def all_node(request,iid,pseudo):
         return redirect('addnode',pseudo,iid)
         
 
-    context = { 'projects':projects,'project':my_project,'nodee': nodes, 'ldn':data_list, 'lastd':lastd,'supervisor':supervisor_obj}
+    context = { 'projects':projects,'project':my_project,'nodee': nodes,'lastd':lastd, 'ldn':data_list, 'ldat':ldat,'supervisor':supervisor_obj}
     return render(request, 'all.html',context)
 
 
-
+#############just for updation the last node added
 def update_weather(request, id):
     # get updated weather information
     my_project = myProject.objects.get(polygon_id=id)
 
     # lasst node added
     nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
+
+
+    
+    
+    ldata =[]
+    for n in nodes:
+        dat= Data.objects.filter(node=n).order_by('-IdData').first()
+        ldata.append( {
+            
+        'temperature': dat.temperature,
+        'humidity': dat.humidity,
+        'wind': dat.wind,
+        'rain': dat.rain,
+        'project' :my_project,
+        
+        
+        'RSSI' : n.RSSI,
+        'battery' :n.Battery_value,
+        'reference' :n.reference,
+        'node_range' : n.node_range,
+        'fwi' : n.FWI,
+        'status' : n.status,
+        'node':n.nom,
+        'x':n.position.x,
+        'y':n.position.y,
+        }
+            
+        )
+        
+    ##################################################################""
     onode = nodes[0]
     print('----onode',onode)
+    print('----onode',onode.FWI)
     
     datas = Data.objects.filter(node=onode).order_by('-IdData')
     # last data coming
     datao = datas.first()
     print('----datao',datao)
-    ##################################################################""
+
     
-    temperature = datao.temperature
-    humidity = datao.humidity
-    wind_speed = datao.wind
-
-    with open('testBatch.csv', mode='a', newline='') as file:
-            writer = csv.writer(file)
-            # writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, '0'])
-
-    batchFWI('testBatch.csv')
-
-    with open('testBatch.csv', mode='r') as file:
-            reader = csv.reader(file)
-            rows = list(reader)
-            last_row = rows[-1]
-            FWI = last_row[-1]
-
-    fwi = float(FWI)
-    onode.FWI=fwi
-    onode.save()
     stat= result(onode.Idnode)
     print ('stattttt',stat)
     onode.status=stat
@@ -356,32 +345,10 @@ def update_weather(request, id):
     node_battery=onode.Battery_value
     node_name =onode.nom
     node_reference =onode.reference
-   
-############################################################################
-
+    node_range=onode.node_range
     
     
-    ldata =[]
-    for n in nodes:
-        dat= Data.objects.filter(node=n).order_by('-IdData').first()
-        ldata.append( {
-            
-        'temperature': datao.temperature,
-        'humidity': datao.humidity,
-        'wind': datao.wind,
-        'rain': datao.rain,
-        'RSSI' : node_rssi,
-        'battery' :node_battery,
-        'reference' :node_reference,
-        
-        'fwi' : node_fwi,
-        'status' : node_status,
-        'node':node_name,
-        }
-            
-        )
     
-
     dataa = {
         'temperature': datao.temperature,
         'humidity': datao.humidity,
@@ -390,21 +357,60 @@ def update_weather(request, id):
         'RSSI' : node_rssi,
         'battery' :node_battery,
         'reference' :node_reference,
+        'node_range' : node_range,
         
         'fwi' : node_fwi,
         'status' : node_status,
         'node':node_name,
+        'x':onode.position.x,
+        'y':onode.position.y,
         }
-    print('fwi',dataa['fwi'])
-    print('rssi',dataa['RSSI'])
-    print('status',dataa['status'])
+
 
     print("dataaaaaa",dataa)
     
 
     # return a JsonResponse with the updated data
-    return JsonResponse(dataa)
+    return JsonResponse(dataa, safe=False)
     # return JsonResponse({"datas": list(datas.values())})
+    
+    
+def update_color(request, id):
+    projects = myProject.objects.all()
+    my_project = myProject.objects.get(polygon_id=id) 
+    
+
+    nodes = node.objects.filter(polyg=my_project)
+        
+    
+    data = []
+    for n in nodes:
+        ds = Data.objects.filter(node=n).order_by('-IdData').first()
+        data.append({
+            'node': {
+                'name': n.nom,
+                'id': n.Idnode,
+                'status': result(n.Idnode),
+                'fwi': n.FWI,
+                'RSSI': n.RSSI,
+                'range': n.node_range,
+                'x': n.position.x,
+                'y': n.position.y,
+                'ref': n.reference,
+            },
+            'temperature': ds.temperature,
+            'humidity': ds.humidity,
+            'wind': ds.wind,
+            'rain': ds.rain,
+        })
+        ds.node.status =result(n.Idnode)
+        ds.node.save()
+    print('+++++++++++++++++++++++++++++++++++++++',data)
+    print('---',len(data))
+    
+    
+
+    return JsonResponse(data, safe=False)
 
 
 
@@ -412,11 +418,11 @@ def update_weather(request, id):
 
 
 
-
+########only for modification
 
 def ALL(request,id,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisor_obj)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
     
     project = myProject.objects.get(polygon_id=id)
     nodes = node.objects.filter(polyg=project).order_by('-Idnode')
@@ -430,10 +436,12 @@ def ALL(request,id,pseudo):
 
     nodeq = node.objects.filter(polyg=project)
     nodes_data = []
-    for node_instance in nodeq:
+    for node_instance in nodes:
         datas = Data.objects.filter(node=node_instance).order_by('-IdData')
         data = datas.first()
         nodes_data.append({'node_instance': node_instance, 'data': data})
+        
+
         
     data_list = []
     for n in nodes :
@@ -448,12 +456,76 @@ def ALL(request,id,pseudo):
         ldn0 = data_list[i]
         print(ldn0)
         print('______data_list node status',ldn0.node.status)
+        print('______ fwi',ldn0.node.FWI)
         
     # print('------nodes_data',nodes_data)
     context = {'nodes_data': nodes_data,'supervisor':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
    
 
     return render(request, 'ALL_node.html',context )
+
+def final(request,id,pseudo):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
+    
+    project = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=project).order_by('-Idnode')
+    nodeq = node.objects.filter(polyg=project)
+    
+    if request.method == 'POST':
+    
+        return redirect('ALL_node', pseudo=supervisor_obj.pseudo,id=project.polygon_id)
+    
+    context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nodee':nodeq}
+    return render(request, 'final.html',context )
+
+def final2(request,id,pseudo,idnode):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
+    
+    project = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=project).order_by('-Idnode')
+    nod = node.objects.get(Idnode=idnode) 
+    ds = Data.objects.filter(node=nod).order_by('-IdData').first()
+    print('*****************',ds)
+    nodeq = node.objects.filter(polyg=project)
+    
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+        
+    print(data_list)
+
+    
+    context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
+    return render(request, 'final2.html',context )
+
+def final3(request,id,pseudo,idnode):
+    supervisor_obj = supervisor.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
+    
+    project = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=project).order_by('-Idnode')
+    nod = node.objects.get(Idnode=idnode) 
+    ds = Data.objects.filter(node=nod).order_by('-IdData').first()
+    print('*****************',ds)
+    nodeq = node.objects.filter(polyg=project)
+    
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+        
+    print(data_list)
+
+    
+    context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
+    return render(request, 'final3.html',context )
 
 
 
@@ -496,6 +568,101 @@ def interface_c(request, id,pseudo):
     context = {'ldn':data_list,'nodes_data': nodes_data,'nodee':nodeq,'clientp':clientp,'project': proj, 'pseudo': pseudo,'node_instance':node_instance}
     return render(request, 'interface_c.html', context)
 
+def client_project(request, pseudo):
+    clientp = client.objects.get(pseudo=pseudo)
+    projects = myProject.objects.filter(clientp=clientp)
+    
+    project_instance = None  # Define a default value
+    
+    if request.method == 'POST':
+        proj = request.POST.get('proj')
+        project_instance = myProject.objects.get(polygon_id=proj)
+        return redirect('clientd', project_instance.polygon_id, clientp.pseudo)
+    
+    context = {'projects': projects, 'client': clientp, 'proj': project_instance}
+    return render(request, 'client_project.html', context)
+
+
+
+def clientd(request, id,pseudo):
+    clientp = client.objects.get(pseudo=pseudo)
+    # projects = myProject.objects.filter(clientp=clientp)
+    
+    # project = myProject.objects.get(clientp=clientp)
+    proj = myProject.objects.get(polygon_id=id)
+    # nodes = node.objects.filter(polyg=project).order_by('-Idnode')
+    
+    context = {'client':clientp,'project':proj}
+    return render(request, 'client.html', context)
+
+
+def clientn(request, id,pseudo):
+    clientp = client.objects.get(pseudo=pseudo)
+    proj = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=proj).order_by('-Idnode')
+    
+    print(nodes)
+    for n in nodes:
+        print(n,n.status)
+    
+    context = {'client':clientp,'project':proj,'nodes':nodes}
+    return render(request, 'clientn.html', context)
+
+
+def locate(request, id,pseudo,idnode):
+    clientp = client.objects.get(pseudo=pseudo)
+    proj = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=proj).order_by('-Idnode')
+    nod = node.objects.get(Idnode=idnode) 
+    
+    
+    
+
+    ds = Data.objects.filter(node=nod).order_by('-IdData').first()
+    print('*******8888**********',ds.node.FWI)
+    print('*******8888**********',ds.node.status)
+    nodeq = node.objects.filter(polyg=proj)
+    
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+        
+    print(data_list)
+    
+    context = {'client':clientp,'project':proj,'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
+    return render(request, 'locate.html', context)
+
+
+def details(request, id,pseudo,idnode):
+    clientp = client.objects.get(pseudo=pseudo)
+    proj = myProject.objects.get(polygon_id=id)
+    nodes = node.objects.filter(polyg=proj).order_by('-Idnode')
+    nod = node.objects.get(Idnode=idnode) 
+
+    nod = node.objects.get(Idnode=idnode) 
+    ds = Data.objects.filter(node=nod).order_by('-IdData').first()
+    print('*****************',ds)
+    nodeq = node.objects.filter(polyg=proj)
+    
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+        
+    print(data_list)
+
+    
+    context={'client':clientp,'project':proj, 'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
+    return render(request, 'details.html', context)
+    
+    
+
+
 
 
 
@@ -514,7 +681,7 @@ from django.http import HttpResponse
 def modify_1(request, pseudo, id):
 
     supervisors = supervisor.objects.get(pseudo=pseudo)
-    projects = myProject.objects.filter(supervisorp=supervisors)
+    projects = myProject.objects.filter(supervisorp=supervisors).order_by('-polygon_id')
     project = myProject.objects.get(polygon_id=id)
 
     

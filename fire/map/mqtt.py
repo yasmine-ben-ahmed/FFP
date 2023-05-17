@@ -6,6 +6,9 @@ from django.conf import settings
 
 from .models import *
 import pyowm
+import csv 
+from .FWI import *
+from datetime import datetime
 
 topics = ['v3/my-lora1-application@ttn/devices/eui-70b3d57edd05a535/up', 'v3/my-lora1-application@ttn/devices/eui-70b3d57ed005ca2c/up']
 topi =['eui-70b3d57edd05a535','eui-70b3d57ed005ca2c']
@@ -35,7 +38,7 @@ def on_message(mqtt_client, userdata, msg):
 
         # project = myProject.objects.get(polygon_id=id)
 
-        
+        #this is not util after because only one diffrent reference  for each node
             # Get the node with the matching reference
         nodes = node.objects.filter(reference=referencep).order_by('-Idnode')
         print('**************nodes',nodes)
@@ -54,9 +57,13 @@ def on_message(mqtt_client, userdata, msg):
             rssi = payload_dict['uplink_message']['rx_metadata'][0]['rssi']
             snr = payload_dict['uplink_message']['rx_metadata'][0]['snr']
 
+            n.RSSI = rssi
+            n.save()
+            n.Battery_value =Battery_level
+            n.save()
 
 
-            print('temperature :', temperature, 'humidity :', humidity, 'rssi :', rssi, 'snr :', snr,'Battery_level :',Battery_level ,'\n')
+            print('payload-----temperature :', temperature, 'humidity :', humidity, 'rssi :', rssi, 'snr :', snr,'Battery_level :',Battery_level ,'\n')
 
                     # Replace "YOUR_API_KEY" with your actual API key from OpenWeatherMap
             owm = pyowm.OWM("0f21fa98b6e075b77fd85b3af087e294")
@@ -90,12 +97,7 @@ def on_message(mqtt_client, userdata, msg):
                     # nodes = node.objects.filter(polyg=my_project)
                     # onode = nodes[0]
 
-            n.RSSI = rssi
-            n.save()
-            n.Battery_value =Battery_level
-            n.save()
-            print('RSSI',n.RSSI)
-            print('Battery_value',n.Battery_value)
+
 
 
 
@@ -107,12 +109,30 @@ def on_message(mqtt_client, userdata, msg):
                     # nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
                     # nodee = nodes[0]
                     
-            datas = Data.objects.filter(node=n)
-            print('datasssssss0',datas)
+            datas = Data.objects.filter(node=n).order_by('-IdData')
+            print('oooold datasssssss---------',datas)
             new_data = Data.objects.create(temperature=temperature, humidity=humidity, wind=wind_speed,rain=rain_volume, node=n)
                     #datas.append(new_data)
             new_data.save()
-            print('hiiiiiiiiii',new_data)
+            print('new_data ---------',new_data)
+            
+            
+            with open('testBatch.csv', mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([datetime.today().strftime('%m/%d/%Y'), temperature, humidity, wind_speed, rain_volume, '0'])
+
+            batchFWI('testBatch.csv')
+
+            with open('testBatch.csv', mode='r') as file:
+                        reader = csv.reader(file)
+                        rows = list(reader)
+                        last_row = rows[-1]
+                        FWI = last_row[-1]
+
+            fwi = float(FWI)
+            n.FWI=fwi
+            n.save()
+            print('mqtttttttttttt',n.FWI)
 
 # def start_mqtt_client(id):
 #     # Create a new MQTT client instance

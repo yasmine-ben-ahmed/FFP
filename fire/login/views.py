@@ -24,9 +24,9 @@ def connectasclient(request):
                 #### on va redirect dashboard #####
                 # return redirect('map/')
                 clientp = client.objects.get(pseudo=pseudo)
-                project = myProject.objects.get(clientp=clientp)
+                # project = myProject.objects.get(clientp=clientp)
                 
-            return redirect('interface_c',pseudo,project.polygon_id)
+            return redirect('client_project',pseudo)
         # We pass the form to the template even if it is not valid
         return render(request, 'login.html', {'form': formulaire})
     # We pass the form to the template for GET requests

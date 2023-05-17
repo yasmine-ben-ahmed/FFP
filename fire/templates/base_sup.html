@@ -8,6 +8,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
 
    
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -51,7 +52,7 @@ rel="stylesheet"
    <header>
     <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407; height: 60px;">
       <div class="container-fluid">
-        <div style="border: 0px solid gray; padding: 2px; display: inline-flex; align-items: center;">
+        <div style="border: 0px solid gray; padding: 2px; display: inline-flex; align-items: center; margin-right:59px;">
           <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
           <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
         </div>
@@ -73,16 +74,16 @@ rel="stylesheet"
                 padding: 0 0px;
                 gap: 20px;" >
     
-                    <p style="  display: flex;
+                    {% comment %} <p style="  display: flex;
                     gap: 10px; margin-top: 15px;">
     
                       <i class="fa-solid fa-signal" style="margin-top: 4px;"></i>
                       <span>Activity</span>
-                    </p>
-                    <div class="notification " style="position: relative;">
-                      <i class="fa-regular fa-bell" style="font-size: 1.3rem;" ></i>
+                    </p> {% endcomment %}
+                    {% comment %} <div class="notification " style="position: relative;">
+                      <i class="fa-regular fa-bell" style="font-size: 1.3rem;" ></i> {% endcomment %}
     
-                      <span class="badge" style="  width: 16px;
+                      {% comment %} <span class="badge" style="  width: 16px;
                       height: 16px;
                       border-radius: 50%;
                       position: absolute;
@@ -92,10 +93,10 @@ rel="stylesheet"
                       color: var(--lightcolor);
                       font-size: 10px;
                       text-align: center;
-                      line-height: 16px;">5</span>
+                      line-height: 16px;">5</span> {% endcomment %}
     
                     </div>
-                    <div class="profile-img" style="  width: 40px;
+                    {% comment %} <div class="profile-img" style="  width: 40px;
                     height: 40px;
                     border-radius: 50%;
                     overflow: hidden; margin-top: -9px;" >
@@ -104,19 +105,19 @@ rel="stylesheet"
                       height: 100%;
                       object-fit: cover;">
                       
-                    </div>
+                    </div> {% endcomment %}
 
                
                   </div>
                   
-                  <li class="nav-item dropdown" style="font-size: 15px; margin-top: 20px;" >
+                  {% comment %} <li class="nav-item dropdown" style="font-size: 15px; margin-top: 20px;" >
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      
                     </a>
                         <!-- <ul class="dropdown-menu" ">
                         <li style="font-size: 15px;"><a class="dropdown-item" href="{% url 'compte' 'supervisor' %}">Welcome <br/> You</a></li>
                         </ul> -->
-                  </li>
+                  </li> {% endcomment %}
     
               
             </li>
