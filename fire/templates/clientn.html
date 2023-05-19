@@ -381,7 +381,42 @@
         
             L.geoJSON(geojson).addTo(map);
         
+            {% for d in ldn %}
         
+            var coords = JSON.parse(geojson_str).coordinates;
+          var first_coords = coords[0][0];
+        
+            var polygonOne = { 
+              "type": "Polygon",
+              "coordinates": [
+                  coords[0][{{ d.node.node_range}}-1]
+              ]
+            };
+     
+                  status = "{{ d.node.status}}" ;
+                  console.log( status )
+                  var color;
+                      if (status == "DOWN") {
+                          color = "green";
+                      } else if (status == "MODERATE") {
+                         color = "blue";
+                      } else if (status == "HIGH") {
+                          color = "yellow";
+                      } else if (status == "VERY HIGH") {
+                          color = "orange";
+                      } else if (status == "EXTREME") {
+                          color = "red";
+                         
+                      } else {
+                          color = "black";
+                      }
+      
+            var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.03 } }).addTo(map);
+            polygonLayer.setStyle({ color: color });
+            polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+  
+            {%endfor%}
+
            $(document).ready(function() {
               setInterval(function() {
               $.ajax({
@@ -486,8 +521,8 @@
                     }
 
 
-                      var buttonTextColor = color === 'black' ? 'white' : 'black';
-        
+                      var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue') ? 'white' : 'black';
+                      
                       var latest_data = "<button style='background-color:" + color + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + color + ";'>Node</button><br><strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+ d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Prediction result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>Rain volume:</strong> "+ d.rain +" <br>";
 
                       marker.bindPopup(latest_data).addTo(map);

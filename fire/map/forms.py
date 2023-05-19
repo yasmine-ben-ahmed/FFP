@@ -45,11 +45,7 @@ class Form_project(forms.Form):
         cityp = self.cleaned_data['cityp']
         clientp = self.cleaned_data['clientp']
         
-      
-        # location = self.cleaned_data['location']
 
-        # data =myProject(nomp=nomp,descp=descp,cityp=cityp,clientp=clientp)
-        # data.save()
 
 
 class Form_client(forms.Form):
@@ -74,6 +70,9 @@ class Form_client(forms.Form):
     
     confirmation_mot_de_passe = forms.CharField(required=True, widget=forms.PasswordInput(
         attrs={'id': 'password1', 'name': 'password1', 'placeholder': 'Re-enter password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+
+    image = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'id': "image", 'name': "image", 'class': "form-control-file", 'style': "font-size: 15px;"}))
+    
 
     def is_valid(self):
             nom = self.data['nom']
@@ -103,18 +102,20 @@ class Form_client(forms.Form):
             return value
 
 
-    def enregistrer(self,idd):
+    def enregistrer(self,idd,pseud):
 
-
+            
             nom = self.cleaned_data['nom']
             prenom = self.cleaned_data['prenom']
             email = self.cleaned_data['email']
             pseudo = self.cleaned_data['pseudo']
+            img = self.cleaned_data['image']
             telephone = self.cleaned_data['telephone']
             confirmation_mot_de_passe = self.cleaned_data['confirmation_mot_de_passe']
+            superviseur = supervisor.objects.get(pseudo=pseud)
             
-            new_client = client(nom=nom, prenom=prenom, pseudo=pseudo,
-                            NB_GSM=telephone, e_mail=email)
+            new_client = client(nom=nom, prenom=prenom, pseudo=pseudo,image=img,
+                            NB_GSM=telephone, e_mail=email,supervisor=superviseur)
             
             new_client.save()
             
@@ -125,6 +126,8 @@ class Form_client(forms.Form):
             data = User.objects.create_user(
                 pseudo, email, confirmation_mot_de_passe)
             data.save()
+            
+            self.new_client = new_client 
 
             # data2 =Project(nomp=nomp,desc=desc,debut=debut,fin=fin,city=city,location=location)
             # data2.save()

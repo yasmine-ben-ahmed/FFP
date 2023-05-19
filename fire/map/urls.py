@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
 
     path('sup_<str:pseudo>/Projects_List/', views.display, name='display'),
-    path('sup_<str:pseudo>/p<int:idd>/add_client/2', views.add_client, name='add_client'),
+    path('sup_<str:pseud>/p<int:idd>/add_client/2', views.add_client, name='add_client'),
     path('sup_<str:pseudo>/add_project/1', views.add_project, name='add_project'),
     path('sup_<str:pseudo>/p<int:id>/add_polygs/3', views.add_polygones, name='add_polygones'),
     

@@ -409,12 +409,7 @@
       
               L.geoJSON(geojson).addTo(map);
       
-              {% comment %} var fireIcon = L.icon({
-                iconUrl: '/static/images/fire3.png',
-                iconSize: [50, 50],
-                iconAnchor: [19, 19],
-                popupAnchor: [0, -19]
-                }); {% endcomment %}
+         
           
           {% for d in ldn %}
           
@@ -474,10 +469,7 @@
                   } else {
                     colorn = "black";
                   }
-              var buttonTextColor = colorn === 'black' ? 'white' : 'black';
-
-              {% comment %} var latest_data = "<button style='background-color:" + color + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + color + ";'>Node</button><br><strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+ d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Prediction result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>Rain volume:</strong> "+ d.rain +" <br>"; {% endcomment %}
-                         
+                  var buttonTextColor = (colorn === 'black' || colorn === 'green' || colorn === 'blue') ? 'white' : 'black';          
   
              var latest_data = "<button style='background-color:" + colorn + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + colorn + ";'>Node</button> <br><br> <h5>Welcome... !</h5> "+"<strong>Name :</strong> {{ nod.nom }} <br><strong>Reference:</strong> {{ nod.reference }} <br><br> <strong>FWI:</strong> {{ nod.FWI }} <br> <strong>Predection result:</strong> <span style='color:" + colorn + ";font-weight:bold;'>{{nod.status}} </span>"
                                              

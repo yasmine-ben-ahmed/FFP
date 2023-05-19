@@ -79,13 +79,35 @@
                   <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
                         
                   <ul class="list-unstyled mt-3">
+
+                    <style>
+                        .project-card {
+                            background-color: #F2F2F2;
+                            border-radius: 12px;
+                            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                            padding: 15px ;
+                            width: 310px;
+                            height:100px;
+                            {% comment %} max-width: 450px; {% endcomment %}
+                            margin: 10px 0;
+                            margin-left:-10px;
+                            text-align: center;
+                            transition: all 0.3s ease-in-out;
+                          }
+                        
+                         .project-card:hover {
+                            transform: translateY(-5px);
+                          } 
+                    </style>
                     {% for proj in projects %}
-                    <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                    <div class="project-card">
+                    <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px;">
                       <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
                       justify-content: space-between;">
                       <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
     
                         <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
+                       
                       </div>
                       <div class="project-actions">
                         <style> 
@@ -115,22 +137,67 @@
                             padding: 5px 5px;
                             border: none;
                             background-color: transparent;
-                            color: #8c8c8c;
+                            color:#8c8c8c;
                             font-size: 10px;
                             cursor: pointer;
                           }
                         
                           .edit-btn:hover {
                             color: #fff;
-                            background-color: #8c8c8c;
-                            border-color: #8c8c8c;
+                            background-color: #3F6D22;
+                            border-color: #3F6D22;
                           }
                         
                           .edit-btn i {
                             font-size: 11px;
                           }
                         </style>
-                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
+                        <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example"  ><i class="fa-solid fa-pencil"></i></button>
+                              <!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header" style="background-color: #6B2737;">
+      <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">What do you want to modify?</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <strong>Choose an option:</strong>
+      <ul>
+        <li style="margin:15px 5px;">
+          <p style="display: inline-block; margin-right: 10px;">Modify project information</p>
+          <a type="button" name="but_1" href="{% url 'modify_1' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</a>
+        </li>
+        <li  style="margin:15px 5px;">
+          <p style="display: inline-block; margin-right: 10px;">Modify project's plots</p>
+          <a type="button" name="but_2" href="{% url 'modify_2' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737;  margin:10px 5px;">click here</a>
+        </li>
+        <li style="margin:15px 5px;">
+            <form method="POST" action="{% url 'modify_3' supervisor.pseudo project.polygon_id %}">
+              {% csrf_token %}
+              <label for="node_to_delete" style="display: inline-block; margin-right: 10px;">Delete a project's node:</label>
+              <select name="node_to_delete" style="display: inline-block; margin-right: 10px; color:black;background-color: white;">
+                {% for n in nodee %}
+                  <option value="{{ n.nom }}">{{ n.nom }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" name="but_3" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</button>
+            </form>
+          </li>
+          
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" style="border-radius:20px;" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+                                                
+    
     
                         <style> 
                           .delete-btn {
@@ -144,8 +211,8 @@
                         
                           .delete-btn:hover {
                             color: #fff;
-                            background-color: #8c8c8c;
-                            border-color: #8c8c8c;
+                            background-color: #3F6D22;
+                            border-color: #3F6D22;
                           }
                         
                           .delete-btn i {
@@ -153,15 +220,39 @@
                           }
                         </style>
                         
-                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
-                        
+                        <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
+                        <!-- Modal --> 
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog ">
+                              <div class="modal-content">
+                                <div class="modal-header " style="background-color:#6B2737;">
+                                  <h5 class="modal-title" id="exampleModalLabel"  style="color:white;">Delete Project</h5>
+                                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Are you sure you want to delete project "{{ project.nomp }}"?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px;">Cancel</button>
+                                  
+                                  <a type="button"  href="{% url 'delete_project' supervisor.pseudo project.polygon_id %}" class="btn btn-danger shadow-none" style="border-radius: 20px; background-color:#6B2737;">Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+
                         
                 
                      
                       </div>
                     </li>
+                </div>
+                    {% comment %} <hr style='border-color: #6B2737;'> {% endcomment %}
                     {% endfor %}
+
                   </ul>
+
                 </div>
               </div>
             </div> 
@@ -299,114 +390,6 @@
         <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
 
-    {% comment %} <script>
-
-
-
-      var geojson_str = "{{ project.geomp.json|escapejs }}";
-      var geojson = JSON.parse(geojson_str);
-
-
-
-
- 
-      var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12);
-
-
-      L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    }).addTo(map);
-
-        L.geoJSON(geojson).addTo(map);
-
-        
-
-        var fireIcon = L.icon({
-          iconUrl: '/static/images/fire3.png',
-          iconSize: [50, 50],
-          iconAnchor: [19, 19],
-          popupAnchor: [0, -19]
-          });
-          
-    
-    {% for d in ldn %}
-    
-        var coords = JSON.parse(geojson_str).coordinates;
-    
-    
-    console.log("{{ d.node.node_range}}")
-        var polygonOne = { 
-          "type": "Polygon",
-          "coordinates": [
-              coords[0][{{ d.node.node_range}}-1]
-          ]
-        };
-
-                                        var statusn = "{{ d.node.status }}";
-                                        console.log('----------node :',"{{node.nom}}"  ,'statusnnnn',statusn)
-
-                                        var colorn = "";
-                                      
-
-                                      if (statusn === "DOWN") {
-                                        colorn = "green";
-                                            
-                                      } else if (statusn === "MODERATE") {
-                                        colorn = "blue";
-                                         
-                                      } else if (statusn === "HIGH") {
-                                        colorn = "yellow";
-                                      } else if (statusn === "VERY HIGH") {
-                                        colorn = "orange";
-                                      } else if (statusn === "EXTREME") {
-                                        colorn = "red";
-                                      } else {
-                                        colorn = "black";
-                                      }
-     var latest_data = "<strong style='color:#A26A25;'>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>( {{ d.node.latitude }},{{ d.node.longitude }})<br> <strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>"
-                                     
-                    var marker = L.marker([{{ d.node.position.y }}, {{ d.node.position.x }}])
-                    .bindPopup(latest_data)
-                    .addTo(map);
-                
-                    marker.openPopup();
- 
- 
-              
-              
-              
-              status = "{{ d.node.status}}" ;
-              console.log( status )
-              var color;
-                  if (status == "DOWN") {
-                      color = "green";
-                  } else if (status == "MODERATE") {
-                     color = "blue";
-                  } else if (status == "HIGH") {
-                      color = "yellow";
-                  } else if (status == "VERY HIGH") {
-                      color = "orange";
-                  } else if (status == "EXTREME") {
-                      color = "red"; {% endcomment %}
-                      {% comment %} marker.setIcon(fireIcon);
-                      marker.bounce(-1); {% endcomment %}
-                  {% comment %} } else {
-                      color = "black";
-                  }
-  
-        var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.5 } }).addTo(map);
-        polygonLayer.setStyle({ color: color });
-        polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
-  
-        
-  
-    {% endfor %}
-
-
-
-  </script> {% endcomment %}
-
-
   
 <script>     
 
@@ -479,6 +462,41 @@
 
         L.geoJSON(geojson).addTo(map);
 
+        {% for d in ldn %}
+        
+        var coords = JSON.parse(geojson_str).coordinates;
+      var first_coords = coords[0][0];
+    
+        var polygonOne = { 
+          "type": "Polygon",
+          "coordinates": [
+              coords[0][{{ d.node.node_range}}-1]
+          ]
+        };
+ 
+              status = "{{ d.node.status}}" ;
+              console.log( status )
+              var color;
+                  if (status == "DOWN") {
+                      color = "green";
+                  } else if (status == "MODERATE") {
+                     color = "blue";
+                  } else if (status == "HIGH") {
+                      color = "yellow";
+                  } else if (status == "VERY HIGH") {
+                      color = "orange";
+                  } else if (status == "EXTREME") {
+                      color = "red";
+                     
+                  } else {
+                      color = "black";
+                  }
+  
+        var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.03 } }).addTo(map);
+        polygonLayer.setStyle({ color: color });
+        polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+
+        {%endfor%}
 
      $(document).ready(function() {
         setInterval(function() {
@@ -524,8 +542,6 @@
                         color = "orange";
                     } else if (status == "EXTREME") {
                         color = "red";
-                       // marker.setIcon(fireIcon);
-                      //marker.bounce(-1); 
 
                     } else {
                         color = "black";
@@ -536,14 +552,74 @@
                 polygonLayer.setStyle({ color: color });
                 polygonLayer.bindTooltip("Polygon " + ( d.node.range ));
     
-    
-                var marker = L.marker([d.node.y, d.node.x], {shadow: false}).addTo(map);
+                var customIcon = L.icon({
+                  iconUrl: '/static/images/nodee.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var fireIcon = L.icon({
+                  iconUrl: '/static/images/firenode.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+              });  
+  
+                var customIcon = L.icon({
+                  iconUrl: '/static/images/nodee.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var blackIcon = L.icon({
+                  iconUrl: '/static/images/black.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var yellowIcon = L.icon({
+                  iconUrl: '/static/images/yellow.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var greenIcon = L.icon({
+                  iconUrl: '/static/images/green.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var orangeIcon = L.icon({
+                  iconUrl: '/static/images/orange.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                if (status == "DOWN") {
+                  var marker = L.marker([d.node.y, d.node.x], {icon: greenIcon}).addTo(map);
+              } else if (status == "MODERATE") {
+                  var marker = L.marker([d.node.y, d.node.x], { icon: customIcon }).addTo(map);
+              } else if (status == "HIGH") {
+                  var marker = L.marker([d.node.y, d.node.x], {icon: yellowIcon}).addTo(map);
+              } else if (status == "VERY HIGH") {
+                  var marker = L.marker([d.node.y, d.node.x], {icon: orangeIcon}).addTo(map);
+              } else if (status == "EXTREME") {
+                  var marker = L.marker([d.node.y, d.node.x], {icon: fireIcon}).addTo(map);
+              } else {
+                  color = "black";
+                  var marker = L.marker([d.node.y, d.node.x], {icon: blackIcon}).addTo(map);    
+              }
+                var buttonTextColor = color === 'black' ? 'white' : 'black';
+  
+                var latest_data = "<button style='background-color:" + color + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + color + ";'>Node</button><br><strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+ d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Prediction result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>Rain volume:</strong> "+ d.rain +" <br>";
+                marker.bindPopup(latest_data).addTo(map);
 
-                {% comment %} var latest_data = "<strong style='color:#A26A25;'>Node name :</strong> {{ d.node.nom }} <br><strong>Ref:</strong> {{ d.node.reference }} <br><strong>Node Position:</strong> <br>( {{ d.node.latitude }},{{ d.node.longitude }})<br> <strong>RSSI:</strong> {{ d.node.RSSI }}<br> <strong>Battery level:</strong> {{ d.node.Battery_value }} <br> <strong>FWI:</strong> {{ d.node.FWI }} <br> <strong>Predection result:</strong> <br><span style='color:" + colorn + ";font-weight:bold;'>" + statusn + "</span>  <br><strong>Temperature:</strong> {{ d.temperature }} <br> <strong>Humidity:</strong> {{ d.humidity }} <br> <strong>Wind_speed:</strong> {{ d.wind }} <br>" {% endcomment %}
-      
-                var latest_data = "<strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+  d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Predection result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>rain volume:</strong> "+ d.rain +" <br>";
-                console.log(latest_data);
-                marker.bindPopup(latest_data).addTo(map); 
     
                 }
               },

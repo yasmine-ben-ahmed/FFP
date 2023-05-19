@@ -30,11 +30,7 @@ class LoginForm(forms.Form):
     )
 
 
-    # CHOICES = [
-    #     ('option1', 'Option 1'),
-    #     ('option2', 'Option 2'),
-    # ]
-    # choice = forms.CharField(max_length=20, choices=CHOICES)
+
 
     def is_valid(self, request):
         pseudo = self.data['pseudo']

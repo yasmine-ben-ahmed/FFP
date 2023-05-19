@@ -388,13 +388,7 @@
             }).addTo(map);
       
               L.geoJSON(geojson).addTo(map);
-      
-              {% comment %} var fireIcon = L.icon({
-                iconUrl: '/static/images/fire3.png',
-                iconSize: [50, 50],
-                iconAnchor: [19, 19],
-                popupAnchor: [0, -19]
-                }); {% endcomment %}
+
           
           {% for d in ldn %}
           
@@ -408,12 +402,7 @@
                     coords[0][{{ d.node.node_range}}-1]
                 ]
               };
-      
-                                      
 
-           
-                    
-                    
                     status = "{{ d.node.status}}" ;
                     console.log( status )
                     var color;
@@ -454,8 +443,7 @@
                     colorn = "black";
                   }
                   
-              var buttonTextColor = colorn === 'black' ? 'white' : 'black';
-
+                  var buttonTextColor = (colorn === 'black' || colorn === 'green' || colorn === 'blue') ? 'white' : 'black';
              var latest_data = "<button style='background-color:" + colorn + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + colorn + ";'>Node</button> <br> <h4>Welcome... !</h4> "+"<strong>Name :</strong> {{ nod.nom }} <br><strong>Reference:</strong> {{ nod.reference }} <br><br> <strong>FWI:</strong> {{ nod.FWI }} <br> <strong>Predection result:</strong> <span style='color:" + colorn + ";font-weight:bold;'>{{nod.status}} </span>"
                                              
             var customIcon = L.icon({

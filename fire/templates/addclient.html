@@ -193,7 +193,7 @@ rel="stylesheet"
 
                 <div class="col-3"   style="background-color: #f7f7f7;width: 1000px; height: 700px; border-radius: 5px; margin-left:45px;">
 
-                  <form method="POST" style='margin: 0px 20px; margin-right:100px;' >
+                  <form method="POST" style='margin: 0px 20px; margin-right:100px;' enctype="multipart/form-data">
                     {% csrf_token %}
 
                     
@@ -233,6 +233,7 @@ rel="stylesheet"
                           <strong class="text-danger" role="alert">{{ form.pseudo.errors }}</strong>
                           {% endif %}
                         </div>
+
                         <div class="col">
                           <h5 style="color:#6B2737;">Phone</h5>
                           {{ form.telephone }}
@@ -241,6 +242,14 @@ rel="stylesheet"
                           {% endif %}
                         </div>
                       </div>
+
+                      <div class="mb-3">
+                        <h5 style='color:#6B2737;'>Select Image</h5>
+                        {% comment %} {{ form.image}}                          {% endcomment %}
+                        <input type="file" name="profile" id="profile" class="form-control-file" style="font-size: 15px;">
+
+                      </div>
+                      <br/>
                       <div class="mb-3">
                         <h5 style="color:#6B2737;">Mail</h5>
                         {{ form.email}}
@@ -292,7 +301,7 @@ rel="stylesheet"
                           
                             <li class="page-item">
                               <button class="page-link" type="submit" value="save" >
-                                <i class="fas fa-chevron-left"></i>
+                                <i class="fas fa-chevron-right"></i>
                               </button>
                               
                             </li>

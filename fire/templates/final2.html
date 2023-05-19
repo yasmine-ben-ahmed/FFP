@@ -514,7 +514,7 @@
                   } else {
                     colorn = "black";
                   }
-              var buttonTextColor = colorn === 'black' ? 'white' : 'black';
+                  var buttonTextColor = (colorn === 'black' || colorn === 'green' || colorn === 'blue') ? 'white' : 'black';
 
              var latest_data = "<button style='background-color:" + colorn + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + colorn + ";'>Node</button> <br><br> <h5>Welcome... !</h5> "+"<strong>Name :</strong> {{ nod.nom }} <br><strong>Reference:</strong> {{ nod.reference }} <br><br> <strong>FWI:</strong> {{ nod.FWI }} <br> <strong>Predection result:</strong> <span style='color:" + colorn + ";font-weight:bold;'>{{nod.status}} </span>"
              var customIcon = L.icon({

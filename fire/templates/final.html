@@ -65,9 +65,7 @@
                         <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
                
                       <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
-                      {% comment %} <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
-                      <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> visualize</button>
-                             {% endcomment %}
+                
                       <ul class="list-unstyled mt-3">
 
                         <style>
@@ -100,6 +98,9 @@
                            
                           </div>
                           <div class="project-actions">
+
+                            
+
                             <style> 
                               .visualize-btn {
                                 padding: 5px 5px;
@@ -119,10 +120,7 @@
                               .visualize-btn i {
                                 font-size: 11px;
                               }
-                            </style>
-                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-        
-                            <style> 
+
                               .edit-btn {
                                 padding: 5px 5px;
                                 border: none;
@@ -141,9 +139,36 @@
                               .edit-btn i {
                                 font-size: 11px;
                               }
+
+                              .delete-btn {
+                                padding: 5px 5px;
+                                border: none;
+                                background-color: transparent;
+                                color: #3F6D22;
+                                font-size: 10px;
+                                cursor: pointer;
+                              }
+                            
+                              .delete-btn:hover {
+                                color: #fff;
+                                background-color: #3F6D22;
+                                border-color: #3F6D22;
+                              }
+                            
+                              .delete-btn i {
+                                font-size: 11px;
+                              }
                             </style>
+
+
+                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                          
+                            {% if proj.polygon_id == project.polygon_id %}
                             <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example"  ><i class="fa-solid fa-pencil"></i></button>
-                                  <!-- Modal -->
+                            <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
+                            {%endif%}   
+                            
+                            <!-- Modal -->
 <!-- Modal -->
 <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -189,29 +214,9 @@
                                                     
         
         
-                            <style> 
-                              .delete-btn {
-                                padding: 5px 5px;
-                                border: none;
-                                background-color: transparent;
-                                color: #3F6D22;
-                                font-size: 10px;
-                                cursor: pointer;
-                              }
+                           
                             
-                              .delete-btn:hover {
-                                color: #fff;
-                                background-color: #3F6D22;
-                                border-color: #3F6D22;
-                              }
-                            
-                              .delete-btn i {
-                                font-size: 11px;
-                              }
-                            </style>
-                            
-                            <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
-                            <!-- Modal --> 
+                             <!-- Modal --> 
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog ">
                                   <div class="modal-content">
@@ -282,6 +287,7 @@
                         <div class='col-6 rounded ' id="map" style="width: 826px;height: 650px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
                         </div>
+                        
              
           
 
@@ -390,6 +396,9 @@
 
         </div>
 
+
+
+
         <script>
           var geojson_str = "{{ project.geomp.json|escapejs }}";
           var geojson = JSON.parse(geojson_str);
@@ -399,7 +408,42 @@
               }).addTo(map);
       
           L.geoJSON(geojson).addTo(map);
+  
+          {% for d in ldn %}
+        
+          var coords = JSON.parse(geojson_str).coordinates;
+        var first_coords = coords[0][0];
       
+          var polygonOne = { 
+            "type": "Polygon",
+            "coordinates": [
+                coords[0][{{ d.node.node_range}}-1]
+            ]
+          };
+   
+                status = "{{ d.node.status}}" ;
+                console.log( status )
+                var color;
+                    if (status == "DOWN") {
+                        color = "green";
+                    } else if (status == "MODERATE") {
+                       color = "blue";
+                    } else if (status == "HIGH") {
+                        color = "yellow";
+                    } else if (status == "VERY HIGH") {
+                        color = "orange";
+                    } else if (status == "EXTREME") {
+                        color = "red";
+                       
+                    } else {
+                        color = "black";
+                    }
+    
+          var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.03 } }).addTo(map);
+          polygonLayer.setStyle({ color: color });
+          polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+
+          {%endfor%}
       
          $(document).ready(function() {
             setInterval(function() {
@@ -503,8 +547,8 @@
                       color = "black";
                       var marker = L.marker([d.node.y, d.node.x], {icon: blackIcon}).addTo(map);    
                   }
-                    var buttonTextColor = color === 'black' ? 'white' : 'black';
-      
+                  var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue') ? 'white' : 'black';
+                  
                     var latest_data = "<button style='background-color:" + color + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + color + ";'>Node</button><br><strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+ d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Prediction result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>Rain volume:</strong> "+ d.rain +" <br>";
                     marker.bindPopup(latest_data).addTo(map);
                     }

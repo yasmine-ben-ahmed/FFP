@@ -40,19 +40,11 @@ def add_project(request,pseudo):
 
 
         if formulairep.is_valid():
-            # Get the selected client from the form
-            selected_client_id = request.POST.get('clientp')
 
-            # Get the client object based on the selected ID
-            
-                 
+            selected_client_id = request.POST.get('clientp')
+                  
             formulairep.enregistrerProj()
 
-            # multiPolygone= request.POST.get('points')
-            # multiPolygone_dict = json.loads(multiPolygone)
-            
-            # ,geomp=multipolygon///print(multiPolygone)
-            # multipolygon = GEOSGeometry(multiPolygone, srid=4326)
             if selected_client_id:
                 selected_client = client.objects.get(id=selected_client_id)
 
@@ -62,22 +54,8 @@ def add_project(request,pseudo):
             else:
                 instance = myProject(nomp=nomp,descp=descp,debutp=debutp,finp=finp,cityp=cityp,supervisorp=supervisors,piece_joinde=piece_joinde)
                 instance.save()                
-                return redirect('add_client',pseudo=pseudo,idd=instance.polygon_id)
+                return redirect('add_client',pseud=pseudo,idd=instance.polygon_id)
             
-            # polygons = []
-
-            # for polygon_coords in multiPolygone_dict['coordinates']:
-            #     print('-----------')
-            #     for i in range(len(polygon_coords)): 
-            #         poly_str = 'POLYGON(({0}))'.format(','.join([' '.join(map(str, c)) for c in polygon_coords[i]]))
-            #         print('poly_str',poly_str)
-            #         polygon = GEOSGeometry(poly_str, srid=4326)
-            #         parcelle_obj = parcelle(poly=polygon,project=instance)
-            #         # parcelle_obj.project = instance  # set the project attribute of the parcelle
-            #         parcelle_obj.save()
-            #         polygons.append(polygon)
-                              
-            # return redirect('add_client',id=instance.polygon_id)
             
         return render(request, 'addproj.html', {'form': formulairep,'projects':projects,'supervisor':supervisors})
     return render(request, 'addproj.html', {'form': Form_project(),'projects':projects,'supervisor':supervisors})
@@ -124,21 +102,33 @@ def add_polygones(request,pseudo,id):
     return render(request, 'addpolyg.html', {'projects':projects,'supervisor':superviseur,'project':project})
 
 
-def add_client(request,idd,pseudo):
+def add_client(request,idd,pseud):
         # project = myProject.objects.get(polygon_id=id)
-        superviseur = supervisor.objects.get(pseudo=pseudo)
+        superviseur = supervisor.objects.get(pseudo=pseud)
         projects = myProject.objects.filter(supervisorp=superviseur).order_by('-polygon_id')
         print('----------',projects)
         project = myProject.objects.get(polygon_id=idd) 
         print('----------',project.polygon_id)
-               
+              
         if request.method == 'POST':
             formulaire = Form_client(request.POST)
+            image = request.FILES.get('profile')
+
+            
+          
             if formulaire.is_valid():
                 
-                formulaire.enregistrer(idd)
+                formulaire.enregistrer(idd,pseud)
+                new_client = formulaire.new_client
+                print(new_client)
+
+                new_client.image=image
+                new_client.save()
+                print(new_client.image.url)
+                
+
  
-                return redirect('add_polygones',pseudo=pseudo,id=project.polygon_id)
+                return redirect('add_polygones',pseudo=pseud,id=project.polygon_id)
             return render(request, 'addclient.html', {'form': formulaire,'supervisor':superviseur,'projects':projects,'project':project})
         return render(request, 'addclient.html', {'form': Form_client(),'supervisor':superviseur,'projects':projects,'project':project})
 
@@ -204,19 +194,9 @@ def add_node(request, id,pseudo):
             list_p.append(p)
         print('----------------------',list_p)
         
-        # parcelle_obj = parcelle.objects.filter(project=project_instance).first() # Retrieve the first parcelle object
-        # print(parcelle_obj)
-        # parcelle_obj.namep = namep # Update the namep attribute
-        # parcelle_obj.save() # Save the changes to the database
-
-                       
-
         instance = node(position=point,nom=node_name, polyg=project_instance,parc=list_p[node_range-1], latitude=mylatitude, longitude=mylongitude,reference=reference,node_range=node_range,Sensors=Sensors)
         instance.save()
         
-        # parce=list_p[node_range-1]
-        # parce.namep=namep
-        # parce.save()
 
         new_data = Data(temperature=0, humidity=0, wind=0, node=instance)
         new_data.save()
@@ -323,7 +303,7 @@ def update_weather(request, id):
             
         )
         
-    ##################################################################""
+
     onode = nodes[0]
     print('----onode',onode)
     print('----onode',onode.FWI)
@@ -374,7 +354,7 @@ def update_weather(request, id):
     return JsonResponse(dataa, safe=False)
     # return JsonResponse({"datas": list(datas.values())})
     
-    
+   
 def update_color(request, id):
     projects = myProject.objects.all()
     my_project = myProject.objects.get(polygon_id=id) 
@@ -397,6 +377,7 @@ def update_color(request, id):
                 'x': n.position.x,
                 'y': n.position.y,
                 'ref': n.reference,
+                'battery' : n.Battery_value,
             },
             'temperature': ds.temperature,
             'humidity': ds.humidity,
@@ -404,6 +385,7 @@ def update_color(request, id):
             'rain': ds.rain,
         })
         ds.node.status =result(n.Idnode)
+        ds.node.Battery_value =n.Battery_value
         ds.node.save()
     print('+++++++++++++++++++++++++++++++++++++++',data)
     print('---',len(data))
@@ -472,11 +454,27 @@ def final(request,id,pseudo):
     nodes = node.objects.filter(polyg=project).order_by('-Idnode')
     nodeq = node.objects.filter(polyg=project)
     
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+    
     if request.method == 'POST':
     
         return redirect('ALL_node', pseudo=supervisor_obj.pseudo,id=project.polygon_id)
     
-    context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nodee':nodeq}
+    context = {
+    'supervisor': supervisor_obj,
+    'projects': projects,
+    'project': project,
+    'nodes': nodes,
+    'nodee': nodeq,
+    'ldn': data_list,
+    'project_exists': True  # Add this line
+        }
+
     return render(request, 'final.html',context )
 
 def final2(request,id,pseudo,idnode):
@@ -573,6 +571,7 @@ def client_project(request, pseudo):
     projects = myProject.objects.filter(clientp=clientp)
     
     project_instance = None  # Define a default value
+
     
     if request.method == 'POST':
         proj = request.POST.get('proj')
@@ -586,13 +585,17 @@ def client_project(request, pseudo):
 
 def clientd(request, id,pseudo):
     clientp = client.objects.get(pseudo=pseudo)
-    # projects = myProject.objects.filter(clientp=clientp)
-    
-    # project = myProject.objects.get(clientp=clientp)
     proj = myProject.objects.get(polygon_id=id)
-    # nodes = node.objects.filter(polyg=project).order_by('-Idnode')
+    nodes = node.objects.filter(polyg=proj).order_by('-Idnode')
     
-    context = {'client':clientp,'project':proj}
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+    
+    context = {'client':clientp,'project':proj,'ldn':data_list}
     return render(request, 'client.html', context)
 
 
@@ -601,11 +604,14 @@ def clientn(request, id,pseudo):
     proj = myProject.objects.get(polygon_id=id)
     nodes = node.objects.filter(polyg=proj).order_by('-Idnode')
     
-    print(nodes)
-    for n in nodes:
-        print(n,n.status)
-    
-    context = {'client':clientp,'project':proj,'nodes':nodes}
+    data_list = []
+    for n in nodes :
+        dat = Data.objects.filter(node=n).order_by('-IdData').first()
+        data_list.append(
+            dat,
+        )
+
+    context = {'client':clientp,'project':proj,'nodes':nodes,'ldn':data_list}
     return render(request, 'clientn.html', context)
 
 

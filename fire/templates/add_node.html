@@ -165,8 +165,8 @@
                             </div>
                             
                             <div class="col-md-3">
-                              <label for="sensors" style="margin-right: 5px; color:#6B2737;">Node sensors:</label>
-                              <input type="text" id="sensors" name="sensors" style="margin-right: 20px; background-color: #FAF8FF;" placeholder="Node Sensors" />
+                              <label for="Sensors" style="margin-right: 5px; color:#6B2737;">Node sensors:</label>
+                              <input type="text" id="Sensors" name="Sensors" style="margin-right: 20px; background-color: #FAF8FF;" placeholder="Node Sensors" />
                             </div>
                             
                             <div class="col-md-3">
@@ -217,7 +217,7 @@
                                     
                                       <li class="page-item">
                                         <button class="page-link" type="submit" value="save" >
-                                          <i class="fas fa-chevron-left"></i>
+                                          <i class="fas fa-chevron-right"></i>
                                         </button>
                                         
                                       </li>
@@ -435,7 +435,7 @@ map.on("draw:edited", function(e){
             var latlng = yass.getLatLng();
             console.log('--latlng',latlng)
             // console.log('--name {{node.nom}}')
-            yass.bindPopup("<b>Node Name</b><br> {{ node.nom }} "   + "<br><b>Node Position</b><br>Latitude: " + latlng.lat + "<br>Longitude: " + latlng.lng).openPopup();
+            yass.bindPopup("<h5 >Welcome !</h5> <hr><strong>Node Name</strong><br> {{ node.nom }} "   + "<br><b>Node Position</b><br>Latitude: " + latlng.lat + "<br>Longitude: " + latlng.lng).openPopup();
         {% endfor %}
 
 /**************the old markeer*****************/

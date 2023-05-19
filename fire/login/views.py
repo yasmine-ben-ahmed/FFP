@@ -21,8 +21,7 @@ def connectasclient(request):
                                 password=mot_de_passe)
             if data is not None:
                 login(request, data)
-                #### on va redirect dashboard #####
-                # return redirect('map/')
+
                 clientp = client.objects.get(pseudo=pseudo)
                 # project = myProject.objects.get(clientp=clientp)
                 
