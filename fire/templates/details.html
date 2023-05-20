@@ -300,7 +300,7 @@
         </div>
 
    
-
+    </div> 
         <style>
             .node-card {
               display: inline-block;
@@ -343,7 +343,7 @@
             }
             </style>
             
-            <div style=" margin-top:20px; height:250px;">
+            <div style=" margin-top:20px; height:250px; margin-left:350px; ">
               {% for node in nodes %}
                 <div class="node-card">
                   <h6>Node-{{ node.nom }}</h6>
@@ -358,7 +358,7 @@
                 </div>
               {% endfor %}
             </div>
-        </div>   
+          
 
         <hr style="border-color: #2F4858; opacity:0.1; margin-left:250px; margin-top:-65px; margin-bottom:80px; width:1000px;">
 
@@ -508,7 +508,7 @@
       
       
        
-            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 10);
+            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12.5);
       
       
       
@@ -518,12 +518,7 @@
       
               L.geoJSON(geojson).addTo(map);
       
-              {% comment %} var fireIcon = L.icon({
-                iconUrl: '/static/images/fire3.png',
-                iconSize: [50, 50],
-                iconAnchor: [19, 19],
-                popupAnchor: [0, -19]
-                }); {% endcomment %}
+         
           
           {% for d in ldn %}
           
@@ -585,7 +580,7 @@
                   } else {
                     colorn = "black";
                   }
-                  var buttonTextColor = (colorn === 'black' || colorn === 'green' || colorn === 'blue') ? 'white' : 'black';
+                  var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue'|| color === 'red') ? 'white' : 'black';
 
               var latest_data = "<button style='background-color:" + colorn + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + colorn + ";'>Node</button> <br> <h4>Welcome... !</h4> "+"<strong>Name :</strong> {{ nod.nom }} <br><strong>Reference:</strong> {{ nod.reference }} <br><br> <strong>FWI:</strong> {{ nod.FWI }} <br> <strong>Predection result:</strong> <span style='color:" + colorn + ";font-weight:bold;'>{{nod.status}} </span>"
                                              

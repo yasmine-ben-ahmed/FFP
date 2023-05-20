@@ -121,7 +121,11 @@
                               }
                             </style>
                             <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-        
+                          
+                            {% if proj.polygon_id == project.polygon_id %}
+                            <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example"  ><i class="fa-solid fa-pencil"></i></button>
+                            <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
+                            {%endif%} 
                             <style> 
                               .edit-btn {
                                 padding: 5px 5px;
@@ -142,8 +146,7 @@
                                 font-size: 11px;
                               }
                             </style>
-                            <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example"  ><i class="fa-solid fa-pencil"></i></button>
-                                  <!-- Modal -->
+                             <!-- Modal -->
 <!-- Modal -->
 <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -210,8 +213,7 @@
                               }
                             </style>
                             
-                            <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
-                            <!-- Modal --> 
+                          
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog ">
                                   <div class="modal-content">
@@ -399,7 +401,7 @@
       
       
        
-            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 10);
+            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12.5);
       
       
       
@@ -469,8 +471,8 @@
                   } else {
                     colorn = "black";
                   }
-                  var buttonTextColor = (colorn === 'black' || colorn === 'green' || colorn === 'blue') ? 'white' : 'black';          
-  
+                  var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue'|| color === 'red') ? 'white' : 'black';
+
              var latest_data = "<button style='background-color:" + colorn + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + colorn + ";'>Node</button> <br><br> <h5>Welcome... !</h5> "+"<strong>Name :</strong> {{ nod.nom }} <br><strong>Reference:</strong> {{ nod.reference }} <br><br> <strong>FWI:</strong> {{ nod.FWI }} <br> <strong>Predection result:</strong> <span style='color:" + colorn + ";font-weight:bold;'>{{nod.status}} </span>"
                                              
              var customIcon = L.icon({

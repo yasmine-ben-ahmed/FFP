@@ -316,7 +316,7 @@ var geojson_str = "{{ project.geomp.json|escapejs }}";
 var geojson = JSON.parse(geojson_str);
 
 // Create a Leaflet map
-var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12);
+var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12.5);
 
 
 L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {

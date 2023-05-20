@@ -283,7 +283,7 @@
             var geojson_str = "{{ project.geomp.json|escapejs }}";
             var geojson = JSON.parse(geojson_str);
   
-            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 10);
+            var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12.5);
       
       
             L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -324,7 +324,7 @@
                             color = "black";
                         }
         
-              var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.3 } }).addTo(map);
+              var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.03 } }).addTo(map);
               polygonLayer.setStyle({ color: color });
               polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
   
@@ -448,7 +448,7 @@
                         color = "black";
                         var marker = L.marker([d.node.y, d.node.x], {icon: blackIcon}).addTo(map);    
                     }
-                    var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue') ? 'white' : 'black';
+                    var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue'|| color === 'red') ? 'white' : 'black';
 
 
         
