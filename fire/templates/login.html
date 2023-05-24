@@ -1,9 +1,19 @@
 {% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<style>
+  body.bg-img {
+    background-image: url("{%static 'index\images\1.jpg'%}");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+
 <body class="bg-img" >
-<div  >
+<div  style="margin-top: 100px;">
   <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" style='background-color: #C3B8B6;'>
     {% csrf_token %}
-    <h1 class="text-center mb-4" style='font-family:subset; font-weight: bolder;'>Connexion</h1>
+    <h1 class="text-center mb-4" style='font-family:subset; font-weight: bolder; color: #423A25;'>Connexion</h1>
     <div class="mb-3">
       <label for="pseudo" class="form-label"><h4 style='font-family:subset; font-weight: bolder;'>Pseudo:</h4></label>
       {{ form.pseudo }}
@@ -20,15 +30,9 @@
     </div>
 
 
-
-    
-   
-
-    
-
     <div class="text-center">
         
-      <button class="btn btn-dark" style='width:30%; background-color: #A26A25; color:#2B2612; font-size: 15px; ' type="submit" value="save"  data-mdb-toggle="modal" data-mdb-target="#exampleModal">connection</button>
+      <button class="btn btn-dark" style='width:30%; background-color: #423A25; color:#C3B8B6; font-size: 15px; ' type="submit" value="save"  data-mdb-toggle="modal" data-mdb-target="#exampleModal">connection</button>
         <!-- <div style="color: black; margin-top: 0px; text-align: center; font-size: 15px; opacity: 0.5;">
           <p  style="margin-bottom: 0px; margin-top: 5px;">New here ?</p>
           <a href="{% url 'compte' 'client' %}" style="color: black; margin-left: -10px;">Singn up</a>

@@ -1,10 +1,17 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
+<style>
+  body.bg-img {
+    background-image: url("{%static 'index\images\1.jpg'%}");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
 <div class="bg-img" >
 <div class="container " >
   <form method="POST" id="form" class="shadow-lg p-6 mb-3 mt-3 rounded">
     {% csrf_token %}
-    <h1 class="mb-4">Create an account</h1>
+    <h1 class="mb-4" style="color: #423A25;">Create an account</h1>
     <div class="row mb-3" >
       <div class="col" >
         <h4>Last Name</h4>
@@ -68,7 +75,7 @@
   
 
     <div class="text-center">
-      <button class="btn btn-dark" style='width:30%; background-color: #A26A25; color:#2B2612; font-size: 15px; ' type="submit" value="save">Next</button>
+      <button class="btn btn-dark" style='width:30%; background-color: #423A25; color:#DFD9DB; font-size: 15px; ' type="submit" value="save">Next</button>
     </div>
 
     <div class="panel-footer" style="text-align: center; margin-top: 10px;">

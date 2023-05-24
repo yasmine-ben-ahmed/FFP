@@ -1,4 +1,4 @@
-{% extends 'base_sup.html' %} 
+{% extends 'base.html' %} 
 {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +38,37 @@
             src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.2/dist/bundle.js"
             crossorigin="anonymous"></script>
 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+            <style>
+              #myChart {
+                margin-top: -350px;
+                  width: 740px !important;
+                  height: 350px !important;
+                  margin-left: 330px;
+              }
+
+              #humchart {
+                margin-top: 200px;
+                  width: 740px !important;
+                  height: 350px !important;
+                  margin-left: 0px;
+              }
+            </style>
+
+
     </head>
 
-    <body style='background-color:#D4D7DC;'>
-        <div class=" text-center" >
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\3.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+
+    <body   class="bg-img">
+        <div class=" text-center" style="margin-top: 30px;">
             <div class="row" style="width:1590px;" >
                 <div class="col-3" >
 
@@ -59,195 +86,10 @@
                       </style>
                       
              
-                      <div class="sidebar-wrapper" style="height: 720px; overflow-y: auto; width:278px;">
-                
-                    <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 25px; margin-bottom: 20px; height: 1500px; width:270px;">
-                        <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
-               
-                      <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
-                      {% comment %} <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
-                      <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> visualize</button> {% endcomment %}
-                            
-                      <ul class="list-unstyled mt-3">
-
-                        <style>
-                            .project-card {
-                                background-color: #F2F2F2;
-                                border-radius: 12px;
-                                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
-                                padding: 15px ;
-                                width: 250px;
-                                height:100px;
-                                {% comment %} max-width: 450px; {% endcomment %}
-                                margin: 10px 0;
-                                margin-left:-10px;
-                                text-align: center;
-                                transition: all 0.3s ease-in-out;
-                              }
-                            
-                              {% comment %} .project-card:hover {
-                                transform: translateY(-5px);
-                              } {% endcomment %}
-                        </style>
-                        {% for proj in projects %}
-                        <div class="project-card">
-                        <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px;">
-                          <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
-                          justify-content: space-between;">
-                          <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
-        
-                            <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
-                           
-                          </div>
-                          <div class="project-actions">
-                            <style> 
-                              .visualize-btn {
-                                padding: 5px 5px;
-                                border: none;
-                                background-color: transparent;
-                                color: #3F6D22;
-                                font-size: 10px;
-                                cursor: pointer;
-                              }
-                            
-                              .visualize-btn:hover {
-                                color: #fff;
-                                background-color: #3F6D22;
-                                border-color: #3F6D22;
-                              }
-                            
-                              .visualize-btn i {
-                                font-size: 11px;
-                              }
-                            </style>
-                          
-                            <style> 
-                              .edit-btn {
-                                padding: 5px 5px;
-                                border: none;
-                                background-color: transparent;
-                                color:#3F6D22;
-                                font-size: 10px;
-                                cursor: pointer;
-                              }
-                            
-                              .edit-btn:hover {
-                                color: #fff;
-                                background-color: #3F6D22;
-                                border-color: #3F6D22;
-                              }
-                            
-                              .edit-btn i {
-                                font-size: 11px;
-                              }
-                            </style>
-                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-                          
-                            {% if proj.polygon_id == project.polygon_id %}
-                            <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example"  ><i class="fa-solid fa-pencil"></i></button>
-                            <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
-                            {%endif%}      <!-- Modal -->
-<!-- Modal -->
-<div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #6B2737;">
-          <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">What do you want to modify?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <strong>Choose an option:</strong>
-          <ul>
-            <li style="margin:15px 5px;">
-              <p style="display: inline-block; margin-right: 10px;">Modify project information</p>
-              <a type="button" name="but_1" href="{% url 'modify_1' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</a>
-            </li>
-            <li  style="margin:15px 5px;">
-              <p style="display: inline-block; margin-right: 10px;">Modify project's plots</p>
-              <a type="button" name="but_2" href="{% url 'modify_2' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737;  margin:10px 5px;">click here</a>
-            </li>
-            <li style="margin:15px 5px;">
-                <form method="POST" action="{% url 'modify_3' supervisor.pseudo project.polygon_id %}">
-                  {% csrf_token %}
-                  <label for="node_to_delete" style="display: inline-block; margin-right: 10px;">Delete a project's node:</label>
-                  <select name="node_to_delete" style="display: inline-block; margin-right: 10px; color:black;background-color: white;">
-                    {% for n in nodee %}
-                      <option value="{{ n.nom }}">{{ n.nom }}</option>
-                    {% endfor %}
-                  </select>
-                  <button type="submit" name="but_3" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</button>
-                </form>
-              </li>
-              
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" style="border-radius:20px;" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-                                                    
-        
-        
-                            <style> 
-                              .delete-btn {
-                                padding: 5px 5px;
-                                border: none;
-                                background-color: transparent;
-                                color: #3F6D22;
-                                font-size: 10px;
-                                cursor: pointer;
-                              }
-                            
-                              .delete-btn:hover {
-                                color: #fff;
-                                background-color: #3F6D22;
-                                border-color: #3F6D22;
-                              }
-                            
-                              .delete-btn i {
-                                font-size: 11px;
-                              }
-                            </style>
-                            
-                         <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog ">
-                                  <div class="modal-content">
-                                    <div class="modal-header " style="background-color:#6B2737;">
-                                      <h5 class="modal-title" id="exampleModalLabel"  style="color:white;">Delete Project</h5>
-                                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to delete project "{{ project.nomp }}"?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px;">Cancel</button>
-                                      
-                                      <a type="button"  href="{% url 'delete_project' supervisor.pseudo project.polygon_id %}" class="btn btn-danger shadow-none" style="border-radius: 20px; background-color:#6B2737;">Delete</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              
-
-                            
                     
-                         
-                          </div>
-                        </li>
-                    </div>
-                        {% comment %} <hr style='border-color: #6B2737;'> {% endcomment %}
-                        {% endfor %}
-
-                      </ul>
-                    </div>
-                  </div>
                 </div>
-                <div class="col-3"  style="background-color: #f7f7f7;width: 830px; height: 720px; border-radius: 5px; margin-left:-90px; margin-right:5px;">
+                
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1100px; height: 740px; border-radius: 5px; margin-left:-360px; margin-right:5px;">
                     <form method="POST">
                     {% csrf_token %} 
 
@@ -285,7 +127,7 @@
                                                             
                               
                               
-                           <div class='col-6 rounded ' id="map" style="width: 500px;height: 660px; box-sizing:border-box; margin-top: -10px;  border-radius: 50px; margin-left:-20px; margin-right:8px; ">
+                           <div class='col-6 rounded ' id="map" style="width: 760px;height: 300px; box-sizing:border-box; margin-top: -10px;  border-radius: 50px; margin-left:-20px; margin-right:8px; ">
                             <div class="leaflet-control"></div>
                         </div>
                              
@@ -294,7 +136,7 @@
 
 
                             <div class="col" >
-                                <div class="card"  style="background-color: #DEDBEE; height:200px; width:300px; margin-top:-340px;">
+                                <div class="card"  style="background-color: #DEDBEE; height:200px; width:300px; margin-top:10px;">
                                   <div class="card-body">
                                     <h6 class="card-title node-info-title"><i class="fa-solid fa-cloud"></i>  Weather Information</h6>
                                     <hr>
@@ -337,11 +179,17 @@
                           
                           
 
-                      
+                              <canvas id="myChart" ></canvas>
+                              <!-- <canvas id="humchart" ></canvas> -->
+
              
           
 
                     </form>
+
+              
+
+
 
                 </div>
 
@@ -361,9 +209,9 @@
                       </style>
                       
              
-                    <div class="sidebar-wrapper" style="height: 740px; overflow-y: auto; width:318px;">
+                    <div class="sidebar-wrapper" style=" overflow-y: auto; width:318px;">
                     
-                        <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 730px; width:318px;">
+                        <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 900px; width:318px;">
                             <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Node List</h5>
                 
                             <style>
@@ -442,6 +290,13 @@
 
 
         </div>
+        
+        <script>
+
+</script>
+        
+        
+        
 
         <script>
             var geojson_str = "{{ project.geomp.json|escapejs }}";
@@ -603,16 +458,64 @@
         
         
           {% endfor %}
+
+                          const xValues = [];
+          const yValues = [];
+          t = 0;
+        
+          {% for temp in ltemp %}
+            xValues.push(t + 30);
+            yValues.push({{ temp }});
+            t += 30;
+          {% endfor %}
+        
+          // Get the canvas element
+          const ctx = document.getElementById('myChart').getContext('2d');
+        
+          // Create the chart
+          new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: 'Temperature',
+      data: yValues,
+      backgroundColor: 'rgba(0, 0, 255, 0.1)',
+      borderColor: 'rgba(0, 0, 255, 1.0)',
+      borderWidth: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: 'Temperature',
+          font: {
+            size: 14,
+            family: 'Arial',
+            weight: 'bold',
+            color: 'rgba(0, 0, 0, 1.0)'
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      }
+    }
+  }
+});
       
-              
-      
-              
-      {% comment %} ----------------------------------------------------------------------------------------------------------- {% endcomment %}
-      
+
+
           </script>
 
-            
-      
+                
+
      
          
  

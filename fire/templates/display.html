@@ -54,64 +54,83 @@ rel="stylesheet"
 
     </head>
 
-    <body style="background-color:#D4D7DC;">
-        <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
-            <div class="container-fluid">
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\9.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+
+    <body   class="bg-img">
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407"> -->
+            <!-- <div class="container-fluid">
               <div style="border: 0px solid gray; padding: 5px; display: inline-flex; align-items: center;">
                 <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
                 <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
-              </div>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              </div> -->
+              <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item" style="font-size: 20px;">
+                  <li class="nav-item" style="font-size: 20px; margin-left: 400px;">
                     <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></i>Home</a>
-                  </li>
+                  </li> -->
                   
                   
-                  <li class="nav-item" style="font-size: 20px; margin-left: 1000px">
+                  <!-- <li class="nav-item" style="font-size: 20px; margin-left: 1000px">
                     <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>
                     
-                  </li>
+                  </li> -->
                  
-                </ul>         
+                <!-- </ul>         
               </div>
             </div>
-          </nav>
+          </nav> -->
 
-        <div class="containert text-center" >
+        <div class="containert text-center" style="margin-top: 40px;">
             <div class="row">
 
           <div class="col-3" >
             <style>
               .sidebar-wrapper::-webkit-scrollbar {
                 width: 6px;
-                background-color: #D4D7DC;
+                background-color: #131407;
               }
               
               .sidebar-wrapper::-webkit-scrollbar-thumb {
-                background-color: #6B2737;
+                background-color: #5ab02e;
                 border-radius: 5px;
               }
               
             </style>
             
    
-            <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
+            <div class="sidebar-wrapper" style="height: 650px; overflow-y: auto;">
             
-            <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
-              <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
+            <div class="sidebar" style="background-color: #e6e5e5; border-radius: 5px; padding: 20px; margin-bottom: 20px;  height: 720px; margin-left: 10px;"">
+             
+              <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 40px;">
+               
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                  <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+              </a>
+                <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;">
+                     Projects List
+                </h5>
               
-              <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+            </div>
+            
+              
+              <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#5BB12F;" onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
 
               <ul class="list-unstyled mt-3">
                 {% for proj in projects %}
-                <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #5b3f43; padding: 10px 10px;">
                   <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
                   justify-content: space-between;">
-                  <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+                  <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px; color: #8c8c8c;">Project Name: <span style="color: #5b3f43">{{ proj.nomp }}</span></h6>
 
                     <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-45px;">Project ID: {{ proj.polygon_id }}</p>
                   </div>
@@ -198,32 +217,32 @@ rel="stylesheet"
           
 
               
-          <div class="col-3" style="background-color: #f7f7f7;width: 1000px; height: 700px; border-radius: 5px; margin-left:45px;">
+          <div class="col-3" style="background-color: #e6e5e5;width: 1090px; height: 650px; border-radius: 5px; margin-left:0px;">
             {% comment %} <div style=" margin: 20px 40px; border-radius: 10px; height: 90px; width: 50%; display: flex; align-items: center; justify-content: center; background-color:#f7f7f7;">
               <h3 style="margin-left: -330px; font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: bold; color: #3F6D22; ">My Projects</h3>
             </div> {% endcomment %}
             <div style="text-align: left; margin: 60px 40px;">
-              <h6 style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Project Progress</h6>
-              <hr style="border: 1px solid #D1485F; width: 50%; margin: 8px auto; margin-left: 0.5px; margin-bottom: 40px;">
+              <h6 style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; color: #5BB12F; text-transform: uppercase; letter-spacing: 2px;">Project Progress</h6>
+              <hr style="border: 1px solid #5b3f43; width: 50%; margin: 8px auto; margin-left: 0.5px; margin-bottom: 40px;">
               <ul style="list-style-type: none; margin: 0; padding: 0;">
                 <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
-                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">1</div>
-                  <span style="margin-left: 20px;"><strong>Project Description</strong></span>
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">1</div>
+                  <span style="margin-left: 20px; "><strong>Project Description</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Enter the necessary information about your project.</p>
                <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
-                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">2</div>
-                  <span style="margin-left: 20px;"><strong>Project Client</strong></span>
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">2</div>
+                  <span style="margin-left: 20px; "><strong>Project Client</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px; ">Enter the necessary information about the client <br>to associate with the project.</p>
                 <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
-                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">3</div>
-                  <span style="margin-left: 20px;"><strong>Project Plots</strong></span>
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">3</div>
+                  <span style="margin-left: 20px; "><strong>Project Plots</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Draw polygons that represent the project areas.</p>
                 <li style="font-size: 20px; color: #333; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; display: flex; align-items: center;">
-                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #6B2737; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">4</div>
-                  <span style="margin-left: 20px;"><strong> Project Nodes</strong></span>
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">4</div>
+                  <span style="margin-left: 20px; "><strong> Project Nodes</strong></span>
                 </li>
                 <p style="font-size: 20px; font-family: 'Open Sans', sans-serif; margin-bottom: 30px;">Place node(s) in project areas.</p>
       

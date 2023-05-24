@@ -11,9 +11,11 @@ from django.http import JsonResponse
 from django.contrib.gis.geos import GEOSGeometry
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 def about(request):
-    return render(request, 'about.html')
+
+    
+    return render(request, 'test.html')
 
 
 

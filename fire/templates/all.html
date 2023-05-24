@@ -1,4 +1,4 @@
-{% extends 'base1.html' %} 
+{% extends 'base.html' %} 
 {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -48,13 +48,21 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
 </head>
+<style>
+  body.bg-img {
+    background-image: url("{%static 'index\images\3.jpg'%}");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
 
-    <body style='background-color:#D4D7DC;'>
+<body   class="bg-img">
 
       
-        <div class=" text-center" >
+        <div class=" text-center" style="margin-top: 30px;">
             <div class="row" style="width:1450px;" >
               <div class="col-3" >
                 <style>
@@ -72,9 +80,18 @@
                 
        
                 <div class="sidebar-wrapper" style="height: 750px; overflow-y: auto;">
-                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 750px;">
-                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
-                 
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 750px; width: 320px; margin-right: -10px; margin-left: 10px;">
+                  <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 40px;">
+                   
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                      <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                  </a>
+                    <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px; color: #6B2737; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;">
+                         Projects List
+                    </h5>
+                  
+                </div>
+                
                   <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
                   <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
                         
@@ -258,7 +275,7 @@
             </div> 
               
 
-                <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 970px; border-radius: 5px; margin-left:30px;">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1050px; height: 970px; border-radius: 5px; margin-left:20px; ">
                     <form method="POST">
                     {% csrf_token %} 
                         <h4 style="  margin-bottom:10px;margin-top:20px; text-align:left; font-size: 18px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 20px;   text-transform: uppercase; letter-spacing: 2px; "> <strong style="color: #3F6D22;">Last Node Added Of Project: </strong>{{ project.nomp }} _ {{ lastd.node }} _</h4>
@@ -326,7 +343,11 @@
                         
                         </div>
 
-                       
+                        <div class="col-3" >
+                          <canvas id="myChart"></canvas>
+                          
+
+                        </div>
 
 </div>
 
@@ -496,6 +517,7 @@
         polygonLayer.setStyle({ color: color });
         polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
 
+
         {%endfor%}
 
      $(document).ready(function() {
@@ -515,7 +537,7 @@
                 });
                 
                 for (var i = 0; i < data.length; i++) {
-                    console.log("helooooo")
+                    
                     
                     var d = data[i]
                     var coords = JSON.parse(geojson_str).coordinates;
@@ -621,6 +643,10 @@
                 var latest_data = "<button style='background-color:" + color + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + color + ";'>Node</button><br><strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+ d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Prediction result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>Rain volume:</strong> "+ d.rain +" <br>";
                 marker.bindPopup(latest_data).addTo(map);
 
+
+
+
+
     
                 }
               },
@@ -632,6 +658,39 @@
        });
       </script>
  
+
+ <script>
+
+
+t=0;
+{% for d in ldn %}
+
+  const xValues = t+30;
+  const yValues = d;
+
+{%endfor%}
+
+  // Get the canvas element
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  // Create the chart
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: 'rgba(0,0,255,1.0)',
+        borderColor: 'rgba(0,0,255,0.1)',
+        data: yValues
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+      // Additional chart options can be added here
+    }
+  });
+</script>
 
     </body>
 

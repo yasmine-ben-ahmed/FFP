@@ -1,4 +1,4 @@
-{% extends 'base_sup.html' %} 
+{% extends 'base.html' %} 
 {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -40,8 +40,16 @@
 
     </head>
 
-    <body style='background-color:#D4D7DC;'>
-        <div class=" text-center" >
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\3.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+
+    <body   class="bg-img">
+        <div class=" text-center" style="margin-top: 30px;">
             <div class="row" style="width:1590px;" >
                 <div class="col-3" >
 
@@ -59,11 +67,19 @@
                       </style>
                       
              
-                      <div class="sidebar-wrapper" style="height: 720px; overflow-y: auto; width:278px;">
+                      <div class="sidebar-wrapper" style="height: 900px; overflow-y: auto; width:300px;">
                 
-                    <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 25px; margin-bottom: 20px; height: 900px; width:270px;">
-                        <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
-               
+                    <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 25px; margin-bottom: 20px; height: 900px; width:300px;">
+                      <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 0px;">
+                   
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                          <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 0px;"></i>
+                      </a>
+                        <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px; color: #6B2737; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;">
+                             Projects List
+                        </h5>
+                      
+                    </div>
                       <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
                 
                       <ul class="list-unstyled mt-3">
@@ -88,7 +104,7 @@
                               } {% endcomment %}
                         </style>
                         {% for proj in projects %}
-                        <div class="project-card">
+                        <div class="project-card" style="width: 270px;">
                         <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px;">
                           <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
                           justify-content: space-between;">
@@ -250,7 +266,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-3"  style="background-color: #f7f7f7;width: 830px; height: 720px; border-radius: 5px; margin-left:-90px; margin-right:5px;">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 800px; height: 720px; border-radius: 5px; margin-left:-70px; margin-right:5px;">
                     <form method="POST">
                     {% csrf_token %} 
 
@@ -284,7 +300,7 @@
                         </h6>
 
 
-                        <div class='col-6 rounded ' id="map" style="width: 826px;height: 650px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
+                        <div class='col-6 rounded ' id="map" style="width: 795px;height: 650px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
                         </div>
                         
@@ -311,9 +327,9 @@
                       </style>
                       
              
-                    <div class="sidebar-wrapper" style="height: 740px; overflow-y: auto; width:318px;">
+                    <div class="sidebar-wrapper" style=" overflow-y: auto; width:318px;">
                     
-                        <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 730px; width:318px;">
+                        <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 900px; width:318px;">
                             <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Node List</h5>
                 
                             <style>

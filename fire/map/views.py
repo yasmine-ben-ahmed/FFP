@@ -38,7 +38,7 @@ def add_project(request,pseudo):
         cityp = request.POST.get('cityp')
         piece_joinde =request.POST.get('piece_joinde')
 
-
+        
         if formulairep.is_valid():
 
             selected_client_id = request.POST.get('clientp')
@@ -239,7 +239,15 @@ def all_node(request,iid,pseudo):
         data_list.append(
             ds,
         )
-    print('!!!!!!!--------data_list',data_list)
+
+    ltemp =[]
+    ds = Data.objects.filter(node=n).order_by('-IdData')
+    for d in ds :
+        
+        ltemp.append(
+            d.temperature,
+        )
+    print('!!!!22!!!--------ltemp',ltemp)
 
     for i in range(len(data_list)):
         ldn0 = data_list[i]
@@ -497,8 +505,25 @@ def final2(request,id,pseudo,idnode):
         
     print(data_list)
 
+    ltemp =[]
+    dss = Data.objects.filter(node=nod).order_by('-IdData')
+    for d in dss :
+        
+        ltemp.append(
+            d.temperature,
+        )
+
+        lhum =[]
+    # dss = Data.objects.filter(node=n).order_by('-IdData')
+    for d in dss :
+        
+        lhum.append(
+            d.humidity,
+        )
+    print('!!!!22!!!--------dss',dss)
+
     
-    context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
+    context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ltemp':ltemp, 'lhum':lhum, 'ldn':data_list,'nodee':nodeq}
     return render(request, 'final2.html',context )
 
 def final3(request,id,pseudo,idnode):

@@ -10,14 +10,14 @@ from django.contrib.gis import forms as geoforms
 class Form_project(forms.Form):
 
     nomp = forms.CharField(required=True,max_length=myProject._meta.get_field(
-        'nomp').max_length, widget=forms.TextInput(attrs={'id': "nomp", 'name': "nomp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;", 'placeholder': 'Project Name'}))
+        'nomp').max_length, widget=forms.TextInput(attrs={'id': "nomp", 'name': "nomp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;", 'placeholder': 'Project Name'}))
     descp = forms.CharField( required=False, max_length=myProject._meta.get_field(
-        'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
+        'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
     
     cityp = forms.CharField(required=True, max_length=myProject._meta.get_field(
-        'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;", 'placeholder': 'Region Name'}))
+        'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;", 'placeholder': 'Region Name'}))
  
-    clientp = forms.ModelChoiceField(queryset=client.objects.all(),required=False,empty_label='None', widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF; width:170px;", 'placeholder': 'Select Client'}))
+    clientp = forms.ModelChoiceField(queryset=client.objects.all(),required=False,empty_label='None', widget=forms.Select(attrs={'id': "clientp", 'name': "clientp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5; width:170px;", 'placeholder': 'Select Client'}))
     
     piece_joinde = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'id': "piece_joinde", 'name': "piece_joinde", 'class': "form-control-file", 'style': "font-size: 15px;"}))
     
@@ -51,25 +51,25 @@ class Form_project(forms.Form):
 class Form_client(forms.Form):
     
     nom = forms.CharField(required=True, max_length=client._meta.get_field(
-        'nom').max_length, widget=forms.TextInput(attrs={'id': "nom", 'name': "nom", 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color:#FAF8FF;", 'placeholder': 'Last Name'}))
+        'nom').max_length, widget=forms.TextInput(attrs={'id': "nom", 'name': "nom", 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color:#e6e5e5;", 'placeholder': 'Last Name'}))
     
     prenom = forms.CharField(required=True, max_length=client._meta.get_field(
-        'prenom').max_length, widget=forms.TextInput(attrs={'id': 'prenom', 'name': 'prenom', 'placeholder': 'First Name', 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+        'prenom').max_length, widget=forms.TextInput(attrs={'id': 'prenom', 'name': 'prenom', 'placeholder': 'First Name', 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;"}))
     
     telephone = forms.CharField(required=True, max_length=client._meta.get_field(
-        'NB_GSM').max_length, widget=forms.TextInput(attrs={'id': 'NB_GSM', 'name': 'NB_GSM', 'placeholder': 'Phone', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+        'NB_GSM').max_length, widget=forms.TextInput(attrs={'id': 'NB_GSM', 'name': 'NB_GSM', 'placeholder': 'Phone', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;"}))
     
     pseudo = forms.CharField(required=True, max_length=client._meta.get_field(
-        'pseudo').max_length, widget=forms.TextInput(attrs={'id': 'pseudo', 'name': 'pseudo', 'placeholder': 'Pseudo', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+        'pseudo').max_length, widget=forms.TextInput(attrs={'id': 'pseudo', 'name': 'pseudo', 'placeholder': 'Pseudo', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;"}))
     
     email = forms.EmailField(max_length=client._meta.get_field(
-        'e_mail').max_length, required=True, widget=forms.EmailInput(attrs={'id': 'email', 'name': 'email', 'placeholder': 'Mail', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+        'e_mail').max_length, required=True, widget=forms.EmailInput(attrs={'id': 'email', 'name': 'email', 'placeholder': 'Mail', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;"}))
     
     mot_de_passe = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'id': 'password', 'name': 'password', 'placeholder': 'Password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+        attrs={'id': 'password', 'name': 'password', 'placeholder': 'Password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;"}))
     
     confirmation_mot_de_passe = forms.CharField(required=True, widget=forms.PasswordInput(
-        attrs={'id': 'password1', 'name': 'password1', 'placeholder': 'Re-enter password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #FAF8FF;"}))
+        attrs={'id': 'password1', 'name': 'password1', 'placeholder': 'Re-enter password', 'class': "form-control p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;"}))
 
     image = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'id': "image", 'name': "image", 'class': "form-control-file", 'style': "font-size: 15px;"}))
     

@@ -1,4 +1,4 @@
-{% extends 'base1.html' %} 
+{% extends 'base.html' %} 
 {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +21,16 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     </head>
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\3.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
 
-    <body  style="background-color:#D4D7DC;">
-        <div class="container222 text-center" >
+    <body   class="bg-img">
+        <div  style="margin-top: 30px;">
             <div class="row">
               <div class="col-3" >
                 <style>
@@ -41,9 +48,17 @@
                 
        
                 <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
-                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px;">
-                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
-                 
+                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 700px; margin-left: 30px;">
+                  <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 40px;">
+                   
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                      <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                  </a>
+                    <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px; color: #6B2737; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;">
+                         Projects List
+                    </h5>
+                  
+                </div>
                   <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
     
                   <ul class="list-unstyled mt-3">
@@ -76,8 +91,9 @@
                             font-size: 11px;
                           }
                         </style>
-                        <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-        
+                                            {% if proj.polygon_id != project.polygon_id %}
+                                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                                              {%endif%} 
                         <style> 
                           .edit-btn {
                             padding: 5px 5px;
@@ -134,7 +150,7 @@
               </div>
             </div>  
 
-                <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 820px; border-radius: 5px; margin-left:30px;">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1040px; height: 700px; border-radius: 5px; margin-left:20px;">
                     <form method="POST">
                     {% csrf_token %} 
 
@@ -272,7 +288,7 @@
                             </div>
                         </div>
                         
-                        <div class='col-6 rounded ' id="map"  style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
+                        <div class='col-6 rounded ' id="map"  style="width: 1036px;height: 450px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
                         </div>
              

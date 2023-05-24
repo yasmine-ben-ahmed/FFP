@@ -1,7 +1,14 @@
 
 {% extends 'base.html' %} {% block content %}
 {% load static %}
-<body class="bg-img" >
+<style>
+    body.bg-img {
+      background-image: url("{%static 'index\images\1.jpg'%}");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+  <body class="bg-img" >
     <center>
 <div class="containerr" style=" margin-top: 200px; margin-bottom: 300px;">
 
@@ -18,7 +25,7 @@
     
             .card button {
                 font-size: 10px;
-                background-color: darkgreen;
+                background-color: #5AB02E;
                 color: #FFFFFF;
                 border: none;
                 padding: 10px 13px;
@@ -52,7 +59,7 @@
                 Visualize
               </button> {% endcomment %}
 
-              <button class="btn btn-dark shadow-none add-project-btn" style="width: 30%; margin-bottom: 20px; border-radius: 20px; background-color:darkgreen;" type="submit" value="save"><i class="fa-solid fa-eyes"></i>
+              <button class="btn btn-dark shadow-none add-project-btn" style="width: 30%; margin-bottom: 10px; margin-top: 20px;border-radius: 20px; background-color:#5AB02E;" type="submit" value="save"><i class="fa-solid fa-eyes"></i>
                 
                 Visualize</button>
 

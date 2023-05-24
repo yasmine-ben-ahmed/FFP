@@ -11,7 +11,7 @@
     margin: 0.5vh auto 0 auto;
     padding: 20px;
    
-    background-color: #C3B8B6;
+    background-color: #FFFFFF;
     /* background-color: rgb(204, 202, 202); */
     
     
@@ -27,7 +27,7 @@
 }
 
 #form h4 {
-  color: #2B2612;
+  color: #423A25;
   
   
 }
@@ -73,7 +73,7 @@
 
 .bg-img {
   /* The image used */
-  background-image: url("/static/images/blur2.jpg");
+  background-image: url("/static/index/images/blur2.jpg");
   /* opacity: 0.7; */
   /* filter: blur(1px); */
   /* Control the height of the image */
