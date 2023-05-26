@@ -315,15 +315,17 @@
 
                         
                     {% comment %} <div style="display: flex; align-items: center;"> {% endcomment %}
-                        <h6 style=" margin-bottom:5px;margin-top:20px; text-align:left;  font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">
-                          <strong style="color: #3F6D22; ">Welcome </strong> {{supervisor.nom}} {{supervisor.prenom}}, <strong style="color: #3F6D22;">To Project: </strong>{{ project.nomp }}
+                      <h6 style="margin-bottom:5px;margin-top:20px;text-align:left;font-weight:bold;margin-bottom:20px;color:rgb(102, 101, 101);font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:2px;">
 
-                         
-                          <a class="btn btn-outline-primary edit-b" style="border: none;" onclick="location.href='{% url 'ALL_node' supervisor.pseudo project.polygon_id %}'" ><i class="fa-solid fa-pen-to-square " style="color: darkgreen;
-                            border-color: white;"></i></a>
-                       
-                        </h6>
+                        <strong style="color: #3F6D22;">Welcome </strong> {{supervisor.nom}} {{supervisor.prenom}}, <strong style="color: #3F6D22;">To Project: </strong>{{ project.nomp }}
+                      
+                        <a class="btn btn-outline-primary edit-b d-inline" style="border:none; margin-left: -20px;" onclick="location.href='{% url 'ALL_node' supervisor.pseudo project.polygon_id %}'">
+                          <i class="fa-solid fa-pen-to-square" style="color: darkgreen; border-color: white;"></i>
+                        </a>
+                      
 
+                      </h6>
+                      
 
                         <div class='col-6 rounded ' id="map" style="width: 795px;height: 650px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
                             <div class="leaflet-control"></div>
@@ -344,8 +346,14 @@
                     <div class="sidebar-wrapper" style=" overflow-y: auto; width:280px; height: 720px;">
                     
                         <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 720px; width:270px;">
-                            <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-size: 19px;  text-transform: uppercase; letter-spacing: 2px;">Node List</h5>
-                
+                         
+                          <div style="display: flex; align-items: center;" >
+                            <h5 class="sidebar-heading" style=" margin-left: 50px; font-weight: bold; margin-bottom: 20px; color:black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-size: 19px;  text-transform: uppercase; letter-spacing: 2px;">Node List</h5>
+                            <button class="btn btn-outline-primary edit-b d-inline" style="border:none; margin-left: -15px; color: darkgreen; margin-top: -20px;" onclick="location.href='{% url 'all' supervisor.pseudo project.polygon_id %}'">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                          
                          
                               {% for node in nodes %}
                               <div class="node-card">

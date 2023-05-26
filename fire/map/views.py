@@ -509,14 +509,15 @@ def final2(request,id,pseudo,idnode):
     lhum = []
 
     # Query for temperature data
-    temp_data = Data.objects.filter(node=nod).order_by('-IdData')
+    temp_data = Data.objects.filter(node=nod)
     for d in temp_data:
         ltemp.append(d.temperature)
 
     # Query for humidity data
-    hum_data = Data.objects.filter(node=nod).order_by('-IdData')
+    hum_data = Data.objects.filter(node=nod)
     for d in hum_data:
         lhum.append(d.humidity)
+        
 
     print('!!!!lhum!!!--------lhum',lhum)
 
@@ -687,17 +688,15 @@ def details(request, id,pseudo,idnode):
     lhum = []
 
     # Query for temperature data
-    temp_data = Data.objects.filter(node=nod).order_by('-IdData')
+    temp_data = Data.objects.filter(node=nod)
     for d in temp_data:
         ltemp.append(d.temperature)
 
     # Query for humidity data
-    hum_data = Data.objects.filter(node=nod).order_by('-IdData')
+    hum_data = Data.objects.filter(node=nod)
     for d in hum_data:
         lhum.append(d.humidity)
-
-    print('*******ltemp**********',ltemp)
-    print('*******lhum**********',lhum)
+        
 
     
     context={'client':clientp,'project':proj,'ltemp':ltemp,'lhum':lhum, 'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
