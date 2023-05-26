@@ -35,33 +35,34 @@
         </style>
 
         
-            <div class="card" style="width: 30rem;">
+            <div class="card" style="width: 30rem; border-radius:20px;">
                 <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                 <div class="card-body">
-                  <h5 class="card-title" style="font-family: 'subset'; font-weight: bolder; "> CLIENT :  {{client.nom}}</h5>
+                  <h5 class="card-title" style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; "> CLIENT :  {{client.nom}}</h5>
                   <img src="{%static 'images\farmer.jpg'%}"  width="160px" height="130px" />
                    {% comment %} <a class="btn btn-dark  mx-auto d-block" style='  font-size: 15px; background-color: darkgreen;' href="{% url 'connectasclient' %}" class="btn btn-primary">connect as client</a> {% endcomment %}
                    <form method="POST">
                     {% csrf_token %} 
 
                    <div class=""><br/>
-                    <h6 style='font-size:10px;' >Select Project You Want To Supervize:</h6>
-                    <select name="proj" style="margin-right: 5px; background-color:#FAF8FF;">
+                    <h6 style='font-size:10px; font-family:Verdana, Geneva, Tahoma, sans-serif;' >Select Id Of Project You Want To Visualize</h6>
+                    <select name="proj" style="margin-right: 5px; background-color:#FAF8FF; font-family:Verdana, Geneva, Tahoma, sans-serif;">
                         {% for proj in projects %}
-                        <option value="{{ proj.polygon_id }}">Project ID: {{ proj.polygon_id }}</option>
+                        <option value="{{ proj.polygon_id }}" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">Project ID: {{ proj.polygon_id }}</option>
                         {% endfor %}
                     </select>
                 </div>
             
 
             
-            {% comment %} <button class="btn btn-dark  mx-auto d-block" style='  font-size: 10px; background-color: darkgreen; margin-top : 10px; border-raduis:20px;' type="submit" value="save" >
-                Visualize
-              </button> {% endcomment %}
+        
 
-              <button class="btn btn-dark shadow-none add-project-btn" style="width: 30%; margin-bottom: 10px; margin-top: 20px;border-radius: 20px; background-color:#5AB02E;" type="submit" value="save"><i class="fa-solid fa-eyes"></i>
+              <button class="btn btn-dark shadow-none add-project-btn" style="width: 40%;  font-size: 14px; background-color: #5AB02E;font-weight: bolder; border-radius:20px;margin-top : 20px; margin-bottom : -35px;font-family:Verdana, Geneva, Tahoma, sans-serif;" type="submit" value="save"><i class="fa-solid fa-eyes"></i>
                 
                 Visualize</button>
+
+                <!-- <button class="btn btn-dark  mx-auto d-block" style='  font-size: 14px; background-color: #5AB02E;font-weight: bolder; margin-top : 30px; margin-bottom : -40px;font-family:Verdana, Geneva, Tahoma, sans-serif;' href="{% url 'connectassupervisor' %}" class="btn btn-primary">connect as supervisor</button> -->
+              
 
 
             </form>

@@ -10,19 +10,19 @@
 </style>
 
 <body class="bg-img" >
-<div  style="margin-top: 100px;">
-  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" style='background-color: #C3B8B6;'>
+<div  style="margin-top: 100px; ">
+  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" style='background-color: #C3B8B6; '>
     {% csrf_token %}
-    <h1 class="text-center mb-4" style='font-family:subset; font-weight: bolder; color: #423A25;'>Connexion</h1>
+    <h1 class="text-center mb-4" style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder; color: #423A25;'>Connexion</h1>
     <div class="mb-3">
-      <label for="pseudo" class="form-label"><h4 style='font-family:subset; font-weight: bolder;'>Pseudo:</h4></label>
+      <label for="pseudo" class="form-label"><h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Pseudo:</h5></label>
       {{ form.pseudo }}
       {% if form.pseudo.errors %}<h4>
       <div class="text-danger" role="alert">{{ form.pseudo.errors }}</div></4>
       {% endif %}
     </div>
     <div class="mb-3">
-      <label for="mot_de_passe" class="form-label"><h4 style='font-family:subset; font-weight: bolder;'>Mot de passe:</h4></label>
+      <label for="mot_de_passe" class="form-label"><h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Mot de passe:</h5></label>
       {{ form.mot_de_passe }}
       {% if form.mot_de_passe.errors %}<h4>
       <div class="text-danger" role="alert">{{ form.mot_de_passe.errors }}</div></h4>
@@ -32,7 +32,7 @@
 
     <div class="text-center">
         
-      <button class="btn btn-dark" style='width:30%; background-color: #423A25; color:#C3B8B6; font-size: 15px; ' type="submit" value="save"  data-mdb-toggle="modal" data-mdb-target="#exampleModal">connection</button>
+      <button class="btn btn-dark" style='border-radius:20px; width:30%; background-color: #423A25; color:#C3B8B6; font-size: 14px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; ' type="submit" value="save"  data-mdb-toggle="modal" data-mdb-target="#exampleModal">LOGIN</button>
         <!-- <div style="color: black; margin-top: 0px; text-align: center; font-size: 15px; opacity: 0.5;">
           <p  style="margin-bottom: 0px; margin-top: 5px;">New here ?</p>
           <a href="{% url 'compte' 'client' %}" style="color: black; margin-left: -10px;">Singn up</a>
@@ -40,10 +40,10 @@
     </div>
 
     <!-- this only for client not concerned by supervisor -->
-    <div class="panel-footer" style="text-align: center; margin-top: 10px;">
-      Don't have an account? <a href="{% url 'compte' 'client' %}">Click here</a> to register.
-   
+    <div class="panel-footer" style="text-align: center; margin-top: 7px;">
+      <a href="#" style="text-decoration: underline; color: black;"> Forgot Password? </a> 
     </div>
+    
     <!-- Modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog">

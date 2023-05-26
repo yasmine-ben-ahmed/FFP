@@ -40,50 +40,177 @@
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
-            <style>
-              #myChart {
-                margin-top: -350px;
-                  width: 740px !important;
-                  height: 350px !important;
+                <style>
+                                #myChart {
+                margin-top: -315px;
+                  width: 720px !important;
+                  height: 300px !important;
                   margin-left: 330px;
               }
 
-              #humchart {
-                margin-top: 200px;
+              #myhum {
+                margin-top: 00px;
                   width: 740px !important;
-                  height: 350px !important;
-                  margin-left: 0px;
+                  height: 300px !important;
+                  margin-left: 330px;
               }
-            </style>
+                  body.bg-img {
+                    background-image: url("{%static 'index\images\3.jpg'%}");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                  }
+            
+                  .sidebar-wrapper::-webkit-scrollbar {
+                                      width: 6px;
+                                      background-color: #D4D7DC;
+                                    }
+                                    
+                                    .sidebar-wrapper::-webkit-scrollbar-thumb {
+                                      background-color: #DEDBEE;
+                                      border-radius: 5px;
+                                    }
+            
+                                    .project-card {
+                                            background-color: #F2F2F2;
+                                            border-radius: 12px;
+                                            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                                            padding: 15px ;
+                                            width: 250px;
+                                            height:100px;
+                                            {% comment %} max-width: 450px; {% endcomment %}
+                                            margin: 10px 0;
+                                            margin-left:-10px;
+                                            text-align: center;
+                                            transition: all 0.3s ease-in-out;
+                                          }
+                                        
+                                          {% comment %} .project-card:hover {
+                                            transform: translateY(-5px);
+                                          } {% endcomment %}
+            
+                                          .visualize-btn {
+                                            padding: 5px 5px;
+                                            border: none;
+                                            background-color: transparent;
+                                            color: #3F6D22;
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                          }
+                                        
+                                          .visualize-btn:hover {
+                                            color: #fff;
+                                            background-color: #3F6D22;
+                                            border-color: #3F6D22;
+                                          }
+                                        
+                                          .visualize-btn i {
+                                            font-size: 11px;
+                                          }
+            
+                                          .edit-btn {
+                                            padding: 5px 5px;
+                                            border: none;
+                                            background-color: transparent;
+                                            color:#3F6D22;
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                          }
+                                        
+                                          .edit-btn:hover {
+                                            color: #fff;
+                                            background-color: #3F6D22;
+                                            border-color: #3F6D22;
+                                          }
+                                        
+                                          .edit-btn i {
+                                            font-size: 11px;
+                                          }
+            
+                                          .delete-btn {
+                                            padding: 5px 5px;
+                                            border: none;
+                                            background-color: transparent;
+                                            color: #3F6D22;
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                          }
+                                        
+                                          .delete-btn:hover {
+                                            color: #fff;
+                                            background-color: #3F6D22;
+                                            border-color: #3F6D22;
+                                          }
+                                        
+                                          .delete-btn i {
+                                            font-size: 11px;
+                                          }
+            
+                                          .node-card {
+                                              background-color: #F2F2F2;
+                                              border-radius: 12px;
+                                              box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                                              padding: 15px;
+                                              width: 100%;
+                                              height: 150px;
+                                              max-width: 450px;
+                                              margin: 15px auto;
+                                              text-align: center;
+                                              transition: all 0.3s ease-in-out;
+                                              font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+                                            }
+                                          
+                                            .node-card:hover {
+                                              transform: translateY(-5px);
+                                            }
+                                          
+                                            .node-card h6 {
+                                              font-size: 17px;
+                                              font-weight: bold;
+                                              color: #2F4858;
+                                              margin-bottom: -10px;
+                                            }
+                                          
+                                            .node-card p {
+                                              font-size: 15px;
+                                              color: #4F4F4F;
+                                              margin-top: -10px;
+                                            }
+                                          
+                                            .node-card button {
+                                              background-color: #2F4858;
+                                              border: none;
+                                              color: #FFFFFF;
+                                              padding: 5px 14px;
+                                              font-size: 13px;
+                                              border-radius: 20px;
+                                              margin:0 8px;
+                                              margin-top: -15px;
+                                              cursor: pointer;
+                                              transition: all 0.3s ease-in-out;
+                                            }
+                                          
+                                            .node-card button:hover {
+                                              background-color: #6B2737;
+                                              /* background-color: rgba(253, 38, 0, 0.1); */
+                                            }
+
+                                            .node-info-title {
+                                color: #2F4858; /* Example color for the title */
+                                font-size: 18px; /* Example font size for the title */
+                                margin-bottom:-15px;
+                                margin-top:-15px;
+                              }
+                </style>
 
 
     </head>
 
-    <style>
-      body.bg-img {
-        background-image: url("{%static 'index\images\3.jpg'%}");
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-    </style>
+
 
     <body   class="bg-img">
-        <div class=" text-center" style="margin-top: 30px;">
-            <div class="row" style="width:1590px;" >
+        <div class=" text-center" >
+            <div class="row" style="width:1420px; margin: 30px 30px;" >
                 <div class="col-3" >
-
-                    <style>
-                        .sidebar-wrapper::-webkit-scrollbar {
-                          width: 6px;
-                          background-color: #D4D7DC;
-                        }
-                        
-                        .sidebar-wrapper::-webkit-scrollbar-thumb {
-                          background-color: #6B2737;
-                          border-radius: 5px;
-                        }
-                        
-                      </style>
                       
              
                     
@@ -93,14 +220,12 @@
                     <form method="POST">
                     {% csrf_token %} 
 
-                        
-                    {% comment %} <div style="display: flex; align-items: center;"> {% endcomment %}
-                        <h5 style="margin-bottom:5px;margin-top:20px; text-align:left; font-size: 18px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 20px;   text-transform: uppercase; letter-spacing: 2px;">
+                        <h5 style="margin-bottom:15px;margin-top:20px; margin-left:300px; text-align:center; font-weight: bold; color:rgb(102, 101, 101); font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-size: 20px;   text-transform: uppercase; letter-spacing: 2px;">
                           <strong style="color: #3F6D22;">Details Of Node</strong> {{ nod.nom }}<strong style="color: #3F6D22;"> Of Project :</strong>  {{ project.nomp }}
                         </h5>
                         <div class="row">
-                            <div class="col">
-                                <div class="card " style="background-color: #DEDBEE; height:310px; width:300px; margin-top:-10px;">
+                            <div class="col" >
+                                <div class="card " style="background-color: #DEDBEE; height:310px; width:300px; margin-top:-10px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                                   <div class="card-body">
                                     <h6 class="card-title node-info-title"><i class="fas fa-info-circle"></i>  Node Information</h6>
                                     <hr>
@@ -116,27 +241,22 @@
                                   </div>
                                 </div>
                               </div>
-                           <style>
-                            .node-info-title {
-                                color: #2F4858; /* Example color for the title */
-                                font-size: 18px; /* Example font size for the title */
-                                margin-bottom:-15px;
-                                margin-top:-15px;
-                              }
-                           </style>
+
                                                             
                               
                               
-                           <div class='col-6 rounded ' id="map" style="width: 760px;height: 300px; box-sizing:border-box; margin-top: -10px;  border-radius: 50px; margin-left:-20px; margin-right:8px; ">
-                            <div class="leaflet-control"></div>
-                        </div>
+                              <canvas id="myChart"></canvas>
+                               <canvas id="myhum"></canvas>
+                                                            
+ 
+                                                            
                              
                               
                             </div>
 
 
                             <div class="col" >
-                                <div class="card"  style="background-color: #DEDBEE; height:200px; width:300px; margin-top:10px;">
+                                <div class="card"  style="background-color: #DEDBEE; height:200px; width:300px; margin-top:-290px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                                   <div class="card-body">
                                     <h6 class="card-title node-info-title"><i class="fa-solid fa-cloud"></i>  Weather Information</h6>
                                     <hr>
@@ -149,7 +269,7 @@
                                   </div>
                                 </div>
 
-                                <div class="card" style="background-color: #DEDBEE; margin:10px 0px; height:110px; width:300px;">
+                                <div class="card" style="background-color: #DEDBEE; margin:10px 0px; height:110px; width:300px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                                     <div class="card-body">
                                       <h6 class="card-title node-info-title"> <i class="fa-sharp fa-solid fa-bell"></i>  Prediction</h6>
                                       <hr>
@@ -174,107 +294,65 @@
                                     </div>
                                   </div>
                               </div>
-                          
-                     
-                          
-                          
-
-                              <canvas id="myChart" ></canvas>
-                              <!-- <canvas id="humchart" ></canvas> -->
-
-             
-          
+                        
+                              
+                              <!-- <div class='col-6 rounded ' id="map" style="width: 760px;height: 300px; box-sizing:border-box; margin-top: -230px;  border-radius: 50px; margin-left:320px; margin-right:8px; ">
+                                <div class="leaflet-control"></div>
+                            </div> -->
 
                     </form>
 
-              
-
-
-
                 </div>
 
-                <div class="col" >
-
-                    <style>
-                        .sidebar-wrapper::-webkit-scrollbar {
-                          width: 6px;
-                          background-color: #D4D7DC;
-                        }
-                        
-                        .sidebar-wrapper::-webkit-scrollbar-thumb {
-                          background-color: #6B2737;
-                          border-radius: 5px;
-                        }
-                        
-                      </style>
-                      
-             
-                    <div class="sidebar-wrapper" style=" overflow-y: auto; width:318px;">
+                <div class="col" >  
+                      <div class="sidebar-wrapper" style=" overflow-y: auto; width:290px; height: 740px;">
                     
-                        <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 900px; width:318px;">
-                            <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Node List</h5>
+                        <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 740px; width:280px;">
+                            <h5 class="sidebar-heading" style="font-size: 22px; font-weight: bold; margin-bottom: 20px; color:black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;  text-transform: uppercase; letter-spacing: 2px;">Node List</h5>
                 
-                            <style>
-                                .node-card {
-                                  background-color: #F2F2F2;
-                                  border-radius: 12px;
-                                  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
-                                  padding: 15px;
-                                  width: 100%;
-                                  max-width: 450px;
-                                  margin: 15px auto;
-                                  text-align: center;
-                                  transition: all 0.3s ease-in-out;
-                                }
-                              
-                                .node-card:hover {
-                                  transform: translateY(-5px);
-                                }
-                              
-                                .node-card h6 {
-                                  font-size: 17px;
-                                  font-weight: bold;
-                                  color: #2F4858;
-                                  margin-bottom: -10px;
-                                }
-                              
-                                .node-card p {
-                                  font-size: 15px;
-                                  color: #4F4F4F;
-                                  margin-bottom: 10px;
-                                }
-                              
-                                .node-card button {
-                                  background-color: #2F4858;
-                                  border: none;
-                                  color: #FFFFFF;
-                                  padding: 5px 14px;
-                                  font-size: 13px;
-                                  border-radius: 20px;
-                                  margin: 0 8px;
-                                  cursor: pointer;
-                                  transition: all 0.3s ease-in-out;
-                                }
-                              
-                                .node-card button:hover {
-                                  background-color: #6B2737;
-                                }
-                              </style>
-                              
-                              {% for node in nodes %}
-                              <div class="node-card">
-        
-                                <h6>Node-{{node.nom}}</h6>
-                                <hr style='border-color: #6B2737;'>
-                                <p><strong>Reference:</strong> {{node.reference}}</p>
-                                <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Node ID: {{ node.Idnode }}</p>
-                    
-                                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                                    <button class="locate-btn" onclick="location.href='{% url 'final3' project.supervisorp.pseudo project.polygon_id node.Idnode %}'" >Locate</button>
-                                    <button onclick="location.href='{% url 'final2' project.supervisorp.pseudo project.polygon_id node.Idnode %}'">Details</button>
-                                </div>
+                         
+                            {% for node in nodes %}
+                            <div class="node-card">
+                              {% if node != nod %}
+                              <h6>Node-{{ node.nom }}</h6>
+                              {% endif %}
+                          
+                              {% if node.status == 'DOWN' and node == nod %}
+                                <h6 <span style="color:green; font-weight:bold">Node-{{ node.nom }}</h6>
+                                <!-- <p class="card-text"><strong>Status:</strong> <span style="color:green; font-weight:bold">{{ nod.status }}</span></p> -->
+                              {% elif node.status == 'MODERATE' and node == nod %}
+                                <h6 style="color:blue; font-weight:bold">Node-{{ node.nom }}</h6>
+                                <!-- <p class="card-text"><strong>Status:</strong> <span style="color:blue; font-weight:bold">{{ nod.status }}</span></p> -->
+                              {% elif node.status == 'HIGH' and node == nod %}
+                                <h6 style="color:yellow; font-weight:bold">Node-{{ node.nom }}</h6>
+                                <!-- <p class="card-text"><strong>Status:</strong> <span style="color:yellow; font-weight:bold">{{ nod.status }}</span></p> -->
+                              {% elif node.status == 'VERY HIGH' and node == nod %}
+                                <h6 style="color:orange; font-weight:bold">Node-{{ node.nom }}</h6>
+                                <!-- <p class="card-text"><strong>Status:</strong> <span style="color:orange; font-weight:bold">{{ nod.status }}</span></p> -->
+                              {% elif node.status == 'EXTREME' and node == nod %}
+                                <h6 style="color:red; font-weight:bold">Node-{{ node.nom }}</h6>
+                                <!-- <p class="card-text"><strong>Status:</strong> <span style="color:red; font-weight:bold">{{ nod.status }}</span></p> -->
+                              {% elif node.status == 'UNKNOWN' and node == nod %}
+                                <h6 style="color:black; font-weight:bold">Node-{{ node.nom }}</h6>
+                                <!-- <p class="card-text"><strong>Status:</strong> <span style="color:black; font-weight:bold">{{ nod.status }}</span></p> -->
+                              {% endif %}
+                          
+                              <hr style='border-color: #6B2737;'>
+                              <p><strong>Ref:</strong> {{ node.reference }}</p>
+                              <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Node ID: {{ node.Idnode }}</p>
+                          
+                              <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                                <button class="locate-btn" onclick="location.href='{% url 'final3' project.supervisorp.pseudo project.polygon_id node.Idnode %}'">Locate</button>
+                                <button onclick="location.href='{% url 'final2' project.supervisorp.pseudo project.polygon_id node.Idnode %}'">Details</button>
                               </div>
-                              {% endfor %}
+                            </div>
+                          {% endfor %}
+                          
+                            
+                        
+                            
+                            
+                            
                               
                               
                         </div>
@@ -291,15 +369,12 @@
 
         </div>
         
-        <script>
 
-</script>
-        
         
         
 
         <script>
-            var geojson_str = "{{ project.geomp.json|escapejs }}";
+                     var geojson_str = "{{ project.geomp.json|escapejs }}";
             var geojson = JSON.parse(geojson_str);
 
       
@@ -458,61 +533,117 @@
         
         
           {% endfor %}
+ </script>
+ 
 
-                          const xValues = [];
-          const yValues = [];
-          t = 0;
-        
-          {% for temp in ltemp %}
-            xValues.push(t + 30);
-            yValues.push({{ temp }});
-            t += 30;
-          {% endfor %}
-        
-          // Get the canvas element
-          const ctx = document.getElementById('myChart').getContext('2d');
-        
-          // Create the chart
-          new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: xValues,
-    datasets: [{
-      label: 'Temperature',
-      data: yValues,
-      backgroundColor: 'rgba(0, 0, 255, 0.1)',
-      borderColor: 'rgba(0, 0, 255, 1.0)',
-      borderWidth: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        title: {
-          display: true,
-          text: 'Temperature',
-          font: {
-            size: 14,
-            family: 'Arial',
-            weight: 'bold',
-            color: 'rgba(0, 0, 0, 1.0)'
+ <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tempData = JSON.parse('{{ ltemp|safe }}');
+    const humData = JSON.parse('{{ lhum|safe }}');
+
+    const xValuesTemp = [];
+    const yValuesTemp = [];
+    t = 0;
+
+    tempData.forEach(function(temp) {
+      xValuesTemp.push(t + 30);
+      yValuesTemp.push(temp);
+      t += 30;
+    });
+
+    const ctxTemp = document.getElementById('myChart').getContext('2d');
+    new Chart(ctxTemp, {
+      type: 'line',
+      data: {
+        labels: xValuesTemp,
+        datasets: [{
+          label: 'Temperature',
+          data: yValuesTemp,
+          backgroundColor: 'rgba(0, 253, 114, 0.1)',
+          borderColor: '#5BB12F',
+          borderWidth: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Temperature',
+              font: {
+                size: 30,
+                family: 'Arial',
+                weight: 'bold',
+                color: 'rgba(0, 0, 0, 1.0)'
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
           }
         }
       }
-    },
-    plugins: {
-      legend: {
-        display: false
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tempData = JSON.parse('{{ ltemp|safe }}');
+    const humData = JSON.parse('{{ lhum|safe }}');
+
+    const xValuesHum = [];
+    const yValuesHum = [];
+    t = 0;
+
+    humData.forEach(function(hum) {
+      xValuesHum.push(t + 30);
+      yValuesHum.push(hum);
+      t += 30;
+    });
+
+    const ctxHum = document.getElementById('myhum').getContext('2d');
+    new Chart(ctxHum, {
+      type: 'line',
+      data: {
+        labels: xValuesHum,
+        datasets: [{
+          label: 'Humidity',
+          data: yValuesHum,
+          backgroundColor: 'rgba(253, 38, 0, 0.1)',
+          borderColor: '#6B2737',
+          borderWidth: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Humidity',
+              font: {
+                size: 14,
+                family: 'Arial',
+                weight: 'bold',
+                color: 'rgba(0, 0, 0, 1.0)'
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
       }
-    }
-  }
-});
-      
-
-
-          </script>
+    });
+  });
+</script>
 
                 
 

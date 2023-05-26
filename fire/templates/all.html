@@ -57,234 +57,196 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-</style>
 
-<body   class="bg-img">
+  .sidebar-wrapper::-webkit-scrollbar {
+              width: 6px;
+              background-color: #131407;
+            }
+            
+            .sidebar-wrapper::-webkit-scrollbar-thumb {
+              background-color: darkgreen;
+              border-radius: 5px;
+            }
+            .visualize-btn {
+                    padding: 5px 5px;
+                    border: none;
+                    background-color: transparent;
+                    color: #5BB12F;
+                    font-size: 10px;
+                    cursor: pointer;
+                  }
+                
+                  .visualize-btn:hover {
+                    color: #fff;
+                    background-color: #3F6D22;
+                    border-color: #3F6D22;
+                  }
+                
+                  .visualize-btn i {
+                    font-size: 11px;
+                  }
 
+                  .edit-btn {
+                    padding: 5px 5px;
+                    border: none;
+                    background-color: transparent;
+                    color: #8c8c8c;
+                    font-size: 10px;
+                    cursor: pointer;
+                  }
+                
+                  .edit-btn:hover {
+                    color: #fff;
+                    background-color: #8c8c8c;
+                    border-color: #8c8c8c;
+                  }
+                
+                  .edit-btn i {
+                    font-size: 11px;
+                  }
+
+                  .delete-btn {
+                    padding: 5px 5px;
+                    border: none;
+                    background-color: transparent;
+                    color: #8c8c8c;
+                    font-size: 10px;
+                    cursor: pointer;
+                  }
+                
+                  .delete-btn:hover {
+                    color: #fff;
+                    background-color: #8c8c8c;
+                    border-color: #8c8c8c;
+                  }
+                
+                  .delete-btn i {
+                    font-size: 11px;
+                  }
+
+                  .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: -10px;
+      }
       
-        <div class=" text-center" style="margin-top: 30px;">
-            <div class="row" style="width:1450px;" >
-              <div class="col-3" >
-                <style>
-                  .sidebar-wrapper::-webkit-scrollbar {
-                    width: 6px;
-                    background-color: #D4D7DC;
-                  }
-                  
-                  .sidebar-wrapper::-webkit-scrollbar-thumb {
-                    background-color: #6B2737;
-                    border-radius: 5px;
-                  }
-                  
-                </style>
-                
-       
-                <div class="sidebar-wrapper" style="height: 750px; overflow-y: auto;">
-                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: 750px; width: 320px; margin-right: -10px; margin-left: 10px;">
-                  <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 40px;">
-                   
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
-                      <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
-                  </a>
-                    <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px; color: #6B2737; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;">
-                         Projects List
-                    </h5>
-                  
-                </div>
-                
-                  <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 10px;   border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo  %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
-                  <button  class="btn btn-outline-dark"  style='  font-size: 8px; margin-top: -25px; font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'display_polygone' project.supervisorp.pseudo project.polygon_id %}'"> Plots</button>
-                        
-                  <ul class="list-unstyled mt-3">
-
-                    <style>
-                        .project-card {
-                            background-color: #F2F2F2;
+      .pagination {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+      
+      .page-item {
+        margin: 0 5px;
+      }
+      
+    .page-link {
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        transition: all 0.3s ease-in-out;
+      }
+      
+    .page-link:hover {
+        background-color: #ddd;
+      }
+      
+      .active .page-link {
+        background-color: #5BB12F;
+        color: #fff;
+        border: 1px solid #5BB12F;
+      }
+      
+      .page-link i {
+        font-size: 16px;
+      }
+      .project-card {
+                            background-color: #E6E5E5;
                             border-radius: 12px;
                             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
                             padding: 15px ;
-                            width: 310px;
+                            width: 290px;
                             height:100px;
-                            {% comment %} max-width: 450px; {% endcomment %}
-                            margin: 10px 0;
-                            margin-left:-10px;
+                            
+                            margin: 10px 5px;
+                            
                             text-align: center;
                             transition: all 0.3s ease-in-out;
                           }
                         
-                         .project-card:hover {
+                          .project-card:hover {
                             transform: translateY(-5px);
                           } 
-                    </style>
-                    {% for proj in projects %}
-                    <div class="project-card">
-                    <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px;">
+</style>
+
+<body   class="bg-img">
+
+
+    <div style="margin: 40px 100px;">
+        <div class="row">
+
+          <div class="col-3" >
+ 
+            <div class="sidebar-wrapper" style="width:340px; height: 950px; overflow-y: auto;">
+          
+              <div class="sidebar" style="background-color: #e6e5e5; width:320px; border-radius: 5px; padding: 20px; margin-bottom: 20px;  height: 950px; ">
+               
+                <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 30px;">
+                 
+                  <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                    <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                </a>
+                <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; text-transform: uppercase; letter-spacing: 2px;">
+                  Projects List
+             </h5>
+                
+              </div>
+              
+                
+                <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:darkgreen; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+  
+                <ul class="list-unstyled mt-3">
+                  {% for proj in projects %}
+                  <div class="project-card" style="width: 270px;">
+                    <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                       <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
                       justify-content: space-between;">
                       <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
     
-                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
+                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-50px;">Project ID: {{ proj.polygon_id }}</p>
                        
                       </div>
                       <div class="project-actions">
-                        <style> 
-                          .visualize-btn {
-                            padding: 5px 5px;
-                            border: none;
-                            background-color: transparent;
-                            color: #3F6D22;
-                            font-size: 10px;
-                            cursor: pointer;
-                          }
                         
-                          .visualize-btn:hover {
-                            color: #fff;
-                            background-color: #3F6D22;
-                            border-color: #3F6D22;
-                          }
-                        
-                          .visualize-btn i {
-                            font-size: 11px;
-                          }
-                        </style>
                         <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-    
-                        <style> 
-                          .edit-btn {
-                            padding: 5px 5px;
-                            border: none;
-                            background-color: transparent;
-                            color:#8c8c8c;
-                            font-size: 10px;
-                            cursor: pointer;
-                          }
-                        
-                          .edit-btn:hover {
-                            color: #fff;
-                            background-color: #3F6D22;
-                            border-color: #3F6D22;
-                          }
-                        
-                          .edit-btn i {
-                            font-size: 11px;
-                          }
-                        </style>
-                        <button class="btn btn-outline-primary edit-btn"data-bs-toggle="modal" data-bs-target="#example"  ><i class="fa-solid fa-pencil"></i></button>
-                              <!-- Modal -->
-<!-- Modal -->
-<div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header" style="background-color: #6B2737;">
-      <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">What do you want to modify?</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <strong>Choose an option:</strong>
-      <ul>
-        <li style="margin:15px 5px;">
-          <p style="display: inline-block; margin-right: 10px;">Modify project information</p>
-          <a type="button" name="but_1" href="{% url 'modify_1' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</a>
-        </li>
-        <li  style="margin:15px 5px;">
-          <p style="display: inline-block; margin-right: 10px;">Modify project's plots</p>
-          <a type="button" name="but_2" href="{% url 'modify_2' supervisor.pseudo project.polygon_id %}" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737;  margin:10px 5px;">click here</a>
-        </li>
-        <li style="margin:15px 5px;">
-            <form method="POST" action="{% url 'modify_3' supervisor.pseudo project.polygon_id %}">
-              {% csrf_token %}
-              <label for="node_to_delete" style="display: inline-block; margin-right: 10px;">Delete a project's node:</label>
-              <select name="node_to_delete" style="display: inline-block; margin-right: 10px; color:black;background-color: white;">
-                {% for n in nodee %}
-                  <option value="{{ n.nom }}">{{ n.nom }}</option>
-                {% endfor %}
-              </select>
-              <button type="submit" name="but_3" class="btn btn-danger btn-sm shadow-none" style="border-radius: 20px; background-color: #6B2737; margin:10px 5px;">click here</button>
-            </form>
-          </li>
-          
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" style="border-radius:20px;" data-bs-dismiss="modal">Close</button>
-    </div>
-  </div>
-</div>
-</div>
-
-
-                                                
-    
-    
-                        <style> 
-                          .delete-btn {
-                            padding: 5px 5px;
-                            border: none;
-                            background-color: transparent;
-                            color: #8c8c8c;
-                            font-size: 10px;
-                            cursor: pointer;
-                          }
-                        
-                          .delete-btn:hover {
-                            color: #fff;
-                            background-color: #3F6D22;
-                            border-color: #3F6D22;
-                          }
-                        
-                          .delete-btn i {
-                            font-size: 11px;
-                          }
-                        </style>
-                        
-                        <button class="btn btn-outline-danger delete-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-alt"></i></button>
-                        <!-- Modal --> 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog ">
-                              <div class="modal-content">
-                                <div class="modal-header " style="background-color:#6B2737;">
-                                  <h5 class="modal-title" id="exampleModalLabel"  style="color:white;">Delete Project</h5>
-                                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <p>Are you sure you want to delete project "{{ project.nomp }}"?</p>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px;">Cancel</button>
-                                  
-                                  <a type="button"  href="{% url 'delete_project' supervisor.pseudo project.polygon_id %}" class="btn btn-danger shadow-none" style="border-radius: 20px; background-color:#6B2737;">Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          
-
-                        
-                
-                     
+                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button> 
+                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
                       </div>
-                    </li>
-                </div>
-                    {% comment %} <hr style='border-color: #6B2737;'> {% endcomment %}
-                    {% endfor %}
-
-                  </ul>
-
-                </div>
-              </div>
-            </div> 
+                  </li>
+                  </div>
+                  {% endfor %}
+                </ul>
+          </div>
+        </div>
+      </div>
               
 
-                <div class="col-3"  style="background-color: #f7f7f7;width: 1050px; height: 970px; border-radius: 5px; margin-left:20px; ">
+                <div class="col-3"  style="background-color: #f7f7f7;width: 900px; height: 950px; border-radius: 5px; margin-left:50px; ">
                     <form method="POST">
                     {% csrf_token %} 
-                        <h4 style="  margin-bottom:10px;margin-top:20px; text-align:left; font-size: 18px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 20px;   text-transform: uppercase; letter-spacing: 2px; "> <strong style="color: #3F6D22;">Last Node Added Of Project: </strong>{{ project.nomp }} _ {{ lastd.node }} _</h4>
-                    
+                       
+                        <h4 style="  margin-bottom:20px; margin-top: 10px;"> <strong style=" font-size: 20px;  margin-bottom: 20px; color:darkgreen; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Last Node Added Of Project: </strong>{{ project.nomp }} {{ lastd.node }} </h4>
+            
                         
 <div class="row">
   
 
-                        <div class="col-3" style=" border: 1px solid #d5d4dd ; width: 250px; height: 250px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                        <div class="col-3" style=" border: 1px solid #d5d4dd ; width: 250px; height: 250px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" >
                     
                           {% if project %}
                           <h5 style="margin-bottom: 1px; "><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}" >Weather Information</a></h5>
@@ -303,13 +265,13 @@
                          
                           </div>  
                           {% comment %} <p><strong style='color:#A26A25;'>related node:</strong> {{ lastd.node }} </p> {% endcomment %}
-                          <button style="margin-top: -60px;  font-family:subset;font-weight:bold; background-color:#082631; border-radius: 20px;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                          <button style="margin-top: -60px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-weight:bold; background-color:#082631; border-radius: 20px; margin-left: 30px;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Node Information
                           </button>
                           {% comment %} {% endfor %}   {% endcomment %}
                         </div>
 
-                        <div class="col-3" style=" border: 1px solid #d5d4dd ; background-color: #E9D8C7; width: 220px; height: 130px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                        <div class="col-3" style=" border: 1px solid #d5d4dd ; background-color: #E9D8C7;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; width: 220px; height: 130px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
                           <h5>Prediction result</h5> <hr>
                         
                           <div>
@@ -339,7 +301,7 @@
                                 {% comment %} {% endfor %} {% endcomment %}
                           </div>
                         
-                          <button  class="btn btn-outline-dark" name="b_add_N" style='  font-size: 10px; margin-top: 40px; font-family:subset;font-weight:bold; border-radius: 20px;' onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
+                          <button  class="btn btn-outline-dark" name="b_add_N" style="  font-size: 10px; margin-top: 40px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-weight:bold; border-radius: 20px; margin-left: 35px;"  onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
                         
                         </div>
 
@@ -355,8 +317,8 @@
 
                          
                            
-                           <div class='col-6 rounded ' id="map" style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-10px; ">
-                            <div class="leaflet-control"></div>
+                        <div class='col-6 rounded ' id="map" style="width: 895px;height: 565px; box-sizing:border-box; margin-top: -5px; margin-top: 10px; border-radius: 50px; margin-left:-10px; ">
+                          <div class="leaflet-control"></div>
                         </div>
 {% comment %}              
                         <label for="geomp">Geometry:</label>
@@ -382,12 +344,12 @@
                 <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog ">
                       <div class="modal-content">
-                        <div class="modal-header " style="background-color:#6B2737;">
+                        <div class="modal-header " style="background-color:#6B2737; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                           <img src="{%static 'images\pos1.png'%}" alt="" width="40px" style="border-radius: 10px; " />
-                          <h5 class="modal-title" id="exampleModalLabel"  style="color:white;">Node Information</h5>
+                          <h5 class="modal-title" id="exampleModalLabel"  style="color:white; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Node Information</h5>
                           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                           <p style='color:#6B2737;'><strong style='color:black;'>Node Name :</strong>   {{ lastd.node.nom }}</p>
                           <p style='color:#6B2737;'><strong style='color:black;'>Reference: </strong>{{ lastd.node.reference }}</p>
                           <p style='color:#6B2737;'><strong style='color:black;'>Position: </strong>{{ lastd.node.latitude }},{{ lastd.node.latitude }}</p>
@@ -400,7 +362,7 @@
                          
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px;">Close</button>
+                          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Close</button>
                           
                            </div>
                       </div>

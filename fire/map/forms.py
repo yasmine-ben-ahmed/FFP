@@ -12,7 +12,7 @@ class Form_project(forms.Form):
     nomp = forms.CharField(required=True,max_length=myProject._meta.get_field(
         'nomp').max_length, widget=forms.TextInput(attrs={'id': "nomp", 'name': "nomp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;", 'placeholder': 'Project Name'}))
     descp = forms.CharField( required=False, max_length=myProject._meta.get_field(
-        'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5; height:70px; width:600px; ", 'placeholder': 'Write description about the project'}))
+        'descp').max_length, widget=forms.Textarea(attrs={'id': "descp", 'name': "descp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5; height:70px; width:550px; ", 'placeholder': 'Write description about the project'}))
     
     cityp = forms.CharField(required=True, max_length=myProject._meta.get_field(
         'cityp').max_length, widget=forms.TextInput(attrs={'id': "cityp", 'name': "cityp", 'class': "form-control  p-8 mb-4 rounded", 'style': "font-size: 15px; background-color: #e6e5e5;", 'placeholder': 'Region Name'}))

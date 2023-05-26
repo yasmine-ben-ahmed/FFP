@@ -505,22 +505,20 @@ def final2(request,id,pseudo,idnode):
         
     print(data_list)
 
-    ltemp =[]
-    dss = Data.objects.filter(node=nod).order_by('-IdData')
-    for d in dss :
-        
-        ltemp.append(
-            d.temperature,
-        )
+    ltemp = []
+    lhum = []
 
-        lhum =[]
-    # dss = Data.objects.filter(node=n).order_by('-IdData')
-    for d in dss :
-        
-        lhum.append(
-            d.humidity,
-        )
-    print('!!!!22!!!--------dss',dss)
+    # Query for temperature data
+    temp_data = Data.objects.filter(node=nod).order_by('-IdData')
+    for d in temp_data:
+        ltemp.append(d.temperature)
+
+    # Query for humidity data
+    hum_data = Data.objects.filter(node=nod).order_by('-IdData')
+    for d in hum_data:
+        lhum.append(d.humidity)
+
+    print('!!!!lhum!!!--------lhum',lhum)
 
     
     context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ltemp':ltemp, 'lhum':lhum, 'ldn':data_list,'nodee':nodeq}
@@ -685,10 +683,24 @@ def details(request, id,pseudo,idnode):
             dat,
         )
         
-    print(data_list)
+    ltemp = []
+    lhum = []
+
+    # Query for temperature data
+    temp_data = Data.objects.filter(node=nod).order_by('-IdData')
+    for d in temp_data:
+        ltemp.append(d.temperature)
+
+    # Query for humidity data
+    hum_data = Data.objects.filter(node=nod).order_by('-IdData')
+    for d in hum_data:
+        lhum.append(d.humidity)
+
+    print('*******ltemp**********',ltemp)
+    print('*******lhum**********',lhum)
 
     
-    context={'client':clientp,'project':proj, 'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
+    context={'client':clientp,'project':proj,'ltemp':ltemp,'lhum':lhum, 'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
     return render(request, 'details.html', context)
     
     

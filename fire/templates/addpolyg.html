@@ -59,139 +59,192 @@ rel="stylesheet"
         background-repeat: no-repeat;
         background-size: cover;
       }
+
+      .sidebar-wrapper::-webkit-scrollbar {
+                  width: 6px;
+                  background-color: #131407;
+                }
+                
+                .sidebar-wrapper::-webkit-scrollbar-thumb {
+                  background-color: #5BB12F;
+                  border-radius: 5px;
+                }
+                .visualize-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #5BB12F;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .visualize-btn:hover {
+                        color: #fff;
+                        background-color: #3F6D22;
+                        border-color: #3F6D22;
+                      }
+                    
+                      .visualize-btn i {
+                        font-size: 11px;
+                      }
+
+                      .edit-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .edit-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .edit-btn i {
+                        font-size: 11px;
+                      }
+
+                      .delete-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .delete-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .delete-btn i {
+                        font-size: 11px;
+                      }
+
+                      .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: -10px;
+          }
+          
+          .pagination {
+            list-style: none;
+            display: flex;
+            align-items: center;
+          }
+          
+          .page-item {
+            margin: 0 5px;
+          }
+          
+        .page-link {
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease-in-out;
+          }
+          
+        .page-link:hover {
+            background-color: #ddd;
+          }
+          
+          .active .page-link {
+            background-color: #5BB12F;
+            color: #fff;
+            border: 1px solid #5BB12F;
+          }
+          
+          .page-link i {
+            font-size: 16px;
+          }
+          .project-card {
+                                background-color: #E6E5E5;
+                                border-radius: 12px;
+                                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                                padding: 15px ;
+                                width: 290px;
+                                height:100px;
+                                
+                                margin: 10px 5px;
+                                
+                                text-align: center;
+                                transition: all 0.3s ease-in-out;
+                              }
+                            
+                              .project-card:hover {
+                                transform: translateY(-5px);
+                              } 
     </style>
 
     <body   class="bg-img">
 
 
-        <div style="margin-top: 30px;">
+        <div style="margin: 40px 100px;">
             <div class="row">
-              <div class="col-3" >
-                <style>
-                  .sidebar-wrapper::-webkit-scrollbar {
-                    width: 6px;
-                    background-color: #D4D7DC;
-                  }
-                  
-                  .sidebar-wrapper::-webkit-scrollbar-thumb {
-                    background-color: #6B2737;
-                    border-radius: 5px;
-                  }
-                  
-                </style>
-                
-       
-                <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
-                <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; margin-left: 10px; height: 700px;">
-                  <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 40px;">
-                   
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
-                      <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
-                  </a>
-                    <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px; color: #6B2737; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px;">
-                         Projects List
-                    </h5>
-                  
-                </div>
-                
-                  <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
-    
-                  <ul class="list-unstyled mt-3">
-                    {% for proj in projects %}
-                    <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
-                      <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
-                      justify-content: space-between;">
-                      <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
-    
-                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
-                      </div>
-                      <div class="project-actions">
-                        <style> 
-                          .visualize-btn {
-                            padding: 5px 5px;
-                            border: none;
-                            background-color: transparent;
-                            color: #3F6D22;
-                            font-size: 10px;
-                            cursor: pointer;
-                          }
-                        
-                          .visualize-btn:hover {
-                            color: #fff;
-                            background-color: #3F6D22;
-                            border-color: #3F6D22;
-                          }
-                        
-                          .visualize-btn i {
-                            font-size: 11px;
-                          }
-                        </style>
-                                           {% if proj.polygon_id != project.polygon_id %}
-                                           <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-                                             {%endif%} 
-                        <style> 
-                          .edit-btn {
-                            padding: 5px 5px;
-                            border: none;
-                            background-color: transparent;
-                            color: #8c8c8c;
-                            font-size: 10px;
-                            cursor: pointer;
-                          }
-                        
-                          .edit-btn:hover {
-                            color: #fff;
-                            background-color: #8c8c8c;
-                            border-color: #8c8c8c;
-                          }
-                        
-                          .edit-btn i {
-                            font-size: 11px;
-                          }
-                        </style>
-                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
-    
-                        <style> 
-                          .delete-btn {
-                            padding: 5px 5px;
-                            border: none;
-                            background-color: transparent;
-                            color: #8c8c8c;
-                            font-size: 10px;
-                            cursor: pointer;
-                          }
-                        
-                          .delete-btn:hover {
-                            color: #fff;
-                            background-color: #8c8c8c;
-                            border-color: #8c8c8c;
-                          }
-                        
-                          .delete-btn i {
-                            font-size: 11px;
-                          }
-                        </style>
-                        
-                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
-                        
-                        
-                
-                     
-                      </div>
-                    </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-            </div>  
 
-                <div class="col-3" style="background-color: #f7f7f7;width: 1040px; height: 700px; border-radius: 5px; margin-left:20px;">
+              <div class="col-3" >
+     
+                <div class="sidebar-wrapper" style="width:340px; height: 700px; overflow-y: auto;">
+              
+                  <div class="sidebar" style="background-color: #e6e5e5; width:320px; border-radius: 5px; padding: 20px; margin-bottom: 20px;  height: 700px; ">
+                   
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 30px;">
+                     
+                      <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                        <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                    </a>
+                    <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; text-transform: uppercase; letter-spacing: 2px;">
+                      Projects List
+                 </h5>
+                    
+                  </div>
+                  
+                    
+                    <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#5ab02e; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+      
+                    <ul class="list-unstyled mt-3">
+                      {% for proj in projects %}
+                      <div class="project-card" style="width: 270px;">
+                        <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                          <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                          justify-content: space-between;">
+                          <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+        
+                            <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-50px;">Project ID: {{ proj.polygon_id }}</p>
+                           
+                          </div>
+                          <div class="project-actions">
+                            {% if proj.polygon_id != project.polygon_id %}
+                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                              {%endif%} 
+                            <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button> 
+                            <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                          </div>
+                      </li>
+                      </div>
+                      {% endfor %}
+                    </ul>
+              </div>
+            </div>
+          </div>
+
+                <div class="col-3" style="background-color: #f7f7f7;width: 900px; height: 700px; border-radius: 5px; margin-left:50px;">
 
                   <form method="POST"  style='margin: 0px 20px; margin-right:100px;' >
                     {% csrf_token %}
         
                     
-                    <h4 style="  margin-bottom:20px; margin-top:10px; font-size: 20px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 18px;   text-transform: uppercase; letter-spacing: 2px;"> <strong style="color: #3F6D22; font-weight: ;">Draw plots project:</strong> {{project.nomp}} <strong style="color: #3F6D22; font-weight: ;">of client :</strong>{{project.clientp}}</h4>
+                    <h4 style="  margin-bottom:20px; margin-top:10px; font-size: 20px;  margin-bottom: 20px; color:gray; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px; "> <strong style="color: #5BB12F; ">Draw plots project:</strong> {{project.nomp}} <strong style="color: #5BB12F; ">of client :</strong>{{project.clientp}}</h4>
                     
                     <nav class="pagination-container" >
                       <ul class="pagination">
@@ -222,72 +275,17 @@ rel="stylesheet"
                         
                       </ul>
                     </nav> 
-            <style>
-                .pagination-container {
-                  display: flex;
-                  justify-content: center;
-                  margin-top: 20px;
-                }
-                
-                .pagination {
-                  list-style: none;
-                  display: flex;
-                  align-items: center;
-                }
-                
-                .page-item {
-                  margin: 0 5px;
-                }
-                
-              .page-link {
-                  color: #333;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                  border: 1px solid #ddd;
-                  transition: all 0.3s ease-in-out;
-                }
-                
-              .page-link:hover {
-                  background-color: #ddd;
-                }
-                
-                .active .page-link {
-                  background-color: #6B2737;
-                  color: #fff;
-                  border: 1px solid #d1485f;
-                }
-                
-                .page-link i {
-                  font-size: 16px;
-                }
-                
-              </style>  
+       
                              
 
 
-         <div class='col-6 rounded ' id="map" style="width: 1036px;height: 565px; box-sizing:border-box; margin-top: 5px;  border-radius: 50px; margin-left:-30px; ">
+                 <div class='col-6 rounded ' id="map" style="width: 895px;height: 565px; box-sizing:border-box; margin-top: -5px;  border-radius: 50px; margin-left:-30px; ">
                             <div class="leaflet-control"></div>
                             
                         </div>
                         <input type="text" id="points" name="points" style="margin-right: 375px;" /> 
         
 
-        
-
-                         
-                      {% comment %} <div class="text-center">
-                        <div class="panel-footer" style="text-align: center; margin-top: 10px;">
-                          Click Next To Submit Project Form Or Skip If You Have Already Project.
-                      </div>
-                        <button class="btn btn-dark" style='width:30%; background-color: #A26A25; color:#2B2612; font-size: 15px; margin-bottom: 4px;' type="submit" value="save">Next</button>
-                        <button class="btn btn-dark  mx-auto d-block"  style='  font-size: 8px; background-color: #A26A25; color:#2B2612;' onclick="location.href='{% url 'project_2' supervisor_obj.pseudo %}'"> Skip </button>  
-                      </div> {% endcomment %}
-                      <!-- {% comment %} <button class="btn btn-dark  mx-auto d-block"  style='  font-size: 8px; background-color: #A26A25; color:#2B2612;' onclick="location.href='#'"> Skip </button> {% endcomment %} -->
-                  
                    </form>
                       
 

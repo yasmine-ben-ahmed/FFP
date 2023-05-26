@@ -45,7 +45,7 @@
   
             <style>
                 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-            }
+            
             @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
             .fa-2x {
             font-size: 2em;
@@ -80,11 +80,13 @@
             transition:width .05s linear;
             -webkit-transform:translateZ(0) scale(1,1);
             z-index:1000;
+            
             }
 
             .main-menu>ul {
             margin:7px 0px;
             margin-top:-10px;
+            
             }
 
             .main-menu li {
@@ -92,6 +94,7 @@
             display:block;
             width:250px;
             margin:30px 0;
+            
             }
 
             .main-menu li>a {
@@ -99,7 +102,7 @@
             display:table;
             border-collapse:collapse;
             border-spacing:0;
-            color:#999;
+            color:#d9d5d5;
             font-family: arial;
             font-size: 14px;
             text-decoration:none;
@@ -161,7 +164,7 @@
             }
             .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
             color:#fff;
-            background-color:#000000;
+            background-color:#3C6070;
             }
             .area {
             float: left;
@@ -176,27 +179,47 @@
             src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
             }
 
+            .main-menu {
+                background-image: url("{%static 'index\images\3.jpg'%}");
+                background-size: cover;
+                height: auto; /* Adjust the height as needed */
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                }
+
+                .welcome {
+          background-color: #f5f5f5;
+          padding: 2px 5px;
+          border-radius: 150px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        
+        .content {
+          text-align: center;
+        }
+        
+        .title {
+          font-size: 32px;
+          font-weight: bold;
+          color: #333333;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+        
+        .description {
+          font-size: 18px;
+          color: #777777;
+        }
             </style>
  
   </head>
   <body><div class="area"></div>
-    <style>
-                        .main-menu {
-                background-image: url("{%static 'index\images\1.jpg'%}");
-                background-size: cover;
-                height: auto; /* Adjust the height as needed */
-                }
-    </style>
+
     <nav class="main-menu" >
-
-
-
     <ul>
-
-
-        <li style="margin-bottom: 50px;">
+      <li style="margin-bottom: 50px; ">
             <a href="#" style="display: flex; align-items: center; color: white; text-decoration: none; height:100px;">
-                <img src="{{ client.image.url }}" alt="profile img" style="width: 35px; height: 35px; border-radius: 50%; overflow: hidden; margin-right: 20px; margin-left: 10px;">
+                <img src="{{ client.image.url }}" alt="profile img" style="width: 35px; height: 35px; border-radius: 50%; overflow: hidden; margin-right: 20px; margin-left: 10px; margin-top: 15px;">
                 <div>
                     <h4 style="margin-bottom: 0; font-size: 20px;">{{ client.prenom }} {{ client.nom }}</h4>
                     <h6 style="margin-top: 2px; margin-bottom: 5px; font-size: 15px;">Welcome, {{ client.pseudo }}!</h6>
@@ -217,7 +240,7 @@
             <a href="{% url 'clientd' project.polygon_id client.pseudo %}">
                 <i style="font-size:20px" class="fa">&#xf0e4;</i>
                 <span class="nav-text">
-                    Dashboard
+                    Welcome Page
                 </span>
             </a>
         </li>
@@ -272,31 +295,7 @@
         </nav>
 
  <div style="margin-left:500px; margin-right:250px;">
-    <style>
-        .welcome {
-          background-color: #f5f5f5;
-          padding: 2px 5px;
-          border-radius: 150px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .content {
-          text-align: center;
-        }
-        
-        .title {
-          font-size: 32px;
-          font-weight: bold;
-          color: #333333;
-          margin-bottom: 10px;
-          text-transform: uppercase;
-        }
-        
-        .description {
-          font-size: 18px;
-          color: #777777;
-        }
-        </style>
+
         
         <div class="welcome">
           <div class="content" style="margin:-15px -15px; ">
