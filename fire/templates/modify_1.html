@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-       
+      <title>SFG - Together We Protect Our Forests!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
     
@@ -54,76 +54,28 @@ rel="stylesheet"
 
     </head>
 
-    <body   style="background-color:#D4D7DC;">
-        <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
-            <div class="container-fluid">
-              <div style="border: 0px solid gray; padding: 5px; display: inline-flex; align-items: center;">
-                <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
-                <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
-              </div>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item" style="font-size: 20px;">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></i>Home</a>
-                  </li>
-                  
-                  
-                  <li class="nav-item" style="font-size: 20px; margin-left: 1000px">
-                    <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>    
-                  </li>
-                  
-                 
-                </ul>         
-              </div>
-            </div>
-        </nav>
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\1.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
 
-        <div >
-            <div class="row">
-
-
-             <div class="col-3" >
-              <style>
-                .sidebar-wrapper::-webkit-scrollbar {
+      .sidebar-wrapper::-webkit-scrollbar {
                   width: 6px;
-                  background-color: #D4D7DC;
+                  background-color: #131407;
                 }
                 
                 .sidebar-wrapper::-webkit-scrollbar-thumb {
-                  background-color: #6B2737;
+                  background-color: #5ab02e;
                   border-radius: 5px;
                 }
-                
-              </style>
-              
-     
-              <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
-             
-            <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: auto;">
-                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
-              
-              
-              <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
 
-              <ul class="list-unstyled mt-3">
-                {% for proj in projects %}
-                <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
-                  <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
-                  justify-content: space-between;">
-                  <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
-
-                    <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
-                  </div>
-                  <div class="project-actions">
-                    <style> 
-                      .visualize-btn {
+                .visualize-btn {
                         padding: 5px 5px;
                         border: none;
                         background-color: transparent;
-                        color: #3F6D22;
+                        color: #5BB12F;
                         font-size: 10px;
                         cursor: pointer;
                       }
@@ -137,10 +89,6 @@ rel="stylesheet"
                       .visualize-btn i {
                         font-size: 11px;
                       }
-                    </style>
-                    <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
-
-                    <style> 
                       .edit-btn {
                         padding: 5px 5px;
                         border: none;
@@ -159,10 +107,7 @@ rel="stylesheet"
                       .edit-btn i {
                         font-size: 11px;
                       }
-                    </style>
-                    <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
 
-                    <style> 
                       .delete-btn {
                         padding: 5px 5px;
                         border: none;
@@ -181,109 +126,11 @@ rel="stylesheet"
                       .delete-btn i {
                         font-size: 11px;
                       }
-                    </style>
-                    
-                    <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
-                    
-                    
-            
-                 
-                  </div>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </div>
 
-                <div class="col-3"  style="background-color: #f7f7f7;width: 1000px; height: 700px; border-radius: 5px; margin-left:45px;">
-
-                  <form method="POST"  style='margin: 0px 20px; ' >
-                    {% csrf_token %}
-        
-                    
-                    <h4 style="  margin-bottom:20px; margin-top:10px;"> <strong style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Create new project: </strong></h4>
-                    
-                    <div class="row " >
-                        <div class="col">
-                          <h5 style='color:#6B2737;'>Project Name</h5>
-                          {{ form.nomp}}
-                          {% if form.nomp.errors %}
-                          <strong class="text-danger" role="alert">{{ form.nomp.errors }}</strong>
-                          {% endif %}
-                        </div>
-
-                        <div class="col" >
-                          <h5 style='color:#6B2737;'>Region Name</h5>
-                          {{ form.cityp}} 
-                        </div>
-                      </div>
-        
-                        <div class="row " >
-                          <div class="col" >
-                            <h5 style='color:#6B2737;'>Start Date</h5>
-                            {% comment %} {{ form.debutp}} {% endcomment %}
-                            
-                            <input type="date" id="start_date" name="debutp" 
-                            class= "form-control  p-8 mb-4 rounded", 
-                            style= "font-size: 15px; background-color: #FAF8FF;",type= 'date', placeholder= 'yyyy-mm-dd (DOB)'
-                            required>
-                            
-                          </div>
-                          <div class="col">
-                            <h5 style='color:#6B2737;'>End Date</h5>
-                            {% comment %} {{ form.finp}} {% endcomment %}
-                            
-                            <input type="date" id="end_date" name="finp" 
-                            class ="form-control  p-8 mb-4 rounded",
-                             style= "font-size: 15px; background-color: #FAF8FF;",type= 'date', placeholder= 'yyyy-mm-dd (DOB)'
-                            required>
-                           
-                          </div>
-                        </div>
-        
-                          <div class="col" >
-                            <h5 style='color:#6B2737;'>Choose An Existing Client </h5>
-
-                            <div style="display: flex; flex-direction: row;">
-                              {% comment %} <label style="margin-right: 10px; font-size:15px;">Select An Existing Client From Here</label> {% endcomment %}
-                              {{ form.clientp }}
-                            </div>
-                            <div class="panel-footer" style=" margin-top: -20px; margin-bottom: 10px; font-size:10px;">
-                              <i class='fa fa-warning' style='color: red'></i> Select your Client Form this list if you have already a client.
-                          </div>
-                            
-                          </div>
-                          <br>
-                          <div class="mb-3">
-                            <h5 style='color:#6B2737;'>Contract</h5>
-                            {{ form.piece_joinde}}                         
-                          </div>
-                          <br>
-
-                          <div class="mb-3">
-                            <h5 style='color:#6B2737;'>Project Description</h5>
-                            {{ form.descp}}                         
-                          </div>
-
-                     <nav class="pagination-container" >
-                            <ul class="pagination">
-                          
-                              
-                                <li class="page-item">
-                                  <button class="page-link" type="submit" value="save" >
-                                   Save
-                                  </button>
-                                  
-                                </li>
-                              
-                            </ul>
-                          </nav> 
-           <style>
-              .pagination-container {
+                      .pagination-container {
                 display: flex;
                 justify-content: center;
-                margin-top: 50px;
+                margin-top: 20px;
               }
               
               .pagination {
@@ -313,16 +160,171 @@ rel="stylesheet"
               }
               
               .active .page-link {
-                background-color: #6B2737;
+                background-color: #5BB12F;
                 color: #fff;
-                border: 1px solid #d1485f;
+                border: 1px solid #5BB12F;
               }
               
               .page-link i {
                 font-size: 16px;
               }
-              
-            </style> 
+
+              .project-card {
+                                background-color: #E6E5E5;
+                                border-radius: 12px;
+                                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                                padding: 15px ;
+                                width: 290px;
+                                height:100px;
+                                
+                                margin: 10px 5px;
+                                
+                                text-align: center;
+                                transition: all 0.3s ease-in-out;
+                              }
+                            
+                              .project-card:hover {
+                                transform: translateY(-5px);
+                              } 
+    </style>
+
+    <body   class="bg-img">
+       
+
+        <div  style="margin: 40px 100px;">
+            <div class="row">
+
+
+             <div class="col-3" >
+     
+              <div class="sidebar-wrapper" style="width:340px; height: 660px; overflow-y: auto;">
+            
+                <div class="sidebar" style="background-color: #e6e5e5; width:320px; border-radius: 5px; padding: 20px; margin-bottom: 20px;  height: 660px; ">
+                 
+                  <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 30px;">
+                   
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                      <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                  </a>
+                  <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; text-transform: uppercase; letter-spacing: 2px;">
+                    Projects List
+               </h5>
+                  
+                </div>
+                
+                  
+                  <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#5ab02e; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+    
+                  <ul class="list-unstyled mt-3">
+                    {% for proj in projects %}
+                    <div class="project-card" style="width: 270px;">
+                      <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                        <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                        justify-content: space-between;">
+                        <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+      
+                          <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-50px;">Project ID: {{ proj.polygon_id }}</p>
+                         
+                        </div>
+                        <div class="project-actions">
+                          <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                          <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button> 
+                          <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                        </div>
+                    </li>
+                    </div>
+                    {% endfor %}
+                  </ul>
+            </div>
+          </div>
+        </div>
+
+                <div class="col-3"  style="background-color: #e6e5e5;width: 600px; height: 660px; border-radius: 5px; margin-left:40px;">
+
+                  <form method="POST"  style='margin: 20px 20px; ' >
+                    {% csrf_token %}
+        
+                    
+                    <h4 style="  margin-bottom:20px; margin-top:10px;"> <strong style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#5ab02e; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Create new project: </strong></h4>
+                    
+                    <div class="row " >
+                        <div class="col">
+                          <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" >Project Name</h5>
+                          {{ form.nomp}}
+                          {% if form.nomp.errors %}
+                          <strong class="text-danger" role="alert">{{ form.nomp.errors }}</strong>
+                          {% endif %}
+                        </div>
+
+                        <div class="col" >
+                          <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Region Name</h5>
+                          {{ form.cityp}} 
+                        </div>
+                      </div>
+        
+                        <div class="row " >
+                          <div class="col" >
+                            <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Start Date</h5>
+                           
+                            
+                            <input type="date" id="start_date" name="debutp" 
+                            class= "form-control  p-8 mb-4 rounded", 
+                            style= "font-size: 15px; background-color: #e6e5e5; ",type= 'date', placeholder= 'yyyy-mm-dd (DOB)'
+                            required>
+                            
+                          </div>
+                          <div class="col">
+                            <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">End Date</h5>
+                            
+                            
+                            <input type="date" id="end_date" name="finp" 
+                            class ="form-control  p-8 mb-4 rounded",
+                             style= "font-size: 15px; background-color: #e6e5e5; ",type= 'date', placeholder= 'yyyy-mm-dd (DOB)'
+                            required>
+                           
+                          </div>
+                        </div>
+        
+                          <div class="col" >
+                            <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Choose An Existing Client </h5>
+
+                            <div style="display: flex; flex-direction: row;">
+                              {{ form.clientp }}
+                            </div>
+                            <div class="panel-footer" style=" margin-top: -20px; margin-bottom: 10px; font-size:10px;">
+                              <i class="fas fa-exclamation-triangle" style="color: red;"></i> Select your Client Form this list if you have already a client.
+                            </div>
+                            
+                          </div>
+                          <br>
+                          <div class="mb-3">
+                            <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Contract</h5>
+                            {{ form.piece_joinde}}                         
+                          </div>
+                          <br>
+
+                          <div class="mb-3">
+                            <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Project Description</h5>
+                            {{ form.descp}}                         
+                          </div>
+
+                     <nav class="pagination-container" >
+                            <ul class="pagination">
+                        
+                              
+                                  <button class="" type="submit"  style ="               
+                                   background-color: #5BB12F;
+                                  color: #fff;
+                                  border: 1px solid #5BB12F;
+                                  border-radius: 20px;" value="save" >
+                                    Save Changes
+                                   </button>
+                                  
+                                </li>
+                              
+                            </ul>
+                          </nav> 
+       
 
             </div>                  
              
@@ -333,6 +335,7 @@ rel="stylesheet"
 
         </div>
 
+      
         <script>
           const startDateField = document.getElementById("start_date");
           const endDateField = document.getElementById("end_date");
@@ -341,85 +344,10 @@ rel="stylesheet"
             endDateField.min = this.value;
           });
 
-          var map = L.map('map').setView([37, 10.2], 10);
-          L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-              attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-          }).addTo(map);
-    
-    // FeatureGroup is to store editable layers
-    var drawnItems = new L.FeatureGroup();
-    map.addLayer(drawnItems);
-    
-    var drawControl = new L.Control.Draw({
-        draw: {
-            polygon: {
-                shapeOptions: {
-                    color: 'purple'
-                },
-            },
-            polyline: {
-                shapeOptions: {
-                    color: 'red'
-                },
-            },
-            rect: {
-                shapeOptions: {
-                    color: 'green'
-                },
-            },
-            circle: {
-                shapeOptions: {
-                    color: 'steelblue'
-                },
-            },
-        },
-        edit: {
-            featureGroup: drawnItems
-        }
-    });
-    map.addControl(drawControl);
-    
-    map.on('draw:created', function (e) {
-            var type = e.layerType;
-            layer = e.layer;
-                console.log(layer.toGeoJSON());
-               
-                const   coordinates = layer.toGeoJSON();
-                {% comment %} console.log("coord : "+e.layer.toGeoJSON().geometry.coordinates); {% endcomment %}
-                console.log(type);
-
-                if (type === 'polygon'){
-                    drawnItems.addLayer(layer);
-                    console.log("coord : "+e.layer.toGeoJSON().geometry.coordinates);
-
-                myjson=drawnItems.toGeoJSON() ;
-            console.log('myjson',myjson);}
-
-            let coords = [];
-            myjson.features.forEach((coordonne) => {
-                coords = [...coords, ...coordonne.geometry.coordinates];
-            })
-                const multiPolygone = { 
-                    "type": "MultiPolygon",
-                    "coordinates": [
-                        [...coords]
-                    ]
-                }
-                console.log('multiPolygone',multiPolygone)
-            document.getElementById('points').value=JSON.stringify(multiPolygone); 
-
-           
-         });
-    
-    
-    
-      </script>  
-      
-
+          </script>
     
    
 
     </body>
 
 </html>
-{% comment %} {% endblock %} {% endcomment %}

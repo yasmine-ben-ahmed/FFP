@@ -754,7 +754,7 @@ def modify_1(request, pseudo, id):
                 project.clientp=new_client
                 project.piece_joinde=new_piece_joinde
                 project.save()
-                return redirect('ALL_node',pseudo=pseudo,id=project.polygon_id)
+                return redirect('final',pseudo=pseudo,id=project.polygon_id)
             else:
                 project.nomp=new_name
                 project.descp=new_descp
@@ -763,7 +763,7 @@ def modify_1(request, pseudo, id):
                 project.cityp=new_cityp
                 project.piece_joinde=new_piece_joinde
                 project.save()              
-                return redirect('ALL_node',pseudo=pseudo,id=project.polygon_id)
+                return redirect('final',pseudo=pseudo,id=project.polygon_id)
 
             
         return render(request, 'modify_1.html', {'form': formulairep,'projects':projects,'supervisor':supervisors})
