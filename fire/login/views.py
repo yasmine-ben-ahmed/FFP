@@ -27,9 +27,9 @@ def connectasclient(request):
                 
             return redirect('client_project',pseudo)
         # We pass the form to the template even if it is not valid
-        return render(request, 'login.html', {'form': formulaire})
+        return render(request, 'login_client.html', {'form': formulaire})
     # We pass the form to the template for GET requests
-    return render(request, 'login.html', {'form': LoginForm()})
+    return render(request, 'login_client.html', {'form': LoginForm()})
 
 
 def connectassupervisor(request):
@@ -46,9 +46,9 @@ def connectassupervisor(request):
                 # return redirect('map/')
             return redirect('display',pseudo)
         # We pass the form to the template even if it is not valid
-        return render(request, 'login.html', {'form': formulaire})
+        return render(request, 'login_superviseur.html', {'form': formulaire})
     # We pass the form to the template for GET requests
-    return render(request, 'login.html', {'form': LoginForm()})
+    return render(request, 'login_superviseur.html', {'form': LoginForm()})
 
 
 # def settings(request):

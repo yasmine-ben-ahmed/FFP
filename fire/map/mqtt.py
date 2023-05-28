@@ -10,7 +10,7 @@ import csv
 from .FWI import *
 from datetime import datetime
 
-topics = ['v3/my-lora1-application@ttn/devices/eui-70b3d57edd05a535/up', 'v3/my-lora1-application@ttn/devices/eui-70b3d57ed005ca2c/up']
+topics = ['v3/my-lora1-application@ttn/devices/eui-70b3d57edd05a535/up', 'v3/loraatest02@ttn/devices/eui-70b3d57ed005a5c4/up', 'v3/loraatest02@ttn/devices/eui-70b3d57ed005c92e/up']
 topi =['eui-70b3d57edd05a535','eui-70b3d57ed005ca2c']
 def on_connect(mqtt_client, userdata, flags, rc):
 
