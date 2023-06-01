@@ -237,7 +237,14 @@
                     <form method="POST">
                     {% csrf_token %} 
                        
-                        <h4 style="  margin-bottom:20px; margin-top: 10px;"> <strong style=" font-size: 20px;  margin-bottom: 20px; color:darkgreen; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Last Node Added Of Project: </strong>{{ project.nomp }} {{ lastd.node }} </h4>
+                        <h4 style="  margin-bottom:20px; margin-top: 10px;"> 
+                          <strong style=" font-size: 20px;  margin-bottom: 20px; color:darkgreen; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Last Node Added Of Project: </strong>{{ project.nomp }} {{ lastd.node }}
+                        
+                          <a class="btn btn-outline-primary edit-b d-inline" style="border:none; margin-left: -20px;" onclick="location.href='{% url 'display_polygone' supervisor.pseudo project.polygon_id %}'">
+                            <i class="fa-sharp fa-solid fa-square" style="color: darkgreen; border-color: white;"></i>
+                          </a>
+                        
+                        </h4>
             
                         
 <div class="row">
@@ -248,16 +255,13 @@
                           {% if project %}
                           <h5 style="margin-bottom: 1px; "><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}" >Weather Information</a></h5>
                           {% endif %} <hr>
-                          {% comment %} {% for ldn0 in ldn %} {% endcomment %}
+                          
                           <div id="weather-info" >
                                     <p><strong>Temperature:</strong> {{ lastd.temperature }}°C</p>
                                     <p><strong>Humidity:</strong> {{ lastd.humidity }}%</p>
                                     <p><strong>Wind Speed:</strong> {{ lastd.wind }} km/h</p>
                                     <p><strong>Rain Volume:</strong> {{ lastd.rain }} mm</p>
-                                    {% comment %} <p><strong style='color:#A26A25;'>related node:</strong> {{ ldn0.node }} </p>
-                                    <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                      Node Information
-                                    </button> {% endcomment %}
+                                   
                                    
                          
                           </div>  
@@ -265,7 +269,7 @@
                           <button style="margin-top: -60px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-weight:bold; background-color:#082631; border-radius: 20px; margin-left: 30px;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Node Information
                           </button>
-                          {% comment %} {% endfor %}   {% endcomment %}
+                          
                         </div>
 
                         <div class="col-3" style=" border: 1px solid #d5d4dd ; background-color: #E9D8C7;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; width: 235px; height: 150px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
@@ -273,7 +277,7 @@
                         
                           <div>
                         
-                            {% comment %} {% for ldn0 in ldn %} {% endcomment %}
+                            
                         
                             <div id="fwi">
                               <p><strong>FWI :</strong>{{ lastd.node.FWI }}</p>
@@ -295,7 +299,7 @@
                                 {% endif %}
                                 </div>
                         
-                                {% comment %} {% endfor %} {% endcomment %}
+                                
                           </div>
                         
                           <button  class="btn btn-outline-dark" name="b_add_N" style="  font-size: 10px; margin-top: 40px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-weight:bold; border-radius: 20px; margin-left: 35px;"  onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
@@ -317,20 +321,6 @@
                         <div class='col-6 rounded ' id="map" style="width: 895px;height: 565px; box-sizing:border-box; margin-top: -5px; margin-top: 10px; border-radius: 50px; margin-left:-10px; ">
                           <div class="leaflet-control"></div>
                         </div>
-{% comment %}              
-                        <label for="geomp">Geometry:</label>
-                        <input type="text" id="geomp" name="geomp" value="{{ project.geomp }}" readonly><br><br>
-                         
-                        <br> {% endcomment %}
-                        {% comment %} {% for d in node %}
-                        <label for="lat">Latitude:</label>
-                        <input type="text" id="latitude" name="latitude" value="{{ d.latitude }}" readonly><br>
-
-                        <label for="lng">Longitude:</label>
-                        <input type="text" id="longitude" name="longitude" value="{{ d.longitude }}" readonly><br><br>
-                        {%endfor%} {% endcomment %}
-
-
                     </form>
 
 

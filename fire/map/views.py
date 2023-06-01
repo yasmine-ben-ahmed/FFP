@@ -15,7 +15,6 @@ from django.http import JsonResponse
 from django.contrib.gis.geos import Point
 from .forms import *
 import pyowm 
-# from .mqtt import start_mqtt_client
 from .status import result
 import csv 
 from .FWI import *
@@ -83,7 +82,6 @@ def add_polygones(request,pseudo,id):
         polygons = []
 
         for polygon_coords in multiPolygone_dict['coordinates']:
-            print('-----------')
             for i in range(len(polygon_coords)): 
                 poly_str = 'POLYGON(({0}))'.format(','.join([' '.join(map(str, c)) for c in polygon_coords[i]]))
                 print('poly_str',poly_str)
@@ -114,11 +112,11 @@ def add_client(request,idd,pseud):
                 
                 formulaire.enregistrer(idd,pseud)
                 new_client = formulaire.new_client
-                print(new_client)
+                
 
                 new_client.image=image
                 new_client.save()
-                print(new_client.image.url)
+                
                 
 
  
@@ -228,7 +226,6 @@ def all_node(request,iid,pseudo):
 
 
     for data in data_list:
-        print(data.node.FWI)
     
         lastd = data_list[0]
         
@@ -372,7 +369,7 @@ def ALL(request,id,pseudo):
            
     for i in range(len(data_list)):
         ldn0 = data_list[i]
-        print(ldn0)
+        
     context = {'nodes_data': nodes_data,'supervisor':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
     return render(request, 'ALL_node.html',context )
 
@@ -426,7 +423,7 @@ def final2(request,id,pseudo,idnode):
             dat,
         )
         
-    print(data_list)
+    
 
     ltemp = []
     lhum = []
@@ -462,7 +459,7 @@ def final3(request,id,pseudo,idnode):
             dat,
         )
         
-    print(data_list)
+    
 
     
     context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
@@ -487,16 +484,16 @@ def interface_c(request, id,pseudo):
            
     for i in range(len(data_list)):
         ldn0 = data_list[i]
-        print(ldn0)
+        
     
     
-    for proj_instance in projects:
-        print('namep',proj_instance.nomp)
+    
+        
         
     nodeq = node.objects.filter(polyg=proj_instance)
     for node_instance in nodeq:
         nom=node_instance.nom
-        print(nom)
+        
 
 
     nodes_data = []
@@ -504,7 +501,7 @@ def interface_c(request, id,pseudo):
         datas = Data.objects.filter(node=node_instance).order_by('-IdData')
         data = datas.first()
         nodes_data.append({'node_instance': node_instance, 'data': data})
-        print(data)
+        
 
     context = {'ldn':data_list,'nodes_data': nodes_data,'nodee':nodeq,'clientp':clientp,'project': proj, 'pseudo': pseudo,'node_instance':node_instance}
     return render(request, 'interface_c.html', context)
@@ -577,7 +574,7 @@ def locate(request, id,pseudo,idnode):
             dat,
         )
         
-    print(data_list)
+    
     
     context = {'client':clientp,'project':proj,'nodes':nodes,'nod':nod,'ds':ds, 'ldn':data_list,'nodee':nodeq}
     return render(request, 'locate.html', context)

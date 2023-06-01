@@ -1,52 +1,58 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 {% load static %}
 
 <style>
   body.bg-img {
-    background-image: url("{%static 'index\images\1.jpg'%}");
+    background-image: url("{% static 'index\images\1.jpg' %}");
     background-repeat: no-repeat;
     background-size: cover;
   }
+  
+  .center-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px 20px;
+  }
 </style>
 
-<body class="bg-img" >
-<div  style="margin-top: 100px; ">
-  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" style='background-color: #C3B8B6; '>
-    {% csrf_token %}
-    <h1 class="text-center mb-4" style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder; color: #423A25;'>Connexion</h1>
-    <div class="mb-3">
-      <label for="pseudo" class="form-label"><h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Pseudo:</h5></label>
-      {{ form.pseudo }}
-      {% if form.pseudo.errors %}<h4>
-      <div class="text-danger" role="alert">{{ form.pseudo.errors }}</div></4>
-      {% endif %}
-    </div>
-    <div class="mb-3">
-      <label for="mot_de_passe" class="form-label"><h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Mot de passe:</h5></label>
-      {{ form.mot_de_passe }}
-      {% if form.mot_de_passe.errors %}<h4>
-      <div  role="alert">{{ form.mot_de_passe.errors }}</div></h4>
-      {% endif %}
-    </div>
+<body class="bg-img">
+  <div style="margin-top: 100px;">
+    <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded center-form" style='background-color: white;'>
+      {% csrf_token %}
+      <h1 class="text-center mb-4" style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder; color: #423A25;'>Connexion</h1>
+      <div class="mb-3">
+        <label for="pseudo" class="form-label">
+          <h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Pseudo:</h5>
+        </label>
+        {{ form.pseudo }}
+        {% if form.pseudo.errors %}
+        <h4>
+          <div class="text-danger" role="alert">{{ form.pseudo.errors }}</div>
+        </h4>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label for="mot_de_passe" class="form-label">
+          <h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Mot de passe:</h5>
+        </label>
+        {{ form.mot_de_passe }}
+        {% if form.mot_de_passe.errors %}
+        <h4>
+          <div role="alert">{{ form.mot_de_passe.errors }}</div>
+        </h4>
+        {% endif %}
+      </div>
 
+      <div class="text-center">
+        <button class="btn btn-dark" style='border-radius:20px; width:30%; background-color: #423A25; color:#C3B8B6; font-size: 14px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; ' type="submit" value="save" data-mdb-toggle="modal" data-mdb-target="#exampleModal">LOGIN</button>
+      </div>
 
-    <div class="text-center">
-        
-      <button class="btn btn-dark" style='border-radius:20px; width:30%; background-color: #423A25; color:#C3B8B6; font-size: 14px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; ' type="submit" value="save"  data-mdb-toggle="modal" data-mdb-target="#exampleModal">LOGIN</button>
-
-    </div>
-
-   
-    <div class="panel-footer" style="text-align: center; margin-top: 7px;">
-      <a href="{% url 'password_reset' %}" style="text-decoration: underline; color: black;"> Forgot Password? </a> 
-    </div>
-
-
-    
-
-
-  </form>
-</div>
+      <div class="panel-footer" style="text-align: center; margin-top: 7px;">
+        <a href="{% url 'password_reset' %}" style="text-decoration: underline; color: black;"> Forgot Password? </a>
+      </div>
+    </form>
+  </div>
 </body>
 
 {% endblock %}

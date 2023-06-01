@@ -7,11 +7,17 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .center-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px 20px;
+  }
 </style>
 
 <body class="bg-img" >
 <div  style="margin-top: 100px; ">
-  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded" style='background-color: #C3B8B6; '>
+  <form method="POST" id="form" class="shadow-lg p-6 mb-8 mt-5 rounded center-form" style='background-color: white;  '>
     {% csrf_token %}
     <h1 class="text-center mb-4" style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder; color: #423A25;'>Connexion</h1>
     <div class="mb-3">

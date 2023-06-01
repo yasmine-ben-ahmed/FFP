@@ -20,7 +20,7 @@ def connectasclient(request):
             if form.is_valid():
                 form.save(
                     request=request,
-                    email_template_name='password_reset_email.html'
+                    # email_template_name='password_reset_email.html'
                 )
                 return render(request, 'password_reset_done.html')
         else:

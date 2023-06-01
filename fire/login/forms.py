@@ -13,7 +13,7 @@ class LoginForm(forms.Form):
                 'name': 'pseudo',
                 'placeholder': 'Pseudo',
                 'class': "form-control shadow-lg p-6 mb-6 rounded",
-                'style': "font-size: 20px; background-color: #DFD9DB;"
+                'style': "font-size: 20px; background-color: white;"
             }
         )
     )
@@ -25,7 +25,7 @@ class LoginForm(forms.Form):
                 'name': 'password',
                 'placeholder': 'Mot de passe',
                 'class': "form-control shadow-lg p-6 mb-6 rounded",
-                'style': "font-size: 20px; background-color: #DFD9DB;"
+                'style': "font-size: 20px; background-color: white;"
             }
         )
     )
@@ -70,7 +70,7 @@ class LoginFormSup(forms.Form):
                 'name': 'pseudo',
                 'placeholder': 'Pseudo',
                 'class': "form-control shadow-lg p-6 mb-6 rounded",
-                'style': "font-size: 20px; background-color: #DFD9DB;"
+                'style': "font-size: 20px; background-color: white;"
             }
         )
     )
@@ -82,7 +82,7 @@ class LoginFormSup(forms.Form):
                 'name': 'password',
                 'placeholder': 'Mot de passe',
                 'class': "form-control shadow-lg p-6 mb-6 rounded",
-                'style': "font-size: 20px; background-color: #DFD9DB;"
+                'style': "font-size: 20px; background-color: white;"
             }
         )
     )
