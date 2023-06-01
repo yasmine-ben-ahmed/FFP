@@ -11,19 +11,11 @@ admin.site.index_title = 'FIRE--Forest administration'
 admin.empty_value_display = '**Empty**'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-   
+    path('admin/', admin.site.urls),   
     path('',include("home.urls")),
-
-    #path('Inscrire/', include('signup.urls')),
-    path('Inscrire', include('signup.urls')),
-   
-    
+    path('Inscrire', include('signup.urls')),    
     path('connect/', include('login.urls')),
-
     path('project/',include("map.urls")),
-    
-    # path('dash/',include("dash.urls")),
    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

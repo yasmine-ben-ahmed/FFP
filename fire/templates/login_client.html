@@ -25,7 +25,7 @@
       <label for="mot_de_passe" class="form-label"><h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Mot de passe:</h5></label>
       {{ form.mot_de_passe }}
       {% if form.mot_de_passe.errors %}<h4>
-      <div class="text-danger" role="alert">{{ form.mot_de_passe.errors }}</div></h4>
+      <div  role="alert">{{ form.mot_de_passe.errors }}</div></h4>
       {% endif %}
     </div>
 
@@ -41,11 +41,7 @@
       <a href="{% url 'password_reset' %}" style="text-decoration: underline; color: black;"> Forgot Password? </a> 
     </div>
 
-    <div class="mb-3">
-        <label for="pseudo" class="form-label"><h5 style='font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; font-weight: bolder;'>Pseudo:</h5></label>
-        {{ form.pseudo }}
 
-      </div>
     
 
 

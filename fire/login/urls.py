@@ -5,7 +5,6 @@ from django.contrib.auth import views as mdp
 from django.contrib.auth import views as auth_views
 
 urlpatterns=[
-    #path('',views.connect,name='connect'),
     path('',views.connectas,name='connectas'),
     path('client/',views.connectasclient,name='connectasclient'),
     path('supervisor/',views.connectassupervisor,name='connectassupervisor'),

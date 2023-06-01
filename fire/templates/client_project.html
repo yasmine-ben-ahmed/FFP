@@ -40,7 +40,6 @@
                 <div class="card-body">
                   <h5 class="card-title" style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder; "> CLIENT :  {{client.nom}}</h5>
                   <img src="{%static 'images\farmer.jpg'%}"  width="160px" height="130px" />
-                   {% comment %} <a class="btn btn-dark  mx-auto d-block" style='  font-size: 15px; background-color: darkgreen;' href="{% url 'connectasclient' %}" class="btn btn-primary">connect as client</a> {% endcomment %}
                    <form method="POST">
                     {% csrf_token %} 
 
@@ -61,7 +60,6 @@
                 
                 Visualize</button>
 
-                <!-- <button class="btn btn-dark  mx-auto d-block" style='  font-size: 14px; background-color: #5AB02E;font-weight: bolder; margin-top : 30px; margin-bottom : -40px;font-family:Verdana, Geneva, Tahoma, sans-serif;' href="{% url 'connectassupervisor' %}" class="btn btn-primary">connect as supervisor</button> -->
               
 
 

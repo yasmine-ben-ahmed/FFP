@@ -14,35 +14,35 @@
     <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
 
     <!-- Bootstrap Core CSS -->
-    <!-- <link href="asset/css/bootstrap.min.css" rel="stylesheet"> -->
+    
 
     <link href="{% static 'index/asset/css/bootstrap.min.css' %}" rel="stylesheet" />
     
     <!-- Font Awesome CSS -->
-    <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
+    
     <link href="{% static 'index/css/font-awesome.min.css' %}" rel="stylesheet" />
     
     
     <!-- Animate CSS -->
-    <!-- <link href="css/animate.css" rel="stylesheet" > -->
+    
     <link href="{% static 'index/css/animate.css' %}" rel="stylesheet" />
     
     <!-- Owl-Carousel -->
-    <!-- <link rel="stylesheet" href="css/owl.carousel.css" > -->
+    
     <link href="{% static 'index/css/owl.carousel.css' %}" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="css/owl.theme.css" > -->
+   
     <link href="{% static 'index/css/owl.theme.css' %}" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="css/owl.transitions.css" > -->
+   
     <link href="{% static 'index/css/owl.transitions.css' %}" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
+   
     <link href="{% static 'index/css/style.css' %}" rel="stylesheet" />
-    <!-- <link href="css/responsive.css" rel="stylesheet"> -->
+  
     <link href="{% static 'index/css/responsive.css' %}" rel="stylesheet" />
     
     <!-- Colors CSS -->
-    <!-- <link rel="stylesheet" type="text/css" href="css/color/green.css"> -->
+    
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/green.css' %}"  />
     
     
@@ -51,16 +51,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/green.css' %}" title="green">
 
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/light-red.css' %}" title="light-red">
-    <!-- <link rel="stylesheet" type="text/css" href="css/color/blue.css" title="blue"> -->
+    
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/blue.css' %}" title="blue">
 
 
-    <!-- <link rel="stylesheet" type="text/css" href="css/color/light-blue.css" title="light-blue"> -->
+    
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/light-blue.css' %}" title="light-blue">
     
-    <!-- <link rel="stylesheet" type="text/css" href="css/color/yellow.css" title="yellow"> -->
+    
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/yellow.css' %}" title="yellow">
-    <!-- <link rel="stylesheet" type="text/css" href="css/color/light-green.css" title="light-green"> -->
+
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/color/light-green.css' %}" title="light-green">
 
     <!-- Custom Fonts -->
@@ -68,16 +68,14 @@
     
     
     <!-- Modernizer js -->
-    <!-- <script src="js/modernizr.custom.js"></script> -->
+    
 
     <script src="{% static 'index/js/modernizr.custom.js' %}"></script>
 
 
     
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -307,7 +305,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>Experience the transformative power of Smart Agriculture, where cutting-edge technology and data-driven solutions revolutionize farming practices. <br> Embrace innovation, increase efficiency, and cultivate a sustainable future for agriculture.</h1>
-                    <button type="submit" class="btn btn-primary">Read more</button>
+                    <!-- <button type="submit" class="btn btn-primary">Read more</button> -->
                 </div>
             </div>
         </div>
@@ -592,8 +590,7 @@
                     <div class="section-title text-center">
                             <h3>About Us</h3>
                             
-                            <p><strong>Smart For Green</strong> is a startup created in 2022 within the local innovation center of Ras Jebel-Bizerte, its main activity was a design office that offers a multitude of services related to intelligent agriculture aimed at preventing fires and ensuring protection against forest fires. The Smart for Green startup is led by a talented and determined team of professionals who are passionate about their mission. Each one of them brings a unique expertise and an overwhelming passion to the company,
-                               and I am delighted to be working together to achieve a common vision</p>
+                            <p><strong>Smart For Green</strong> is a startup created in 2022 within the local innovation center of Ras Jebel-Bizerte, its main activity was a design office that offers a multitude of services related to intelligent agriculture aimed at preventing fires and ensuring protection against forest fires. The Smart for Green startup is led by a talented and determined team of professionals who are passionate about their mission. Each one of them brings a unique expertise and an overwhelming passion to the company.</p>
                         </div>
                 </div>
             </div>
@@ -799,7 +796,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="section-title text-center">
                             <h3>Our Team</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                            <p>United by passion, driven by excellence.</p>
                         </div>
                 </div>
             </div>
@@ -815,20 +812,22 @@
                                 <div class="our-team">
 
                                     <div class="team-member">
-                                        <!-- <img src="images/team/manage-1.png" class="img-responsive" alt=""> -->
-                                        <img src="{%static 'images\me.jpg'%}" class="img-responsive" alt="...">
+                                        <img src="{% static 'images/me.jpg' %}" class="img-responsive" alt="...">
                                         <div class="team-details">
                                             <h4>Yasmine Ben Ahmed</h4>
-                                            <p>Embedded systems and IOT Developer</p>
+                                            <p>Embedded systems and IoT Developer</p>
                                             <ul>
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                                <li><a href="https://github.com/Yasmine-BA1"><i class="fa fa-github"></i></a></li>
+                                                <li><a href="https://www.facebook.com/yasmine.benahmed.902"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="https://www.linkedin.com/in/yasmine-ben-ahmed/"><i class="fa fa-linkedin"></i></a></li>
+                                              
+                                                <li><a href="https://www.instagram.com/yasmin.benahmed/?hl=fr"><i class="fa fa-instagram"></i></a></li>
                                             </ul>
                                         </div>
+                                        
                                     </div>
+                                    
+                                    
 
                                     <div class="team-member">
                                         <!-- <img src="images/team/manage-2.png" class="img-responsive" alt=""> -->
@@ -848,10 +847,10 @@
 
                                     <div class="team-member">
                                         <!-- <img src="images/team/manage-3.png" class="img-responsive" alt=""> -->
-                                        <img src="{% static 'index/images/team/manage-3.png' %}" class="img-responsive" alt="...">
+                                        <img src="{% static 'index/images/mdm2.png' %}" class="img-responsive" alt="...">
                                         <div class="team-details">
                                             <h4>Manel Zekri</h4>
-                                            <p>Founder & Director</p>
+                                            <!-- <p>Founder & Director</p> -->
                                             <ul>
                                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -894,21 +893,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="team-member">
-                                        <!-- <img src="images/team/manage-2.png" class="img-responsive" alt=""> -->
-                                        <img src="{% static 'index/images/team/manage-2.png' %}" class="img-responsive" alt="...">
-                                        <div class="team-details">
-                                            <h4>John Doe</h4>
-                                            <p>Founder & Director</p>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                         
 
 
                                 </div>
@@ -938,159 +923,9 @@
                 </div>
             </div>
 
-            <!-- <iframe width="270" height="134" src="https://www.youtube.com/embed/mqX0VtU11FQ" title="Forest Fire Protection by Smart For Green" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+            <iframe width="270" height="134" src="https://www.youtube.com/embed/mqX0VtU11FQ" title="Forest Fire Protection by Smart For Green" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     
-            <!-- <div class="row">
-                        
-                <div class="pricing">
-                        
-                        <div class="col-md-12">
-                            <div class="pricing-table">
-                                <div class="plan-name">
-								    <h3>Free</h3>
-                                </div>
-                                <div class="plan-price">
-                                    <div class="price-value">$49<span>.00</span></div>
-                                    <div class="interval">per month</div>
-                                </div>
-                                <div class="plan-list">
-                                    <ul>
-                                        <li>40 GB Storage</li>
-                                        <li>40GB Transfer</li>
-                                        <li>10 Domains</li>
-                                        <li>20 Projects</li>
-                                        <li>Free installation</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-signup">
-                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <div class="pricing-table">
-                                <div class="plan-name">
-								    <h3>Standard</h3>
-                                </div>
-                                <div class="plan-price">
-                                    <div class="price-value">$49<span>.00</span></div>
-                                    <div class="interval">per month</div>
-                                </div>
-                                <div class="plan-list">
-                                    <ul>
-                                        <li>40 GB Storage</li>
-                                        <li>40GB Transfer</li>
-                                        <li>10 Domains</li>
-                                        <li>20 Projects</li>
-                                        <li>Free installation</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-signup">
-                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="pricing-table">
-                                <div class="plan-name">
-								    <h3>Premium</h3>
-                                </div>
-                                <div class="plan-price">
-                                    <div class="price-value">$49<span>.00</span></div>
-                                    <div class="interval">per month</div>
-                                </div>
-                                <div class="plan-list">
-                                    <ul>
-                                        <li>40 GB Storage</li>
-                                        <li>40GB Transfer</li>
-                                        <li>10 Domains</li>
-                                        <li>20 Projects</li>
-                                        <li>Free installation</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-signup">
-                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <div class="pricing-table">
-                                <div class="plan-name">
-								    <h3>Professional</h3>
-                                </div>
-                                <div class="plan-price">
-                                    <div class="price-value">$49<span>.00</span></div>
-                                    <div class="interval">per month</div>
-                                </div>
-                                <div class="plan-list">
-                                    <ul>
-                                        <li>40 GB Storage</li>
-                                        <li>40GB Transfer</li>
-                                        <li>10 Domains</li>
-                                        <li>20 Projects</li>
-                                        <li>Free installation</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-signup">
-                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-md-12">
-                            <div class="pricing-table">
-                                <div class="plan-name">
-								    <h3>Premium</h3>
-                                </div>
-                                <div class="plan-price">
-                                    <div class="price-value">$49<span>.00</span></div>
-                                    <div class="interval">per month</div>
-                                </div>
-                                <div class="plan-list">
-                                    <ul>
-                                        <li>40 GB Storage</li>
-                                        <li>40GB Transfer</li>
-                                        <li>10 Domains</li>
-                                        <li>20 Projects</li>
-                                        <li>Free installation</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-signup">
-                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <div class="pricing-table">
-                                <div class="plan-name">
-								    <h3>Professional</h3>
-                                </div>
-                                <div class="plan-price">
-                                    <div class="price-value">$49<span>.00</span></div>
-                                    <div class="interval">per month</div>
-                                </div>
-                                <div class="plan-list">
-                                    <ul>
-                                        <li>40 GB Storage</li>
-                                        <li>40GB Transfer</li>
-                                        <li>10 Domains</li>
-                                        <li>20 Projects</li>
-                                        <li>Free installation</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-signup">
-                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-						
-						
-            </div> -->
+         
         </div>
     </div>
     <!-- End Pricing Table Section -->
@@ -1338,32 +1173,7 @@
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
-                    <!-- <div class="col-md-12">
-                        <div class="latest-post">
-                            
-                            <img src="{% static 'index/images/about-02.jpg' %}" class="img-responsive" alt="...">
-                            <h4><a href="#">Standard Post with Image</a></h4>
-                            <div class="post-details">
-                                <span class="date"><strong>08</strong> <br>Aug , 2014</span>
-                                
-                            </div>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                            <a href="#" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="latest-post">
-                           
-                            <img src="{% static 'index/images/about-03.jpg' %}" class="img-responsive" alt="...">
-                            <h4><a href="#">Standard Post with Image</a></h4>
-                            <div class="post-details">
-                                <span class="date"><strong>08</strong> <br>Aug , 2014</span>
-                                
-                            </div>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                            <a href="#" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div> -->
+                  
                     
                 </div>
             </div>
@@ -1376,7 +1186,7 @@
     
 
     <!-- Clients Aside -->
-    <section id="partner">
+    <!-- <section id="partner">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -1385,53 +1195,53 @@
                         <p>Duis aute irure dolor in reprehenderit in voluptate</p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="clients">
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/themeforest.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/themeforest.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/themeforest.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/creative-market.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/creative-market.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/creative-market.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/designmodo.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/designmodo.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/designmodo.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/creative-market.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/creative-market.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/creative-market.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/microlancer.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/microlancer.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/microlancer.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/themeforest.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/themeforest.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/themeforest.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/microlancer.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/microlancer.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/microlancer.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/designmodo.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/designmodo.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/designmodo.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
-                    <div class="col-md-12">
+                    <div class="col-md-12"> -->
                         <!-- <img src="images/logos/creative-market.jpg" class="img-responsive" alt="..."> -->
-                        <img src="{% static 'index/images/logos/creative-market.jpg' %}" class="img-responsive" alt="...">
+                        <!-- <img src="{% static 'index/images/logos/creative-market.jpg' %}" class="img-responsive" alt="...">
                     </div>
                     
                     <div class="col-md-12">
@@ -1442,7 +1252,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     
     
     
@@ -1460,7 +1270,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <!-- <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -1488,33 +1298,30 @@
                                 <button type="submit" class="btn btn-primary">Send Message</button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
-            <div class="row">
+            <div style="display: flex; justify-content: center;">
                 <div class="col-md-4">
-                    <div class="footer-contact-info">
-                        <h4>Contact info</h4>
-                        <ul>
-                            <li><strong>E-mail :</strong> your-email@mail.com</li>
-                            <li><strong>Phone :</strong> +8801-6778776</li>
-                            <li><strong>Mobile :</strong> +8801-45565378</li>
-                            <li><strong>Web :</strong> yourdomain.com</li>
-                        </ul>
-                    </div>
+                  <div class="footer-contact-info">
+                    <h4>Contact info</h4>
+                    <!-- <ul>
+                      <li><strong>E-mail:</strong> benahmedyasmin@mail.com</li>
+                      <li><strong>Phone:</strong> +216 52 066 233</li>
+                    </ul> -->
+                    <ul>
+                        <li><strong>E-mail:</strong> benahmedyasmin@mail.com</li>
+                        <li><strong>Phone:</strong> +216 52 066 233</li>
+                        <li><a href="https://github.com/Yasmine-BA1"><i class="fa fa-github"></i> </a>Github</li>
+                        <li><a href="https://www.facebook.com/yasmine.benahmed.902"><i class="fa fa-facebook"></i> </a>Facebook</li>
+                        <li><a href="https://www.linkedin.com/in/yasmine-ben-ahmed/"><i class="fa fa-linkedin"></i></a> Linkedin</li>         
+                        <li><a href="https://www.instagram.com/yasmin.benahmed/?hl=fr"><i class="fa fa-instagram"></i></a> Instagram</li>
+                    </ul>
+                  </div>
                 </div>
-                <!-- <div class="col-md-4 col-md-offset-4">
-                    <div class="footer-contact-info">
-                        <h4>Working Hours</h4>
-                        <ul>
-                            <li><strong>Mon-Wed :</strong> 9 am to 5 pm</li>
-                            <li><strong>Thurs-Fri :</strong> 12 pm to 10 pm</li>
-                            <li><strong>Sat :</strong> 9 am to 3 pm</li>
-                            <li><strong>Sunday :</strong> Closed</li>
-                        </ul>
-                    </div>
-                </div> -->
-            </div>
+              </div>
+              
+              
         </div>
         <footer class="style-1">
             <div class="container">
@@ -1525,11 +1332,11 @@
                     <div class="col-md-4 col-xs-12">
                         <div class="footer-social text-center">
                             <ul>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="https://github.com/Yasmine-BA1"><i class="fa fa-github"></i></a></li>
+                                <li><a href="https://www.facebook.com/yasmine.benahmed.902"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/yasmine-ben-ahmed/"><i class="fa fa-linkedin"></i></a></li>
+                              
+                                <li><a href="https://www.instagram.com/yasmin.benahmed/?hl=fr"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>

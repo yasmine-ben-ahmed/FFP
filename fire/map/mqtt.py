@@ -10,8 +10,7 @@ import csv
 from .FWI import *
 from datetime import datetime
 
-topics = ['v3/my-lora1-application@ttn/devices/eui-70b3d57edd05a535/up', 'v3/loraatest02@ttn/devices/eui-70b3d57ed005a5c4/up', 'v3/loraatest02@ttn/devices/eui-70b3d57ed005c92e/up']
-topi =['eui-70b3d57edd05a535','eui-70b3d57ed005ca2c']
+topics = ['v3/my-lora1-application@ttn/devices/eui-70b3d57edd05a535/up','v3/my-lora1-application@ttn/devices/eui-70b3d57ed005ca2c/up', 'v3/loraatest02@ttn/devices/eui-70b3d57ed005a5c4/up', 'v3/loraatest02@ttn/devices/eui-70b3d57ed005c92e/up']
 def on_connect(mqtt_client, userdata, flags, rc):
 
     if rc == 0:
@@ -22,6 +21,7 @@ def on_connect(mqtt_client, userdata, flags, rc):
 
         #other card
         mqtt_client.subscribe(topics[1])
+        mqtt_client.subscribe(topics[2])
 
     else:
         print('Bad connection. Code:', rc)
@@ -33,86 +33,47 @@ def on_message(mqtt_client, userdata, msg):
         print(f'Received message on topic: {msg.topic} with payload: {msg.payload}', '\n')
         
         referencep = msg.topic.split('/')[-2]
-        print('rrrrrffffffrrrppp',referencep)
-        
+        print('---topic-reference',referencep)
 
-        # project = myProject.objects.get(polygon_id=id)
-
-        #this is not util after because only one diffrent reference  for each node
-            # Get the node with the matching reference
         nodes = node.objects.filter(reference=referencep).order_by('-Idnode')
-        print('**************nodes',nodes)
+        
         if nodes:
             n = nodes[0]
-            print('*****n',n.nom,' ********* ref',n.reference)
+            print('-----n',n.nom,' ------- ref-node',n.reference)
         
-
-            
-                    # print('reeeef',n.reference)
-                    # Get temperature and humidity values from payload
             temperature = payload_dict['uplink_message']['decoded_payload']['temperature']
             humidity = payload_dict['uplink_message']['decoded_payload']['humidity']
-            Battery_level = payload_dict['uplink_message']['decoded_payload']['Battery_level']
+            # Battery_level = payload_dict['uplink_message']['decoded_payload']['Battery_level']
             
             rssi = payload_dict['uplink_message']['rx_metadata'][0]['rssi']
             snr = payload_dict['uplink_message']['rx_metadata'][0]['snr']
 
             n.RSSI = rssi
             n.save()
-            n.Battery_value =Battery_level
-            n.save()
+            # n.Battery_value =Battery_level
+            # n.save()
 
 
-            print('payload-----temperature :', temperature, 'humidity :', humidity, 'rssi :', rssi, 'snr :', snr,'Battery_level :',Battery_level ,'\n')
+            print('payload-----temperature :', temperature, 'humidity :', humidity, 'rssi :', rssi, 'snr :', snr ,'\n')
 
-                    # Replace "YOUR_API_KEY" with your actual API key from OpenWeatherMap
+            # Replace "YOUR_API_KEY" with your actual API key from OpenWeatherMap
             owm = pyowm.OWM("0f21fa98b6e075b77fd85b3af087e294")
                 
-                    # Replace "City name" with the name of the city you want weather data for
+            # Replace "City name" with the name of the city you want weather data for
             location = owm.weather_manager().weather_at_place('Bizerte, TN')
                 
             weather = location.weather
 
-                    # Get the temperature, humidity, and wind speed
+            # Get the temperature, humidity, and wind speed
             temperature_owm = weather.temperature('celsius')['temp']
             humidity_owm = weather.humidity
             wind_speed = weather.wind()['speed']
             rain_volume = weather.rain.get('1h', 0)  # get rain volume in last 1 hour
 
-            # print('wind_speed',wind_speed)
-            # print('rain',rain_volume)
-
-
-
-                    # print('temperature :', temperature, 'humidity :', humidity, 'wind :', wind_speed, '\n')
-                    # Create a new Post object and save it to the database
-                    # project = myProject.objects.get(polygon_id=id)
-
-                
-                    # nodes = node.objects.filter(polyg=project).order_by('-Idnode')
-                    
-                    # my_project = myProject.objects.get(polygon_id=id)
-                    # # polygon = my_project.geomp
-
-                    # nodes = node.objects.filter(polyg=my_project)
-                    # onode = nodes[0]
-
-
-
-
-
-
-
-                    # my_project = myProject.objects.get(polygon_id=id)
-                    # # polygon = my_project.geomp
-
-                    # nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
-                    # nodee = nodes[0]
                     
             datas = Data.objects.filter(node=n).order_by('-IdData')
-            print('oooold datasssssss---------',datas)
+            
             new_data = Data.objects.create(temperature=temperature, humidity=humidity, wind=wind_speed,rain=rain_volume, node=n)
-                    #datas.append(new_data)
             new_data.save()
             print('new_data ---------',new_data)
             
@@ -132,28 +93,9 @@ def on_message(mqtt_client, userdata, msg):
             fwi = float(FWI)
             n.FWI=fwi
             n.save()
-            print('mqtttttttttttt',n.FWI)
+            print('------mqt--FWI',n.FWI)
 
-# def start_mqtt_client(id):
-#     # Create a new MQTT client instance
-#     client = mqtt.Client()
 
-#     # Set the client's connection and message handling functions
-#     client.on_connect = on_connect
-#     client.on_message = lambda client, userdata, msg: on_message(client, userdata, msg,id)
-
-#     # Set the client's username and password
-#     client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
-
-#     # Connect to the MQTT broker
-#     client.connect(
-#         host=settings.MQTT_SERVER,
-#         port=settings.MQTT_PORT,
-#         keepalive=settings.MQTT_KEEPALIVE
-#     )
-    
-#     client.loop_forever()
-#     return client
 
 client = mqtt.Client()
 
@@ -171,11 +113,3 @@ client.connect(
         keepalive=settings.MQTT_KEEPALIVE
 )
     
-    
-        # Start the MQTT loop (this function blocks and waits for incoming messages)
-#     client.loop_forever()
-    # Start the MQTT client loop
-#     client.loop_start()
-
-    # Return the MQTT client instance
-#     return client

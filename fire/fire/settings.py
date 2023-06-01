@@ -151,18 +151,18 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'static/images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configurations pour l'envoi d'e-mails
-
+#######################################################################################
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_PORT = 587
 
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS=True
 
 EMAIL_HOST_USER='benahmedyasmin@gmail.com'
 
-EMAIL_HOST_PASSWORD='0207yes21'
+EMAIL_HOST_PASSWORD='obivagwtxuaupacu'
 
 ###################################################################
 # MQTT_SERVER = 'eu1.cloud.thethings.network'
@@ -179,18 +179,10 @@ MQTT_PASSWORD = 'NNSXS.LO6MNFLIDPGXTB4YOKJWMEK2CYCNIODLIVEQ2RY.5THHCR2XZHZXYT4VT
 
 ###########################################################################
 LOCATION_FIELD = {
-    # 'map.provider': 'google',
-    # 'map.zoom': 13,
-    # OpenStreetMap
     'provider.openstreetmap.max_zoom': 18,
 }
 
 LOCATION_FIELD = {
-    # 'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
-    # 'provider.google.api_key': '',
-    # 'provider.google.api_libraries': '',
-    # 'provider.google.map.type': 'ROADMAP',
-    
     'map.provider': 'openstreetmap',
     'search.provider': 'nominatim',
 }

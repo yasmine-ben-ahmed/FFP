@@ -77,9 +77,6 @@ def add_polygones(request,pseudo,id):
         multiPolygone_dict = json.loads(multiPolygone)
         multipolygon = GEOSGeometry(multiPolygone, srid=4326)
 
-        # geometry = myProject(geomp=multipolygon)
-        # geometry.save()
-
         project.geomp = multipolygon
         project.save()         
         
@@ -92,23 +89,20 @@ def add_polygones(request,pseudo,id):
                 print('poly_str',poly_str)
                 polygon = GEOSGeometry(poly_str, srid=4326)
                 parcelle_obj = parcelle(poly=polygon,project=project)
-                    # parcelle_obj.project = instance  # set the project attribute of the parcelle
                 parcelle_obj.save()
                 polygons.append(polygon)       
-                    
-            # return redirect('add_client',id=instance.polygon_id)
+
         return redirect('addnode',pseudo=pseudo,id=project.polygon_id)
         
     return render(request, 'addpolyg.html', {'projects':projects,'supervisor':superviseur,'project':project})
 
 
 def add_client(request,idd,pseud):
-        # project = myProject.objects.get(polygon_id=id)
         superviseur = supervisor.objects.get(pseudo=pseud)
         projects = myProject.objects.filter(supervisorp=superviseur).order_by('-polygon_id')
-        print('----------',projects)
+        
         project = myProject.objects.get(polygon_id=idd) 
-        print('----------',project.polygon_id)
+        
               
         if request.method == 'POST':
             formulaire = Form_client(request.POST)
@@ -134,19 +128,10 @@ def add_client(request,idd,pseud):
 
 
 def display(request,pseudo):
-    # projects = myProject.objects.all()
-    # supervisors = supervisor.objects.get(pseudo=pseudo)
-    
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
     projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
-    print("/////////", supervisor_obj.pseudo)
-    print("/////projects////",projects )
-
-    for proj in projects :
-        print("/////proj////", proj)
         
     if request.method == 'POST':
-    #     return redirect('project_1',pseudo)
         return redirect('add_project', pseudo=pseudo)
 
     return render(request, 'display.html', {'projects':projects,'supervisor_obj':supervisor_obj})
@@ -154,15 +139,11 @@ def display(request,pseudo):
 
 def display_polygone(request,id,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
-    print("//supervisor_obj/", supervisor_obj)
     projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
     project = myProject.objects.get(polygon_id=id)
-    print("//project/", project.supervisorp)
 
     if request.method == 'POST':
-        # id=instance.polygon_id
 
-       
         return redirect('addnode',pseudo,id)
     return render(request, 'displaypoly.html', {'projects':projects,'project':project,'supervisor':supervisor_obj})
 
@@ -192,7 +173,7 @@ def add_node(request, id,pseudo):
         list_p=[]
         for p in parcelles:
             list_p.append(p)
-        print('----------------------',list_p)
+        
         
         instance = node(position=point,nom=node_name, polyg=project_instance,parc=list_p[node_range-1], latitude=mylatitude, longitude=mylongitude,reference=reference,node_range=node_range,Sensors=Sensors)
         instance.save()
@@ -202,10 +183,6 @@ def add_node(request, id,pseudo):
         new_data.save()
 
         datas = Data.objects.filter(node=instance)
-        print('hello')
-        print(instance.nom)
-        print(datas)
-    
 
         return redirect('all',pseudo,id)
 
@@ -213,12 +190,7 @@ def add_node(request, id,pseudo):
 #--------------------------------------------------------------------
 
 def start_mqtt(request,id):
-    # Start the MQTT client
-    # start_mqtt_client(id)
-    # mqtt.client.loop_forever()
-    
-    # Return a simple response to indicate that the client has started
-    #return HttpResponse('MQTT client started successfully.')
+
     return render(request, 'all.html', {})
 
 
@@ -231,7 +203,6 @@ def all_node(request,iid,pseudo):
     
     nod = node.objects.filter(polyg=my_project).order_by('-Idnode').first()
     ldat = Data.objects.filter(node=nod).order_by('-IdData').first()
-    print('********',nod,'*****',ldat)
      
     data_list = []
     for n in nodes :
@@ -247,20 +218,15 @@ def all_node(request,iid,pseudo):
         ltemp.append(
             d.temperature,
         )
-    print('!!!!22!!!--------ltemp',ltemp)
 
     for i in range(len(data_list)):
         ldn0 = data_list[i]
-        #node = ldn0.node
-        print('++++++++++++++++++ldn0',ldn0)
 
-   
         temperature = ldn0.temperature
         humidity = ldn0.humidity
         wind_speed = ldn0.wind
 
 
-    
     for data in data_list:
         print(data.node.FWI)
     
@@ -275,17 +241,14 @@ def all_node(request,iid,pseudo):
     return render(request, 'all.html',context)
 
 
-#############just for updation the last node added
+#############just for updation the last node added 'all.html'
 def update_weather(request, id):
     # get updated weather information
     my_project = myProject.objects.get(polygon_id=id)
 
     # lasst node added
     nodes = node.objects.filter(polyg=my_project).order_by('-Idnode')
-
-
-    
-    
+ 
     ldata =[]
     for n in nodes:
         dat= Data.objects.filter(node=n).order_by('-IdData').first()
@@ -295,9 +258,7 @@ def update_weather(request, id):
         'humidity': dat.humidity,
         'wind': dat.wind,
         'rain': dat.rain,
-        'project' :my_project,
-        
-        
+        'project' :my_project,   
         'RSSI' : n.RSSI,
         'battery' :n.Battery_value,
         'reference' :n.reference,
@@ -311,19 +272,14 @@ def update_weather(request, id):
             
         )
         
-
-    onode = nodes[0]
-    print('----onode',onode)
-    print('----onode',onode.FWI)
-    
+    onode = nodes[0]  
     datas = Data.objects.filter(node=onode).order_by('-IdData')
     # last data coming
     datao = datas.first()
-    print('----datao',datao)
 
     
     stat= result(onode.Idnode)
-    print ('stattttt',stat)
+    print ('stat-last-node',stat)
     onode.status=stat
     onode.save() 
     
@@ -334,9 +290,7 @@ def update_weather(request, id):
     node_name =onode.nom
     node_reference =onode.reference
     node_range=onode.node_range
-    
-    
-    
+ 
     dataa = {
         'temperature': datao.temperature,
         'humidity': datao.humidity,
@@ -345,18 +299,13 @@ def update_weather(request, id):
         'RSSI' : node_rssi,
         'battery' :node_battery,
         'reference' :node_reference,
-        'node_range' : node_range,
-        
+        'node_range' : node_range,       
         'fwi' : node_fwi,
         'status' : node_status,
         'node':node_name,
         'x':onode.position.x,
         'y':onode.position.y,
         }
-
-
-    print("dataaaaaa",dataa)
-    
 
     # return a JsonResponse with the updated data
     return JsonResponse(dataa, safe=False)
@@ -366,11 +315,7 @@ def update_weather(request, id):
 def update_color(request, id):
     projects = myProject.objects.all()
     my_project = myProject.objects.get(polygon_id=id) 
-    
-
-    nodes = node.objects.filter(polyg=my_project)
-        
-    
+    nodes = node.objects.filter(polyg=my_project)   
     data = []
     for n in nodes:
         ds = Data.objects.filter(node=n).order_by('-IdData').first()
@@ -395,20 +340,9 @@ def update_color(request, id):
         ds.node.status =result(n.Idnode)
         ds.node.Battery_value =n.Battery_value
         ds.node.save()
-    print('+++++++++++++++++++++++++++++++++++++++',data)
-    print('---',len(data))
-    
-    
-
     return JsonResponse(data, safe=False)
 
-
-
-
-
-
-
-########only for modification
+########extra page -- only for modification
 
 def ALL(request,id,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
@@ -417,8 +351,7 @@ def ALL(request,id,pseudo):
     project = myProject.objects.get(polygon_id=id)
     nodes = node.objects.filter(polyg=project).order_by('-Idnode')
    
-    onode = nodes[0] # =======node_instance// onlyy for the last one
-    # print(onode) 
+    onode = nodes[0] 
 
     datas = Data.objects.filter(node=onode).order_by('-IdData')
     data = datas.first()
@@ -429,31 +362,22 @@ def ALL(request,id,pseudo):
     for node_instance in nodes:
         datas = Data.objects.filter(node=node_instance).order_by('-IdData')
         data = datas.first()
-        nodes_data.append({'node_instance': node_instance, 'data': data})
-        
-
-        
+        nodes_data.append({'node_instance': node_instance, 'data': data})        
     data_list = []
     for n in nodes :
         ds = Data.objects.filter(node=n).order_by('-IdData').first()
         data_list.append(
             ds,
         )
-    
-    print('__________data_list',data_list)
            
     for i in range(len(data_list)):
         ldn0 = data_list[i]
         print(ldn0)
-        print('______data_list node status',ldn0.node.status)
-        print('______ fwi',ldn0.node.FWI)
-        
-    # print('------nodes_data',nodes_data)
     context = {'nodes_data': nodes_data,'supervisor':supervisor_obj,'nodee': nodeq,'node':onode,'projects':projects, 'project': project,'parm':data,'ldn':data_list}
-   
-
     return render(request, 'ALL_node.html',context )
 
+
+###-------------supervision page for supervisor
 def final(request,id,pseudo):
     supervisor_obj = supervisor.objects.get(pseudo=pseudo)
     projects = myProject.objects.filter(supervisorp=supervisor_obj).order_by('-polygon_id')
@@ -493,7 +417,6 @@ def final2(request,id,pseudo,idnode):
     nodes = node.objects.filter(polyg=project).order_by('-Idnode')
     nod = node.objects.get(Idnode=idnode) 
     ds = Data.objects.filter(node=nod).order_by('-IdData').first()
-    print('*****************',ds)
     nodeq = node.objects.filter(polyg=project)
     
     data_list = []
@@ -517,9 +440,6 @@ def final2(request,id,pseudo,idnode):
     hum_data = Data.objects.filter(node=nod)
     for d in hum_data:
         lhum.append(d.humidity)
-        
-
-    print('!!!!lhum!!!--------lhum',lhum)
 
     
     context={'supervisor':supervisor_obj,'projects':projects, 'project': project,'nodes':nodes,'nod':nod,'ds':ds, 'ltemp':ltemp, 'lhum':lhum, 'ldn':data_list,'nodee':nodeq}
@@ -533,7 +453,6 @@ def final3(request,id,pseudo,idnode):
     nodes = node.objects.filter(polyg=project).order_by('-Idnode')
     nod = node.objects.get(Idnode=idnode) 
     ds = Data.objects.filter(node=nod).order_by('-IdData').first()
-    print('*****************',ds)
     nodeq = node.objects.filter(polyg=project)
     
     data_list = []
@@ -649,8 +568,6 @@ def locate(request, id,pseudo,idnode):
     
 
     ds = Data.objects.filter(node=nod).order_by('-IdData').first()
-    print('*******8888**********',ds.node.FWI)
-    print('*******8888**********',ds.node.status)
     nodeq = node.objects.filter(polyg=proj)
     
     data_list = []
@@ -674,7 +591,6 @@ def details(request, id,pseudo,idnode):
 
     nod = node.objects.get(Idnode=idnode) 
     ds = Data.objects.filter(node=nod).order_by('-IdData').first()
-    print('*****************',ds)
     nodeq = node.objects.filter(polyg=proj)
     
     data_list = []

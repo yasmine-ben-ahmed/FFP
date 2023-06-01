@@ -362,16 +362,7 @@
         </nav>
 
  <div style="margin-left:400px; ">
-        
-        <!-- <div class="welcome">
-          <div class="content" style="margin:-15px -15px; ">
-            <h1 class="title" style="margin-bottom:-15px; letter-spacing: 2px;">Nodes List</h1>
-            <p class="description">Hello <strong>{{ client.prenom }} {{ client.nom }}</strong>, here you can find all nodes in your project!</p>
-          </div>
-        </div> -->
-
-
-            
+             
             <div style=" margin-top:10px; height:250px;">
               {% for node in nodes %}
                 <div class="node-card">
@@ -445,7 +436,7 @@
         </div>
 
           <div class="col" style="margin-left: 400px; margin-top: -290px;">
-            <div class="node-card" style="background-color: #DEDBEE; height: 150px; width: 300px;">
+            <div class="node-card" style="background-color: #DEDBEE; height: 180px; width: 300px;">
                 <div class="card-body">
                     <h5 class="card-title node-info-title" style="margin-top:10px; font-size: 18px;"><i class="fas fa-cloud" ></i> Weather Information</h5>
                     <hr style="border-color: #2F4858; opacity:0.3;">
@@ -456,6 +447,7 @@
                         <p class="card-text" style="font-size: 13px;"><strong>Humidity:</strong> {{ ds.humidity }}%</p>
                         <p class="card-text" style="font-size: 13px;"><strong>Wind Speed:</strong> {{ ds.wind }} km/h</p>
                         <p class="card-text" style="font-size: 13px;"><strong>Rain Volume:</strong> {{ ds.rain }} mm</p>
+                        <p class="card-text" style="font-size: 13px;"><strong>Last Data Date:</strong> {{ ds.Data_date }} </p>
                     </div>
                 </div>
             </div>

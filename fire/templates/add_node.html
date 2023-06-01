@@ -222,8 +222,7 @@
                             
                             <div class="col-md-3">
                               <label for="reference" style="margin-right: 5px;color:#6B2737; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Node Reference:</label>
-                              {% comment %} <input type="text" id="reference" name="reference" style="margin-right: 20px; background-color: #FAF8FF;" placeholder="Node reference" /> {% endcomment %}
-                              
+                             
                               <select  type="text" name="reference" style="margin-right: 20px; height:32px; background-color: #FAF8FF;" placeholder="Node reference">
                                 <option value="">Node reference</option>
                                 <option value="eui-70b3d57edd05a535">1:Ref-70b3d57edd05a535</option>
@@ -245,13 +244,10 @@
                           </div>
                           
                           <div class="row" style="margin-left: 10px;">
-                            {% comment %} <div class="col-md-3">
-                              <label for="nom" style="margin-right: 5px;">Parcelle Name:</label>
-                              <input type="text" id="parcelle" name="parcelle" style="margin-right: 20px; background-color: #DFD9DB;" placeholder="Node Name" />
-                            </div> {% endcomment %}
+
 
                             <div class="col-md-3"><br/>
-                                {% comment %} <h6 >Select The Specific Project ID:</h6> {% endcomment %}
+       
                                 <select name="polyg" style="margin-right: 50px; background-color:#FAF8FF; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
                                     {% for proj in projects %}
                                     <option value="{{ proj.polygon_id }}">Project ID: {{ proj.polygon_id }}</option>
@@ -259,7 +255,6 @@
                                 </select>
                             </div>
                             <div class="col-md-3"><br/>
-                                {% comment %} <button class="btn btn-dark mx-auto d-block shadow-none" name="button_1" style='font-size: 10px; margin-bottom: 10px;' onclick="location.href='{% url 'all' project.supervisorp.pseudo project.polygon_id %}'"> SAVE node</button> {% endcomment %}
                                
                                 
 
@@ -318,7 +313,7 @@
         </div>
 
    
-    <!-- <script src="{% static 'js/map.js' %}"></script> -->
+    
     <!-- leaflet js  -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"></script>
@@ -328,12 +323,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
   <script>
 
-    //  var map = L.map('map').setView([35, 9.5], 5);
-    //  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    //  }).addTo(map);
-
-    // var client = "{{ client }}";
 var geojson_str = "{{ project.geomp.json|escapejs }}";
 var geojson = JSON.parse(geojson_str);
 
@@ -365,11 +354,6 @@ var drawControl = new L.Control.Draw({
      shapeOptions: {
       color: 'purple'
      },
-    //  allowIntersection: false,
-    //  drawError: {
-    //   color: 'orange',
-    //   timeout: 1000
-    //  },
     },
     polyline: {
      shapeOptions: {
@@ -386,7 +370,7 @@ var drawControl = new L.Control.Draw({
       color: 'steelblue'
      },
     },
-    // remove: true // Add remove control option
+    
    },
 
 });
@@ -434,10 +418,7 @@ map.on("draw:created", function(e){
   
 });
 
-    // remove the marker when clicked
-   // layer.on('click', function () {
-   //   map.removeLayer(layer);
-  //});
+
 
 map.on("draw:edited", function(e){
     var layers = e.layers;
@@ -460,30 +441,7 @@ map.on("draw:edited", function(e){
             yass.bindPopup("<h5 >Welcome !</h5> <hr><strong>Node Name</strong><br> {{ node.nom }} "   + "<br><b>Node Position</b><br>Latitude: " + latlng.lat + "<br>Longitude: " + latlng.lng).openPopup();
         {% endfor %}
 
-/**************the old markeer*****************/
 
-// {% comment %} var marker;
-
-// map.on("click", function (e) {
-//   // If marker is already defined, remove it before adding a new one
-//    if (marker) {
-//    map.removeLayer(marker);
-//    }  
-//   // Add new marker at double-clicked location
-//   marker = L.marker(e.latlng, { draggable: true }).addTo(map);
-// marker.bindPopup('heloooo from "click".')
-//     .openPopup();
-  
-//   document.getElementById("lat").value = e.latlng.lat;
-//   document.getElementById("lng").value = e.latlng.lng;
-
-//   marker.on("dragend", function (e) {
-//     var marker = e.target;
-//     var position = marker.getLatLng();
-//     document.getElementById("lat").value = position.lat;
-//     document.getElementById("lng").value = position.lng;
-//   });
-// }); {% endcomment %}
  </script>       
 
     </body>

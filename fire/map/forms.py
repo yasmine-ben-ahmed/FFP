@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.gis.geos import Point
 from .models import *
 from itertools import chain
-# from location_field.widgets import LocationWidget
-# from django.contrib.gis.forms.widgets import LocationWidget
 from django.contrib.gis import forms as geoforms
 
 class Form_project(forms.Form):
@@ -40,8 +38,6 @@ class Form_project(forms.Form):
     def enregistrerProj(self):
         nomp = self.cleaned_data['nomp']
         descp = self.cleaned_data['descp']
-        # debutp = self.cleaned_data['debutp']
-        # finp = self.cleaned_data['finp']
         cityp = self.cleaned_data['cityp']
         clientp = self.cleaned_data['clientp']
         
@@ -129,5 +125,4 @@ class Form_client(forms.Form):
             
             self.new_client = new_client 
 
-            # data2 =Project(nomp=nomp,desc=desc,debut=debut,fin=fin,city=city,location=location)
-            # data2.save()
+

@@ -68,9 +68,10 @@ class Data(models.Model):
     wind = models.FloatField(default=0, null=True)
     rain = models.FloatField(default=0, null=True)
     node = models.ForeignKey(node, on_delete=models.CASCADE, null=True, related_name='datas')
+    Data_date = models.DateTimeField(auto_now_add=True)
     
     
     
     def __str__(self):
-        return f' node : {self.node},Temperature: {self.temperature}, Humidity: {self.humidity}, wind: {self.wind}'
+        return f' node : {self.node},Temperature: {self.temperature}, Humidity: {self.humidity}, wind: {self.wind}, rain: {self.rain}, date: {self.Data_date}'
 
