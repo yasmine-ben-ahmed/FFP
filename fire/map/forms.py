@@ -5,6 +5,11 @@ from .models import *
 from itertools import chain
 from django.contrib.gis import forms as geoforms
 
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+
 class Form_project(forms.Form):
 
     nomp = forms.CharField(required=True,max_length=myProject._meta.get_field(
@@ -124,5 +129,27 @@ class Form_client(forms.Form):
             data.save()
             
             self.new_client = new_client 
+
+            # Get the client email entered by the user
+            # client_email = request.POST.get('client_email')
+            
+            # Prepare the email subject and message
+            print('reaaadyyyy')
+            subject = 'Client data!'
+            context = {
+                'client_name': nom,  # Replace with the appropriate client name
+                'nom': nom,
+                'prenom': prenom,
+                'email': email,
+                'phone': telephone,
+                'mdp': confirmation_mot_de_passe,
+                'superviseur' : superviseur,  # Replace with the appropriate client data
+            }
+            html_message = render_to_string('email_template.html', context)
+            plain_message = strip_tags(html_message)
+            
+            # Send the email
+            send_mail(subject, plain_message, 'benahmedyasmin@gmail.com', [email], html_message=html_message)
+            print('doooooooooooone')
 
 

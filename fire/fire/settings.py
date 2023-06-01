@@ -150,8 +150,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'static/images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configurations pour l'envoi d'e-mails
+
 #######################################################################################
+# Configurations pour l'envoi d'e-mails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
