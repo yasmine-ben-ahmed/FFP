@@ -20,6 +20,10 @@ import csv
 from .FWI import *
 from datetime import datetime
 
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 def add_project(request,pseudo):
     supervisors = supervisor.objects.get(pseudo=pseudo)
@@ -389,6 +393,27 @@ def final(request,id,pseudo):
         data_list.append(
             dat,
         )
+
+        print(n.status)
+
+        if n.status == 'EXTREME':
+            # Prepare the email subject and message
+            subject = 'Alert: Node Status EXTREME'
+            context = {
+                'client_name': project.clientp,  # Replace with the appropriate client name
+                'node_status': n.status, 
+                'node_name' : n.nom,
+                'project_name' : project,
+                'supervisor' : supervisor_obj,
+                'sup_phone' : supervisor_obj.NB_GSM, # Replace with the appropriate node status
+            }
+            html_message = render_to_string('alert_email_template.html', context)
+            plain_message = strip_tags(html_message)
+
+            # Send the email
+            send_mail(subject, plain_message, 'benahmedyasmin@gmail.com', [project.clientp.e_mail], html_message=html_message)
+
+
     
     if request.method == 'POST':
     
@@ -401,7 +426,7 @@ def final(request,id,pseudo):
     'nodes': nodes,
     'nodee': nodeq,
     'ldn': data_list,
-    'project_exists': True  # Add this line
+    'project_exists': True  
         }
 
     return render(request, 'final.html',context )

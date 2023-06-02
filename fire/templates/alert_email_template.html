@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Alert: Node Status - {{ node_status }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .advice {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ffcccc;
+            border-radius: 5px;
+        }
+
+        .advice h2 {
+            color: #333;
+        }
+
+        .advice ul {
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: disc;
+            color: #555;
+        }
+
+        .advice li {
+            margin-left: 20px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Alert: Node Status - {{ node_status }}</h1>
+        <p>Dear <strong>{{ client_name }}</strong>,</p>
+        <p>Your project name is: {{ project_name }}</p>
+        <p>We would like to inform you that the status of your node is currently {{ node_status }}.</p>
+        <p>Please take appropriate action to resolve the issue.</p>
+        <div class="advice">
+            <h2>Advice:</h2>
+            <ul>
+                <li>Stay informed about the current forest conditions.</li>
+                <li>Take necessary precautions to ensure safety.</li>
+                <li>Contact the relevant authorities or support team for assistance.</li>
+            </ul>
+        </div>
+        <p class="signature">Best regards,</p>
+        <p class="signature"><strong>Supervisor</strong>: {{ supervisor }}</p>
+        <p class="signature">Feel free to contact me in case you need help!</p>
+        <p class="signature">{{ sup_phone }}</p>
+    </div>
+</body>
+</html>

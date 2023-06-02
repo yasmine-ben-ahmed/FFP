@@ -134,7 +134,6 @@ class Form_client(forms.Form):
             # client_email = request.POST.get('client_email')
             
             # Prepare the email subject and message
-            print('reaaadyyyy')
             subject = 'Client data!'
             context = {
                 'client_name': nom,  # Replace with the appropriate client name
@@ -150,6 +149,6 @@ class Form_client(forms.Form):
             
             # Send the email
             send_mail(subject, plain_message, 'benahmedyasmin@gmail.com', [email], html_message=html_message)
-            print('doooooooooooone')
+            
 
 
