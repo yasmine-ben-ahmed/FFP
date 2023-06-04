@@ -142,7 +142,9 @@ class Form_client(forms.Form):
                 'email': email,
                 'phone': telephone,
                 'mdp': confirmation_mot_de_passe,
-                'superviseur' : superviseur,  # Replace with the appropriate client data
+                'superviseur' : superviseur, 
+                'p_id': my_project.polygon_id ,
+                'tel': superviseur.NB_GSM , # Replace with the appropriate client data
             }
             html_message = render_to_string('email_template.html', context)
             plain_message = strip_tags(html_message)

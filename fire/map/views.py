@@ -400,12 +400,12 @@ def final(request,id,pseudo):
             # Prepare the email subject and message
             subject = 'Alert: Node Status EXTREME'
             context = {
-                'client_name': project.clientp,  # Replace with the appropriate client name
+                'client_name': project.clientp,  
                 'node_status': n.status, 
                 'node_name' : n.nom,
                 'project_name' : project,
                 'supervisor' : supervisor_obj,
-                'sup_phone' : supervisor_obj.NB_GSM, # Replace with the appropriate node status
+                'sup_phone' : supervisor_obj.NB_GSM, 
             }
             html_message = render_to_string('alert_email_template.html', context)
             plain_message = strip_tags(html_message)

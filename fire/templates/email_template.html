@@ -2,24 +2,26 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to our platform Smart For Green !</title>
+    <title> Welcome to our platform Smart For Green !</title>
 </head>
 <body>
-    <p>Dear {{ superviseur }},</p>
-    <p>Thank you for creating an account on our platform. Here are your client details:</p>
+    <p>Dear {{ client_name }},</p>
+    <p>Thank you for choosing Smart For Green. Here are your account details:</p>
     <ul>
-        <li>Name: {{ client_name }}</li>
         <li>Data: 
             <ul>
                 <li>Email: {{email}}</li>
                 <li>Phone: {{phone}}</li>
                 <li>Mot De Passe: {{mdp}}</li>
+                <li>Project ID: {{p_id}}</li>
             </ul>
 
         </li>
     </ul>
     <p>Feel free to contact us if you have any questions.</p>
     <p>Best regards,</p>
+    <p> Your Supervisor : {{ superviseur }}</p>
+    <p>Phone : {{tel}}</p>
    
 </body>
 </html>
