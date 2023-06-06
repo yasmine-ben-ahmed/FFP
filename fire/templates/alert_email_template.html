@@ -62,12 +62,12 @@
         <h1>Alert: Node Status - {{ node_status }}</h1>
         <p>Dear <strong>{{ client_name }}</strong>,</p>
         <p>Your project name is: {{ project_name }}</p>
-        <p>We would like to inform you that the status of your node is currently {{ node_status }}.</p>
-        <p>Please take appropriate action to resolve the issue.</p>
+        <p>We would like to inform you that the status of your node <strong>{{node_name}}</strong> is currently <strong>{{ node_status }}</strong>.</p>
+        <p>Please take appropriate action and be careful !</p>
         <div class="advice">
             <h2>Advice:</h2>
             <ul>
-                <li>Stay informed about the current forest conditions.</li>
+                <li>Stay informed about the current plot conditions.</li>
                 <li>Take necessary precautions to ensure safety.</li>
                 <li>Contact the relevant authorities or support team for assistance.</li>
             </ul>
