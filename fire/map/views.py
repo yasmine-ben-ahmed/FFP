@@ -398,7 +398,7 @@ def final(request,id,pseudo):
 
         if n.status == 'EXTREME':
             # Prepare the email subject and message
-            subject = 'Alert: Node Status EXTREME'
+            subject = 'Alerte'
             context = {
                 'client_name': project.clientp,  
                 'node_status': n.status, 
