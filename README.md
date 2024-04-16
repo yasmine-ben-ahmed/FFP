@@ -23,7 +23,7 @@ Scriptes\activate
 **install django 
 pip install django 
 
-**creation projet django et activation du serveur 
+**creation projet django of activation of server
 django-admin startproject fire
 
 cd fire 
@@ -54,7 +54,7 @@ PS: exemple superuser :
 username: yasmino
 password: 12345yasmine?
 
-!! by opening the admin page you can enjoy the created projects in the application from supervisors interfaces and client interfaces !
+!! by opening the admin page you can enjoy creating projects in the application from supervisors interfaces and client interfaces !
 
 
 
