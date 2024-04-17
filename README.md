@@ -49,11 +49,6 @@ python manage.py createsuperuser
 use this url : http://127.0.0.1:8000/admin 
 
 /***************************************************************************/
-
-PS: exemple superuser : 
-username: yasmino
-password: 12345yasmine?
-
 !! by opening the admin page you can enjoy creating projects in the application from supervisors interfaces and client interfaces !
 
 
