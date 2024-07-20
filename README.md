@@ -18,12 +18,12 @@ python -m venv FFP
 
 cd FFP
 
-Scriptes\activate
+Scripts\activate
 
 **install django 
 pip install django 
 
-**creation projet django of activation of server
+**creation projet django et activation du serveur 
 django-admin startproject fire
 
 cd fire 
@@ -49,7 +49,12 @@ python manage.py createsuperuser
 use this url : http://127.0.0.1:8000/admin 
 
 /***************************************************************************/
-!! by opening the admin page you can enjoy creating projects in the application from supervisors interfaces and client interfaces !
+
+PS: exemple superuser : 
+username: yasmino
+password: 12345yasmine?
+
+!! by opening the admin page you can enjoy the created projects in the application from supervisors interfaces and client interfaces !
 
 
 

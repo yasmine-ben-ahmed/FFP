@@ -12,12 +12,25 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 
 
+#from pathlib import Path
+#import os
+#if os.name == 'nt':
+ #   VENV_BASE = os.environ['VIRTUAL_ENV']
+  #  os.environ['PATH'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo') + ';' + os.environ['PATH']
+   # os.environ['PROJ_LIB'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo\\data\\proj')
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+#BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 from pathlib import Path
 import os
+
 if os.name == 'nt':
-    VENV_BASE = os.environ['VIRTUAL_ENV']
-    os.environ['PATH'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo') + ';' + os.environ['PATH']
-    os.environ['PROJ_LIB'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo\\data\\proj')
+    VENV_BASE = os.environ.get('VIRTUAL_ENV', None)
+    if VENV_BASE:
+        os.environ['PATH'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo') + ';' + os.environ['PATH']
+        os.environ['PROJ_LIB'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo\\data\\proj')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -95,10 +108,10 @@ WSGI_APPLICATION = 'fire.wsgi.application'
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'pfe',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'fire',
         'USER' : 'postgres',
-        'PASSWORD': '12345yasmine',
+        'PASSWORD': '12345yasmine?',
         'HOST' : 'localhost',
         'PORT': '5432',
     }
